@@ -1,7 +1,8 @@
 
 import { Button } from "../components/Button";
-import * as React from 'react'
 import { useForm } from 'react-hook-form'
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../services/firebase";
 
 import '../styles/home.scss'
 
@@ -24,7 +25,10 @@ export function Home() {
       <main>
         <div className="main-content">
           <form onSubmit={onSubmit}>
-            <label htmlFor="email">E-mail</label>
+            <label htmlFor="email">
+              E-mail
+              <p>{errors.email && "*Campo obrigatório"}</p>
+            </label>
             <input
               {...register("email", { required: true })}
               type="email"
@@ -32,7 +36,11 @@ export function Home() {
               placeholder="Digite seu e-mail"
               autoComplete="username"
             />
-            <label htmlFor="password">Senha</label>
+
+            <label htmlFor="password">
+              Senha
+              <p>{ errors.password && "*Campo obrigatório" }</p>
+            </label>
             <input
               {...register("password", { required: true })}
               type="password"
