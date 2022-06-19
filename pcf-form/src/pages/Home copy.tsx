@@ -2,14 +2,19 @@
 import { Button } from "../components/Button";
 import { useForm } from 'react-hook-form'
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { auth, firebase } from "../services/firebase";
+import { auth } from "../services/firebase";
 
 import '../styles/home.scss'
 
 
-
+type FormData = {
+  email: string;
+  password: string;
+}
 
 export function Home() {
+  const { register, handleSubmit, formState: { errors } } = useForm<FormData>();
+  const onSubmit = handleSubmit(data => console.log(data))
 
   return (
     <div id="page-auth">
@@ -19,13 +24,13 @@ export function Home() {
       </aside>
       <main>
         <div className="main-content">
-          <form>
+          <form onSubmit={onSubmit}>
             <label htmlFor="email">
               E-mail
-
+              <p>{errors.email && "*Campo obrigatório"}</p>
             </label>
             <input
-
+              {...register("email", { required: true })}
               type="email"
               name="email"
               placeholder="Digite seu e-mail"
@@ -34,10 +39,10 @@ export function Home() {
 
             <label htmlFor="password">
               Senha
-
+              <p>{ errors.password && "*Campo obrigatório" }</p>
             </label>
             <input
-
+              {...register("password", { required: true })}
               type="password"
               name="password"
               placeholder="Digite sua senha"
