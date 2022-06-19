@@ -11,7 +11,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/forms/step1" element={<FormStep1 />} />
-          <Route path="/foorms/step2" element={<FormStep2 />} />
+          <Route path="/forms/step2" element={<FormStep2 />} />
         </Routes>
 
     </BrowserRouter>
