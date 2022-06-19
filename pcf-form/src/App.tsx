@@ -1,20 +1,20 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { FormStep1 } from "./pages/FormStep1";
 import { FormStep2 } from "./pages/FormStep2";
-import { Home } from "./pages/Home";
+import { FormStep3 } from "./pages/FormStep3";
+import { FormProvider } from './context/FormContext';
+import { Router } from "./router";
 
 
-function App() {
+const App = () => {
   return (
-    <BrowserRouter>
-
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/forms/step1" element={<FormStep1 />} />
-          <Route path="/forms/step2" element={<FormStep2 />} />
-        </Routes>
-
-    </BrowserRouter>
+    <FormProvider>
+      <Router/>
+    </FormProvider>
   )
 }
+
 export default App;
+
+//BrowserRouter - container geral, tudo que estiver aqui dentro pode usar as routes
+//Todo meu ambiente esta em torno do meu provider
