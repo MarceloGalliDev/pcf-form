@@ -1,9 +1,5 @@
 import * as C from "./styles";
 import { Link } from "react-router-dom";
-import { BookSVG } from "../../assets/BookSVG";
-import { MailSVG } from "../../assets/MailSVG";
-import { ProfileSVG } from "../../assets/ProfileSVG";
-
 
 type Props = {
   title: string;

@@ -5,7 +5,7 @@ import { createContext, useReducer, useContext, ReactNode } from "react";
 type State = {
   currentStep: number;
   name: string;
-  level: 0 | 1;
+  phoneNumber: string;
   email: string;
   github: string;
   //é o tipo de informação que está dentro do meu state
@@ -29,7 +29,7 @@ type FormProviderProps = {
 const initialData: State = {
   currentStep: 0,
   name: '',
-  level: 0,
+  phoneNumber: '',
   email: '',
   github: '',
   //são os dados iniciais
@@ -42,7 +42,7 @@ const FormContext = createContext<ContextType | undefined>(undefined);//o create
 export enum FormActions {
   setCurrentStep,
   setName,
-  setLevel,
+  setPhoneNumber,
   setEmail,
   setGithub,
   //enum = é uma forma de tipificar dados em um objeto, como listas, são autoincrementados, e podem ser números, podem haver strings sem valores.
@@ -55,8 +55,8 @@ const formReducer = (state: State, action: Action) => {//recebi os dados origina
       return { ...state, currentStep: action.payload };//pego o passo no action.payload, no currentStep e retorna o novo valor
     case FormActions.setName:
       return { ...state, name: action.payload };
-    case FormActions.setLevel:
-      return { ...state, level: action.payload };
+    case FormActions.setPhoneNumber:
+      return { ...state, phoneNumber: action.payload };
     case FormActions.setEmail:
       return { ...state, email: action.payload };
     case FormActions.setGithub:
@@ -86,7 +86,7 @@ export const FormProvider = ({children}: FormProviderProps) => {
 }
 
 //Context hook
-export const useForm = () => {
+export const useFormPage = () => {
   const context = useContext(FormContext);//esta enviado FormContext
   if (context === undefined) {
     throw new Error('useForm precisa ser usado dentro do FormProvider');

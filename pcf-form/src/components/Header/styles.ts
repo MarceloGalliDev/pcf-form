@@ -13,5 +13,7 @@ export const Container = styled.div`
   p {
     font-size: 14px;
     color: #591C21;
+    width: 650px;
+    margin-top: 10px;
   }
 `;

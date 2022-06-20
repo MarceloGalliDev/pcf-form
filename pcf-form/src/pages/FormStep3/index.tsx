@@ -1,12 +1,12 @@
 import * as C from "./styles"
 import { Theme } from "../../components/Theme"
 import { Link, useNavigate } from "react-router-dom"
-import { useForm, FormActions } from "../../context/FormContext"
+import { useFormPage, FormActions } from "../../context/FormContext"
 import { ChangeEvent, useEffect } from "react"
 
 export const FormStep3 = () => {
   const navigate = useNavigate();
-  const { state, dispatch } = useForm();
+  const { state, dispatch } = useFormPage();
 
   useEffect(() => {
     if (state.name === '') {
@@ -20,7 +20,9 @@ export const FormStep3 = () => {
   }, []);
 
   const handleNextStep = () => {
-    if (state.email !== '' && state.github !== '') {
+    if (
+      state.email !== '' &&
+      state.github !== '') {
       console.log(state)
     } else {
       alert("Preencha os dados")

@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 import * as C from "./styles";
 import { Header } from "../Header";
 import { SidebarItem } from "../SidebarItem";
-import { useForm } from "../../context/FormContext"
+import { useFormPage } from "../../context/FormContext"
 
 
 type Props = {
@@ -10,7 +10,7 @@ type Props = {
 }
 
 export const Theme = ({ children }: Props) => {
-  const { state } = useForm();
+  const { state } = useFormPage();
 
   return (
     <C.Container>

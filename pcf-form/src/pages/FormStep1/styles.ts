@@ -12,6 +12,7 @@ export const Container = styled.div`
     font-size: 26px;
   }
 
+
   hr {
     height: 1px;
     border: 0;
@@ -19,20 +20,34 @@ export const Container = styled.div`
     margin: 30px 0;
   }
 
-  label {
-    font-size: 15px;
+  .formQuestion {
+    border: 1px solid #8C1F28;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 10px 10px;
+    margin-bottom: 10px;
 
-    input {
-      display: block;
-      margin-top: 7px;
-      width: 100%;
-      padding: 10px 10px;
-      border: 2px solid #8C1F28;
-      border-radius: 10px;
-      color: #591C21;
-      outline: 0;
+    label {
       font-size: 15px;
-      background-color: #F2F2F2;
+      font-weight: bold;
+      
+      span {
+        font-weight: normal;
+        color: red;
+        margin-left: 10px;
+      }
+      
+      input {
+        display: block;
+        margin-top: 17px;
+        width: 100%;
+        border: none;
+        border-bottom: 1px solid #8C1F28;
+        color: #591C21;
+        outline: 0;
+        font-size: 15px;
+        padding: 5px 0;
+      }
     }
   }
 
@@ -53,3 +68,5 @@ export const Container = styled.div`
     }
   }
 `;
+
+

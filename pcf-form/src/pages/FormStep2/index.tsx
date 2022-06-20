@@ -1,7 +1,7 @@
 import * as C from "./styles";
 import { Theme } from "../../components/Theme";
 import { useNavigate, Link } from "react-router-dom";
-import { useForm, FormActions } from "../../context/FormContext";
+import { useFormPage, FormActions } from "../../context/FormContext";
 import { ChangeEvent, useEffect } from "react";
 import { SelectOption } from "../../components/SelectOption";
 
@@ -11,7 +11,7 @@ import { SelectOption } from "../../components/SelectOption";
 
 export const FormStep2 = () => {
   const navigate = useNavigate();
-  const { state, dispatch } = useForm();
+  const { state, dispatch } = useFormPage();
 
   useEffect(() => {
     if (state.name === '') {
