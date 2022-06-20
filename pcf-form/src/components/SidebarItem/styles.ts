@@ -21,32 +21,21 @@ export const Title = styled.div`
   font-weight: bold;
   margin-bottom: 5px;
   font-size: 15px;
-  color: #FFF;
+  color: #591C21;
   `;
 
 export const Description = styled.div`
   text-align: right;
   font-size: 13px;
-  color: #B8B8D4;
-`;
-
-export const IconArea = styled.div<{ active: boolean }>`
-  margin-right: 10px;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  background-color: ${props => props.active ? '#25CD89' : '#494A7C'};
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  color: #591C21;
 `;
 
 export const Point = styled.div<{ active: boolean }>`
   width: 10px;
   height: 10px;
-  border: 1px solid #494A7C;
+  border: 1px solid #591C21;
   border-radius: 50%;
   margin-left: 30px;
   margin-right: -5.5px;
-  background-color: ${props => props.active ? '#25CD89' : '#02044A'};
+  background-color: ${props => props.active ? '#591C21' : '#F2F2F2'};
 `;

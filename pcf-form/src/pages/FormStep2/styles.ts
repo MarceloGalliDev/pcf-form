@@ -3,7 +3,7 @@ import styled from "styled-components"
 export const Container = styled.div`
   p {
     font-size: 15px;
-    color: #B8B8D4;
+    color: #591C21;
   }
 
   h1 {
@@ -15,7 +15,7 @@ export const Container = styled.div`
   hr {
     height: 1px;
     border: 0;
-    background-color: #16195C;
+    background-color: #591C21;
     margin: 30px 0;
   }
 
@@ -23,23 +23,22 @@ export const Container = styled.div`
     font-size: 15px;
 
     input {
-      box-sizing: border-box;
       display: block;
       margin-top: 7px;
       width: 100%;
       padding: 10px 10px;
-      border: 2px solid #25CD89;
+      border: 2px solid #8C1F28;
       border-radius: 10px;
-      color: #FFFFFF;
+      color: #591C21;
       outline: 0;
       font-size: 15px;
-      background-color: #02044A;
+      background-color: #F2F2F2;
     }
   }
 
   button {
-    background-color: #25CD89;
-    color: #FFFFFF;
+    background-color: #D92525;
+    color: #F2F2F2;
     font-size: 14px;
     font-weight: bold;
     padding: 10px 40px;
@@ -47,12 +46,17 @@ export const Container = styled.div`
     border-radius: 10px;
     cursor: pointer;
     margin-top: 30px;
+    transition: filter 0.2s;
+
+    &:hover {
+      filter: brightness(0.8);
+    }
   }
 
   .backButton {
-    background-color: #25CD89;
+    background-color: #D92525;
     text-decoration: none;
-    color: #FFFFFF;
+    color: #F2F2F2;
     font-size: 14px;
     font-weight: bold;
     padding: 10px 40px;
@@ -60,5 +64,10 @@ export const Container = styled.div`
     border-radius: 10px;
     cursor: pointer;
     margin: 30px 15px 0 0;
+    transition: filter 0.2s;
+
+    &:hover {
+      filter: brightness(0.8);
+    }
   }
 `;

@@ -21,11 +21,6 @@ export const SidebarItem = ({ title, description, icon, path, active}: Props) =>
           <C.Title>{title}</C.Title>
           <C.Description>{description}</C.Description>
         </C.Info>
-        <C.IconArea active={active}>
-          {icon === 'profile' && <ProfileSVG />}
-          {icon === 'book' && <BookSVG />}
-          {icon === 'mail' && <MailSVG />}
-        </C.IconArea>
         <C.Point active={active}></C.Point>
       </Link>
     </C.Container>
