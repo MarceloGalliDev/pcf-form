@@ -42,9 +42,10 @@ export const FormStep1 = () => {
 
         <hr/>
 
-        <label htmlFor="">
+        <label htmlFor="name">
           Seu nome completo
           <input
+            name="name"
             type="text"
             autoFocus
             value={state.name}

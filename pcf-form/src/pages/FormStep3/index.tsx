@@ -1,37 +1,46 @@
 import * as C from "./styles"
 import { Theme } from "../../components/Theme"
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { useForm, FormActions } from "../../context/FormContext"
 import { ChangeEvent, useEffect } from "react"
-
-
-
 
 export const FormStep3 = () => {
   const navigate = useNavigate();
   const { state, dispatch } = useForm();
 
-  const handleNextStep = () => {
-    if (state.name !== '') {
-      navigate('/formstep2')
-    } else {
-      alert("Preencha os dados.")
-    }
-  }
-
-  const handleNameChange = (event: ChangeEvent<HTMLInputElement>) => {
-    dispatch({
-      type: FormActions.setName,
-      payload: event.target.value
-    });
-  }//Aqui fizemos a função de troca de nome, usamos dispatch para realizar a troca, onde recebemos no payload o valor, e setamos no FormActions
-
   useEffect(() => {
+    if (state.name === '') {
+      navigate('/')
+    } else {
+      dispatch({
+        type: FormActions.setCurrentStep,
+        payload: 3
+      });
+    }
+  }, []);
+
+  const handleNextStep = () => {
+    if (state.email !== '' && state.github !== '') {
+      console.log(state)
+    } else {
+      alert("Preencha os dados")
+    }
+  };
+
+  const handleEmailChange = (event: ChangeEvent<HTMLInputElement>) => {
     dispatch({
-      type: FormActions.setCurrentStep,
-      payload: 3
-    });
-  }, [])
+      type: FormActions.setEmail,
+      payload: event.target.value
+    })
+  };//Aqui fizemos a função de troca de nome, usamos dispatch para realizar a troca, onde recebemos no payload o valor, e setamos no FormActions
+
+  const handleGithubChange = (event: ChangeEvent<HTMLInputElement>) => {
+    dispatch({
+      type: FormActions.setGithub,
+      payload: event.target.value
+    })
+  };
+
 
   return (
     <Theme>
@@ -42,19 +51,30 @@ export const FormStep3 = () => {
 
         <hr/>
 
-        <label htmlFor="">
+        <label htmlFor="email">
           Qual seu e-mail?
           <input
-            type="text"
+            name="email"
+            type="email"
             value={state.email}
             onChange={handleEmailChange}
           />
         </label>
 
-        
+        <label htmlFor="github">
+          Qual seu Github?
+          <input
+            name="github"
+            type="url"
+            value={state.github}
+            onChange={handleGithubChange}
+          />
+        </label>
+
+        <Link className="backButton" to="/">Voltar</Link>
         <button
           onClick={handleNextStep}
-        >Próximo
+        >Finalizar Cadastro
         </button>
       </C.Container>
     </Theme>

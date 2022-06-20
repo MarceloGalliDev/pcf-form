@@ -13,7 +13,17 @@ export const FormStep2 = () => {
   const navigate = useNavigate();
   const { state, dispatch } = useForm();
 
-  
+  useEffect(() => {
+    if (state.name === '') {
+      navigate('/')
+    } else {
+      dispatch({
+        type: FormActions.setCurrentStep,
+        payload: 2
+      });
+    }
+  }, []);
+
   const handleNextStep = () => {
     if (state.name !== '') {
       navigate('/formstep3')
@@ -29,16 +39,6 @@ export const FormStep2 = () => {
     })
   }
 
-  useEffect(() => {
-    if (state.name === '') {
-      navigate('/')
-    } else {
-      dispatch({
-        type: FormActions.setCurrentStep,
-        payload: 2
-      });
-    }
-  }, [])
 
   return (
     <Theme>
