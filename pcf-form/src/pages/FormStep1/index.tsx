@@ -2,18 +2,21 @@ import * as C from "./styles"
 import { Theme } from "../../components/Theme"
 import { useNavigate } from "react-router-dom"
 import { useForm, FormActions } from "../../context/FormContext"
-import { ChangeEvent } from "react"
+import { ChangeEvent, useEffect } from "react"
 
 
 
 
 export const FormStep1 = () => {
   const navigate = useNavigate();
-
   const { state, dispatch } = useForm();
 
   const handleNextStep = () => {
-    navigate('/formstep2')
+    if (state.name !== '') {
+      navigate('/formstep2')
+    } else {
+      alert("Preencha os dados.")
+    }
   }
 
   const handleNameChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -23,10 +26,17 @@ export const FormStep1 = () => {
     });
   }//Aqui fizemos a função de troca de nome, usamos dispatch para realizar a troca, onde recebemos no payload o valor, e setamos no FormActions
 
+  useEffect(() => {
+    dispatch({
+      type: FormActions.setCurrentStep,
+      payload: 1
+    });
+  }, [])
+
   return (
     <Theme>
       <C.Container>
-        <p>Passo 1/3 - { state.name }</p>
+        <p>Passo {state.currentStep}/3 - {state.name}</p>
         <h1>Vamos começar com seu nome</h1>
         <p>Preencha o campo abaixo com seu nome completo.</p>
 
