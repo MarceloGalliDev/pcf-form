@@ -2,7 +2,7 @@ import * as C from "./styles"
 import { Theme } from "../../components/Theme"
 import { useNavigate } from "react-router-dom"
 import { useFormPage, FormActions } from "../../context/FormContext"
-import { ChangeEvent, useEffect } from "react"
+import { ChangeEvent, useEffect, useState } from "react"
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
@@ -22,8 +22,6 @@ const schema = yup.object({
   email: yup.string().required(),
   functionPCF: yup.string().required(),
 }).required();
-
-
 
 export const FormStep1 = () => {
   const navigate = useNavigate();
@@ -141,7 +139,7 @@ export const FormStep1 = () => {
           <label htmlFor="stateUF">
             Local em que atua no PCF:
             <span>{errors.functionPCF && " ⚠ *Campo obrigatório "}</span>
-            <DropdownStateCity/>
+            <DropdownStateCity />
           </label>
           
         </div>
