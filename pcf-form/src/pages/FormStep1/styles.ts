@@ -36,7 +36,7 @@ export const Container = styled.div`
         color: red;
         margin-left: 10px;
       }
-      
+
       input {
         display: block;
         margin-top: 17px;

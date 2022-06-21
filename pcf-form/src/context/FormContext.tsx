@@ -5,8 +5,9 @@ import { createContext, useReducer, useContext, ReactNode } from "react";
 type State = {
   currentStep: number;
   name: string;
-  phoneNumber: string;
   email: string;
+  phoneNumber: string;
+  functionPCF: string;
   github: string;
   //é o tipo de informação que está dentro do meu state
 };
@@ -29,8 +30,9 @@ type FormProviderProps = {
 const initialData: State = {
   currentStep: 0,
   name: '',
-  phoneNumber: '',
   email: '',
+  phoneNumber: '',
+  functionPCF: '',
   github: '',
   //são os dados iniciais
 }
@@ -42,8 +44,9 @@ const FormContext = createContext<ContextType | undefined>(undefined);//o create
 export enum FormActions {
   setCurrentStep,
   setName,
-  setPhoneNumber,
   setEmail,
+  setPhoneNumber,
+  setFunctionPCF,
   setGithub,
   //enum = é uma forma de tipificar dados em um objeto, como listas, são autoincrementados, e podem ser números, podem haver strings sem valores.
 }
@@ -55,10 +58,12 @@ const formReducer = (state: State, action: Action) => {//recebi os dados origina
       return { ...state, currentStep: action.payload };//pego o passo no action.payload, no currentStep e retorna o novo valor
     case FormActions.setName:
       return { ...state, name: action.payload };
-    case FormActions.setPhoneNumber:
-      return { ...state, phoneNumber: action.payload };
     case FormActions.setEmail:
       return { ...state, email: action.payload };
+    case FormActions.setPhoneNumber:
+      return { ...state, phoneNumber: action.payload };
+    case FormActions.setFunctionPCF:
+      return { ...state, functionPCF: action.payload };
     case FormActions.setGithub:
       return { ...state, github: action.payload };
     default://se não existir está ação retorna o state do jeito que veio
@@ -68,9 +73,7 @@ const formReducer = (state: State, action: Action) => {//recebi os dados origina
   //payload é os dados
 }
 
-
 //Provider - o ambiente geral para gerenciar os dados, componente principal
-
 export const FormProvider = ({children}: FormProviderProps) => {
   const [state, dispatch] = useReducer(formReducer, initialData);
   const value = { state, dispatch };

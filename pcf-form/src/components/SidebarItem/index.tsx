@@ -4,12 +4,11 @@ import { Link } from "react-router-dom";
 type Props = {
   title: string;
   description: string;
-  icon: string;
   path: string;
   active: boolean;
 }
 
-export const SidebarItem = ({ title, description, icon, path, active}: Props) => {
+export const SidebarItem = ({ title, description, path, active}: Props) => {
   return (
     <C.Container>
       <Link to={path}>
