@@ -11,7 +11,9 @@ type State = {
   uf: string;
   city: string;
   dateAcquisition: string;
-  dateVisition: 'janeiro' | 'fevereiro';
+  dateVisition: string;
+  lastMonthSpentData: string;
+  github: string;
   //é o tipo de informação que está dentro do meu state
 };
 type Action = {
@@ -39,7 +41,9 @@ const initialData: State = {
   uf: '',
   city: '',
   dateAcquisition: '',
-  dateVisition: 'janeiro' || 'fevereiro',
+  dateVisition: '',
+  lastMonthSpentData: '',
+  github: '',
   //são os dados iniciais
 }
 
@@ -57,6 +61,8 @@ export enum FormActions {
   setCity,
   setDateAcquisition,
   setDateVisition,
+  setLastMonthSpentData,
+  setGithub,
   //enum = é uma forma de tipificar dados em um objeto, como listas, são autoincrementados, e podem ser números, podem haver strings sem valores.
 }
 
@@ -81,6 +87,10 @@ const formReducer = (state: State, action: Action) => {//recebi os dados origina
         return { ...state, dateAcquisition: action.payload };
       case FormActions.setDateVisition:
         return { ...state, dateVisition: action.payload };
+      case FormActions.setLastMonthSpentData:
+        return { ...state, lastMonthSpentData: action.payload };
+      case FormActions.setGithub:
+        return { ...state, github: action.payload };
     default://se não existir está ação retorna o state do jeito que veio
       return state;
   }

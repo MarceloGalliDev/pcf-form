@@ -21,19 +21,12 @@ export const FormStep3 = () => {
 
   const handleNextStep = () => {
     if (
-      state.name !== '' &&
-      state.email !== '') {
+      state.name !== '') {
+      console.log(state)
     } else {
       alert("Preencha os dados")
     }
   };
-
-  const handleEmailChange = (event: ChangeEvent<HTMLInputElement>) => {
-    dispatch({
-      type: FormActions.setEmail,
-      payload: event.target.value
-    })
-  };//Aqui fizemos a função de troca de nome, usamos dispatch para realizar a troca, onde recebemos no payload o valor, e setamos no FormActions
 
   const handleGithubChange = (event: ChangeEvent<HTMLInputElement>) => {
     dispatch({
@@ -52,15 +45,6 @@ export const FormStep3 = () => {
 
         <hr/>
 
-        <label htmlFor="email">
-          Qual seu e-mail?
-          <input
-            name="email"
-            type="email"
-            value={state.email}
-            onChange={handleEmailChange}
-          />
-        </label>
 
         <label htmlFor="github">
           Qual seu Github?

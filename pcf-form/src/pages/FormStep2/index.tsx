@@ -12,6 +12,7 @@ import * as yup from "yup";
 interface FormStep1Input {
   dateAcquisition: string;
   dateVisition: string;
+  lastMonthSpentData: 'janeiro' | 'fevereiro' | 'marco' | 'abril' | 'maio' | 'junho' | 'julho' | 'agosto' | 'setembro' | 'outubro' | 'novembro' | 'dezembro';
 }
 
 const schema = yup.object({
@@ -26,7 +27,7 @@ export const FormStep2 = () => {
   const { register, handleSubmit, formState: {errors}} = useForm<FormStep1Input>({resolver: yupResolver(schema)})
   const onSubmit = handleSubmit(data => navigate('/formstep3'))
 
-
+//função de captura de valores
   const handleDateAcquisitionChange = (event: ChangeEvent<HTMLInputElement>) => {
     dispatch({
       type: FormActions.setDateAcquisition,
@@ -36,11 +37,19 @@ export const FormStep2 = () => {
 
   const handleDateVisitionChange = (event: ChangeEvent<HTMLInputElement>) => {
     dispatch({
-      type: FormActions.setName,
+      type: FormActions.setDateVisition,
       payload: event.target.value
     });
   };
 
+  const handleLastMonthSpentDataChange = (event: ChangeEvent<HTMLInputElement>) => {
+    dispatch({
+      type: FormActions.setLastMonthSpentData,
+      payload: event.target.value
+    });
+  };
+
+  //verificando se foi respondi, não passa apra próxima etapa
   useEffect(() => {
     if (state.name === '' ||
       state.phoneNumber === '' ||
@@ -102,184 +111,183 @@ export const FormStep2 = () => {
         <div className="formQuestion">
           <p className="lastMonth">
             Qual é o último mês do ano de 2022 do qual o município possui dados dos gastos com o PCF?
-            <span>{errors.dateVisition && " ⚠ *Campo obrigatório "}</span>
-
-            <div id="containerOptionYear">
-              <div id="containerOptionSixMonth">
-                <div id="containerLastMonth">
-                  <input
-                      {...register("dateVisition")}
-                      name="dateVisition"
-                      type="radio"
-                      value={state.dateVisition}
-                      onChange={handleDateVisitionChange}
-                  />
-                  <label
-                    className="lastMonthLabel"
-                    htmlFor="janeiro"
-                  >Janeiro
-                  </label>
-                </div>
-                <div id="containerLastMonth">
-                  <input
-                      {...register("dateVisition")}
-                      name="dateVisition"
-                      type="radio"
-                      value={state.dateVisition}
-                      onChange={handleDateVisitionChange}
-                  />
-                  <label
-                    className="lastMonthLabel"
-                    htmlFor="fevereiro"
-                  >Fevereiro
-                  </label>
-                </div>
-                <div id="containerLastMonth">
-                  <input
-                      {...register("dateVisition")}
-                      name="dateVisition"
-                      type="radio"
-                      value={state.dateVisition}
-                      onChange={handleDateVisitionChange}
-                  />
-                  <label
-                    className="lastMonthLabel"
-                    htmlFor="marco"
-                  >Março
-                  </label>
-                </div>
-                <div id="containerLastMonth">
-                  <input
-                      {...register("dateVisition")}
-                      name="dateVisition"
-                      type="radio"
-                      value={state.dateVisition}
-                      onChange={handleDateVisitionChange}
-                  />
-                  <label
-                    className="lastMonthLabel"
-                    htmlFor="abril"
-                  >Abril
-                  </label>
-                </div>
-                <div id="containerLastMonth">
-                  <input
-                      {...register("dateVisition")}
-                      name="dateVisition"
-                      type="radio"
-                      value={state.dateVisition}
-                      onChange={handleDateVisitionChange}
-                  />
-                  <label
-                    className="lastMonthLabel"
-                    htmlFor="maio"
-                  >Maio
-                  </label>
-                </div>
-                <div id="containerLastMonth">
-                  <input
-                      {...register("dateVisition")}
-                      name="dateVisition"
-                      type="radio"
-                      value={state.dateVisition}
-                      onChange={handleDateVisitionChange}
-                  />
-                  <label
-                    className="lastMonthLabel"
-                    htmlFor="junho"
-                  >Junho
-                  </label>
-                </div>
+            <span>{errors.lastMonthSpentData && " ⚠ *Campo obrigatório "}</span>
+          </p>
+          <div id="containerOptionYear">
+            <div id="containerOptionSixMonth">
+              <div id="containerLastMonth">
+                <input
+                    {...register("lastMonthSpentData")}
+                    id="lastMonthSpentJaneiro"
+                    name="lastMonthSpentData"
+                    type="radio"
+                    value="janeiro"
+                    onChange={handleLastMonthSpentDataChange}
+                />
+                <label
+                  className="lastMonthLabel"
+                  htmlFor="lastMonthSpentJaneiro"
+                >Janeiro
+                </label>
               </div>
-              <div id="containerOptionSixMonth">
-                <div id="containerLastMonth">
-                  <input
-                      {...register("dateVisition")}
-                      name="dateVisition"
-                      type="radio"
-                      value={state.dateVisition}
-                      onChange={handleDateVisitionChange}
-                  />
-                  <label
-                    className="lastMonthLabel"
-                    htmlFor="julho"
-                  >Julho
-                  </label>
-                </div>
-                <div id="containerLastMonth">
-                  <input
-                      {...register("dateVisition")}
-                      name="dateVisition"
-                      type="radio"
-                      value={state.dateVisition}
-                      onChange={handleDateVisitionChange}
-                  />
-                  <label
-                    className="lastMonthLabel"
-                    htmlFor="agosto"
-                  >Agosto
-                  </label>
-                </div>
-                <div id="containerLastMonth">
-                  <input
-                      {...register("dateVisition")}
-                      name="dateVisition"
-                      type="radio"
-                      value={state.dateVisition}
-                      onChange={handleDateVisitionChange}
-                  />
-                  <label
-                    className="lastMonthLabel"
-                    htmlFor="setembro"
-                  >Setembro
-                  </label>
-                </div>
-                <div id="containerLastMonth">
-                  <input
-                      {...register("dateVisition")}
-                      name="dateVisition"
-                      type="radio"
-                      value={state.dateVisition}
-                      onChange={handleDateVisitionChange}
-                  />
-                  <label
-                    className="lastMonthLabel"
-                    htmlFor="outubro"
-                  >Outubro
-                  </label>
-                </div>
-                <div id="containerLastMonth">
-                  <input
-                      {...register("dateVisition")}
-                      name="dateVisition"
-                      type="radio"
-                      value={state.dateVisition}
-                      onChange={handleDateVisitionChange}
-                  />
-                  <label
-                    className="lastMonthLabel"
-                    htmlFor="novembro"
-                  >Novembro
-                  </label>
-                </div>
-                <div id="containerLastMonth">
-                  <input
-                      {...register("dateVisition")}
-                      name="dateVisition"
-                      type="radio"
-                      value={state.dateVisition}
-                      onChange={handleDateVisitionChange}
-                  />
-                  <label
-                    className="lastMonthLabel"
-                    htmlFor="dezembro"
-                  >Dezembro
-                  </label>
-                </div>
+              <div id="containerLastMonth">
+                <input
+                    id="lastMonthSpentFevereiro"
+                    name="lastMonthSpentData"
+                    type="radio"
+                    value="Fevereiro"
+                    onChange={handleLastMonthSpentDataChange}
+                />
+                <label
+                  className="lastMonthLabel"
+                  htmlFor="lastMonthSpentFevereiro"
+                >Fevereiro
+                </label>
+              </div>
+              <div id="containerLastMonth">
+                <input
+                    id="lastMonthSpentMarco"
+                    name="lastMonthSpentData"
+                    type="radio"
+                    value="Março"
+                    onChange={handleLastMonthSpentDataChange}
+                />
+                <label
+                  className="lastMonthLabel"
+                  htmlFor="lastMonthSpentMarco"
+                >Março
+                </label>
+              </div>
+              <div id="containerLastMonth">
+                <input
+                    id="lastMonthSpentAbril"
+                    name="lastMonthSpentData"
+                    type="radio"
+                    value="Abril"
+                    onChange={handleLastMonthSpentDataChange}
+                />
+                <label
+                  className="lastMonthLabel"
+                  htmlFor="lastMonthSpentAbril"
+                >Abril
+                </label>
+              </div>
+              <div id="containerLastMonth">
+                <input
+                    id="lastMonthSpentMaio"
+                    name="lastMonthSpentData"
+                    type="radio"
+                    value="Maio"
+                    onChange={handleLastMonthSpentDataChange}
+                />
+                <label
+                  className="lastMonthLabel"
+                  htmlFor="lastMonthSpentMaio"
+                >Maio
+                </label>
+              </div>
+              <div id="containerLastMonth">
+                <input
+                    id="lastMonthSpentJunho"
+                    name="lastMonthSpentData"
+                    type="radio"
+                    value="Junho"
+                    onChange={handleLastMonthSpentDataChange}
+                />
+                <label
+                  className="lastMonthLabel"
+                  htmlFor="lastMonthSpentJunho"
+                >Junho
+                </label>
               </div>
             </div>
-
-          </p>
+            <div id="containerOptionSixMonth">
+              <div id="containerLastMonth">
+                <input
+                    id="lastMonthSpentJulho"
+                    name="lastMonthSpentData"
+                    type="radio"
+                    value="Julho"
+                    onChange={handleLastMonthSpentDataChange}
+                />
+                <label
+                  className="lastMonthLabel"
+                  htmlFor="lastMonthSpentJulho"
+                >Julho
+                </label>
+              </div>
+              <div id="containerLastMonth">
+                <input
+                    id="lastMonthSpentAgosto"
+                    name="lastMonthSpentData"
+                    type="radio"
+                    value="Agosto"
+                    onChange={handleLastMonthSpentDataChange}
+                />
+                <label
+                  className="lastMonthLabel"
+                  htmlFor="lastMonthSpentAgosto"
+                >Agosto
+                </label>
+              </div>
+              <div id="containerLastMonth">
+                <input
+                    id="lastMonthSpentSetembro"
+                    name="lastMonthSpentData"
+                    type="radio"
+                    value="Setembro"
+                    onChange={handleLastMonthSpentDataChange}
+                />
+                <label
+                  className="lastMonthLabel"
+                  htmlFor="lastMonthSpentSetembro"
+                >Setembro
+                </label>
+              </div>
+              <div id="containerLastMonth">
+                <input
+                    id="lastMonthSpentOutubro"
+                    name="lastMonthSpentData"
+                    type="radio"
+                    value="Outubro"
+                    onChange={handleLastMonthSpentDataChange}
+                />
+                <label
+                  className="lastMonthLabel"
+                  htmlFor="lastMonthSpentOutubro"
+                >Outubro
+                </label>
+              </div>
+              <div id="containerLastMonth">
+                <input
+                    id="lastMonthSpentNovembro"
+                    name="lastMonthSpentData"
+                    type="radio"
+                    value="Novembro"
+                    onChange={handleLastMonthSpentDataChange}
+                />
+                <label
+                  className="lastMonthLabel"
+                  htmlFor="lastMonthSpentNovembro"
+                >Novembro
+                </label>
+              </div>
+              <div id="containerLastMonth">
+                <input
+                    id="lastMonthSpentDezembro"
+                    name="lastMonthSpentData"
+                    type="radio"
+                    value="Dezembro"
+                    onChange={handleLastMonthSpentDataChange}
+                />
+                <label
+                  className="lastMonthLabel"
+                  htmlFor="lastMonthSpentDezembro"
+                >Dezembro
+                </label>
+              </div>
+            </div>
+          </div>
         </div>
 
         <Link className="backButton" to="/">Voltar</Link>
