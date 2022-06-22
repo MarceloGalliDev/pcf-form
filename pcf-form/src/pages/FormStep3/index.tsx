@@ -75,9 +75,65 @@ export const FormStep3 = () => {
   return (
     <Theme>
       <C.Container>
-        <p>Etapa {state.currentStep}/3</p>
+        <p>Etapa {state.currentStep}/8</p>
         <h1>Gestão do PCF</h1>
         <hr />
+
+        <div className="formQuestion">
+          <p className="textFormRadioButton">
+            A equipe do PCF em seu município tem Coordenador?
+          </p>
+          <div id="containerOption">
+            <div id="containerOptionSixOption">
+              
+              <div id="containerInputLabelRadioButton">
+                <input
+                    id="lastMonthSpentJaneiro"
+                    name="lastMonthSpentData"
+                    type="radio"
+                    value="sim"
+                    onChange={handleLastMonthSpentDataChange}
+                />
+                <label
+                  className="containerTextLabel"
+                  htmlFor="lastMonthSpentJaneiro"
+                >Sim
+                </label>
+              </div>
+
+              <div id="containerInputLabelRadioButton">
+                <input
+                    id="lastMonthSpentFevereiro"
+                    name="lastMonthSpentData"
+                    type="radio"
+                    value="Não"
+                    onChange={handleLastMonthSpentDataChange}
+                />
+                <label
+                  className="containerTextLabel"
+                  htmlFor="lastMonthSpentFevereiro"
+                >Não
+                </label>
+              </div>
+
+              <div id="containerInputLabelRadioButton">
+                <input
+                    id="lastMonthSpentFevereiro"
+                    name="lastMonthSpentData"
+                    type="radio"
+                    value="Não"
+                    onChange={handleLastMonthSpentDataChange}
+                />
+                <label
+                  className="containerTextLabel"
+                  htmlFor="lastMonthSpentFevereiro"
+                >Não sei
+                </label>
+              </div>
+
+            </div>
+          </div>
+        </div>
 
         <div className="formQuestion">
           <p className="textFormRadioButton">

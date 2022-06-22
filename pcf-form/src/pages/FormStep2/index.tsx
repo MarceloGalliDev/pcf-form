@@ -75,7 +75,7 @@ export const FormStep2 = () => {
   return (
     <Theme>
       <C.Container>
-        <p>Etapa {state.currentStep}/3</p>
+        <p>Etapa {state.currentStep}/8</p>
         <h1>Características do PCF</h1>
         <hr />
         

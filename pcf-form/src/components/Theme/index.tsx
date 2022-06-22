@@ -39,6 +39,21 @@ export const Theme = ({ children }: Props) => {
               path="/formstep3"
               active={state.currentStep === 3}
             />
+
+            <SidebarItem
+              title="Público atendido pelo PCF em seu município"
+              description="Perfil das famílias atendidas"
+              path="/formstep4"
+              active={state.currentStep === 4}
+            />
+
+            <SidebarItem
+              title="Equipe do PCF"
+              description="Informações sobre os atores/ participantes da equipe do PCF"
+              path="/formstep5"
+              active={state.currentStep === 5}
+            />
+
           </C.Sidebar>
           <C.Page>
             {children}

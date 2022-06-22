@@ -116,7 +116,7 @@ export const FormStep1 = () => {
   return (
     <Theme>
       <C.Container>
-        <p>Etapa {state.currentStep}/3</p>
+        <p>Etapa {state.currentStep}/8</p>
         <h1>Informações gerais</h1>
         <hr />
         
@@ -158,7 +158,7 @@ export const FormStep1 = () => {
             <input
               {...register("phoneNumber")}
               name="phoneNumber"
-              type="text"
+              type="tel"
               value={state.phoneNumber}
               onChange={handlePhoneNumberChange}
               placeholder="DDD + Telefone"
