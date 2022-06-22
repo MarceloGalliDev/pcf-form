@@ -37,6 +37,16 @@ export const Container = styled.div`
         margin-left: 10px;
       }
 
+      select {
+        display: flex;
+        width: 50%;
+        margin-top: 17px;
+        padding: 5px;
+        color: #591C21;
+        border: 1px solid #8C1F28;
+        border-radius: 5px;
+      }
+
       input {
         display: block;
         margin-top: 17px;

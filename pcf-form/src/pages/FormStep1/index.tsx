@@ -4,16 +4,28 @@ import { useNavigate } from "react-router-dom"
 import { useFormPage, FormActions } from "../../context/FormContext"
 import { ChangeEvent, useEffect, useState } from "react"
 import { useForm } from "react-hook-form";
+import axios from "axios"
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
-import { DropdownStateCity } from "../../components/DropdownStateCity"
 
+type IBGEUFResponse = {
+  id: number;
+  sigla: string;
+  nome: string;
+}
+
+type IBGECITYResponse = {
+  id: number;
+  nome: string;
+}
 
 interface FormStep1Input {
   name: string;
   phoneNumber: string;
   email: string;
   functionPCF: string;
+  uf: string;
+  city: string;
 }
 
 const schema = yup.object({
@@ -21,12 +33,20 @@ const schema = yup.object({
   phoneNumber: yup.number().required(),
   email: yup.string().required(),
   functionPCF: yup.string().required(),
+  uf: yup.string().required(),
+  city: yup.string().required(),
 }).required();
 
 export const FormStep1 = () => {
+  const [ufs, setUfs] = useState<IBGEUFResponse[]>([]);
+  const [cities, setCities] = useState<IBGECITYResponse[]>([]);
+  const [selectedUf, setSelectedUf] = useState('0')
+  const [selectedCity, setSelectedCity] = useState('0')
   const navigate = useNavigate();
   const { state, dispatch } = useFormPage();
 
+
+  //dropdown state e cities
   const { register, handleSubmit, formState: {errors}} = useForm<FormStep1Input>({resolver: yupResolver(schema)})
   const onSubmit = handleSubmit(data => navigate('/formstep2'))
 
@@ -59,13 +79,42 @@ export const FormStep1 = () => {
     });
   };
 
+  
+
+  function handleSelectedUf(event: ChangeEvent<HTMLSelectElement>) {
+    const uf = event.target.value
+    setSelectedUf(uf)
+    dispatch({
+      type: FormActions.setUf,
+      payload: event.target.value
+    });
+  }
+  
+  function handleSelectedCity(event: ChangeEvent<HTMLSelectElement>) {
+    const city = event.target.value
+    setSelectedCity(city)
+    dispatch({
+      type: FormActions.setCity,
+      payload: event.target.value
+    });
+  }
+  
+  useEffect(() => {
+    axios.get('https://servicodados.ibge.gov.br/api/v1/localidades/estados/').then((response) => {setUfs(response.data)})
+  }, []);
+  
+  useEffect(() => {
+    axios.get(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${selectedUf}/municipios`).then((response) => {setCities(response.data)})
+  }, [selectedUf]);//executa toda vez que {selectedUf} mudar
+  ufs.sort((a,b) => a.nome.localeCompare(b.nome))
+  
   //Aqui ambiente da troca do passe, de acordo com a currentStep, controle de página
   useEffect(() => {
     dispatch({
       type: FormActions.setCurrentStep,
       payload: 1
     });
-  }, [])
+  }, []);
 
   return (
     <Theme>
@@ -136,14 +185,39 @@ export const FormStep1 = () => {
         </div>
 
         <div className="formQuestion">
-          <label htmlFor="stateUF">
+          <label htmlFor="uf">
             Local em que atua no PCF:
-            <span>{errors.functionPCF && " ⚠ *Campo obrigatório "}</span>
-            <DropdownStateCity />
-          </label>
-          
-        </div>
+            <span>{errors.uf && " ⚠ *Campo obrigatório "}</span>
 
+            <select
+              {...register("uf")}
+              name="uf"
+              id="uf"
+              onChange={handleSelectedUf}
+            >
+              <option value="0">Selecione o Estado</option>
+              {ufs.map(uf => (
+                <option key={uf.id} value={uf.sigla}>{uf.nome}</option>
+              ))}
+            </select>
+
+            <span>{errors.city && " ⚠ *Campo obrigatório "}</span>
+            <select
+              {...register("city")}
+              name="city"
+              id="city"
+              value={selectedCity}
+              onChange={handleSelectedCity}
+            >
+              <option value="0">Selecione o Município</option>
+              {cities.map(city => (
+                <option key={city.id} value={city.nome}>{city.nome}</option>
+              ))}
+            </select>
+
+          </label>
+        </div>
+        
         <button
           onClick={onSubmit}
         >Próximo
