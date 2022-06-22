@@ -72,10 +72,11 @@ export const Container = styled.div`
       font-weight: normal;
     }
 
+    
     label {
       font-size: 15px;
       font-weight: bold;
-
+      
       select {
         display: flex;
         width: 50%;
@@ -85,7 +86,7 @@ export const Container = styled.div`
         border: 1px solid #8C1F28;
         border-radius: 5px;
       }
-
+      
       input {
         display: block;
         margin-top: 17px;
@@ -98,10 +99,35 @@ export const Container = styled.div`
         padding: 5px 0;
       }
 
+      #containerLabelCheckboxBorder {
+        display: 1
+        display: flex;
+        border: 1px solid #8C1F28;
+        border-radius: 10px;
+        padding: 10px;
+        margin-top: 10px;
+      }
+
+      #containerTextLabelCheckbox {
+        margin-top: 10px;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        
+        .labelForContainerTextLabelCheckbox {
+          font-weight: normal;
+        }
+
+        .inputForContainerTextLabelCheckbox {
+          margin: 0 10px;
+        }
+      }
+      
     }
     .inputPlaceholderOther {
       border: none
     }
+
   }
 
   button {
