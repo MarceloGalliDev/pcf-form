@@ -2,66 +2,410 @@ import * as C from "./styles"
 import { Theme } from "../../components/Theme"
 import { Link, useNavigate } from "react-router-dom"
 import { useFormPage, FormActions } from "../../context/FormContext"
-import { ChangeEvent, useEffect } from "react"
+import { ChangeEvent, useEffect, useState } from "react"
+import { useForm } from "react-hook-form";
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from "yup";
+
+
+interface FormStep1Input {
+  dateAcquisition: string;
+  dateVisition: string;
+  lastMonthSpentData: 'janeiro' | 'fevereiro' | 'marco' | 'abril' | 'maio' | 'junho' | 'julho' | 'agosto' | 'setembro' | 'outubro' | 'novembro' | 'dezembro';
+}
+
+const schema = yup.object({
+  dateAcquisition: yup.string().required(),
+  dateVisition: yup.string().required(),
+}).required();
 
 export const FormStep3 = () => {
   const navigate = useNavigate();
   const { state, dispatch } = useFormPage();
 
-  useEffect(() => {
-    if (state.name === '') {
-      navigate('/')
-    } else {
-      dispatch({
-        type: FormActions.setCurrentStep,
-        payload: 3
-      });
-    }
-  }, []);
+  const { register, handleSubmit, formState: {errors}} = useForm<FormStep1Input>({resolver: yupResolver(schema)})
+  const onSubmit = handleSubmit(data => navigate('/formstep3'))
 
-  const handleNextStep = () => {
-    if (
-      state.name !== '') {
-      console.log(state)
-    } else {
-      alert("Preencha os dados")
-    }
-  };
-
-  const handleGithubChange = (event: ChangeEvent<HTMLInputElement>) => {
+//função de captura de valores
+  const handleDateAcquisitionChange = (event: ChangeEvent<HTMLInputElement>) => {
     dispatch({
-      type: FormActions.setGithub,
+      type: FormActions.setDateAcquisition,
       payload: event.target.value
-    })
+    });
   };
 
+  const handleDateVisitionChange = (event: ChangeEvent<HTMLInputElement>) => {
+    dispatch({
+      type: FormActions.setDateVisition,
+      payload: event.target.value
+    });
+  };
+
+  const handleLastMonthSpentDataChange = (event: ChangeEvent<HTMLInputElement>) => {
+    dispatch({
+      type: FormActions.setLastMonthSpentData,
+      payload: event.target.value
+    });
+  };
+
+  //verificando se foi respondida, não passa para próxima etapa
+  // useEffect(() => {
+  //   if (state.name === '' ||
+  //     state.phoneNumber === '' ||
+  //     state.email === '' ||
+  //     state.functionPCF === '' ||
+  //     state.uf === '' ||
+  //     state.city === '') {
+  //     navigate('/')
+  //   } else {
+  //     dispatch({
+  //       type: FormActions.setCurrentStep,
+  //       payload: 2
+  //     });
+  //   }
+  // }, []);
+
+  useEffect(() => {
+    dispatch({
+      type: FormActions.setCurrentStep,
+      payload: 3
+    });
+  }, []);
 
   return (
     <Theme>
       <C.Container>
-        <p>Passo {state.currentStep}/3</p>
-        <h1>Legal, {state.name}</h1>
-        <p>Preencha com seu contato.</p>
+        <p>Etapa {state.currentStep}/3</p>
+        <h1>Gestão do PCF</h1>
+        <hr />
 
-        <hr/>
+        <div className="formQuestion">
+          <p className="textFormRadioButton">
+            Você conhece o Coordenador Estadual do PCF?
+            <span>{errors.lastMonthSpentData && " ⚠ *Campo obrigatório "}</span>
+          </p>
 
+          <div id="containerOption">
+            <div id="containerOptionSixOption">
+              
+              <div id="containerInputLabelRadioButton">
+                <input
+                    id="lastMonthSpentJaneiro"
+                    name="lastMonthSpentData"
+                    type="radio"
+                    value="sim"
+                    onChange={handleLastMonthSpentDataChange}
+                />
+                <label
+                  className="containerTextLabel"
+                  htmlFor="lastMonthSpentJaneiro"
+                >Sim
+                </label>
+              </div>
 
-        <label htmlFor="github">
-          Qual seu Github?
-          <input
-            name="github"
-            type="url"
-            value={state.github}
-            onChange={handleGithubChange}
-          />
-        </label>
+              <div id="containerInputLabelRadioButton">
+                <input
+                    id="lastMonthSpentFevereiro"
+                    name="lastMonthSpentData"
+                    type="radio"
+                    value="Não"
+                    onChange={handleLastMonthSpentDataChange}
+                />
+                <label
+                  className="containerTextLabel"
+                  htmlFor="lastMonthSpentFevereiro"
+                >Não
+                </label>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div className="formQuestion">
+          <p className="textFormRadioButton">
+            Quantas vezes teve contato com ele(a) nos últimos 12 meses?
+            <span>{errors.lastMonthSpentData && " ⚠ *Campo obrigatório "}</span>
+          </p>
+
+          <div id="containerOption">
+            <div id="containerOptionSixOption">
+              
+              <div id="containerInputLabelRadioButton">
+                <input
+                    id="lastMonthSpentJaneiro"
+                    name="lastMonthSpentData"
+                    type="radio"
+                    value="sim"
+                    onChange={handleLastMonthSpentDataChange}
+                />
+                <label
+                  className="containerTextLabel"
+                  htmlFor="lastMonthSpentJaneiro"
+                >0
+                </label>
+              </div>
+
+              <div id="containerInputLabelRadioButton">
+                <input
+                    id="lastMonthSpentJaneiro"
+                    name="lastMonthSpentData"
+                    type="radio"
+                    value="sim"
+                    onChange={handleLastMonthSpentDataChange}
+                />
+                <label
+                  className="containerTextLabel"
+                  htmlFor="lastMonthSpentJaneiro"
+                >1
+                </label>
+              </div>
+
+              <div id="containerInputLabelRadioButton">
+                <input
+                    id="lastMonthSpentFevereiro"
+                    name="lastMonthSpentData"
+                    type="radio"
+                    value="Não"
+                    onChange={handleLastMonthSpentDataChange}
+                />
+                <label
+                  className="containerTextLabel"
+                  htmlFor="lastMonthSpentFevereiro"
+                >2
+                </label>
+              </div>
+
+              <div id="containerInputLabelRadioButton">
+                <input
+                    id="lastMonthSpentMarco"
+                    name="lastMonthSpentData"
+                    type="radio"
+                    value="Não sei"
+                    onChange={handleLastMonthSpentDataChange}
+                />
+                <label
+                  className="containerTextLabel"
+                  htmlFor="lastMonthSpentMarco"
+                >3
+                </label>
+              </div>
+
+              <div id="containerInputLabelRadioButton">
+                <input
+                    id="lastMonthSpentMarco"
+                    name="lastMonthSpentData"
+                    type="radio"
+                    value="Não sei"
+                    onChange={handleLastMonthSpentDataChange}
+                />
+                <label
+                  className="containerTextLabel"
+                  htmlFor="lastMonthSpentMarco"
+                >4 ou mais
+                </label>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div className="formQuestion">
+          <p className="textFormRadioButton">
+            Você conhece o Multiplicador Estadual do PCF?
+            <span>{errors.lastMonthSpentData && " ⚠ *Campo obrigatório "}</span>
+          </p>
+
+          <div id="containerOption">
+            <div id="containerOptionSixOption">
+              
+              <div id="containerInputLabelRadioButton">
+                <input
+                    id="lastMonthSpentJaneiro"
+                    name="lastMonthSpentData"
+                    type="radio"
+                    value="sim"
+                    onChange={handleLastMonthSpentDataChange}
+                />
+                <label
+                  className="containerTextLabel"
+                  htmlFor="lastMonthSpentJaneiro"
+                >Sim
+                </label>
+              </div>
+
+              <div id="containerInputLabelRadioButton">
+                <input
+                    id="lastMonthSpentFevereiro"
+                    name="lastMonthSpentData"
+                    type="radio"
+                    value="Não"
+                    onChange={handleLastMonthSpentDataChange}
+                />
+                <label
+                  className="containerTextLabel"
+                  htmlFor="lastMonthSpentFevereiro"
+                >Não
+                </label>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div className="formQuestion">
+          <p className="textFormRadioButton">
+            O município possui Comitê Gestor Municipal do PCF?
+            <span>{errors.lastMonthSpentData && " ⚠ *Campo obrigatório "}</span>
+          </p>
+
+          <div id="containerOption">
+            <div id="containerOptionSixOption">
+              
+              <div id="containerInputLabelRadioButton">
+                <input
+                    id="lastMonthSpentJaneiro"
+                    name="lastMonthSpentData"
+                    type="radio"
+                    value="sim"
+                    onChange={handleLastMonthSpentDataChange}
+                />
+                <label
+                  className="containerTextLabel"
+                  htmlFor="lastMonthSpentJaneiro"
+                >Sim
+                </label>
+              </div>
+
+              <div id="containerInputLabelRadioButton">
+                <input
+                    id="lastMonthSpentFevereiro"
+                    name="lastMonthSpentData"
+                    type="radio"
+                    value="Não"
+                    onChange={handleLastMonthSpentDataChange}
+                />
+                <label
+                  className="containerTextLabel"
+                  htmlFor="lastMonthSpentFevereiro"
+                >Não
+                </label>
+              </div>
+
+              <div id="containerInputLabelRadioButton">
+                <input
+                    id="lastMonthSpentFevereiro"
+                    name="lastMonthSpentData"
+                    type="radio"
+                    value="Não"
+                    onChange={handleLastMonthSpentDataChange}
+                />
+                <label
+                  className="containerTextLabel"
+                  htmlFor="lastMonthSpentFevereiro"
+                >Não sei
+                </label>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div className="formQuestion">
+          <p className="textFormRadioButton">
+            Quantas vezes o Comitê Gestor Municipal se reuniu nos últimos 12 meses?
+            <span>{errors.lastMonthSpentData && " ⚠ *Campo obrigatório "}</span>
+          </p>
+
+          <div id="containerOption">
+            <div id="containerOptionSixOption">
+              
+              <div id="containerInputLabelRadioButton">
+                <input
+                    id="lastMonthSpentJaneiro"
+                    name="lastMonthSpentData"
+                    type="radio"
+                    value="sim"
+                    onChange={handleLastMonthSpentDataChange}
+                />
+                <label
+                  className="containerTextLabel"
+                  htmlFor="lastMonthSpentJaneiro"
+                >0
+                </label>
+              </div>
+
+              <div id="containerInputLabelRadioButton">
+                <input
+                    id="lastMonthSpentJaneiro"
+                    name="lastMonthSpentData"
+                    type="radio"
+                    value="sim"
+                    onChange={handleLastMonthSpentDataChange}
+                />
+                <label
+                  className="containerTextLabel"
+                  htmlFor="lastMonthSpentJaneiro"
+                >1
+                </label>
+              </div>
+
+              <div id="containerInputLabelRadioButton">
+                <input
+                    id="lastMonthSpentFevereiro"
+                    name="lastMonthSpentData"
+                    type="radio"
+                    value="Não"
+                    onChange={handleLastMonthSpentDataChange}
+                />
+                <label
+                  className="containerTextLabel"
+                  htmlFor="lastMonthSpentFevereiro"
+                >2
+                </label>
+              </div>
+
+              <div id="containerInputLabelRadioButton">
+                <input
+                    id="lastMonthSpentMarco"
+                    name="lastMonthSpentData"
+                    type="radio"
+                    value="Não sei"
+                    onChange={handleLastMonthSpentDataChange}
+                />
+                <label
+                  className="containerTextLabel"
+                  htmlFor="lastMonthSpentMarco"
+                >3
+                </label>
+              </div>
+
+              <div id="containerInputLabelRadioButton">
+                <input
+                    id="lastMonthSpentMarco"
+                    name="lastMonthSpentData"
+                    type="radio"
+                    value="Não sei"
+                    onChange={handleLastMonthSpentDataChange}
+                />
+                <label
+                  className="containerTextLabel"
+                  htmlFor="lastMonthSpentMarco"
+                >4 ou mais
+                </label>
+              </div>
+
+            </div>
+          </div>
+        </div>
 
         <Link className="backButton" to="/">Voltar</Link>
         <button
-          onClick={handleNextStep}
-        >Finalizar Cadastro
+          onClick={onSubmit}
+        >Próximo
         </button>
       </C.Container>
     </Theme>
   )
 }
+

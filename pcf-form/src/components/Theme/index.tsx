@@ -34,8 +34,8 @@ export const Theme = ({ children }: Props) => {
             />
 
             <SidebarItem
-              title="Contatos"
-              description="Como te achar"
+              title="Gestão do PCF"
+              description="Gestão e Comitê"
               path="/formstep3"
               active={state.currentStep === 3}
             />

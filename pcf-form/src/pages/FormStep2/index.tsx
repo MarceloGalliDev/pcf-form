@@ -4,7 +4,6 @@ import { Link, useNavigate } from "react-router-dom"
 import { useFormPage, FormActions } from "../../context/FormContext"
 import { ChangeEvent, useEffect, useState } from "react"
 import { useForm } from "react-hook-form";
-import axios from "axios"
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 
@@ -49,22 +48,22 @@ export const FormStep2 = () => {
     });
   };
 
-  //verificando se foi respondi, não passa apra próxima etapa
-  useEffect(() => {
-    if (state.name === '' ||
-      state.phoneNumber === '' ||
-      state.email === '' ||
-      state.functionPCF === '' ||
-      state.uf === '' ||
-      state.city === '') {
-      navigate('/')
-    } else {
-      dispatch({
-        type: FormActions.setCurrentStep,
-        payload: 2
-      });
-    }
-  }, []);
+  //verificando se foi respondida, não passa para próxima etapa
+  // useEffect(() => {
+  //   if (state.name === '' ||
+  //     state.phoneNumber === '' ||
+  //     state.email === '' ||
+  //     state.functionPCF === '' ||
+  //     state.uf === '' ||
+  //     state.city === '') {
+  //     navigate('/')
+  //   } else {
+  //     dispatch({
+  //       type: FormActions.setCurrentStep,
+  //       payload: 2
+  //     });
+  //   }
+  // }, []);
 
   useEffect(() => {
     dispatch({
@@ -109,15 +108,15 @@ export const FormStep2 = () => {
         </div>
 
         <div className="formQuestion">
-          <p className="lastMonth">
-            Qual é o último mês do ano de 2022 do qual o município possui dados dos gastos com o PCF?
+          <p className="textFormRadioButton">
+            Qual é o último mês do ano de 2022 do qual o município possui dados dos gastos com o PCF:
             <span>{errors.lastMonthSpentData && " ⚠ *Campo obrigatório "}</span>
           </p>
-          <div id="containerOptionYear">
-            <div id="containerOptionSixMonth">
-              <div id="containerLastMonth">
+          <div id="containerOption">
+            <div id="containerOptionSixOption">
+
+              <div id="containerInputLabelRadioButton">
                 <input
-                    {...register("lastMonthSpentData")}
                     id="lastMonthSpentJaneiro"
                     name="lastMonthSpentData"
                     type="radio"
@@ -125,12 +124,13 @@ export const FormStep2 = () => {
                     onChange={handleLastMonthSpentDataChange}
                 />
                 <label
-                  className="lastMonthLabel"
+                  className="containerTextLabel"
                   htmlFor="lastMonthSpentJaneiro"
                 >Janeiro
                 </label>
               </div>
-              <div id="containerLastMonth">
+
+              <div id="containerInputLabelRadioButton">
                 <input
                     id="lastMonthSpentFevereiro"
                     name="lastMonthSpentData"
@@ -139,12 +139,13 @@ export const FormStep2 = () => {
                     onChange={handleLastMonthSpentDataChange}
                 />
                 <label
-                  className="lastMonthLabel"
+                  className="containerTextLabel"
                   htmlFor="lastMonthSpentFevereiro"
                 >Fevereiro
                 </label>
               </div>
-              <div id="containerLastMonth">
+
+              <div id="containerInputLabelRadioButton">
                 <input
                     id="lastMonthSpentMarco"
                     name="lastMonthSpentData"
@@ -153,12 +154,13 @@ export const FormStep2 = () => {
                     onChange={handleLastMonthSpentDataChange}
                 />
                 <label
-                  className="lastMonthLabel"
+                  className="containerTextLabel"
                   htmlFor="lastMonthSpentMarco"
                 >Março
                 </label>
               </div>
-              <div id="containerLastMonth">
+
+              <div id="containerInputLabelRadioButton">
                 <input
                     id="lastMonthSpentAbril"
                     name="lastMonthSpentData"
@@ -167,12 +169,13 @@ export const FormStep2 = () => {
                     onChange={handleLastMonthSpentDataChange}
                 />
                 <label
-                  className="lastMonthLabel"
+                  className="containerTextLabel"
                   htmlFor="lastMonthSpentAbril"
                 >Abril
                 </label>
               </div>
-              <div id="containerLastMonth">
+
+              <div id="containerInputLabelRadioButton">
                 <input
                     id="lastMonthSpentMaio"
                     name="lastMonthSpentData"
@@ -181,12 +184,13 @@ export const FormStep2 = () => {
                     onChange={handleLastMonthSpentDataChange}
                 />
                 <label
-                  className="lastMonthLabel"
+                  className="containerTextLabel"
                   htmlFor="lastMonthSpentMaio"
                 >Maio
                 </label>
               </div>
-              <div id="containerLastMonth">
+
+              <div id="containerInputLabelRadioButton">
                 <input
                     id="lastMonthSpentJunho"
                     name="lastMonthSpentData"
@@ -195,14 +199,16 @@ export const FormStep2 = () => {
                     onChange={handleLastMonthSpentDataChange}
                 />
                 <label
-                  className="lastMonthLabel"
+                  className="containerTextLabel"
                   htmlFor="lastMonthSpentJunho"
                 >Junho
                 </label>
               </div>
             </div>
-            <div id="containerOptionSixMonth">
-              <div id="containerLastMonth">
+
+            <div id="containerOptionSixOption">
+
+              <div id="containerInputLabelRadioButton">
                 <input
                     id="lastMonthSpentJulho"
                     name="lastMonthSpentData"
@@ -211,12 +217,13 @@ export const FormStep2 = () => {
                     onChange={handleLastMonthSpentDataChange}
                 />
                 <label
-                  className="lastMonthLabel"
+                  className="containerTextLabel"
                   htmlFor="lastMonthSpentJulho"
                 >Julho
                 </label>
               </div>
-              <div id="containerLastMonth">
+
+              <div id="containerInputLabelRadioButton">
                 <input
                     id="lastMonthSpentAgosto"
                     name="lastMonthSpentData"
@@ -225,12 +232,13 @@ export const FormStep2 = () => {
                     onChange={handleLastMonthSpentDataChange}
                 />
                 <label
-                  className="lastMonthLabel"
+                  className="containerTextLabel"
                   htmlFor="lastMonthSpentAgosto"
                 >Agosto
                 </label>
               </div>
-              <div id="containerLastMonth">
+
+              <div id="containerInputLabelRadioButton">
                 <input
                     id="lastMonthSpentSetembro"
                     name="lastMonthSpentData"
@@ -239,12 +247,13 @@ export const FormStep2 = () => {
                     onChange={handleLastMonthSpentDataChange}
                 />
                 <label
-                  className="lastMonthLabel"
+                  className="containerTextLabel"
                   htmlFor="lastMonthSpentSetembro"
                 >Setembro
                 </label>
               </div>
-              <div id="containerLastMonth">
+
+              <div id="containerInputLabelRadioButton">
                 <input
                     id="lastMonthSpentOutubro"
                     name="lastMonthSpentData"
@@ -253,12 +262,13 @@ export const FormStep2 = () => {
                     onChange={handleLastMonthSpentDataChange}
                 />
                 <label
-                  className="lastMonthLabel"
+                  className="containerTextLabel"
                   htmlFor="lastMonthSpentOutubro"
                 >Outubro
                 </label>
               </div>
-              <div id="containerLastMonth">
+
+              <div id="containerInputLabelRadioButton">
                 <input
                     id="lastMonthSpentNovembro"
                     name="lastMonthSpentData"
@@ -267,12 +277,13 @@ export const FormStep2 = () => {
                     onChange={handleLastMonthSpentDataChange}
                 />
                 <label
-                  className="lastMonthLabel"
+                  className="containerTextLabel"
                   htmlFor="lastMonthSpentNovembro"
                 >Novembro
                 </label>
               </div>
-              <div id="containerLastMonth">
+
+              <div id="containerInputLabelRadioButton">
                 <input
                     id="lastMonthSpentDezembro"
                     name="lastMonthSpentData"
@@ -281,11 +292,244 @@ export const FormStep2 = () => {
                     onChange={handleLastMonthSpentDataChange}
                 />
                 <label
-                  className="lastMonthLabel"
+                  className="containerTextLabel"
                   htmlFor="lastMonthSpentDezembro"
                 >Dezembro
                 </label>
               </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div className="formQuestion">
+          <p className="textFormRadioButton">
+            Fase do PCF em seu município:
+            <span>{errors.lastMonthSpentData && " ⚠ *Campo obrigatório "}</span>
+          </p>
+
+          <div id="containerOption">
+            <div id="containerOptionSixOption">
+              
+              <div id="containerInputLabelRadioButton">
+                <input
+                    id="lastMonthSpentJaneiro"
+                    name="lastMonthSpentData"
+                    type="radio"
+                    value="janeiro"
+                    onChange={handleLastMonthSpentDataChange}
+                />
+                <label
+                  className="containerTextLabel"
+                  htmlFor="lastMonthSpentJaneiro"
+                >Implantação (até 4 meses)
+                </label>
+              </div>
+
+              <div id="containerInputLabelRadioButton">
+                <input
+                    id="lastMonthSpentFevereiro"
+                    name="lastMonthSpentData"
+                    type="radio"
+                    value="Fevereiro"
+                    onChange={handleLastMonthSpentDataChange}
+                />
+                <label
+                  className="containerTextLabel"
+                  htmlFor="lastMonthSpentFevereiro"
+                >Execução Fase I (entre o 5º e o 7º mês do início da implantação)
+                </label>
+              </div>
+
+              <div id="containerInputLabelRadioButton">
+                <input
+                    id="lastMonthSpentMarco"
+                    name="lastMonthSpentData"
+                    type="radio"
+                    value="Março"
+                    onChange={handleLastMonthSpentDataChange}
+                />
+                <label
+                  className="containerTextLabel"
+                  htmlFor="lastMonthSpentMarco"
+                >Execução Fase II (a partir do 8º mês da implantação)
+                </label>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div className="formQuestion">
+          <p className="textFormRadioButton">
+            O município ampliou suas metas (de atendimento de famílias) no Programa?
+            <span>{errors.lastMonthSpentData && " ⚠ *Campo obrigatório "}</span>
+          </p>
+
+          <div id="containerOption">
+            <div id="containerOptionSixOption">
+              
+              <div id="containerInputLabelRadioButton">
+                <input
+                    id="lastMonthSpentJaneiro"
+                    name="lastMonthSpentData"
+                    type="radio"
+                    value="sim"
+                    onChange={handleLastMonthSpentDataChange}
+                />
+                <label
+                  className="containerTextLabel"
+                  htmlFor="lastMonthSpentJaneiro"
+                >Sim
+                </label>
+              </div>
+
+              <div id="containerInputLabelRadioButton">
+                <input
+                    id="lastMonthSpentFevereiro"
+                    name="lastMonthSpentData"
+                    type="radio"
+                    value="Não"
+                    onChange={handleLastMonthSpentDataChange}
+                />
+                <label
+                  className="containerTextLabel"
+                  htmlFor="lastMonthSpentFevereiro"
+                >Não
+                </label>
+              </div>
+
+              <div id="containerInputLabelRadioButton">
+                <input
+                    id="lastMonthSpentMarco"
+                    name="lastMonthSpentData"
+                    type="radio"
+                    value="Não sei"
+                    onChange={handleLastMonthSpentDataChange}
+                />
+                <label
+                  className="containerTextLabel"
+                  htmlFor="lastMonthSpentMarco"
+                >Não sei
+                </label>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div className="formQuestion">
+          <p className="textFormRadioButton">
+            Seu município tem Centro de Referência de Assistência Social (CRAS)?
+            <span>{errors.lastMonthSpentData && " ⚠ *Campo obrigatório "}</span>
+          </p>
+
+          <div id="containerOption">
+            <div id="containerOptionSixOption">
+              
+              <div id="containerInputLabelRadioButton">
+                <input
+                    id="lastMonthSpentJaneiro"
+                    name="lastMonthSpentData"
+                    type="radio"
+                    value="sim"
+                    onChange={handleLastMonthSpentDataChange}
+                />
+                <label
+                  className="containerTextLabel"
+                  htmlFor="lastMonthSpentJaneiro"
+                >Sim
+                </label>
+              </div>
+
+              <div id="containerInputLabelRadioButton">
+                <input
+                    id="lastMonthSpentFevereiro"
+                    name="lastMonthSpentData"
+                    type="radio"
+                    value="Não"
+                    onChange={handleLastMonthSpentDataChange}
+                />
+                <label
+                  className="containerTextLabel"
+                  htmlFor="lastMonthSpentFevereiro"
+                >Não
+                </label>
+              </div>
+
+              <div id="containerInputLabelRadioButton">
+                <input
+                    id="lastMonthSpentMarco"
+                    name="lastMonthSpentData"
+                    type="radio"
+                    value="Não sei"
+                    onChange={handleLastMonthSpentDataChange}
+                />
+                <label
+                  className="containerTextLabel"
+                  htmlFor="lastMonthSpentMarco"
+                >Não sei
+                </label>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div className="formQuestion">
+          <p className="textFormRadioButton">
+            O município possui Plano de Ação do PCF?
+            <span>{errors.lastMonthSpentData && " ⚠ *Campo obrigatório "}</span>
+          </p>
+
+          <div id="containerOption">
+            <div id="containerOptionSixOption">
+              
+              <div id="containerInputLabelRadioButton">
+                <input
+                    id="lastMonthSpentJaneiro"
+                    name="lastMonthSpentData"
+                    type="radio"
+                    value="sim"
+                    onChange={handleLastMonthSpentDataChange}
+                />
+                <label
+                  className="containerTextLabel"
+                  htmlFor="lastMonthSpentJaneiro"
+                >Sim
+                </label>
+              </div>
+
+              <div id="containerInputLabelRadioButton">
+                <input
+                    id="lastMonthSpentFevereiro"
+                    name="lastMonthSpentData"
+                    type="radio"
+                    value="Não"
+                    onChange={handleLastMonthSpentDataChange}
+                />
+                <label
+                  className="containerTextLabel"
+                  htmlFor="lastMonthSpentFevereiro"
+                >Não
+                </label>
+              </div>
+
+              <div id="containerInputLabelRadioButton">
+                <input
+                    id="lastMonthSpentMarco"
+                    name="lastMonthSpentData"
+                    type="radio"
+                    value="Não sei"
+                    onChange={handleLastMonthSpentDataChange}
+                />
+                <label
+                  className="containerTextLabel"
+                  htmlFor="lastMonthSpentMarco"
+                >Não sei
+                </label>
+              </div>
+
             </div>
           </div>
         </div>

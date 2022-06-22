@@ -27,23 +27,23 @@ export const Container = styled.div`
     padding: 10px 10px;
     margin-bottom: 10px;
 
-    .lastMonth {
+    .textFormRadioButton {
       font-size: 15px;
       font-weight: bold;
     }
 
-    .lastMonthLabel {
+    .containerTextLabel {
       font-size: 15px;
       font-weight: normal;
     }
 
-    #containerOptionYear {
+    #containerOption {
       display: flex;
       margin-left: 10px;
       gap: 50px;
     }
 
-    #containerLastMonth {
+    #containerInputLabelRadioButton {
       display: flex;
       gap: 10px;
       margin-top: 10px;
