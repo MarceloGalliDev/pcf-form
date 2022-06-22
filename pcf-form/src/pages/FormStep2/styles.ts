@@ -32,20 +32,32 @@ export const Container = styled.div`
       font-weight: bold;
     }
 
-    #lastMonth {
+    .lastMonthLabel {
       font-size: 15px;
       font-weight: normal;
+    }
+
+    #containerOptionYear {
+      display: flex;
+      margin-left: 10px;
+      gap: 50px;
+    }
+
+    #containerLastMonth {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+      align-items: center;
+    }
+    span {
+      font-weight: normal;
+      color: red;
+      margin-left: 10px;
     }
 
     label {
       font-size: 15px;
       font-weight: bold;
-      
-      span {
-        font-weight: normal;
-        color: red;
-        margin-left: 10px;
-      }
 
       select {
         display: flex;
@@ -60,7 +72,7 @@ export const Container = styled.div`
       input {
         display: block;
         margin-top: 17px;
-        width: 100%;
+        width: 20% + 10vw;
         border: none;
         border-bottom: 1px solid #8C1F28;
         color: #591C21;

@@ -11,7 +11,7 @@ type State = {
   uf: string;
   city: string;
   dateAcquisition: string;
-  dateVisition: string;
+  dateVisition: 'janeiro' | 'fevereiro';
   //é o tipo de informação que está dentro do meu state
 };
 type Action = {
@@ -39,7 +39,7 @@ const initialData: State = {
   uf: '',
   city: '',
   dateAcquisition: '',
-  dateVisition: '',
+  dateVisition: 'janeiro' || 'fevereiro',
   //são os dados iniciais
 }
 

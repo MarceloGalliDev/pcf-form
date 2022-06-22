@@ -42,6 +42,22 @@ export const FormStep2 = () => {
   };
 
   useEffect(() => {
+    if (state.name === '' ||
+      state.phoneNumber === '' ||
+      state.email === '' ||
+      state.functionPCF === '' ||
+      state.uf === '' ||
+      state.city === '') {
+      navigate('/')
+    } else {
+      dispatch({
+        type: FormActions.setCurrentStep,
+        payload: 2
+      });
+    }
+  }, []);
+
+  useEffect(() => {
     dispatch({
       type: FormActions.setCurrentStep,
       payload: 2
@@ -87,15 +103,182 @@ export const FormStep2 = () => {
           <p className="lastMonth">
             Qual é o último mês do ano de 2022 do qual o município possui dados dos gastos com o PCF?
             <span>{errors.dateVisition && " ⚠ *Campo obrigatório "}</span>
-            <label id="lastMonth" htmlFor="">Janeiro
-              <input
-                {...register("dateVisition")}
-                name="dateVisition"
-                type="radio"
-                value={state.dateVisition}
-                onChange={handleDateVisitionChange}
-              />
-            </label>
+
+            <div id="containerOptionYear">
+              <div id="containerOptionSixMonth">
+                <div id="containerLastMonth">
+                  <input
+                      {...register("dateVisition")}
+                      name="dateVisition"
+                      type="radio"
+                      value={state.dateVisition}
+                      onChange={handleDateVisitionChange}
+                  />
+                  <label
+                    className="lastMonthLabel"
+                    htmlFor="janeiro"
+                  >Janeiro
+                  </label>
+                </div>
+                <div id="containerLastMonth">
+                  <input
+                      {...register("dateVisition")}
+                      name="dateVisition"
+                      type="radio"
+                      value={state.dateVisition}
+                      onChange={handleDateVisitionChange}
+                  />
+                  <label
+                    className="lastMonthLabel"
+                    htmlFor="fevereiro"
+                  >Fevereiro
+                  </label>
+                </div>
+                <div id="containerLastMonth">
+                  <input
+                      {...register("dateVisition")}
+                      name="dateVisition"
+                      type="radio"
+                      value={state.dateVisition}
+                      onChange={handleDateVisitionChange}
+                  />
+                  <label
+                    className="lastMonthLabel"
+                    htmlFor="marco"
+                  >Março
+                  </label>
+                </div>
+                <div id="containerLastMonth">
+                  <input
+                      {...register("dateVisition")}
+                      name="dateVisition"
+                      type="radio"
+                      value={state.dateVisition}
+                      onChange={handleDateVisitionChange}
+                  />
+                  <label
+                    className="lastMonthLabel"
+                    htmlFor="abril"
+                  >Abril
+                  </label>
+                </div>
+                <div id="containerLastMonth">
+                  <input
+                      {...register("dateVisition")}
+                      name="dateVisition"
+                      type="radio"
+                      value={state.dateVisition}
+                      onChange={handleDateVisitionChange}
+                  />
+                  <label
+                    className="lastMonthLabel"
+                    htmlFor="maio"
+                  >Maio
+                  </label>
+                </div>
+                <div id="containerLastMonth">
+                  <input
+                      {...register("dateVisition")}
+                      name="dateVisition"
+                      type="radio"
+                      value={state.dateVisition}
+                      onChange={handleDateVisitionChange}
+                  />
+                  <label
+                    className="lastMonthLabel"
+                    htmlFor="junho"
+                  >Junho
+                  </label>
+                </div>
+              </div>
+              <div id="containerOptionSixMonth">
+                <div id="containerLastMonth">
+                  <input
+                      {...register("dateVisition")}
+                      name="dateVisition"
+                      type="radio"
+                      value={state.dateVisition}
+                      onChange={handleDateVisitionChange}
+                  />
+                  <label
+                    className="lastMonthLabel"
+                    htmlFor="julho"
+                  >Julho
+                  </label>
+                </div>
+                <div id="containerLastMonth">
+                  <input
+                      {...register("dateVisition")}
+                      name="dateVisition"
+                      type="radio"
+                      value={state.dateVisition}
+                      onChange={handleDateVisitionChange}
+                  />
+                  <label
+                    className="lastMonthLabel"
+                    htmlFor="agosto"
+                  >Agosto
+                  </label>
+                </div>
+                <div id="containerLastMonth">
+                  <input
+                      {...register("dateVisition")}
+                      name="dateVisition"
+                      type="radio"
+                      value={state.dateVisition}
+                      onChange={handleDateVisitionChange}
+                  />
+                  <label
+                    className="lastMonthLabel"
+                    htmlFor="setembro"
+                  >Setembro
+                  </label>
+                </div>
+                <div id="containerLastMonth">
+                  <input
+                      {...register("dateVisition")}
+                      name="dateVisition"
+                      type="radio"
+                      value={state.dateVisition}
+                      onChange={handleDateVisitionChange}
+                  />
+                  <label
+                    className="lastMonthLabel"
+                    htmlFor="outubro"
+                  >Outubro
+                  </label>
+                </div>
+                <div id="containerLastMonth">
+                  <input
+                      {...register("dateVisition")}
+                      name="dateVisition"
+                      type="radio"
+                      value={state.dateVisition}
+                      onChange={handleDateVisitionChange}
+                  />
+                  <label
+                    className="lastMonthLabel"
+                    htmlFor="novembro"
+                  >Novembro
+                  </label>
+                </div>
+                <div id="containerLastMonth">
+                  <input
+                      {...register("dateVisition")}
+                      name="dateVisition"
+                      type="radio"
+                      value={state.dateVisition}
+                      onChange={handleDateVisitionChange}
+                  />
+                  <label
+                    className="lastMonthLabel"
+                    htmlFor="dezembro"
+                  >Dezembro
+                  </label>
+                </div>
+              </div>
+            </div>
+
           </p>
         </div>
 
