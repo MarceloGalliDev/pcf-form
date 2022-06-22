@@ -49,7 +49,6 @@ export const FormStep1 = () => {
   //dropdown state e cities
   const { register, handleSubmit, formState: {errors}} = useForm<FormStep1Input>({resolver: yupResolver(schema)})
   const onSubmit = handleSubmit(data => navigate('/formstep2'))
-
 //Aqui fizemos a função de troca de nome, usamos dispatch para realizar a troca, onde recebemos no payload o valor, e setamos no FormActions
   const handleNameChange = (event: ChangeEvent<HTMLInputElement>) => {
     dispatch({
@@ -78,8 +77,6 @@ export const FormStep1 = () => {
       payload: event.target.value
     });
   };
-
-  
 
   function handleSelectedUf(event: ChangeEvent<HTMLSelectElement>) {
     const uf = event.target.value
@@ -188,7 +185,6 @@ export const FormStep1 = () => {
           <label htmlFor="uf">
             Local em que atua no PCF:
             <span>{errors.uf && " ⚠ *Campo obrigatório "}</span>
-
             <select
               {...register("uf")}
               name="uf"
@@ -214,10 +210,9 @@ export const FormStep1 = () => {
                 <option key={city.id} value={city.nome}>{city.nome}</option>
               ))}
             </select>
-
           </label>
         </div>
-        
+
         <button
           onClick={onSubmit}
         >Próximo

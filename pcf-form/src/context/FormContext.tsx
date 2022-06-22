@@ -10,6 +10,8 @@ type State = {
   functionPCF: string;
   uf: string;
   city: string;
+  dateAcquisition: string;
+  dateVisition: string;
   //é o tipo de informação que está dentro do meu state
 };
 type Action = {
@@ -36,6 +38,8 @@ const initialData: State = {
   functionPCF: '',
   uf: '',
   city: '',
+  dateAcquisition: '',
+  dateVisition: '',
   //são os dados iniciais
 }
 
@@ -51,6 +55,8 @@ export enum FormActions {
   setFunctionPCF,
   setUf,
   setCity,
+  setDateAcquisition,
+  setDateVisition,
   //enum = é uma forma de tipificar dados em um objeto, como listas, são autoincrementados, e podem ser números, podem haver strings sem valores.
 }
 
@@ -71,13 +77,16 @@ const formReducer = (state: State, action: Action) => {//recebi os dados origina
       return { ...state, uf: action.payload };
       case FormActions.setCity:
         return { ...state, city: action.payload };
+      case FormActions.setDateAcquisition:
+        return { ...state, dateAcquisition: action.payload };
+      case FormActions.setDateVisition:
+        return { ...state, dateVisition: action.payload };
     default://se não existir está ação retorna o state do jeito que veio
       return state;
   }
   //{... state} estamos clonando os dados de state
   //payload é os dados
 }
-
 //Provider - o ambiente geral para gerenciar os dados, componente principal
 export const FormProvider = ({children}: FormProviderProps) => {
   const [state, dispatch] = useReducer(formReducer, initialData);
@@ -92,7 +101,6 @@ export const FormProvider = ({children}: FormProviderProps) => {
   //children serve para recebe o conteúdo que está dentro de FormProvider
   //cria o site inteiro e coloca dentro do FormContext, que será passado para o children
 }
-
 //Context hook
 export const useFormPage = () => {
   const context = useContext(FormContext);//esta enviado FormContext

@@ -27,8 +27,8 @@ export const Theme = ({ children }: Props) => {
             />
 
             <SidebarItem
-              title="Profissional"
-              description="Seu nível"
+              title="Características do PCF"
+              description="Características"
               path="/formstep2"
               active={state.currentStep === 2}
             />

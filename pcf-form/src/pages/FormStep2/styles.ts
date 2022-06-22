@@ -12,6 +12,7 @@ export const Container = styled.div`
     font-size: 26px;
   }
 
+
   hr {
     height: 1px;
     border: 0;
@@ -19,20 +20,54 @@ export const Container = styled.div`
     margin: 30px 0;
   }
 
-  label {
-    font-size: 15px;
+  .formQuestion {
+    border: 1px solid #8C1F28;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 10px 10px;
+    margin-bottom: 10px;
 
-    input {
-      display: block;
-      margin-top: 7px;
-      width: 100%;
-      padding: 10px 10px;
-      border: 2px solid #8C1F28;
-      border-radius: 10px;
-      color: #591C21;
-      outline: 0;
+    .lastMonth {
       font-size: 15px;
-      background-color: #F2F2F2;
+      font-weight: bold;
+    }
+
+    #lastMonth {
+      font-size: 15px;
+      font-weight: normal;
+    }
+
+    label {
+      font-size: 15px;
+      font-weight: bold;
+      
+      span {
+        font-weight: normal;
+        color: red;
+        margin-left: 10px;
+      }
+
+      select {
+        display: flex;
+        width: 50%;
+        margin-top: 17px;
+        padding: 5px;
+        color: #591C21;
+        border: 1px solid #8C1F28;
+        border-radius: 5px;
+      }
+
+      input {
+        display: block;
+        margin-top: 17px;
+        width: 100%;
+        border: none;
+        border-bottom: 1px solid #8C1F28;
+        color: #591C21;
+        outline: 0;
+        font-size: 15px;
+        padding: 5px 0;
+      }
     }
   }
 
@@ -55,7 +90,6 @@ export const Container = styled.div`
 
   .backButton {
     background-color: #D92525;
-    text-decoration: none;
     color: #F2F2F2;
     font-size: 14px;
     font-weight: bold;
@@ -63,7 +97,7 @@ export const Container = styled.div`
     border: 0;
     border-radius: 10px;
     cursor: pointer;
-    margin: 30px 15px 0 0;
+    margin: 30px 10px 0 0;
     transition: filter 0.2s;
 
     &:hover {
@@ -71,3 +105,5 @@ export const Container = styled.div`
     }
   }
 `;
+
+
