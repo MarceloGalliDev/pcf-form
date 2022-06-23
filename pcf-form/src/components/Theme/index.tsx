@@ -19,6 +19,7 @@ export const Theme = ({ children }: Props) => {
 
         <C.Steps>
           <C.Sidebar>
+            
             <SidebarItem
               title="Informações gerais"
               description="Identificação"

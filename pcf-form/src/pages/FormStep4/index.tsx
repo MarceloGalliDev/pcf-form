@@ -86,7 +86,9 @@ export const FormStep4 = () => {
         <p>Etapa {state.currentStep}/8</p>
         <h1>Público atendido pelo PCF em seu município</h1>
         <hr />
+      </C.Container>
 
+      <C.ButtonTypeTextV2>
         <div className="formQuestion">
           <p>Indique o número de pessoas atendidas pelo Programa em seu município no mês de referência mencionado anteriormente:</p>
 
@@ -197,13 +199,16 @@ export const FormStep4 = () => {
           </div>
 
         </div>
+      </C.ButtonTypeTextV2>
 
-        <Link className="backButton" to="/">Voltar</Link>
+        <C.AllButtons>
+        <Link className="buttonBack" to="/">Voltar</Link>
         <button
+          className="buttonNext"
           onClick={onSubmit}
         >Próximo
         </button>
-      </C.Container>
+      </C.AllButtons>
     </Theme>
   )
 }

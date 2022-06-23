@@ -22,7 +22,7 @@ export const Title = styled.div`
   margin-bottom: 5px;
   font-size: 15px;
   color: #591C21;
-  `;
+`;
 
 export const Description = styled.div`
   text-align: right;

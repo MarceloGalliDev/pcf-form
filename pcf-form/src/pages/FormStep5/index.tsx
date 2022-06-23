@@ -87,10 +87,12 @@ export const FormStep5 = () => {
         <h1>Equipe do PCF</h1>
         <p>Informações sobre os atores/ participantes da equipe do PCF</p>
         <hr />
+      </C.Container>
 
-        <div className="formQuestion">
-          <p>Subseção Supervisores</p>
+      <div className="formQuestion">
+        <p>Subseção Supervisores</p>
 
+        <C.ButtonTypeText>
           <div className="formQuestion">
             <label htmlFor="name">
               Quantos Supervisores existem na equipe do PCF no seu município?
@@ -104,7 +106,9 @@ export const FormStep5 = () => {
               />
             </label>
           </div>
+        </C.ButtonTypeText>
 
+        <C.ButtonTypeText>
           <div className="formQuestion">
             <label htmlFor="name">
               Qual a remuneração média em R$ (reais) dos Supervisores?
@@ -118,14 +122,15 @@ export const FormStep5 = () => {
               />
             </label>
           </div>
+        </C.ButtonTypeText>
 
+        <C.ButtonTypeCheckbox>
           <div className="formQuestion">
             <p className="textFormRadioButton">
               Qual a carga horária dos Supervisores?
-
             </p>
             <div id="containerOption">
-              <div id="containerOptionSixOption">
+              <div>
               
                 <div id="containerInputLabelRadioButton">
                   <input
@@ -198,7 +203,9 @@ export const FormStep5 = () => {
               </div>
             </div>
           </div>
+        </C.ButtonTypeCheckbox>
 
+        <C.ButtonTypeTextV3>
           <div className="formQuestion">
             <label htmlFor="name">
               Quantos Supervisores da equipe do PCF tem em seu município:
@@ -249,15 +256,15 @@ export const FormStep5 = () => {
 
             </label>
           </div>
+        </C.ButtonTypeTextV3>
+      </div>
 
-        </div>
-
+      <C.ButtonTypeTextV3>
         <div className="formQuestion">
           <label htmlFor="name">
             Quantos Supervisores da equipe do PCF são contratados nas seguintes categorias em seu município:
 
             <div id="containerLabelCheckboxBorder">
-
               <div id="containerTextLabelCheckbox">
                 <label
                   className="labelForContainerTextLabelCheckbox"
@@ -287,7 +294,6 @@ export const FormStep5 = () => {
                   placeholder="Sua resposta"
                 />
               </div>
-
             </div>
 
             <div id="containerLabelCheckboxBorder">
@@ -320,7 +326,7 @@ export const FormStep5 = () => {
                 />
               </div>
             </div>
-              
+
             <div id="containerLabelCheckboxBorder">
               <div id="containerTextLabelCheckbox">
                 <label
@@ -416,13 +422,16 @@ export const FormStep5 = () => {
 
           </label>
         </div>
+      </C.ButtonTypeTextV3>
 
-        <Link className="backButton" to="/">Voltar</Link>
+      <C.AllButtons>
+        <Link className="buttonBack" to="/">Voltar</Link>
         <button
+          className="buttonNext"
           onClick={onSubmit}
         >Próximo
         </button>
-      </C.Container>
+      </C.AllButtons>
     </Theme>
   )
 }

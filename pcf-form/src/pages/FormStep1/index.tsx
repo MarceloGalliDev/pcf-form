@@ -118,8 +118,10 @@ export const FormStep1 = () => {
       <C.Container>
         <p>Etapa {state.currentStep}/8</p>
         <h1>Informações gerais</h1>
-        <hr />
-        
+        <hr/>
+      </C.Container>
+
+      <C.ButtonTypeText>
         <div className="formQuestion">
           <label htmlFor="name">
             Nome do entrevistado:
@@ -135,7 +137,9 @@ export const FormStep1 = () => {
             />
           </label>
         </div>
+      </C.ButtonTypeText>
 
+      <C.ButtonTypeText>
         <div className="formQuestion">
           <label htmlFor="email">
             E-mail:
@@ -150,7 +154,9 @@ export const FormStep1 = () => {
             />
           </label>
         </div>
+      </C.ButtonTypeText>
 
+      <C.ButtonTypeText>
         <div className="formQuestion">
           <label htmlFor="phoneNumber">
             Telefone para contato:
@@ -165,7 +171,9 @@ export const FormStep1 = () => {
             />
           </label>
         </div>
+      </C.ButtonTypeText>
 
+      <C.ButtonTypeText>
         <div className="formQuestion">
           <label htmlFor="functionPCF">
             Função no PCF:
@@ -180,7 +188,10 @@ export const FormStep1 = () => {
             />
           </label>
         </div>
+      </C.ButtonTypeText>
 
+
+      <C.ButtonTypeSelectOption>
         <div className="formQuestion">
           <label htmlFor="uf">
             Local em que atua no PCF:
@@ -212,12 +223,14 @@ export const FormStep1 = () => {
             </select>
           </label>
         </div>
+      </C.ButtonTypeSelectOption>
 
+      <C.ButtonNext>
         <button
           onClick={onSubmit}
         >Próximo
         </button>
-      </C.Container>
+      </C.ButtonNext>
     </Theme>
   )
 }
