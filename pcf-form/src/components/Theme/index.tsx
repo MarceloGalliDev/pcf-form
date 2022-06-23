@@ -68,6 +68,13 @@ export const Theme = ({ children }: Props) => {
               active={state.currentStep === 7}
             />
 
+            <SidebarItem
+              title="Outros profissionais"
+              description="Informações sobre outros profissionais participantes da equipe do PCF"
+              path="/formstep8"
+              active={state.currentStep === 8}
+            />
+
           </C.Sidebar>
           <C.Page>
             {children}

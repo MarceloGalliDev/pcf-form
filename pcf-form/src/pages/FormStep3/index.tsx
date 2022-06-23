@@ -77,7 +77,7 @@ export const FormStep3 = () => {
       <C.Container>
         <p>Etapa {state.currentStep}/8</p>
         <h1>Gestão do PCF</h1>
-        <hr />
+        <hr/>
 
         <div className="formQuestion">
           <p className="textFormRadioButton">
@@ -85,7 +85,7 @@ export const FormStep3 = () => {
           </p>
           <div id="containerOption">
             <div id="containerOptionSixOption">
-              
+
               <div id="containerInputLabelRadioButton">
                 <input
                     id="lastMonthSpentJaneiro"
