@@ -48,10 +48,24 @@ export const Theme = ({ children }: Props) => {
             />
 
             <SidebarItem
-              title="Equipe do PCF"
+              title="Equipe do PCF - 1"
               description="Informações sobre os atores/ participantes da equipe do PCF"
               path="/formstep5"
               active={state.currentStep === 5}
+            />
+
+            <SidebarItem
+              title="Equipe do PCF - 2"
+              description="Informações sobre os atores/ participantes da equipe do PCF"
+              path="/formstep6"
+              active={state.currentStep === 6}
+            />
+
+            <SidebarItem
+              title="Organizações parceiras"
+              description="Informações sobre organizações parceira do PCF"
+              path="/formstep7"
+              active={state.currentStep === 7}
             />
 
           </C.Sidebar>

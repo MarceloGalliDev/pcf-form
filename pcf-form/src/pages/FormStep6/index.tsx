@@ -20,7 +20,7 @@ const schema = yup.object({
   dateVisition: yup.string().required(),
 }).required();
 
-export const FormStep5 = () => {
+export const FormStep6 = () => {
   const navigate = useNavigate();
   const { state, dispatch } = useFormPage();
 
@@ -76,7 +76,7 @@ export const FormStep5 = () => {
   useEffect(() => {
     dispatch({
       type: FormActions.setCurrentStep,
-      payload: 5
+      payload: 6
     });
   }, []);
 
@@ -86,14 +86,14 @@ export const FormStep5 = () => {
         <p>Etapa {state.currentStep}/8</p>
         <h1>Equipe do PCF</h1>
         <p>Informações sobre os atores/ participantes da equipe do PCF</p>
-        <hr />
+        <hr/>
 
         <div className="formQuestion">
-          <p>Subseção Supervisores</p>
+          <p>Subseção Visitadores</p>
 
           <div className="formQuestion">
             <label htmlFor="name">
-              Quantos Supervisores existem na equipe do PCF no seu município?
+              Quantos Visitadores existem na equipe do PCF no seu município?
               <input
                 {...register("name")}
                 name="name"
@@ -107,7 +107,7 @@ export const FormStep5 = () => {
 
           <div className="formQuestion">
             <label htmlFor="name">
-              Qual a remuneração média em R$ (reais) dos Supervisores?
+              Qual a remuneração média em R$ (reais) dos Visitadores?
               <input
                 {...register("name")}
                 name="name"
@@ -121,12 +121,11 @@ export const FormStep5 = () => {
 
           <div className="formQuestion">
             <p className="textFormRadioButton">
-              Qual a carga horária dos Supervisores?
-
+              Qual a carga horária dos Visitadores?
             </p>
             <div id="containerOption">
               <div id="containerOptionSixOption">
-              
+
                 <div id="containerInputLabelRadioButton">
                   <input
                     id="lastMonthSpentJaneiro"
@@ -201,7 +200,35 @@ export const FormStep5 = () => {
 
           <div className="formQuestion">
             <label htmlFor="name">
-              Quantos Supervisores da equipe do PCF tem em seu município:
+              Quantos Visitadores da equipe do PCF tem em seu município:
+
+              <div id="containerTextLabelCheckbox">
+                <label
+                  className="labelForContainerTextLabelCheckbox"
+                  htmlFor="">Superior Incompleto:</label>
+                <input
+                  className="inputForContainerTextLabelCheckbox"
+                  name="name"
+                  type="text"
+                  value={state.name}
+                  onChange={handleNameChange}
+                  placeholder="Sua resposta"
+                />
+              </div>
+
+              <div id="containerTextLabelCheckbox">
+                <label
+                  className="labelForContainerTextLabelCheckbox"
+                  htmlFor="">Superior Completo:</label>
+                <input
+                  className="inputForContainerTextLabelCheckbox"
+                  name="name"
+                  type="text"
+                  value={state.name}
+                  onChange={handleNameChange}
+                  placeholder="Sua resposta"
+                />
+              </div>
 
               <div id="containerTextLabelCheckbox">
                 <label
@@ -246,18 +273,16 @@ export const FormStep5 = () => {
                   placeholder="Sua resposta"
                 />
               </div>
-
             </label>
-          </div>
 
+          </div>
         </div>
 
         <div className="formQuestion">
           <label htmlFor="name">
-            Quantos Supervisores da equipe do PCF são contratados nas seguintes categorias em seu município:
+            Quantos Visitadores da equipe do PCF são contratados nas seguintes categorias em seu município:
 
             <div id="containerLabelCheckboxBorder">
-
               <div id="containerTextLabelCheckbox">
                 <label
                   className="labelForContainerTextLabelCheckbox"
@@ -273,7 +298,6 @@ export const FormStep5 = () => {
                   placeholder="Sua resposta"
                 />
               </div>
-
               <div id="containerTextLabelCheckbox">
                 <label
                   className="labelForContainerTextLabelCheckbox"
@@ -287,7 +311,6 @@ export const FormStep5 = () => {
                   placeholder="Sua resposta"
                 />
               </div>
-
             </div>
 
             <div id="containerLabelCheckboxBorder">
@@ -320,7 +343,7 @@ export const FormStep5 = () => {
                 />
               </div>
             </div>
-              
+            
             <div id="containerLabelCheckboxBorder">
               <div id="containerTextLabelCheckbox">
                 <label
@@ -381,6 +404,37 @@ export const FormStep5 = () => {
                   placeholder="Sua resposta"
                 />
               </div>
+              </div>
+          
+            <div id="containerLabelCheckboxBorder">
+              <div id="containerTextLabelCheckbox">
+                <label
+                  className="labelForContainerTextLabelCheckbox"
+                  htmlFor=""
+                >Estagiário de nivel superior:
+                </label>
+                <input
+                  className="inputForContainerTextLabelCheckbox"
+                  name="name"
+                  type="text"
+                  value={state.name}
+                  onChange={handleNameChange}
+                  placeholder="Sua resposta"
+                />
+              </div>
+              <div id="containerTextLabelCheckbox">
+                <label
+                  className="labelForContainerTextLabelCheckbox"
+                  htmlFor="">Média Remuneração:</label>
+                <input
+                  className="inputForContainerTextLabelCheckbox"
+                  name="name"
+                  type="text"
+                  value={state.name}
+                  onChange={handleNameChange}
+                  placeholder="Sua resposta"
+                />
+              </div>
             </div>
 
             <div id="containerLabelCheckboxBorder">
@@ -413,8 +467,142 @@ export const FormStep5 = () => {
                 />
               </div>
             </div>
-
           </label>
+        </div>
+
+        <div className="formQuestion">
+            <p className="textFormRadioButton">
+              Como são realizadas as contratações dos Visitadores e/ou Supervisores em seu município?
+            </p>
+            <div id="containerOption">
+              <div id="containerOptionSixOption">
+
+                <div id="containerInputLabelRadioButton">
+                  <input
+                    id="lastMonthSpentJaneiro"
+                    name="lastMonthSpentData"
+                    type="checkbox"
+                    value="sim"
+                    onChange={handleLastMonthSpentDataChange}
+                  />
+                  <label
+                    className="containerTextLabel"
+                    htmlFor="lastMonthSpentJaneiro"
+                  >Edital
+                  </label>
+                </div>
+
+                <div id="containerInputLabelRadioButton">
+                  <input
+                    id="lastMonthSpentFevereiro"
+                    name="lastMonthSpentData"
+                    type="checkbox"
+                    value="Não"
+                    onChange={handleLastMonthSpentDataChange}
+                  />
+                  <label
+                    className="containerTextLabel"
+                    htmlFor="lastMonthSpentFevereiro"
+                  >Equipe própria
+                  </label>
+                </div>
+
+                <div id="containerInputLabelRadioButton">
+                  <input
+                    id="lastMonthSpentFevereiro"
+                    name="lastMonthSpentData"
+                    type="checkbox"
+                    value="Não"
+                    onChange={handleLastMonthSpentDataChange}
+                  />
+                  <label
+                    className="containerTextLabel"
+                    htmlFor="lastMonthSpentFevereiro"
+                  >Contratação direta
+                  </label>
+                </div>
+
+                <div id="containerInputLabelRadioButton">
+                  <input
+                    id="lastMonthSpentFevereiro"
+                    name="lastMonthSpentData"
+                    type="checkbox"
+                    value="Não"
+                    onChange={handleLastMonthSpentDataChange}
+                  />
+                  <label
+                    className="containerTextLabel"
+                    htmlFor="lastMonthSpentFevereiro"
+                  >Outro:
+                  </label>
+                  <input
+                    className="inputPlaceholderOther"
+                    name="name"
+                    type="text"
+                    value={state.name}
+                    onChange={handleNameChange}
+                    placeholder="Escreva aqui"
+                  />
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <div className="formQuestion">
+          <p className="textFormRadioButton">
+            O município tem parcerias com organizações da sociedade civil para contratação de equipe?
+          </p>
+          <div id="containerOption">
+            <div id="containerOptionSixOption">
+              
+              <div id="containerInputLabelRadioButton">
+                <input
+                    id="lastMonthSpentJaneiro"
+                    name="lastMonthSpentData"
+                    type="radio"
+                    value="sim"
+                    onChange={handleLastMonthSpentDataChange}
+                />
+                <label
+                  className="containerTextLabel"
+                  htmlFor="lastMonthSpentJaneiro"
+                >Sim
+                </label>
+              </div>
+
+              <div id="containerInputLabelRadioButton">
+                <input
+                    id="lastMonthSpentFevereiro"
+                    name="lastMonthSpentData"
+                    type="radio"
+                    value="Não"
+                    onChange={handleLastMonthSpentDataChange}
+                />
+                <label
+                  className="containerTextLabel"
+                  htmlFor="lastMonthSpentFevereiro"
+                >Não
+                </label>
+              </div>
+
+              <div id="containerInputLabelRadioButton">
+                <input
+                    id="lastMonthSpentFevereiro"
+                    name="lastMonthSpentData"
+                    type="radio"
+                    value="Não"
+                    onChange={handleLastMonthSpentDataChange}
+                />
+                <label
+                  className="containerTextLabel"
+                  htmlFor="lastMonthSpentFevereiro"
+                >Não sei
+                </label>
+              </div>
+
+            </div>
+          </div>
         </div>
 
         <Link className="backButton" to="/">Voltar</Link>
