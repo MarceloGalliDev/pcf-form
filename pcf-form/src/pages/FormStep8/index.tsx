@@ -1,4 +1,4 @@
-import * as C from "./styles"
+import * as C from "../../styles/styles"
 import { Theme } from "../../components/Theme"
 import { Link, useNavigate } from "react-router-dom"
 import { useFormPage, FormActions } from "../../context/FormContext"
@@ -86,61 +86,75 @@ export const FormStep8 = () => {
         <p>Etapa {state.currentStep}/8</p>
         <h1>Outros profissionais</h1>
         <p>Informações sobre os atores/ participantes da equipe do PCF</p>
-        <hr />
+        <hr/>
+      </C.Container>
 
-        <div className="formQuestion">
+
+      <C.SubSection>
+        <div className="bgSubSection">
           <p>Subseção Outros Profissionais</p>
+        </div>
+        <div className="formQuestionV2">
 
-          <div className="formQuestion">
-            <label htmlFor="name">
-              Indique outros profissionais remunerados pelo PCF?
-              <input
-                {...register("name")}
-                name="name"
-                type="text"
-                value={state.name}
-                onChange={handleNameChange}
-                placeholder="Sua resposta"
-              />
-            </label>
-          </div>
+          <C.ButtonTypeText>
+            <div className="formQuestion">
+              <label htmlFor="name">
+                Indique outros profissionais remunerados pelo PCF?
+                <input
+                  {...register("name")}
+                  name="name"
+                  type="text"
+                  value={state.name}
+                  onChange={handleNameChange}
+                  placeholder="Sua resposta"
+                />
+              </label>
+            </div>
+          </C.ButtonTypeText>
 
-          <div className="formQuestion">
-            <label htmlFor="name">
-              Qual a remuneração média em R$ (reais) desses outros profissionais?
-              <input
-                {...register("name")}
-                name="name"
-                type="text"
-                value={state.name}
-                onChange={handleNameChange}
-                placeholder="Valor em R$"
-              />
-            </label>
-          </div>
+          <C.ButtonTypeText>
+            <div className="formQuestion">
+              <label htmlFor="name">
+                Qual a remuneração média em R$ (reais) desses outros profissionais?
+                <input
+                  {...register("name")}
+                  name="name"
+                  type="text"
+                  value={state.name}
+                  onChange={handleNameChange}
+                  placeholder="Valor em R$"
+                />
+              </label>
+            </div>
+          </C.ButtonTypeText>
 
-          <div className="formQuestion">
-            <label htmlFor="name">
-              Observações:
-              <input
-                {...register("name")}
-                name="name"
-                type="text"
-                value={state.name}
-                onChange={handleNameChange}
-                placeholder="Sua resposta"
-              />
-            </label>
-          </div>
+          <C.ButtonTypeText>
+            <div className="formQuestion">
+              <label htmlFor="name">
+                Observações:
+                <input
+                  {...register("name")}
+                  name="name"
+                  type="text"
+                  value={state.name}
+                  onChange={handleNameChange}
+                  placeholder="Sua resposta"
+                />
+              </label>
+            </div>
+          </C.ButtonTypeText>
 
         </div>
+      </C.SubSection>
 
-        <Link className="backButton" to="/">Voltar</Link>
+      <C.AllButtons>
+        <Link className="buttonBack" to="/">Voltar</Link>
         <button
+          className="buttonNext"
           onClick={onSubmit}
         >Próximo
         </button>
-      </C.Container>
+      </C.AllButtons>
     </Theme>
   )
 }

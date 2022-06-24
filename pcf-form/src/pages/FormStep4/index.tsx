@@ -1,4 +1,4 @@
-import * as C from "./styles"
+import * as C from "../../styles/styles"
 import { Theme } from "../../components/Theme"
 import { Link, useNavigate } from "react-router-dom"
 import { useFormPage, FormActions } from "../../context/FormContext"
@@ -85,6 +85,7 @@ export const FormStep4 = () => {
       <C.Container>
         <p>Etapa {state.currentStep}/8</p>
         <h1>Público atendido pelo PCF em seu município</h1>
+        <p>Perfil das famílias atendidas pelo PCF em seu município</p>
         <hr />
       </C.Container>
 

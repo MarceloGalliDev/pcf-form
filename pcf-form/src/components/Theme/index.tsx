@@ -76,6 +76,13 @@ export const Theme = ({ children }: Props) => {
               active={state.currentStep === 8}
             />
 
+            <SidebarItem
+              title="Recursos e Custos"
+              description="Recursos e custos mensais diretos do PCF no município"
+              path="/formstep9"
+              active={state.currentStep === 9}
+            />
+
           </C.Sidebar>
           <C.Page>
             {children}

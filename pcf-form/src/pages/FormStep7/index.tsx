@@ -1,4 +1,4 @@
-import * as C from "./styles"
+import * as C from "../../styles/styles"
 import { Theme } from "../../components/Theme"
 import { Link, useNavigate } from "react-router-dom"
 import { useFormPage, FormActions } from "../../context/FormContext"
@@ -82,11 +82,14 @@ export const FormStep7 = () => {
 
   return (
     <Theme>
-      <C.Container>
+      <C.Container> 
         <p>Etapa {state.currentStep}/8</p>
         <h1>Organizações parceiras</h1>
+        <p>Informações sobre as organizações participantes e parceiras do PCF</p>
         <hr/>
+      </C.Container>
 
+      <C.ButtonTypeText>
         <div className="formQuestion">
           <label htmlFor="name">
             Com qual(is) a(s) organização(ões) possui parceria?
@@ -100,7 +103,9 @@ export const FormStep7 = () => {
             />
           </label>
         </div>
+      </C.ButtonTypeText>
 
+      <C.ButtonTypeRadio>
         <div className="formQuestion">
           <p className="textFormRadioButton">
             Essas organizaões fazem aporte financeiros para o PCF?
@@ -112,11 +117,11 @@ export const FormStep7 = () => {
               
               <div id="containerInputLabelRadioButton">
                 <input
-                    id="lastMonthSpentJaneiro"
-                    name="lastMonthSpentData"
-                    type="radio"
-                    value="sim"
-                    onChange={handleLastMonthSpentDataChange}
+                  id="lastMonthSpentJaneiro"
+                  name="lastMonthSpentData"
+                  type="radio"
+                  value="sim"
+                  onChange={handleLastMonthSpentDataChange}
                 />
                 <label
                   className="containerTextLabel"
@@ -127,11 +132,11 @@ export const FormStep7 = () => {
 
               <div id="containerInputLabelRadioButton">
                 <input
-                    id="lastMonthSpentFevereiro"
-                    name="lastMonthSpentData"
-                    type="radio"
-                    value="Não"
-                    onChange={handleLastMonthSpentDataChange}
+                  id="lastMonthSpentFevereiro"
+                  name="lastMonthSpentData"
+                  type="radio"
+                  value="Não"
+                  onChange={handleLastMonthSpentDataChange}
                 />
                 <label
                   className="containerTextLabel"
@@ -142,11 +147,11 @@ export const FormStep7 = () => {
 
               <div id="containerInputLabelRadioButton">
                 <input
-                    id="lastMonthSpentMarco"
-                    name="lastMonthSpentData"
-                    type="radio"
-                    value="Não sei"
-                    onChange={handleLastMonthSpentDataChange}
+                  id="lastMonthSpentMarco"
+                  name="lastMonthSpentData"
+                  type="radio"
+                  value="Não sei"
+                  onChange={handleLastMonthSpentDataChange}
                 />
                 <label
                   className="containerTextLabel"
@@ -158,7 +163,9 @@ export const FormStep7 = () => {
             </div>
           </div>
         </div>
+      </C.ButtonTypeRadio>
 
+      <C.ButtonTypeText>
         <div className="formQuestion">
           <label htmlFor="name">
             Qual o valor em Reais (R$) desse aporte financeiro?
@@ -172,13 +179,16 @@ export const FormStep7 = () => {
             />
           </label>
         </div>
+      </C.ButtonTypeText>
 
-        <Link className="backButton" to="/">Voltar</Link>
+      <C.AllButtons>
+        <Link className="buttonBack" to="/">Voltar</Link>
         <button
+          className="buttonNext"
           onClick={onSubmit}
         >Próximo
         </button>
-      </C.Container>
+      </C.AllButtons>
     </Theme>
   )
 }

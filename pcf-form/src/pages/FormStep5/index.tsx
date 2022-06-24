@@ -1,4 +1,4 @@
-import * as C from "./styles"
+import * as C from "../../styles/styles"
 import { Theme } from "../../components/Theme"
 import { Link, useNavigate } from "react-router-dom"
 import { useFormPage, FormActions } from "../../context/FormContext"
@@ -261,8 +261,6 @@ export const FormStep5 = () => {
             </div>
           </C.ButtonTypeTextV3>
 
-
-
           <C.ButtonTypeTextV3>
             <div className="formQuestion">
               <label htmlFor="name">
@@ -430,7 +428,7 @@ export const FormStep5 = () => {
 
         </div>
       </C.SubSection>
-          
+
       <C.AllButtons>
         <Link className="buttonBack" to="/">Voltar</Link>
         <button

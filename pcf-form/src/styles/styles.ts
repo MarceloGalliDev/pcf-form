@@ -180,10 +180,12 @@ export const ButtonTypeCheckbox = styled.div`
 
         }
         .inputPlaceholderOther {
+          width: 100%;
           border-left: none;
           border-right: none;
           border-top: none;
           border-bottom: 1px solid #8C1F28;
+          outline: none;
         }
       }
     }
@@ -243,7 +245,10 @@ export const ButtonTypeTextV2 = styled.div`
       padding: 10px;
       margin-bottom: 10px;
 
-
+      .containerTextLabel {
+        font-size: 15px;
+        font-weight: 500;
+      }
 
       span {
         font-weight: normal;
@@ -294,7 +299,7 @@ export const ButtonTypeTextV3 = styled.div`
         text-align: center;
 
         .labelForContainerTextLabelCheckbox {
-          font-weight: normal;
+          font-weight: 500;
         }
 
         .inputForContainerTextLabelCheckbox {
@@ -304,6 +309,38 @@ export const ButtonTypeTextV3 = styled.div`
           border-top: none;
           border-bottom: 1px solid #8C1F28;
         }
+      }
+    }
+  }
+`;
+
+export const ButtonTypeFile = styled.div`
+  .formQuestion {
+    border: 1px solid #8C1F28;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 10px 10px;
+    margin-bottom: 10px;
+
+    label {
+      font-size: 15px;
+      font-weight: bold;
+
+      span {
+        font-weight: normal;
+        color: red;
+        margin-left: 10px;
+      }
+
+      input {
+        display: block;
+        margin-top: 17px;
+        width: 100%;
+        border: none;
+        color: #591C21;
+        outline: 0;
+        font-size: 15px;
+        padding: 5px 0;
       }
     }
   }
@@ -345,3 +382,5 @@ export const AllButtons = styled.div`
     }
   }
 `;
+
+

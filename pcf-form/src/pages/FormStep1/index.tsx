@@ -1,4 +1,4 @@
-import * as C from "./styles"
+import * as C from "../../styles/styles"
 import { Theme } from "../../components/Theme"
 import { useNavigate } from "react-router-dom"
 import { useFormPage, FormActions } from "../../context/FormContext"
@@ -118,6 +118,7 @@ export const FormStep1 = () => {
       <C.Container>
         <p>Etapa {state.currentStep}/8</p>
         <h1>Informações gerais</h1>
+        <p>Identificação do entrevistado</p>
         <hr/>
       </C.Container>
 
@@ -225,12 +226,13 @@ export const FormStep1 = () => {
         </div>
       </C.ButtonTypeSelectOption>
 
-      <C.ButtonNext>
+      <C.AllButtons>
         <button
+          className="buttonNext"
           onClick={onSubmit}
         >Próximo
         </button>
-      </C.ButtonNext>
+      </C.AllButtons>
     </Theme>
   )
 }

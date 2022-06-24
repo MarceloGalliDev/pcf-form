@@ -7,6 +7,7 @@ import { FormStep5 } from "./pages/FormStep5";
 import { FormStep6 } from "./pages/FormStep6";
 import { FormStep7 } from "./pages/FormStep7";
 import { FormStep8 } from "./pages/FormStep8";
+import { FormStep9 } from "./pages/FormStep9";
 
 
 
@@ -22,6 +23,7 @@ export const Router = () => {
         <Route path="/formstep6" element={<FormStep6 />} />
         <Route path="/formstep7" element={<FormStep7 />} />
         <Route path="/formstep8" element={<FormStep8 />} />
+        <Route path="/formstep9" element={<FormStep9 />} />
       </Routes>
     </BrowserRouter>
   )
