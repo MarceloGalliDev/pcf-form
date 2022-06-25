@@ -12,6 +12,9 @@ type Props = {
 export const Theme = ({ children }: Props) => {
   const { state } = useFormPage();
 
+  const routerActivate = {
+    routeDefault: 1
+  }
   return (
     <C.Container>
       <C.Area>
@@ -24,7 +27,7 @@ export const Theme = ({ children }: Props) => {
               title="Informações gerais"
               description="Identificação"
               path="/"
-              active={state.currentStep === 1}
+              active={state.currentStep === routerActivate.routeDefault}
             />
 
             <SidebarItem
