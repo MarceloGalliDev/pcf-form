@@ -9,7 +9,6 @@ import * as yup from "yup";
 import { Item } from "../../components/TableQuestion/types/Item"
 import { items } from "../../components/TableQuestion/data/items"
 import { categories } from "../../components/TableQuestion/data/categories"
-import { getCurrentMonth, FilterListByMonth } from "../../components/TableQuestion/helpers/dateFilter"
 import { TableArea } from "../../components/TableQuestion/components/TableArea"
 import { InputArea } from "../../components/TableQuestion/components/InputArea"
 
@@ -31,7 +30,6 @@ const schema = yup.object({
 export const FormStep10 = () => {
   const [list, setList] = useState<Item[]>(items);//lista geral
   const [filteredList, setFilteredList] = useState<Item[]>([]);;//lista filtrada
-  const [currentMonth, setCurrentMonth] = useState(getCurrentMonth());//pega o mês atual e joga em currentMonth
   const [income, setIncome] = useState(0)
   const [expense, setExpense] = useState(0)
   
@@ -56,8 +54,8 @@ export const FormStep10 = () => {
 
 
   useEffect(() => {
-    setFilteredList(FilterListByMonth(list, currentMonth))
-  }, [list, currentMonth]);
+    setFilteredList(list)
+  }, [list]);
 
   useEffect(() => {
     let incomeCount = 0;
@@ -76,9 +74,7 @@ export const FormStep10 = () => {
 
   }, [filteredList]);
 
-  const handleMonthChange = (newMonth: string) => {
-    setCurrentMonth(newMonth);
-  }
+
 
   return (
     <Theme>

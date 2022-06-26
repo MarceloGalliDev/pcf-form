@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { categories } from '../../data/categories';
-import { newDateAdjusted } from '../../helpers/dateFilter';
 import { Item } from '../../types/Item';
 import * as C from './styles';
 
@@ -20,9 +19,6 @@ export const InputArea = ({ onAdd }: Props) => {
   const handleAddEvent = () => {
     let errors: string[] = [];
 
-    if(isNaN(new Date(dateField).getTime())) {
-      errors.push('Data inválida!');
-    }
     if(!categoryKeys.includes(categoryField)) {
       errors.push('Categoria inválida!');
     }
@@ -37,7 +33,6 @@ export const InputArea = ({ onAdd }: Props) => {
       alert(errors.join("\n"));
     } else {
       onAdd({
-        date: newDateAdjusted(dateField),
         category: categoryField,
         title: titleField,
         value: valueField
