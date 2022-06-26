@@ -21,27 +21,28 @@ export const Input = styled.input`
     width: 100%;
     height: 30px;
     padding: 0 5px;
-    border: 1px solid lightblue;
+    border: 1px solid #AB6661;
     border-radius: 5px;
 `;
 export const Select = styled.select`
     width: 100%;
     height: 30px;
     padding: 0 5px;
-    border: 1px solid lightblue;
+    border: 1px solid #AB6661;
     border-radius: 5px;
 `;
 export const Button = styled.button`
     width: 100%;
     height: 30px;
     padding: 0 5px;
-    border: 1px solid lightblue;
+    border: 1px solid #AB6661;
     border-radius: 5px;
-    background-color: lightblue;
-    color: black;
+    background-color: #AB6661;
+    color: #fff;
     cursor: pointer;
+
     &:hover {
-        background-color: blue;
-        color: white;
+      filter: brightness(0.8);
+      color: white;
     }
 `;

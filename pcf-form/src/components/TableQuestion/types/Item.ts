@@ -1,5 +1,5 @@
 export type Item = {
   category: string,
-  title: string,
+  type: string,
   value: number,
 };

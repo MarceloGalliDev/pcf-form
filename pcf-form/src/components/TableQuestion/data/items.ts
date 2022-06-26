@@ -2,9 +2,9 @@ import { Item } from '../types/Item';
 
 //item da tabela
 export const items: Item[] = [
-  { category: 'transporte', title: 'McDonalds', value: 32.12 },
-  { category: 'alimentacao', title: 'Matsuri', value: 119.15 },
-  { category: 'comunicacao', title: 'Burguer King', value: 28.22 },
-  { category: 'equipamentos', title: 'Aluguel Apt', value: 2300 },
-  { category: 'moveiseutensilios', title: 'Salário ACME', value: 3200.12 },
+  { category: 'transporte', type: 'pcf', value: 32.12 },
+  { category: 'alimentacao', type: 'municipio', value: 119.15 },
+  { category: 'comunicacao', type: 'equipe', value: 28.22 },
+  { category: 'equipamentos', type: 'equipe', value: 2300 },
+  { category: 'moveiseutensilios', type: 'pcf', value: 3200.12 },
 ];

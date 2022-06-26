@@ -1,4 +1,4 @@
-import * as C from "../../styles/styles"
+import * as SC from "../../styles/styles"
 import { Theme } from "../../components/Theme"
 import { Link, useNavigate } from "react-router-dom"
 import { useFormPage, FormActions } from "../../context/FormContext"
@@ -82,14 +82,14 @@ export const FormStep4 = () => {
 
   return (
     <Theme>
-      <C.Container>
+      <SC.Container>
         <p>Etapa {state.currentStep}/8</p>
         <h1>Público atendido pelo PCF em seu município</h1>
         <p>Perfil das famílias atendidas pelo PCF em seu município</p>
         <hr />
-      </C.Container>
+      </SC.Container>
 
-      <C.ButtonTypeTextV2>
+      <SC.ButtonTypeTextV2>
         <div className="formQuestion">
           <p>Indique o número de pessoas atendidas pelo Programa em seu município no mês de referência mencionado anteriormente:</p>
 
@@ -200,16 +200,16 @@ export const FormStep4 = () => {
           </div>
 
         </div>
-      </C.ButtonTypeTextV2>
+      </SC.ButtonTypeTextV2>
 
-        <C.AllButtons>
+        <SC.AllButtons>
         <Link className="buttonBack" to="/">Voltar</Link>
         <button
           className="buttonNext"
           onClick={onSubmit}
         >Próximo
         </button>
-      </C.AllButtons>
+      </SC.AllButtons>
     </Theme>
   )
 }

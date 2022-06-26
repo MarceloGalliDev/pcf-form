@@ -1,4 +1,4 @@
-import * as C from "../../styles/styles"
+import * as SC from "../../styles/styles"
 import { Theme } from "../../components/Theme"
 import { useNavigate } from "react-router-dom"
 import { useFormPage, FormActions } from "../../context/FormContext"
@@ -115,14 +115,14 @@ export const FormStep1 = () => {
 
   return (
     <Theme>
-      <C.Container>
-        <p>Etapa {state.currentStep}/8</p>
+      <SC.Container>
+        <p>Etapa {state.currentStep}/10</p>
         <h1>Informações gerais</h1>
         <p>Identificação do entrevistado</p>
         <hr/>
-      </C.Container>
+      </SC.Container>
 
-      <C.ButtonTypeText>
+      <SC.ButtonTypeText>
         <div className="formQuestion">
           <label htmlFor="name">
             Nome do entrevistado:
@@ -138,9 +138,9 @@ export const FormStep1 = () => {
             />
           </label>
         </div>
-      </C.ButtonTypeText>
+      </SC.ButtonTypeText>
 
-      <C.ButtonTypeText>
+      <SC.ButtonTypeText>
         <div className="formQuestion">
           <label htmlFor="email">
             E-mail:
@@ -155,9 +155,9 @@ export const FormStep1 = () => {
             />
           </label>
         </div>
-      </C.ButtonTypeText>
+      </SC.ButtonTypeText>
 
-      <C.ButtonTypeText>
+      <SC.ButtonTypeText>
         <div className="formQuestion">
           <label htmlFor="phoneNumber">
             Telefone para contato:
@@ -172,9 +172,9 @@ export const FormStep1 = () => {
             />
           </label>
         </div>
-      </C.ButtonTypeText>
+      </SC.ButtonTypeText>
 
-      <C.ButtonTypeText>
+      <SC.ButtonTypeText>
         <div className="formQuestion">
           <label htmlFor="functionPCF">
             Função no PCF:
@@ -189,10 +189,10 @@ export const FormStep1 = () => {
             />
           </label>
         </div>
-      </C.ButtonTypeText>
+      </SC.ButtonTypeText>
 
 
-      <C.ButtonTypeSelectOption>
+      <SC.ButtonTypeSelectOption>
         <div className="formQuestion">
           <label htmlFor="uf">
             Local em que atua no PCF:
@@ -224,15 +224,15 @@ export const FormStep1 = () => {
             </select>
           </label>
         </div>
-      </C.ButtonTypeSelectOption>
+      </SC.ButtonTypeSelectOption>
 
-      <C.AllButtons>
+      <SC.AllButtons>
         <button
           className="buttonNext"
           onClick={onSubmit}
         >Próximo
         </button>
-      </C.AllButtons>
+      </SC.AllButtons>
     </Theme>
   )
 }

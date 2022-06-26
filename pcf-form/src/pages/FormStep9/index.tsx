@@ -1,4 +1,4 @@
-import * as C from "../../styles/styles"
+import * as SC from "../../styles/styles"
 import { Theme } from "../../components/Theme"
 import { Link, useNavigate } from "react-router-dom"
 import { useFormPage, FormActions } from "../../context/FormContext"
@@ -82,21 +82,21 @@ export const FormStep9 = () => {
 
   return (
     <Theme>
-      <C.Container>
+      <SC.Container>
         <p>Etapa {state.currentStep}/8</p>
         <h1>Recursos e Custos</h1>
         <p>Recursos e custos mensais diretos do PCF no município (incluindo recursos humanos, materiais, infraestrutura etc.)</p>
         <hr/>
-      </C.Container>
+      </SC.Container>
 
 
-      <C.SubSection>
+      <SC.SubSection>
         <div className="bgSubSection">
           <p>Recursos e custos diretos do PCF</p>
         </div>
         <div className="formQuestionV2">
 
-        <C.ButtonTypeCheckbox>
+        <SC.ButtonTypeCheckbox>
           <div className="formQuestion">
             <p className="textFormRadioButton">
             Qual o critério de distribuição das famílias por Visitador?
@@ -206,9 +206,9 @@ export const FormStep9 = () => {
               </div>
             </div>
           </div>
-        </C.ButtonTypeCheckbox>
+        </SC.ButtonTypeCheckbox>
           
-        <C.ButtonTypeFile>
+        <SC.ButtonTypeFile>
           <div className="formQuestion">
             <label htmlFor="name">
               Poderia enviar uma planilha com o endereço dos domicílios atendidos pelo PCF?
@@ -220,9 +220,9 @@ export const FormStep9 = () => {
               />
             </label>
           </div>
-        </C.ButtonTypeFile>
+        </SC.ButtonTypeFile>
 
-        <C.ButtonTypeText>
+        <SC.ButtonTypeText>
           <div className="formQuestion">
             <label htmlFor="name">
               Qual o tempo médio (em minutos) da visita para cada um dos beneficiados:
@@ -236,19 +236,19 @@ export const FormStep9 = () => {
               />
             </label>
           </div>
-        </C.ButtonTypeText>
+        </SC.ButtonTypeText>
 
         </div>
-      </C.SubSection>
+      </SC.SubSection>
 
-      <C.AllButtons>
+      <SC.AllButtons>
         <Link className="buttonBack" to="/">Voltar</Link>
         <button
           className="buttonNext"
           onClick={onSubmit}
         >Próximo
         </button>
-      </C.AllButtons>
+      </SC.AllButtons>
     </Theme>
   )
 }

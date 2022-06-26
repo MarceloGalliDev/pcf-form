@@ -1,4 +1,4 @@
-import * as C from "../../styles/styles"
+import * as SC from "../../styles/styles"
 import { Theme } from "../../components/Theme"
 import { Link, useNavigate } from "react-router-dom"
 import { useFormPage, FormActions } from "../../context/FormContext"
@@ -74,14 +74,14 @@ export const FormStep2 = () => {
 
   return (
     <Theme>
-      <C.Container>
+      <SC.Container>
         <p>Etapa {state.currentStep}/8</p>
         <h1>Características do PCF</h1>
         <p>Características gerais do PCF</p>
         <hr/>
-      </C.Container>
+      </SC.Container>
 
-      <C.ButtonTypeDate>
+      <SC.ButtonTypeDate>
         <div className="formQuestion">
           <label htmlFor="dateAcquisition">
             Data de adesão do município ao PCF:
@@ -95,9 +95,9 @@ export const FormStep2 = () => {
             />
           </label>
         </div>
-      </C.ButtonTypeDate>
+      </SC.ButtonTypeDate>
 
-      <C.ButtonTypeDate>
+      <SC.ButtonTypeDate>
         <div className="formQuestion">
           <label htmlFor="dateVisition">
             Data do início das visitas:
@@ -111,10 +111,10 @@ export const FormStep2 = () => {
             />
           </label>
         </div>
-      </C.ButtonTypeDate>
+      </SC.ButtonTypeDate>
 
 
-      <C.ButtonTypeRadio>
+      <SC.ButtonTypeRadio>
         <div className="formQuestion">
           <p className="textFormRadioButton">
             Qual é o último mês do ano de 2022 do qual o município possui dados dos gastos com o PCF:
@@ -309,9 +309,9 @@ export const FormStep2 = () => {
             </div>
           </div>
         </div>
-      </C.ButtonTypeRadio>
+      </SC.ButtonTypeRadio>
 
-      <C.ButtonTypeRadio>
+      <SC.ButtonTypeRadio>
         <div className="formQuestion">
           <p className="textFormRadioButton">
             Fase do PCF em seu município:
@@ -369,9 +369,9 @@ export const FormStep2 = () => {
             </div>
           </div>
         </div>
-      </C.ButtonTypeRadio>
+      </SC.ButtonTypeRadio>
 
-      <C.ButtonTypeRadio>
+      <SC.ButtonTypeRadio>
         <div className="formQuestion">
           <p className="textFormRadioButton">
             O município ampliou suas metas (de atendimento de famílias) no Programa?
@@ -429,9 +429,9 @@ export const FormStep2 = () => {
             </div>
           </div>
         </div>
-      </C.ButtonTypeRadio>
+      </SC.ButtonTypeRadio>
 
-      <C.ButtonTypeRadio>
+      <SC.ButtonTypeRadio>
         <div className="formQuestion">
           <p className="textFormRadioButton">
             Seu município tem Centro de Referência de Assistência Social (CRAS)?
@@ -489,9 +489,9 @@ export const FormStep2 = () => {
             </div>
           </div>
         </div>
-      </C.ButtonTypeRadio>
+      </SC.ButtonTypeRadio>
 
-      <C.ButtonTypeRadio>
+      <SC.ButtonTypeRadio>
         <div className="formQuestion">
           <p className="textFormRadioButton">
             O município possui Plano de Ação do PCF?
@@ -549,16 +549,16 @@ export const FormStep2 = () => {
             </div>
           </div>
         </div>
-      </C.ButtonTypeRadio>
+      </SC.ButtonTypeRadio>
 
-      <C.AllButtons>
+      <SC.AllButtons>
         <Link className="buttonBack" to="/">Voltar</Link>
         <button
           className="buttonNext"
           onClick={onSubmit}
         >Próximo
         </button>
-      </C.AllButtons>
+      </SC.AllButtons>
     </Theme>
   )
 }

@@ -1,4 +1,4 @@
-import * as C from "../../styles/styles"
+import * as SC from "../../styles/styles"
 import { Theme } from "../../components/Theme"
 import { Link, useNavigate } from "react-router-dom"
 import { useFormPage, FormActions } from "../../context/FormContext"
@@ -82,20 +82,20 @@ export const FormStep5 = () => {
 
   return (
     <Theme>
-      <C.Container>
+      <SC.Container>
         <p>Etapa {state.currentStep}/8</p>
         <h1>Equipe do PCF</h1>
         <p>Informações sobre os atores/ participantes da equipe do PCF</p>
         <hr />
-      </C.Container>
+      </SC.Container>
 
-      <C.SubSection>
+      <SC.SubSection>
         <div className="bgSubSection">
           <p>Subseção Supervisores</p>
         </div>
         <div className="formQuestionV2">
 
-          <C.ButtonTypeText>
+          <SC.ButtonTypeText>
             <div className="formQuestion">
               <label htmlFor="name">
                 Quantos Supervisores existem na equipe do PCF no seu município?
@@ -109,9 +109,9 @@ export const FormStep5 = () => {
                 />
               </label>
             </div>
-          </C.ButtonTypeText>
+          </SC.ButtonTypeText>
 
-          <C.ButtonTypeText>
+          <SC.ButtonTypeText>
             <div className="formQuestion">
               <label htmlFor="name">
                 Qual a remuneração média em R$ (reais) dos Supervisores?
@@ -125,9 +125,9 @@ export const FormStep5 = () => {
                 />
               </label>
             </div>
-          </C.ButtonTypeText>
+          </SC.ButtonTypeText>
 
-          <C.ButtonTypeCheckbox>
+          <SC.ButtonTypeCheckbox>
             <div className="formQuestion">
               <p className="textFormRadioButton">
                 Qual a carga horária dos Supervisores?
@@ -206,9 +206,9 @@ export const FormStep5 = () => {
                 </div>
               </div>
             </div>
-          </C.ButtonTypeCheckbox>
+          </SC.ButtonTypeCheckbox>
 
-          <C.ButtonTypeTextV3>
+          <SC.ButtonTypeTextV3>
             <div className="formQuestion">
               <label htmlFor="name">
                 Quantos Supervisores da equipe do PCF tem em seu município:
@@ -259,9 +259,9 @@ export const FormStep5 = () => {
 
               </label>
             </div>
-          </C.ButtonTypeTextV3>
+          </SC.ButtonTypeTextV3>
 
-          <C.ButtonTypeTextV3>
+          <SC.ButtonTypeTextV3>
             <div className="formQuestion">
               <label htmlFor="name">
                 Quantos Supervisores da equipe do PCF são contratados nas seguintes categorias em seu município:
@@ -424,19 +424,19 @@ export const FormStep5 = () => {
 
               </label>
             </div>
-          </C.ButtonTypeTextV3>
+          </SC.ButtonTypeTextV3>
 
         </div>
-      </C.SubSection>
+      </SC.SubSection>
 
-      <C.AllButtons>
+      <SC.AllButtons>
         <Link className="buttonBack" to="/">Voltar</Link>
         <button
           className="buttonNext"
           onClick={onSubmit}
         >Próximo
         </button>
-      </C.AllButtons>
+      </SC.AllButtons>
     </Theme>
   )
 }

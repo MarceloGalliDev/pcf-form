@@ -1,4 +1,4 @@
-import * as C from "./styles";
+import * as SC from "./styles";
 
 type Props = {
   title: string;
@@ -9,11 +9,11 @@ type Props = {
 
 export const SelectOption = ({title, description, selected, onClick}: Props) => {
   return (
-    <C.Container onClick={onClick} selected={selected}>
-      <C.Info>
-        <C.Title>{title}</C.Title>
-        <C.Description>{description}</C.Description>
-      </C.Info>
-    </C.Container>
+    <SC.Container onClick={onClick} selected={selected}>
+      <SC.Info>
+        <SC.Title>{title}</SC.Title>
+        <SC.Description>{description}</SC.Description>
+      </SC.Info>
+    </SC.Container>
   )
 }

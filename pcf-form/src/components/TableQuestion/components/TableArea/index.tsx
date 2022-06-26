@@ -1,6 +1,6 @@
 import { Item } from '../../types/Item';
 import { TableItem } from '../TableItem';
-import * as C from './styles';
+import * as SC from './styles';
 
 type Props = {
   list: Item[]
@@ -8,12 +8,12 @@ type Props = {
 
 export const TableArea = ({list}: Props) => {
   return (
-    <C.Table>
+    <SC.Table>
       <thead>
         <tr>
-          <C.TableHeadColumn width={130}>Categoria</C.TableHeadColumn>
-          <C.TableHeadColumn>Tipo</C.TableHeadColumn>
-          <C.TableHeadColumn width={150}>Valor</C.TableHeadColumn>
+          <SC.TableHeadColumn width={130}>Categoria</SC.TableHeadColumn>
+          <SC.TableHeadColumn width={130}>Tipo</SC.TableHeadColumn>
+          <SC.TableHeadColumn width={150}>Valor</SC.TableHeadColumn>
         </tr>
       </thead>
       <tbody>
@@ -21,6 +21,6 @@ export const TableArea = ({list}: Props) => {
           <TableItem key={index} item={item} />
         ))}
       </tbody>
-    </C.Table>
+    </SC.Table>
   )
 }

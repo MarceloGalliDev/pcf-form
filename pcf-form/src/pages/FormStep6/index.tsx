@@ -1,4 +1,4 @@
-import * as C from "../../styles/styles"
+import * as SC from "../../styles/styles"
 import { Theme } from "../../components/Theme"
 import { Link, useNavigate } from "react-router-dom"
 import { useFormPage, FormActions } from "../../context/FormContext"
@@ -82,20 +82,20 @@ export const FormStep6 = () => {
 
   return (
     <Theme>
-      <C.Container>
+      <SC.Container>
         <p>Etapa {state.currentStep}/8</p>
         <h1>Equipe do PCF</h1>
         <p>Informações sobre os atores/ participantes da equipe do PCF</p>
         <hr/>
-      </C.Container>
+      </SC.Container>
 
-      <C.SubSection>
+      <SC.SubSection>
         <div className="bgSubSection">
           <p>Subseção Visitadores</p>
         </div>
         <div className="formQuestionV2">
 
-          <C.ButtonTypeText>
+          <SC.ButtonTypeText>
             <div className="formQuestion">
               <label htmlFor="name">
                 Quantos Visitadores existem na equipe do PCF no seu município?
@@ -109,9 +109,9 @@ export const FormStep6 = () => {
                 />
               </label>
             </div>
-          </C.ButtonTypeText>
+          </SC.ButtonTypeText>
 
-          <C.ButtonTypeText>
+          <SC.ButtonTypeText>
             <div className="formQuestion">
               <label htmlFor="name">
                 Qual a remuneração média em R$ (reais) dos Visitadores?
@@ -125,9 +125,9 @@ export const FormStep6 = () => {
                 />
               </label>
             </div>
-          </C.ButtonTypeText>
+          </SC.ButtonTypeText>
 
-          <C.ButtonTypeCheckbox>
+          <SC.ButtonTypeCheckbox>
             <div className="formQuestion">
               <p className="textFormRadioButton">
                 Qual a carga horária dos Visitadores?
@@ -207,10 +207,10 @@ export const FormStep6 = () => {
                 </div>
               </div>
             </div>
-          </C.ButtonTypeCheckbox>
+          </SC.ButtonTypeCheckbox>
 
 
-          <C.ButtonTypeTextV3>
+          <SC.ButtonTypeTextV3>
             <div className="formQuestion">
               <label htmlFor="name">
                 Quantos Visitadores da equipe do PCF tem em seu município:
@@ -289,9 +289,9 @@ export const FormStep6 = () => {
               </label>
 
             </div>
-          </C.ButtonTypeTextV3>
+          </SC.ButtonTypeTextV3>
 
-          <C.ButtonTypeTextV3>
+          <SC.ButtonTypeTextV3>
             <div className="formQuestion">
               <label htmlFor="name">
                 Quantos Visitadores da equipe do PCF são contratados nas seguintes categorias em seu município:
@@ -483,9 +483,9 @@ export const FormStep6 = () => {
                 </div>
               </label>
             </div>
-          </C.ButtonTypeTextV3>
+          </SC.ButtonTypeTextV3>
 
-          <C.ButtonTypeCheckbox>
+          <SC.ButtonTypeCheckbox>
             <div className="formQuestion">
               <p className="textFormRadioButton">
                 Como são realizadas as contratações dos Visitadores e/ou Supervisores em seu município?
@@ -565,9 +565,9 @@ export const FormStep6 = () => {
                 </div>
               </div>
             </div>
-          </C.ButtonTypeCheckbox>
+          </SC.ButtonTypeCheckbox>
           
-          <C.ButtonTypeRadio>
+          <SC.ButtonTypeRadio>
             <div className="formQuestion">
               <p className="textFormRadioButton">
                 O município tem parcerias com organizações da sociedade civil para contratação de equipe?
@@ -623,19 +623,19 @@ export const FormStep6 = () => {
                 </div>
               </div>
             </div>
-          </C.ButtonTypeRadio>
+          </SC.ButtonTypeRadio>
 
         </div>
-      </C.SubSection>
+      </SC.SubSection>
 
-      <C.AllButtons>
+      <SC.AllButtons>
         <Link className="buttonBack" to="/">Voltar</Link>
         <button
           className="buttonNext"
           onClick={onSubmit}
         >Próximo
         </button>
-      </C.AllButtons>
+      </SC.AllButtons>
     </Theme>
   )
 }

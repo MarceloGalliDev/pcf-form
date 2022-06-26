@@ -1,4 +1,4 @@
-import * as C from "../../styles/styles"
+import * as SC from "../../styles/styles"
 import { Theme } from "../../components/Theme"
 import { Link, useNavigate } from "react-router-dom"
 import { useFormPage, FormActions } from "../../context/FormContext"
@@ -74,14 +74,14 @@ export const FormStep3 = () => {
 
   return (
     <Theme>
-      <C.Container>
+      <SC.Container>
         <p>Etapa {state.currentStep}/8</p>
         <h1>Gestão do PCF</h1>
         <p>Gestão, comitê e equipe do PCF</p>
         <hr/>
-      </C.Container>
+      </SC.Container>
 
-      <C.ButtonTypeRadio>
+      <SC.ButtonTypeRadio>
         <div className="formQuestion">
           <p className="textFormRadioButton">
             A equipe do PCF em seu município tem Coordenador?
@@ -137,9 +137,9 @@ export const FormStep3 = () => {
             </div>
           </div>
         </div>
-      </C.ButtonTypeRadio>
+      </SC.ButtonTypeRadio>
 
-      <C.ButtonTypeRadio>
+      <SC.ButtonTypeRadio>
         <div className="formQuestion">
           <p className="textFormRadioButton">
             Você conhece o Coordenador Estadual do PCF?
@@ -182,9 +182,9 @@ export const FormStep3 = () => {
             </div>
           </div>
         </div>
-      </C.ButtonTypeRadio>
+      </SC.ButtonTypeRadio>
 
-      <C.ButtonTypeRadio>
+      <SC.ButtonTypeRadio>
         <div className="formQuestion">
           <p className="textFormRadioButton">
             Quantas vezes teve contato com ele(a) nos últimos 12 meses?
@@ -272,9 +272,9 @@ export const FormStep3 = () => {
             </div>
           </div>
         </div>
-      </C.ButtonTypeRadio>
+      </SC.ButtonTypeRadio>
 
-      <C.ButtonTypeRadio>
+      <SC.ButtonTypeRadio>
         <div className="formQuestion">
           <p className="textFormRadioButton">
             Você conhece o Multiplicador Estadual do PCF?
@@ -317,9 +317,9 @@ export const FormStep3 = () => {
             </div>
           </div>
         </div>
-      </C.ButtonTypeRadio>
+      </SC.ButtonTypeRadio>
 
-      <C.ButtonTypeRadio>
+      <SC.ButtonTypeRadio>
         <div className="formQuestion">
           <p className="textFormRadioButton">
             O município possui Comitê Gestor Municipal do PCF?
@@ -377,9 +377,9 @@ export const FormStep3 = () => {
             </div>
           </div>
         </div>
-      </C.ButtonTypeRadio>
+      </SC.ButtonTypeRadio>
 
-      <C.ButtonTypeRadio>
+      <SC.ButtonTypeRadio>
         <div className="formQuestion">
           <p className="textFormRadioButton">
             Quantas vezes o Comitê Gestor Municipal se reuniu nos últimos 12 meses?
@@ -467,16 +467,16 @@ export const FormStep3 = () => {
             </div>
           </div>
         </div>
-      </C.ButtonTypeRadio>
+      </SC.ButtonTypeRadio>
 
-      <C.AllButtons>
+      <SC.AllButtons>
         <Link className="buttonBack" to="/">Voltar</Link>
         <button
           className="buttonNext"
           onClick={onSubmit}
         >Próximo
         </button>
-      </C.AllButtons>
+      </SC.AllButtons>
     </Theme>
   )
 }

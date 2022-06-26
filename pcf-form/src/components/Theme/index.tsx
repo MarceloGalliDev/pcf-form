@@ -1,5 +1,5 @@
+import * as SC from "./styles";
 import { ReactNode } from "react";
-import * as C from "./styles";
 import { Header } from "../Header";
 import { SidebarItem } from "../SidebarItem";
 import { useFormPage } from "../../context/FormContext"
@@ -13,15 +13,17 @@ export const Theme = ({ children }: Props) => {
   const { state } = useFormPage();
 
   const routerActivate = {
-    routeDefault: 1
+    routeDefault: 1,
+    routeFeatures: 2,
+
   }
   return (
-    <C.Container>
-      <C.Area>
+    <SC.Container>
+      <SC.Area>
         <Header />
 
-        <C.Steps>
-          <C.Sidebar>
+        <SC.Steps>
+          <SC.Sidebar>
             
             <SidebarItem
               title="Informações gerais"
@@ -34,7 +36,7 @@ export const Theme = ({ children }: Props) => {
               title="Características do PCF"
               description="Características"
               path="/formstep2"
-              active={state.currentStep === 2}
+              active={state.currentStep === routerActivate.routeFeatures}
             />
 
             <SidebarItem
@@ -93,12 +95,12 @@ export const Theme = ({ children }: Props) => {
               active={state.currentStep === 10}
             />
 
-          </C.Sidebar>
-          <C.Page>
+          </SC.Sidebar>
+          <SC.Page>
             {children}
-          </C.Page>
-        </C.Steps>
-      </C.Area>
-    </C.Container>
+          </SC.Page>
+        </SC.Steps>
+      </SC.Area>
+    </SC.Container>
   )
 }

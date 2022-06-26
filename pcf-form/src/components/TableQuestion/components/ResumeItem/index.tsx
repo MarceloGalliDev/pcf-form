@@ -1,4 +1,4 @@
-import * as C from './styles'
+import * as SC from './styles'
 
 type Props = {
   title: string,
@@ -8,9 +8,9 @@ type Props = {
 
 export const ResumeItem = ({title, value, color}: Props) => {
   return (
-    <C.Container>
-      <C.Title>{title}</C.Title>
-      <C.Info color={color}>R$ {value}</C.Info>
-    </C.Container>
+    <SC.Container>
+      <SC.Title>{title}</SC.Title>
+      <SC.Info color={color}>R$ {value}</SC.Info>
+    </SC.Container>
   )
 };

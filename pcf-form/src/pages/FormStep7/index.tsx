@@ -1,4 +1,4 @@
-import * as C from "../../styles/styles"
+import * as SC from "../../styles/styles"
 import { Theme } from "../../components/Theme"
 import { Link, useNavigate } from "react-router-dom"
 import { useFormPage, FormActions } from "../../context/FormContext"
@@ -82,14 +82,14 @@ export const FormStep7 = () => {
 
   return (
     <Theme>
-      <C.Container> 
+      <SC.Container> 
         <p>Etapa {state.currentStep}/8</p>
         <h1>Organizações parceiras</h1>
         <p>Informações sobre as organizações participantes e parceiras do PCF</p>
         <hr/>
-      </C.Container>
+      </SC.Container>
 
-      <C.ButtonTypeText>
+      <SC.ButtonTypeText>
         <div className="formQuestion">
           <label htmlFor="name">
             Com qual(is) a(s) organização(ões) possui parceria?
@@ -103,9 +103,9 @@ export const FormStep7 = () => {
             />
           </label>
         </div>
-      </C.ButtonTypeText>
+      </SC.ButtonTypeText>
 
-      <C.ButtonTypeRadio>
+      <SC.ButtonTypeRadio>
         <div className="formQuestion">
           <p className="textFormRadioButton">
             Essas organizaões fazem aporte financeiros para o PCF?
@@ -163,9 +163,9 @@ export const FormStep7 = () => {
             </div>
           </div>
         </div>
-      </C.ButtonTypeRadio>
+      </SC.ButtonTypeRadio>
 
-      <C.ButtonTypeText>
+      <SC.ButtonTypeText>
         <div className="formQuestion">
           <label htmlFor="name">
             Qual o valor em Reais (R$) desse aporte financeiro?
@@ -179,16 +179,16 @@ export const FormStep7 = () => {
             />
           </label>
         </div>
-      </C.ButtonTypeText>
+      </SC.ButtonTypeText>
 
-      <C.AllButtons>
+      <SC.AllButtons>
         <Link className="buttonBack" to="/">Voltar</Link>
         <button
           className="buttonNext"
           onClick={onSubmit}
         >Próximo
         </button>
-      </C.AllButtons>
+      </SC.AllButtons>
     </Theme>
   )
 }

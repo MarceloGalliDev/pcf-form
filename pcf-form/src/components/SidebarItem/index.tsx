@@ -1,4 +1,4 @@
-import * as C from "./styles";
+import * as SC from "./styles";
 import { Link } from "react-router-dom";
 
 type Props = {
@@ -10,14 +10,14 @@ type Props = {
 
 export const SidebarItem = ({ title, description, path, active}: Props) => {
   return (
-    <C.Container>
+    <SC.Container>
       <Link to={path}>
-        <C.Info>
-          <C.Title>{title}</C.Title>
-          <C.Description>{description}</C.Description>
-        </C.Info>
-        <C.Point active={active}></C.Point>
+        <SC.Info>
+          <SC.Title>{title}</SC.Title>
+          <SC.Description>{description}</SC.Description>
+        </SC.Info>
+        <SC.Point active={active}></SC.Point>
       </Link>
-    </C.Container>
+    </SC.Container>
   )
 };
