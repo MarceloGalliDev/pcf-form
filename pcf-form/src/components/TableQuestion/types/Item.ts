@@ -1,5 +1,6 @@
 export type Item = {
-  category: string;
-  resource: string;
-  value: number;
+  date: Date,
+  category: string,
+  title: string,
+  value: number,
 };

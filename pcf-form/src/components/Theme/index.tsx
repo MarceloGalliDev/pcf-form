@@ -88,7 +88,7 @@ export const Theme = ({ children }: Props) => {
 
             <SidebarItem
               title="Outros Custos"
-              description="Outros custos, com transport, diárias e recursos materiais "
+              description="Outros custos, com transporte, diárias e recursos materiais "
               path="/formstep10"
               active={state.currentStep === 10}
             />

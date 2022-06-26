@@ -1,24 +1,19 @@
-import { TableItem } from '../InputArea/TableItem';
-import * as S from './styles';
-
-type Item = {
-  category: string;
-  resource: string;
-  value: number;
-};
+import { Item } from '../../types/Item';
+import { TableItem } from '../TableItem';
+import * as C from './styles';
 
 type Props = {
   list: Item[]
 }
 
-export const TableArea = ({ list }: Props) => {
+export const TableArea = ({list}: Props) => {
   return (
-    <S.Table>
+    <C.Table>
       <thead>
         <tr>
-          <S.TableHeadColumn width={130}>Categoria</S.TableHeadColumn>
-          <S.TableHeadColumn width={130}>Tipo</S.TableHeadColumn>
-          <S.TableHeadColumn width={150}>Valor</S.TableHeadColumn>
+          <C.TableHeadColumn width={130}>Categoria</C.TableHeadColumn>
+          <C.TableHeadColumn>Tipo</C.TableHeadColumn>
+          <C.TableHeadColumn width={150}>Valor</C.TableHeadColumn>
         </tr>
       </thead>
       <tbody>
@@ -26,6 +21,6 @@ export const TableArea = ({ list }: Props) => {
           <TableItem key={index} item={item} />
         ))}
       </tbody>
-    </S.Table>
+    </C.Table>
   )
-};
+}

@@ -1,12 +1,7 @@
-import { Category } from "../types/Category"
+import { Category } from '../types/Category'
 
 export const categories: Category = {
-  transporte: { title: 'Transporte' },
-  alimentacao: { title: 'Alimentação' },
-  comunicacao: { title: 'Comunicação' },
-  equipamentos: { title: 'Equipamentos' },
-  utensilios: { title: 'Móveis e utensílios' },
-  materiaisconsumo: { title: 'Materiais de consumo' },
-  livrosbrinquedos: { title: 'Livros e brinquedos' },
-  outros: { title: 'Outros' },
-};
+  food: { title: 'Alimentação', color: 'blue', expense: true },
+  rent: { title: 'Aluguel', color: 'brown', expense: true },
+  salary: { title: 'Salário', color: 'green', expense: false },
+}
