@@ -24,10 +24,17 @@ export const FormStep7 = () => {
   const navigate = useNavigate();
   const { state, dispatch } = useFormPage();
 
-  const { register, handleSubmit, formState: {errors}} = useForm<FormStep1Input>({resolver: yupResolver(schema)})
+  const { register, handleSubmit, formState: { errors } } = useForm<FormStep1Input>({ resolver: yupResolver(schema) })
   const onSubmit = handleSubmit(data => navigate('/formstep3'))
 
-//função de captura de valores
+  //função de captura de valores
+  const handleNameChange = (event: ChangeEvent<HTMLInputElement>) => {
+    dispatch({
+      type: FormActions.setName,
+      payload: event.target.value
+    });
+  };
+  
   const handleDateAcquisitionChange = (event: ChangeEvent<HTMLInputElement>) => {
     dispatch({
       type: FormActions.setDateAcquisition,
@@ -45,13 +52,6 @@ export const FormStep7 = () => {
   const handleLastMonthSpentDataChange = (event: ChangeEvent<HTMLInputElement>) => {
     dispatch({
       type: FormActions.setLastMonthSpentData,
-      payload: event.target.value
-    });
-  };
-
-  const handleNameChange = (event: ChangeEvent<HTMLInputElement>) => {
-    dispatch({
-      type: FormActions.setName,
       payload: event.target.value
     });
   };
@@ -82,104 +82,125 @@ export const FormStep7 = () => {
 
   return (
     <Theme>
-      <SC.Container> 
-        <p>Etapa {state.currentStep}/8</p>
-        <h1>Organizações parceiras</h1>
-        <p>Informações sobre as organizações participantes e parceiras do PCF</p>
-        <hr/>
+      <SC.Container>
+        <p>Etapa {state.currentStep}/10</p>
+        <h1>Público atendido pelo PCF em seu município</h1>
+        <p>Perfil das famílias atendidas pelo PCF em seu município</p>
+        <hr />
       </SC.Container>
 
-      <SC.ButtonTypeText>
+      <SC.ButtonTypeTextV2>
         <div className="formQuestion">
-          <label htmlFor="name">
-            Com qual(is) a(s) organização(ões) possui parceria?
-            <input
-              {...register("name")}
-              name="name"
-              type="text"
-              value={state.name}
-              onChange={handleNameChange}
-              placeholder="Sua resposta"
-            />
-          </label>
-        </div>
-      </SC.ButtonTypeText>
+          <p>Indique o número de pessoas atendidas pelo Programa em seu município no mês de referência mencionado anteriormente:</p>
 
-      <SC.ButtonTypeRadio>
-        <div className="formQuestion">
-          <p className="textFormRadioButton">
-            Essas organizaões fazem aporte financeiros para o PCF?
-            <span>{errors.lastMonthSpentData && " ⚠ *Campo obrigatório "}</span>
-          </p>
-
-          <div id="containerOption">
-            <div id="containerOptionSixOption">
-              
-              <div id="containerInputLabelRadioButton">
-                <input
-                  id="lastMonthSpentJaneiro"
-                  name="lastMonthSpentData"
-                  type="radio"
-                  value="sim"
-                  onChange={handleLastMonthSpentDataChange}
-                />
-                <label
-                  className="containerTextLabel"
-                  htmlFor="lastMonthSpentJaneiro"
-                >Sim
-                </label>
-              </div>
-
-              <div id="containerInputLabelRadioButton">
-                <input
-                  id="lastMonthSpentFevereiro"
-                  name="lastMonthSpentData"
-                  type="radio"
-                  value="Não"
-                  onChange={handleLastMonthSpentDataChange}
-                />
-                <label
-                  className="containerTextLabel"
-                  htmlFor="lastMonthSpentFevereiro"
-                >Não
-                </label>
-              </div>
-
-              <div id="containerInputLabelRadioButton">
-                <input
-                  id="lastMonthSpentMarco"
-                  name="lastMonthSpentData"
-                  type="radio"
-                  value="Não sei"
-                  onChange={handleLastMonthSpentDataChange}
-                />
-                <label
-                  className="containerTextLabel"
-                  htmlFor="lastMonthSpentMarco"
-                >Não sei
-                </label>
-              </div>
-
-            </div>
+          <div className="containerBgLabel">
+            <label className="containerTextLabel" htmlFor="name">
+              Gestantes (inseridas no CadÚnico):
+              <span>{errors.name && " ⚠ *Campo obrigatório "}</span>
+              <input
+                {...register("name")}
+                name="name"
+                type="text"
+                autoFocus
+                value={state.name}
+                onChange={handleNameChange}
+                placeholder="Quantidade"
+              />
+            </label>
           </div>
-        </div>
-      </SC.ButtonTypeRadio>
 
-      <SC.ButtonTypeText>
-        <div className="formQuestion">
-          <label htmlFor="name">
-            Qual o valor em Reais (R$) desse aporte financeiro?
-            <input
-              {...register("name")}
-              name="name"
-              type="text"
-              value={state.name}
-              onChange={handleNameChange}
-              placeholder="Sua resposta"
-            />
-          </label>
+          <div className="containerBgLabel">
+            <label className="containerTextLabel" htmlFor="name">
+              Crianças de 0-36 meses (inseridas no CadÚnico):
+              <span>{errors.name && " ⚠ *Campo obrigatório "}</span>
+              <input
+                {...register("name")}
+                name="name"
+                type="text"
+                value={state.name}
+                onChange={handleNameChange}
+                placeholder="Quantidade"
+              />
+            </label>
+          </div>
+
+          <div className="containerBgLabel">
+            <label className="containerTextLabel" htmlFor="name">
+              Crianças de 0-72 meses (Beneficiárias do BPC):
+              <span>{errors.name && " ⚠ *Campo obrigatório "}</span>
+              <input
+                {...register("name")}
+                name="name"
+                type="text"
+                value={state.name}
+                onChange={handleNameChange}
+                placeholder="Quantidade"
+              />
+            </label>
+          </div>
+
+          <div className="containerBgLabel">
+            <label className="containerTextLabel" htmlFor="name">
+              Crianças de até 6 anos afastadas do convívio familiar:
+              <span>{errors.name && " ⚠ *Campo obrigatório "}</span>
+              <input
+                {...register("name")}
+                name="name"
+                type="text"
+                value={state.name}
+                onChange={handleNameChange}
+                placeholder="Quantidade"
+              />
+            </label>
+          </div>
+          
+          <div className="containerBgLabel">
+            <label className="containerTextLabel" htmlFor="name">
+              Crianças de até 6 anos inseridas no CadÚnico, que perderam ao menos um de seus responsáveis familiares, independente da causa de morte, durante o período de Emergência em Saúde Pública de Importância Nacional (ESPIN) decorrente da Covid-19:
+              <span>{errors.name && " ⚠ *Campo obrigatório "}</span>
+              <input
+                {...register("name")}
+                name="name"
+                type="text"
+                value={state.name}
+                onChange={handleNameChange}
+                placeholder="Quantidade"
+              />
+            </label>
+          </div>
+
+          <div className="containerBgLabel">
+            <label className="containerTextLabel" htmlFor="name">
+              Crianças atendidas que não pertencem ao grupo prioritário do PCF:
+              <span>{errors.name && " ⚠ *Campo obrigatório "}</span>
+              <input
+                {...register("name")}
+                name="name"
+                type="text"
+                value={state.name}
+                onChange={handleNameChange}
+                placeholder="Quantidade"
+              />
+            </label>
+          </div>
+
+          <div className="containerBgLabel">
+            <label className="containerTextLabel" htmlFor="name">
+              Quantos domicílios no seu município possuem mais de uma criança sendo atendida pelo PCF?
+              <span>{errors.name && " ⚠ *Campo obrigatório "}</span>
+              <input
+                {...register("name")}
+                name="name"
+                type="text"
+                value={state.name}
+                onChange={handleNameChange}
+                placeholder="Quantidade"
+              />
+            </label>
+          </div>
+
         </div>
-      </SC.ButtonTypeText>
+      </SC.ButtonTypeTextV2>
 
       <SC.AllButtons>
         <Link className="buttonBack" to="/">Voltar</Link>
@@ -191,5 +212,5 @@ export const FormStep7 = () => {
       </SC.AllButtons>
     </Theme>
   )
-}
+};
 

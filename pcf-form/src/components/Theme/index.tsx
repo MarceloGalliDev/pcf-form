@@ -15,7 +15,14 @@ export const Theme = ({ children }: Props) => {
   const routerActivate = {
     routeDefault: 1,
     routeFeatures: 2,
-
+    routeManagement: 3,
+    routeSupervisor: 4,
+    routeVisitors: 5,
+    routeOtherProfessionals: 6,
+    routePublicServed: 7,
+    routePartners: 8,
+    routeResourceCost: 9,
+    routeOtherCost: 10,
   }
   return (
     <SC.Container>
@@ -43,56 +50,57 @@ export const Theme = ({ children }: Props) => {
               title="Gestão do PCF"
               description="Gestão e Comitê"
               path="/formstep3"
-              active={state.currentStep === 3}
+              active={state.currentStep === routerActivate.routeManagement}
             />
 
             <SidebarItem
-              title="Público atendido pelo PCF em seu município"
-              description="Perfil das famílias atendidas"
+              title="Supervisores do PCF"
+              description="Informações sobre os atores/ participantes da equipe do PCF"
               path="/formstep4"
-              active={state.currentStep === 4}
+              active={state.currentStep === routerActivate.routeSupervisor}
             />
 
             <SidebarItem
-              title="Equipe do PCF - 1"
+              title="Visitadores do PCF"
               description="Informações sobre os atores/ participantes da equipe do PCF"
               path="/formstep5"
-              active={state.currentStep === 5}
-            />
-
-            <SidebarItem
-              title="Equipe do PCF - 2"
-              description="Informações sobre os atores/ participantes da equipe do PCF"
-              path="/formstep6"
-              active={state.currentStep === 6}
-            />
-
-            <SidebarItem
-              title="Organizações parceiras"
-              description="Informações sobre organizações parceira do PCF"
-              path="/formstep7"
-              active={state.currentStep === 7}
+              active={state.currentStep === routerActivate.routeVisitors}
             />
 
             <SidebarItem
               title="Outros profissionais"
               description="Informações sobre outros profissionais participantes da equipe do PCF"
+              path="/formstep6"
+              active={state.currentStep === routerActivate.routeOtherProfessionals}
+            />
+
+            <SidebarItem
+              title="Público atendido pelo PCF em seu município"
+              description="Perfil das famílias atendidas"
+              path="/formstep7"
+              active={state.currentStep === routerActivate.routePublicServed}
+            />
+
+
+            <SidebarItem
+              title="Organizações parceiras"
+              description="Informações sobre organizações parceira do PCF"
               path="/formstep8"
-              active={state.currentStep === 8}
+              active={state.currentStep === routerActivate.routePartners}
             />
 
             <SidebarItem
               title="Recursos e Custos"
               description="Recursos e custos mensais diretos do PCF no município"
               path="/formstep9"
-              active={state.currentStep === 9}
+              active={state.currentStep === routerActivate.routeResourceCost}
             />
 
             <SidebarItem
               title="Outros Custos"
               description="Outros custos, com transporte, diárias e recursos materiais "
               path="/formstep10"
-              active={state.currentStep === 10}
+              active={state.currentStep === routerActivate.routeOtherCost}
             />
 
           </SC.Sidebar>

@@ -82,70 +82,104 @@ export const FormStep8 = () => {
 
   return (
     <Theme>
-      <SC.Container>
-        <p>Etapa {state.currentStep}/8</p>
-        <h1>Outros profissionais</h1>
-        <p>Informações sobre os atores/ participantes da equipe do PCF</p>
+      <SC.Container> 
+        <p>Etapa {state.currentStep}/10</p>
+        <h1>Organizações parceiras</h1>
+        <p>Informações sobre as organizações participantes e parceiras do PCF</p>
         <hr/>
       </SC.Container>
 
-
-      <SC.SubSection>
-        <div className="bgSubSection">
-          <p>Subseção Outros Profissionais</p>
+      <SC.ButtonTypeText>
+        <div className="formQuestion">
+          <label htmlFor="name">
+            Com qual(is) a(s) organização(ões) possui parceria?
+            <input
+              {...register("name")}
+              name="name"
+              type="text"
+              value={state.name}
+              onChange={handleNameChange}
+              placeholder="Sua resposta"
+            />
+          </label>
         </div>
-        <div className="formQuestionV2">
+      </SC.ButtonTypeText>
 
-          <SC.ButtonTypeText>
-            <div className="formQuestion">
-              <label htmlFor="name">
-                Indique outros profissionais remunerados pelo PCF?
+      <SC.ButtonTypeRadio>
+        <div className="formQuestion">
+          <p className="textFormRadioButton">
+            Essas organizaões fazem aporte financeiros para o PCF?
+            <span>{errors.lastMonthSpentData && " ⚠ *Campo obrigatório "}</span>
+          </p>
+
+          <div id="containerOption">
+            <div id="containerOptionSixOption">
+              
+              <div id="containerInputLabelRadioButton">
                 <input
-                  {...register("name")}
-                  name="name"
-                  type="text"
-                  value={state.name}
-                  onChange={handleNameChange}
-                  placeholder="Sua resposta"
+                  id="lastMonthSpentJaneiro"
+                  name="lastMonthSpentData"
+                  type="radio"
+                  value="sim"
+                  onChange={handleLastMonthSpentDataChange}
                 />
-              </label>
-            </div>
-          </SC.ButtonTypeText>
+                <label
+                  className="containerTextLabel"
+                  htmlFor="lastMonthSpentJaneiro"
+                >Sim
+                </label>
+              </div>
 
-          <SC.ButtonTypeText>
-            <div className="formQuestion">
-              <label htmlFor="name">
-                Qual a remuneração média em R$ (reais) desses outros profissionais?
+              <div id="containerInputLabelRadioButton">
                 <input
-                  {...register("name")}
-                  name="name"
-                  type="text"
-                  value={state.name}
-                  onChange={handleNameChange}
-                  placeholder="Valor em R$"
+                  id="lastMonthSpentFevereiro"
+                  name="lastMonthSpentData"
+                  type="radio"
+                  value="Não"
+                  onChange={handleLastMonthSpentDataChange}
                 />
-              </label>
-            </div>
-          </SC.ButtonTypeText>
+                <label
+                  className="containerTextLabel"
+                  htmlFor="lastMonthSpentFevereiro"
+                >Não
+                </label>
+              </div>
 
-          <SC.ButtonTypeText>
-            <div className="formQuestion">
-              <label htmlFor="name">
-                Observações:
+              <div id="containerInputLabelRadioButton">
                 <input
-                  {...register("name")}
-                  name="name"
-                  type="text"
-                  value={state.name}
-                  onChange={handleNameChange}
-                  placeholder="Sua resposta"
+                  id="lastMonthSpentMarco"
+                  name="lastMonthSpentData"
+                  type="radio"
+                  value="Não sei"
+                  onChange={handleLastMonthSpentDataChange}
                 />
-              </label>
-            </div>
-          </SC.ButtonTypeText>
+                <label
+                  className="containerTextLabel"
+                  htmlFor="lastMonthSpentMarco"
+                >Não sei
+                </label>
+              </div>
 
+            </div>
+          </div>
         </div>
-      </SC.SubSection>
+      </SC.ButtonTypeRadio>
+
+      <SC.ButtonTypeText>
+        <div className="formQuestion">
+          <label htmlFor="name">
+            Qual o valor em Reais (R$) desse aporte financeiro?
+            <input
+              {...register("name")}
+              name="name"
+              type="text"
+              value={state.name}
+              onChange={handleNameChange}
+              placeholder="Sua resposta"
+            />
+          </label>
+        </div>
+      </SC.ButtonTypeText>
 
       <SC.AllButtons>
         <Link className="buttonBack" to="/">Voltar</Link>

@@ -83,7 +83,7 @@ export const FormStep9 = () => {
   return (
     <Theme>
       <SC.Container>
-        <p>Etapa {state.currentStep}/8</p>
+        <p>Etapa {state.currentStep}/10</p>
         <h1>Recursos e Custos</h1>
         <p>Recursos e custos mensais diretos do PCF no município (incluindo recursos humanos, materiais, infraestrutura etc.)</p>
         <hr/>
