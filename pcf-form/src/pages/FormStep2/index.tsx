@@ -16,6 +16,7 @@ const schema = yup.object({
   phasePCFCity: yup.string().required(),
   expansionGoals: yup.string().required(),
   referenceCenter: yup.string().required(),
+  actionPlan: yup.string().required(),
 }).required();
 
 export const FormStep2 = () => {
@@ -64,6 +65,13 @@ export const FormStep2 = () => {
   const handleReferenceCenterChange = (event: ChangeEvent<HTMLInputElement>) => {
     dispatch({
       type: FormActions.setReferenceCenter,
+      payload: event.target.value
+    });
+  };
+
+  const handleActionPlanChange = (event: ChangeEvent<HTMLInputElement>) => {
+    dispatch({
+      type: FormActions.setActionPlan,
       payload: event.target.value
     });
   };
@@ -480,11 +488,12 @@ export const FormStep2 = () => {
               
               <div id="containerInputLabelRadioButton">
                 <input
-                    id="referenceCenterYes"
-                    name="referenceCenter"
-                    type="radio"
-                    value="sim"
-                    onChange={handleReferenceCenterChange}
+                  {...register("referenceCenter")}
+                  id="referenceCenterYes"
+                  name="referenceCenter"
+                  type="radio"
+                  value="sim"
+                  onChange={handleReferenceCenterChange}
                 />
                 <label
                   className="containerTextLabel"
@@ -495,11 +504,12 @@ export const FormStep2 = () => {
 
               <div id="containerInputLabelRadioButton">
                 <input
-                    id="referenceCenterNo"
-                    name="referenceCenter"
-                    type="radio"
-                    value="Não"
-                    onChange={handleReferenceCenterChange}
+                  {...register("referenceCenter")}
+                  id="referenceCenterNo"
+                  name="referenceCenter"
+                  type="radio"
+                  value="Não"
+                  onChange={handleReferenceCenterChange}
                 />
                 <label
                   className="containerTextLabel"
@@ -510,11 +520,12 @@ export const FormStep2 = () => {
 
               <div id="containerInputLabelRadioButton">
                 <input
-                    id="referenceCenterDontKnow"
-                    name="referenceCenter"
-                    type="radio"
-                    value="Não sei"
-                    onChange={handleReferenceCenterChange}
+                  {...register("referenceCenter")}
+                  id="referenceCenterDontKnow"
+                  name="referenceCenter"
+                  type="radio"
+                  value="Não sei"
+                  onChange={handleReferenceCenterChange}
                 />
                 <label
                   className="containerTextLabel"
@@ -532,7 +543,7 @@ export const FormStep2 = () => {
         <div className="formQuestion">
           <p className="textFormRadioButton">
             O município possui Plano de Ação do PCF?
-            <span>{errors.lastMonthSpentData && " ⚠ *Campo obrigatório "}</span>
+            <span>{errors.actionPlan && " ⚠ *Campo obrigatório "}</span>
           </p>
 
           <div id="containerOption">
@@ -540,45 +551,48 @@ export const FormStep2 = () => {
               
               <div id="containerInputLabelRadioButton">
                 <input
-                    id="lastMonthSpentJaneiro"
-                    name="lastMonthSpentData"
-                    type="radio"
-                    value="sim"
-                    onChange={handleLastMonthSpentDataChange}
+                  {...register("actionPlan")}
+                  id="actionPlanYes"
+                  name="actionPlan"
+                  type="radio"
+                  value="sim"
+                  onChange={handleActionPlanChange}
                 />
                 <label
                   className="containerTextLabel"
-                  htmlFor="lastMonthSpentJaneiro"
+                  htmlFor="actionPlanYes"
                 >Sim
                 </label>
               </div>
 
               <div id="containerInputLabelRadioButton">
                 <input
-                    id="lastMonthSpentFevereiro"
-                    name="lastMonthSpentData"
-                    type="radio"
-                    value="Não"
-                    onChange={handleLastMonthSpentDataChange}
+                  {...register("actionPlan")}
+                  id="actionPlanNo"
+                  name="actionPlan"
+                  type="radio"
+                  value="Não"
+                  onChange={handleActionPlanChange}
                 />
                 <label
                   className="containerTextLabel"
-                  htmlFor="lastMonthSpentFevereiro"
+                  htmlFor="actionPlanNo"
                 >Não
                 </label>
               </div>
 
               <div id="containerInputLabelRadioButton">
                 <input
-                    id="lastMonthSpentMarco"
-                    name="lastMonthSpentData"
-                    type="radio"
-                    value="Não sei"
-                    onChange={handleLastMonthSpentDataChange}
+                  {...register("actionPlan")}
+                  id="actionPlanDontKnow"
+                  name="actionPlan"
+                  type="radio"
+                  value="Não sei"
+                  onChange={handleActionPlanChange}
                 />
                 <label
                   className="containerTextLabel"
-                  htmlFor="lastMonthSpentMarco"
+                  htmlFor="actionPlanDontKnow"
                 >Não sei
                 </label>
               </div>

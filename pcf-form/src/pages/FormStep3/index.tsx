@@ -6,49 +6,69 @@ import { ChangeEvent, useEffect, useState } from "react"
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
+import { FormStep3Input } from "../../types/FormStep3"
 
-
-interface FormStep1Input {
-  dateAcquisition: string;
-  dateVisition: string;
-  lastMonthSpentData: 'janeiro' | 'fevereiro' | 'marco' | 'abril' | 'maio' | 'junho' | 'julho' | 'agosto' | 'setembro' | 'outubro' | 'novembro' | 'dezembro';
-}
 
 const schema = yup.object({
-  dateAcquisition: yup.string().required(),
-  dateVisition: yup.string().required(),
+  teamCoordinator: yup.string().required(),
+  meetTheCoordinator: yup.string().required(),
+  contactCoordinator: yup.string().required(),
+  knowTheMultiplier: yup.string().required(),
+  steeringCommittee: yup.string().required(),
+  steeringCommitteeMeeting: yup.string().required(),
+
 }).required();
 
 export const FormStep3 = () => {
   const navigate = useNavigate();
   const { state, dispatch } = useFormPage();
 
-  const { register, handleSubmit, formState: {errors}} = useForm<FormStep1Input>({resolver: yupResolver(schema)})
+  const { register, handleSubmit, formState: { errors } } = useForm<FormStep3Input>({ resolver: yupResolver(schema) })
   const onSubmit = handleSubmit(data => navigate('/formstep3'))
 
-//função de captura de valores
-  const handleDateAcquisitionChange = (event: ChangeEvent<HTMLInputElement>) => {
+  //função de captura de valores
+  const handleTeamCoordinatorChange = (event: ChangeEvent<HTMLInputElement>) => {
     dispatch({
-      type: FormActions.setDateAcquisition,
+      type: FormActions.setTeamCoordinator,
       payload: event.target.value
     });
   };
 
-  const handleDateVisitionChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleMeetTheCoordinatorChange = (event: ChangeEvent<HTMLInputElement>) => {
     dispatch({
-      type: FormActions.setDateVisition,
+      type: FormActions.setMeetTheCoordinator,
+      payload: event.target.value
+    });
+  };
+  
+  const handleContactCoordinatorChange = (event: ChangeEvent<HTMLInputElement>) => {
+    dispatch({
+      type: FormActions.setContactCoordinator,
       payload: event.target.value
     });
   };
 
-  const handleLastMonthSpentDataChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleKnowTheMultiplierChange = (event: ChangeEvent<HTMLInputElement>) => {
     dispatch({
-      type: FormActions.setLastMonthSpentData,
+      type: FormActions.setKnowTheMultiplier,
       payload: event.target.value
     });
   };
 
-  //verificando se foi respondida, não passa para próxima etapa
+  const handleSteeringCommitteeChange = (event: ChangeEvent<HTMLInputElement>) => {
+    dispatch({
+      type: FormActions.setSteeringCommittee,
+      payload: event.target.value
+    });
+  };
+
+  const handleSteeringCommitteeMeetingChange = (event: ChangeEvent<HTMLInputElement>) => {
+    dispatch({
+      type: FormActions.setSteeringCommitteeMeeting,
+      payload: event.target.value
+    });
+  };
+
   // useEffect(() => {
   //   if (state.name === '' ||
   //     state.phoneNumber === '' ||
@@ -72,64 +92,70 @@ export const FormStep3 = () => {
     });
   }, []);
 
+  console.log(state)
+
   return (
     <Theme>
       <SC.Container>
-        <p>Etapa {state.currentStep}/8</p>
+        <p>Etapa {state.currentStep}/10</p>
         <h1>Gestão do PCF</h1>
         <p>Gestão, comitê e equipe do PCF</p>
-        <hr/>
+        <hr />
       </SC.Container>
 
       <SC.ButtonTypeRadio>
         <div className="formQuestion">
           <p className="textFormRadioButton">
             A equipe do PCF em seu município tem Coordenador?
+            <span>{errors.teamCoordinator && " ⚠ *Campo obrigatório "}</span>
           </p>
           <div id="containerOption">
             <div id="containerOptionSixOption">
 
               <div id="containerInputLabelRadioButton">
                 <input
-                    id="lastMonthSpentJaneiro"
-                    name="lastMonthSpentData"
-                    type="radio"
-                    value="sim"
-                    onChange={handleLastMonthSpentDataChange}
+                  {...register("teamCoordinator")}
+                  id="teamCoordinatorYes"
+                  name="teamCoordinator"
+                  type="radio"
+                  value="sim"
+                  onChange={handleTeamCoordinatorChange}
                 />
                 <label
                   className="containerTextLabel"
-                  htmlFor="lastMonthSpentJaneiro"
+                  htmlFor="teamCoordinatorYes"
                 >Sim
                 </label>
               </div>
 
               <div id="containerInputLabelRadioButton">
                 <input
-                    id="lastMonthSpentFevereiro"
-                    name="lastMonthSpentData"
-                    type="radio"
-                    value="Não"
-                    onChange={handleLastMonthSpentDataChange}
+                  {...register("teamCoordinator")}
+                  id="teamCoordinatorNo"
+                  name="teamCoordinator"
+                  type="radio"
+                  value="Não"
+                  onChange={handleTeamCoordinatorChange}
                 />
                 <label
                   className="containerTextLabel"
-                  htmlFor="lastMonthSpentFevereiro"
+                  htmlFor="teamCoordinatorNo"
                 >Não
                 </label>
               </div>
 
               <div id="containerInputLabelRadioButton">
                 <input
-                    id="lastMonthSpentFevereiro"
-                    name="lastMonthSpentData"
-                    type="radio"
-                    value="Não"
-                    onChange={handleLastMonthSpentDataChange}
+                  {...register("teamCoordinator")}
+                  id="teamCoordinatorDontKnow"
+                  name="teamCoordinator"
+                  type="radio"
+                  value="Não"
+                  onChange={handleTeamCoordinatorChange}
                 />
                 <label
                   className="containerTextLabel"
-                  htmlFor="lastMonthSpentFevereiro"
+                  htmlFor="teamCoordinatorDontKnow"
                 >Não sei
                 </label>
               </div>
@@ -143,7 +169,7 @@ export const FormStep3 = () => {
         <div className="formQuestion">
           <p className="textFormRadioButton">
             Você conhece o Coordenador Estadual do PCF?
-            <span>{errors.lastMonthSpentData && " ⚠ *Campo obrigatório "}</span>
+            <span>{errors.meetTheCoordinator && " ⚠ *Campo obrigatório "}</span>
           </p>
 
           <div id="containerOption">
@@ -151,30 +177,32 @@ export const FormStep3 = () => {
               
               <div id="containerInputLabelRadioButton">
                 <input
-                    id="lastMonthSpentJaneiro"
-                    name="lastMonthSpentData"
-                    type="radio"
-                    value="sim"
-                    onChange={handleLastMonthSpentDataChange}
+                  {...register("meetTheCoordinator")}
+                  id="meetTheCoordinatorYes"
+                  name="meetTheCoordinator"
+                  type="radio"
+                  value="sim"
+                  onChange={handleMeetTheCoordinatorChange}
                 />
                 <label
                   className="containerTextLabel"
-                  htmlFor="lastMonthSpentJaneiro"
+                  htmlFor="meetTheCoordinatorYes"
                 >Sim
                 </label>
               </div>
 
               <div id="containerInputLabelRadioButton">
                 <input
-                    id="lastMonthSpentFevereiro"
-                    name="lastMonthSpentData"
-                    type="radio"
-                    value="Não"
-                    onChange={handleLastMonthSpentDataChange}
+                  {...register("meetTheCoordinator")}
+                  id="meetTheCoordinatorNo"
+                  name="meetTheCoordinator"
+                  type="radio"
+                  value="Não"
+                  onChange={handleMeetTheCoordinatorChange}
                 />
                 <label
                   className="containerTextLabel"
-                  htmlFor="lastMonthSpentFevereiro"
+                  htmlFor="meetTheCoordinatorNo"
                 >Não
                 </label>
               </div>
@@ -188,7 +216,7 @@ export const FormStep3 = () => {
         <div className="formQuestion">
           <p className="textFormRadioButton">
             Quantas vezes teve contato com ele(a) nos últimos 12 meses?
-            <span>{errors.lastMonthSpentData && " ⚠ *Campo obrigatório "}</span>
+            <span>{errors.contactCoordinator && " ⚠ *Campo obrigatório "}</span>
           </p>
 
           <div id="containerOption">
@@ -196,75 +224,80 @@ export const FormStep3 = () => {
               
               <div id="containerInputLabelRadioButton">
                 <input
-                    id="lastMonthSpentJaneiro"
-                    name="lastMonthSpentData"
-                    type="radio"
-                    value="sim"
-                    onChange={handleLastMonthSpentDataChange}
+                  {...register("contactCoordinator")}
+                  id="contactCoordinatorZero"
+                  name="contactCoordinator"
+                  type="radio"
+                  value="0"
+                  onChange={handleContactCoordinatorChange}
                 />
                 <label
                   className="containerTextLabel"
-                  htmlFor="lastMonthSpentJaneiro"
+                  htmlFor="contactCoordinatorZero"
                 >0
                 </label>
               </div>
 
               <div id="containerInputLabelRadioButton">
                 <input
-                    id="lastMonthSpentJaneiro"
-                    name="lastMonthSpentData"
-                    type="radio"
-                    value="sim"
-                    onChange={handleLastMonthSpentDataChange}
+                  {...register("contactCoordinator")}
+                  id="contactCoordinatorOne"
+                  name="contactCoordinator"
+                  type="radio"
+                  value="1"
+                  onChange={handleContactCoordinatorChange}
                 />
                 <label
                   className="containerTextLabel"
-                  htmlFor="lastMonthSpentJaneiro"
+                  htmlFor="contactCoordinatorOne"
                 >1
                 </label>
               </div>
 
               <div id="containerInputLabelRadioButton">
                 <input
-                    id="lastMonthSpentFevereiro"
-                    name="lastMonthSpentData"
-                    type="radio"
-                    value="Não"
-                    onChange={handleLastMonthSpentDataChange}
+                  {...register("contactCoordinator")}
+                  id="contactCoordinatorTwo"
+                  name="contactCoordinator"
+                  type="radio"
+                  value="2"
+                  onChange={handleContactCoordinatorChange}
                 />
                 <label
                   className="containerTextLabel"
-                  htmlFor="lastMonthSpentFevereiro"
+                  htmlFor="contactCoordinatorTwo"
                 >2
                 </label>
               </div>
 
               <div id="containerInputLabelRadioButton">
                 <input
-                    id="lastMonthSpentMarco"
-                    name="lastMonthSpentData"
-                    type="radio"
-                    value="Não sei"
-                    onChange={handleLastMonthSpentDataChange}
+                  {...register("contactCoordinator")}
+                  id="contactCoordinatorThree"
+                  name="contactCoordinator"
+                  type="radio"
+                  value="3"
+                  onChange={handleContactCoordinatorChange}
                 />
                 <label
                   className="containerTextLabel"
-                  htmlFor="lastMonthSpentMarco"
+                  htmlFor="contactCoordinatorThree"
                 >3
                 </label>
               </div>
 
               <div id="containerInputLabelRadioButton">
                 <input
-                    id="lastMonthSpentMarco"
-                    name="lastMonthSpentData"
-                    type="radio"
-                    value="Não sei"
-                    onChange={handleLastMonthSpentDataChange}
+                  {...register("contactCoordinator")}
+                  id="contactCoordinatorFour"
+                  name="contactCoordinator"
+                  type="radio"
+                  value="4 ou mais"
+                  onChange={handleContactCoordinatorChange}
                 />
                 <label
                   className="containerTextLabel"
-                  htmlFor="lastMonthSpentMarco"
+                  htmlFor="contactCoordinatorFour"
                 >4 ou mais
                 </label>
               </div>
@@ -278,7 +311,7 @@ export const FormStep3 = () => {
         <div className="formQuestion">
           <p className="textFormRadioButton">
             Você conhece o Multiplicador Estadual do PCF?
-            <span>{errors.lastMonthSpentData && " ⚠ *Campo obrigatório "}</span>
+            <span>{errors.knowTheMultiplier && " ⚠ *Campo obrigatório "}</span>
           </p>
 
           <div id="containerOption">
@@ -286,30 +319,32 @@ export const FormStep3 = () => {
               
               <div id="containerInputLabelRadioButton">
                 <input
-                    id="lastMonthSpentJaneiro"
-                    name="lastMonthSpentData"
-                    type="radio"
-                    value="sim"
-                    onChange={handleLastMonthSpentDataChange}
+                  {...register("knowTheMultiplier")}
+                  id="knowTheMultiplierYes"
+                  name="knowTheMultiplier"
+                  type="radio"
+                  value="sim"
+                  onChange={handleKnowTheMultiplierChange}
                 />
                 <label
                   className="containerTextLabel"
-                  htmlFor="lastMonthSpentJaneiro"
+                  htmlFor="knowTheMultiplierYes"
                 >Sim
                 </label>
               </div>
 
               <div id="containerInputLabelRadioButton">
                 <input
-                    id="lastMonthSpentFevereiro"
-                    name="lastMonthSpentData"
-                    type="radio"
-                    value="Não"
-                    onChange={handleLastMonthSpentDataChange}
+                  {...register("knowTheMultiplier")}
+                  id="knowTheMultiplierNo"
+                  name="knowTheMultiplier"
+                  type="radio"
+                  value="Não"
+                  onChange={handleKnowTheMultiplierChange}
                 />
                 <label
                   className="containerTextLabel"
-                  htmlFor="lastMonthSpentFevereiro"
+                  htmlFor="knowTheMultiplierNo"
                 >Não
                 </label>
               </div>
@@ -323,7 +358,7 @@ export const FormStep3 = () => {
         <div className="formQuestion">
           <p className="textFormRadioButton">
             O município possui Comitê Gestor Municipal do PCF?
-            <span>{errors.lastMonthSpentData && " ⚠ *Campo obrigatório "}</span>
+            <span>{errors.steeringCommittee && " ⚠ *Campo obrigatório "}</span>
           </p>
 
           <div id="containerOption">
@@ -331,45 +366,48 @@ export const FormStep3 = () => {
               
               <div id="containerInputLabelRadioButton">
                 <input
-                    id="lastMonthSpentJaneiro"
-                    name="lastMonthSpentData"
-                    type="radio"
-                    value="sim"
-                    onChange={handleLastMonthSpentDataChange}
+                  {...register("steeringCommittee")}
+                  id="steeringCommitteeYes"
+                  name="steeringCommittee"
+                  type="radio"
+                  value="sim"
+                  onChange={handleSteeringCommitteeChange}
                 />
                 <label
                   className="containerTextLabel"
-                  htmlFor="lastMonthSpentJaneiro"
+                  htmlFor="steeringCommitteeYes"
                 >Sim
                 </label>
               </div>
 
               <div id="containerInputLabelRadioButton">
                 <input
-                    id="lastMonthSpentFevereiro"
-                    name="lastMonthSpentData"
-                    type="radio"
-                    value="Não"
-                    onChange={handleLastMonthSpentDataChange}
+                  {...register("steeringCommittee")}
+                  id="steeringCommitteeNo"
+                  name="steeringCommittee"
+                  type="radio"
+                  value="Não"
+                  onChange={handleSteeringCommitteeChange}
                 />
                 <label
                   className="containerTextLabel"
-                  htmlFor="lastMonthSpentFevereiro"
+                  htmlFor="steeringCommitteeNo"
                 >Não
                 </label>
               </div>
 
               <div id="containerInputLabelRadioButton">
                 <input
-                    id="lastMonthSpentFevereiro"
-                    name="lastMonthSpentData"
-                    type="radio"
-                    value="Não"
-                    onChange={handleLastMonthSpentDataChange}
+                  {...register("steeringCommittee")}
+                  id="steeringCommitteeDontKnow"
+                  name="steeringCommittee"
+                  type="radio"
+                  value="Não sei"
+                  onChange={handleSteeringCommitteeChange}
                 />
                 <label
                   className="containerTextLabel"
-                  htmlFor="lastMonthSpentFevereiro"
+                  htmlFor="steeringCommitteeDontKnow"
                 >Não sei
                 </label>
               </div>
@@ -383,7 +421,7 @@ export const FormStep3 = () => {
         <div className="formQuestion">
           <p className="textFormRadioButton">
             Quantas vezes o Comitê Gestor Municipal se reuniu nos últimos 12 meses?
-            <span>{errors.lastMonthSpentData && " ⚠ *Campo obrigatório "}</span>
+            <span>{errors.steeringCommitteeMeeting && " ⚠ *Campo obrigatório "}</span>
           </p>
 
           <div id="containerOption">
@@ -391,75 +429,80 @@ export const FormStep3 = () => {
               
               <div id="containerInputLabelRadioButton">
                 <input
-                    id="lastMonthSpentJaneiro"
-                    name="lastMonthSpentData"
-                    type="radio"
-                    value="sim"
-                    onChange={handleLastMonthSpentDataChange}
+                  {...register("steeringCommitteeMeeting")}
+                  id="steeringCommitteeMeetingZero"
+                  name="steeringCommitteeMeeting"
+                  type="radio"
+                  value="0"
+                  onChange={handleSteeringCommitteeMeetingChange}
                 />
                 <label
                   className="containerTextLabel"
-                  htmlFor="lastMonthSpentJaneiro"
+                  htmlFor="steeringCommitteeMeetingZero"
                 >0
                 </label>
               </div>
 
               <div id="containerInputLabelRadioButton">
                 <input
-                    id="lastMonthSpentJaneiro"
-                    name="lastMonthSpentData"
-                    type="radio"
-                    value="sim"
-                    onChange={handleLastMonthSpentDataChange}
+                  {...register("steeringCommitteeMeeting")}
+                  id="steeringCommitteeMeetingOne"
+                  name="steeringCommitteeMeeting"
+                  type="radio"
+                  value="1"
+                  onChange={handleSteeringCommitteeMeetingChange}
                 />
                 <label
                   className="containerTextLabel"
-                  htmlFor="lastMonthSpentJaneiro"
+                  htmlFor="steeringCommitteeMeetingOne"
                 >1
                 </label>
               </div>
 
               <div id="containerInputLabelRadioButton">
                 <input
-                    id="lastMonthSpentFevereiro"
-                    name="lastMonthSpentData"
-                    type="radio"
-                    value="Não"
-                    onChange={handleLastMonthSpentDataChange}
+                  {...register("steeringCommitteeMeeting")}
+                  id="steeringCommitteeMeetingTwo"
+                  name="steeringCommitteeMeeting"
+                  type="radio"
+                  value="2"
+                  onChange={handleSteeringCommitteeMeetingChange}
                 />
                 <label
                   className="containerTextLabel"
-                  htmlFor="lastMonthSpentFevereiro"
+                  htmlFor="steeringCommitteeMeetingTwo"
                 >2
                 </label>
               </div>
 
               <div id="containerInputLabelRadioButton">
                 <input
-                    id="lastMonthSpentMarco"
-                    name="lastMonthSpentData"
-                    type="radio"
-                    value="Não sei"
-                    onChange={handleLastMonthSpentDataChange}
+                  {...register("steeringCommitteeMeeting")}
+                  id="steeringCommitteeMeetingThree"
+                  name="steeringCommitteeMeeting"
+                  type="radio"
+                  value="3"
+                  onChange={handleSteeringCommitteeMeetingChange}
                 />
                 <label
                   className="containerTextLabel"
-                  htmlFor="lastMonthSpentMarco"
+                  htmlFor="steeringCommitteeMeetingThree"
                 >3
                 </label>
               </div>
 
               <div id="containerInputLabelRadioButton">
                 <input
-                    id="lastMonthSpentMarco"
-                    name="lastMonthSpentData"
-                    type="radio"
-                    value="Não sei"
-                    onChange={handleLastMonthSpentDataChange}
+                  {...register("steeringCommitteeMeeting")}
+                  id="steeringCommitteeMeetingFour"
+                  name="steeringCommitteeMeeting"
+                  type="radio"
+                  value="4 ou mais"
+                  onChange={handleSteeringCommitteeMeetingChange}
                 />
                 <label
                   className="containerTextLabel"
-                  htmlFor="lastMonthSpentMarco"
+                  htmlFor="steeringCommitteeMeetingFour"
                 >4 ou mais
                 </label>
               </div>
@@ -470,7 +513,7 @@ export const FormStep3 = () => {
       </SC.ButtonTypeRadio>
 
       <SC.AllButtons>
-        <Link className="buttonBack" to="/">Voltar</Link>
+        <Link className="buttonBack" to="/formstep2">Voltar</Link>
         <button
           className="buttonNext"
           onClick={onSubmit}
@@ -479,5 +522,5 @@ export const FormStep3 = () => {
       </SC.AllButtons>
     </Theme>
   )
-}
+};
 

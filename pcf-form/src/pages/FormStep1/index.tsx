@@ -8,26 +8,8 @@ import axios from "axios"
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import React from "react"
+import { IBGEUFResponse, IBGECITYResponse, FormStep1Input } from "../../types/FormStep1"
 
-type IBGEUFResponse = {
-  id: number;
-  sigla: string;
-  nome: string;
-}
-
-type IBGECITYResponse = {
-  id: number;
-  nome: string;
-}
-
-interface FormStep1Input {
-  name: string;
-  phoneNumber: string;
-  email: string;
-  functionPCF: string;
-  uf: string;
-  city: string;
-}
 
 const schema = yup.object({
   name: yup.string().required(),
@@ -50,7 +32,7 @@ export const FormStep1 = () => {
   //dropdown state e cities
   const { register, handleSubmit, formState: {errors}} = useForm<FormStep1Input>({resolver: yupResolver(schema)})
   const onSubmit = handleSubmit(data => navigate('/formstep2'))
-  console.log(state)
+  
 //Aqui fizemos a função de troca de nome, usamos dispatch para realizar a troca, onde recebemos no payload o valor, e setamos no FormActions
   const handleNameChange = (event: ChangeEvent<HTMLInputElement>) => {
     dispatch({

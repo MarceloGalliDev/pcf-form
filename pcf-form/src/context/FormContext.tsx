@@ -16,6 +16,13 @@ type State = {
   phasePCFCity: string;
   expansionGoals: string;
   referenceCenter: string;
+  actionPlan: string;
+  teamCoordinator: string;
+  meetTheCoordinator: string;
+  contactCoordinator: string;
+  knowTheMultiplier: string;
+  steeringCommittee: string;
+  steeringCommitteeMeeting: string;
   //é o tipo de informação que está dentro do meu state
 };
 type Action = {
@@ -48,6 +55,13 @@ const initialData: State = {
   phasePCFCity: '',
   expansionGoals: '',
   referenceCenter: '',
+  actionPlan: '',
+  teamCoordinator: '',
+  meetTheCoordinator: '',
+  contactCoordinator: '',
+  knowTheMultiplier: '',
+  steeringCommittee: '',
+  steeringCommitteeMeeting: '',
   //são os dados iniciais
 };
 
@@ -69,6 +83,13 @@ export enum FormActions {
   setPhasePCFCity,
   setExpansionGoals,
   setReferenceCenter,
+  setActionPlan,
+  setTeamCoordinator,
+  setMeetTheCoordinator,
+  setContactCoordinator,
+  setKnowTheMultiplier,
+  setSteeringCommittee,
+  setSteeringCommitteeMeeting,
   //enum = é uma forma de tipificar dados em um objeto, como listas, são autoincrementados, e podem ser números, podem haver strings sem valores.
 };
 
@@ -101,6 +122,20 @@ const formReducer = (state: State, action: Action) => {//recebi os dados origina
       return { ...state, expansionGoals: action.payload };
     case FormActions.setReferenceCenter:
       return { ...state, referenceCenter: action.payload };
+    case FormActions.setActionPlan:
+      return { ...state, actionPlan: action.payload };
+    case FormActions.setTeamCoordinator:
+      return { ...state, teamCoordinator: action.payload };
+    case FormActions.setMeetTheCoordinator:
+      return { ...state, meetTheCoordinator: action.payload };
+    case FormActions.setContactCoordinator:
+      return { ...state, contactCoordinator: action.payload };
+    case FormActions.setKnowTheMultiplier:
+      return { ...state, knowTheMultiplier: action.payload };
+    case FormActions.setSteeringCommittee:
+      return { ...state, steeringCommittee: action.payload };
+    case FormActions.setSteeringCommitteeMeeting:
+      return { ...state, steeringCommitteeMeeting: action.payload };
     default://se não existir está ação retorna o state do jeito que veio
       return state;
   }

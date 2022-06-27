@@ -6,14 +6,8 @@ import { ChangeEvent, useEffect, useState } from "react"
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
+import { FormStep4Input } from "../../types/FormStep4"
 
-
-interface FormStep1Input {
-  name: string;
-  dateAcquisition: string;
-  dateVisition: string;
-  lastMonthSpentData: 'janeiro' | 'fevereiro' | 'marco' | 'abril' | 'maio' | 'junho' | 'julho' | 'agosto' | 'setembro' | 'outubro' | 'novembro' | 'dezembro';
-}
 
 const schema = yup.object({
   dateAcquisition: yup.string().required(),
@@ -24,7 +18,7 @@ export const FormStep4 = () => {
   const navigate = useNavigate();
   const { state, dispatch } = useFormPage();
 
-  const { register, handleSubmit, formState: {errors}} = useForm<FormStep1Input>({resolver: yupResolver(schema)})
+  const { register, handleSubmit, formState: {errors}} = useForm<FormStep4Input>({resolver: yupResolver(schema)})
   const onSubmit = handleSubmit(data => navigate('/formstep3'))
 
 //função de captura de valores
@@ -83,7 +77,7 @@ export const FormStep4 = () => {
   return (
     <Theme>
       <SC.Container>
-        <p>Etapa {state.currentStep}/8</p>
+        <p>Etapa {state.currentStep}/10</p>
         <h1>Equipe do PCF</h1>
         <p>Informações sobre os atores/ participantes da equipe do PCF</p>
         <hr />
