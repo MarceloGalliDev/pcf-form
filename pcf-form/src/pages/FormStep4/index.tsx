@@ -43,12 +43,6 @@ export const FormStep4 = () => {
     });
   };
 
-  const handleWorkloadOtherChange = (event: ChangeEvent<HTMLInputElement>) => {
-    dispatch({
-      type: FormActions.setWorkloadOther,
-      payload: event.target.value
-    });
-  };
 
   //verificando se foi respondida, não passa para próxima etapa
   // useEffect(() => {
@@ -185,7 +179,7 @@ export const FormStep4 = () => {
                   <div id="containerInputLabelRadioButton">
                     <input
                       {...register("workload")}
-                      id="workloadOthers"
+                      id="workload"
                       name="workload"
                       type="checkbox"
                       value="Outro"
@@ -193,7 +187,7 @@ export const FormStep4 = () => {
                     />
                     <label
                       className="containerTextLabel"
-                      htmlFor="workloadOthers"
+                      htmlFor="workload"
                     >Outro:
                     </label>
                     <input
@@ -201,8 +195,8 @@ export const FormStep4 = () => {
                       className="inputPlaceholderOther"
                       name="workload"
                       type="text"
-                      value={state.name}
-                      onChange={handleWorkloadOtherChange}
+                      value=""
+                      onChange={handleWorkloadChange}
                       placeholder="Escreva aqui"
                     />
                   </div>
@@ -212,7 +206,7 @@ export const FormStep4 = () => {
             </div>
           </SC.ButtonTypeCheckbox>
 
-          <SC.ButtonTypeTextV3>
+          {/* <SC.ButtonTypeTextV3>
             <div className="formQuestion">
               <label htmlFor="name">
                 Quantos Supervisores da equipe do PCF tem em seu município:
@@ -428,7 +422,7 @@ export const FormStep4 = () => {
 
               </label>
             </div>
-          </SC.ButtonTypeTextV3>
+          </SC.ButtonTypeTextV3> */}
 
         </div>
       </SC.SubSection>

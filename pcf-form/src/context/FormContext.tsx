@@ -1,7 +1,7 @@
 //context, reducer, provider, hook
 import { createContext, useReducer, useContext, ReactNode } from "react";
-import { string } from "yup/lib/locale";
-import { initialWorkload, Workload } from "../types/FormStep4";
+
+
 
 
 
@@ -29,7 +29,7 @@ type State = {
   steeringCommitteeMeeting: string;
   numberOfSupervisors: string;
   averagePay: string;
-  workload: Workload;
+
   }
   //é o tipo de informação que está dentro do meu state
 
@@ -72,7 +72,7 @@ const initialData: State = {
   steeringCommitteeMeeting: '',
   numberOfSupervisors: '',
   averagePay: '',
-  workload: initialWorkload,
+
   //são os dados iniciais
 };
 
@@ -155,6 +155,8 @@ const formReducer = (state: State, action: Action) => {//recebi os dados origina
       return { ...state, numberOfSupervisors: action.payload };
     case FormActions.setAveragePay:
       return { ...state, averagePay: action.payload };
+    case FormActions.setWorkload:
+      return { ...state, Workload: action.payload };
     default://se não existir está ação retorna o state do jeito que veio
       return state;
   }
