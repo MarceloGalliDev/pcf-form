@@ -13,7 +13,9 @@ type State = {
   dateAcquisition: string;
   dateVisition: string;
   lastMonthSpentData: string;
-  github: string;
+  phasePCFCity: string;
+  expansionGoals: string;
+  referenceCenter: string;
   //é o tipo de informação que está dentro do meu state
 };
 type Action = {
@@ -27,7 +29,7 @@ type ContextType = {
 }
 type FormProviderProps = {
   children: ReactNode;
-}
+};
 //diferença entre Type e Interface o interface faz uso do extends para incorporar a tipagem ao dado
 //interface podemos alterar campos em nossa definição o types não, podemos ter duas interface com mesmo nome, types não
 //
@@ -43,9 +45,11 @@ const initialData: State = {
   dateAcquisition: '',
   dateVisition: '',
   lastMonthSpentData: '',
-  github: '',
+  phasePCFCity: '',
+  expansionGoals: '',
+  referenceCenter: '',
   //são os dados iniciais
-}
+};
 
 //Context - onde fica o contexto da nossa aplicação
 const FormContext = createContext<ContextType | undefined>(undefined);//o createContext começa com undefined
@@ -62,9 +66,11 @@ export enum FormActions {
   setDateAcquisition,
   setDateVisition,
   setLastMonthSpentData,
-  setGithub,
+  setPhasePCFCity,
+  setExpansionGoals,
+  setReferenceCenter,
   //enum = é uma forma de tipificar dados em um objeto, como listas, são autoincrementados, e podem ser números, podem haver strings sem valores.
-}
+};
 
 
 const formReducer = (state: State, action: Action) => {//recebi os dados originais no state, qual a ação vou executar
@@ -81,24 +87,28 @@ const formReducer = (state: State, action: Action) => {//recebi os dados origina
       return { ...state, functionPCF: action.payload };
     case FormActions.setUf:
       return { ...state, uf: action.payload };
-      case FormActions.setCity:
-        return { ...state, city: action.payload };
-      case FormActions.setDateAcquisition:
-        return { ...state, dateAcquisition: action.payload };
-      case FormActions.setDateVisition:
-        return { ...state, dateVisition: action.payload };
-      case FormActions.setLastMonthSpentData:
-        return { ...state, lastMonthSpentData: action.payload };
-      case FormActions.setGithub:
-        return { ...state, github: action.payload };
+    case FormActions.setCity:
+      return { ...state, city: action.payload };
+    case FormActions.setDateAcquisition:
+      return { ...state, dateAcquisition: action.payload };
+    case FormActions.setDateVisition:
+      return { ...state, dateVisition: action.payload };
+    case FormActions.setLastMonthSpentData:
+      return { ...state, lastMonthSpentData: action.payload };
+    case FormActions.setPhasePCFCity:
+      return { ...state, phasePCFCity: action.payload };
+    case FormActions.setExpansionGoals:
+      return { ...state, expansionGoals: action.payload };
+    case FormActions.setReferenceCenter:
+      return { ...state, referenceCenter: action.payload };
     default://se não existir está ação retorna o state do jeito que veio
       return state;
   }
   //{... state} estamos clonando os dados de state
   //payload é os dados
-}
+};
 //Provider - o ambiente geral para gerenciar os dados, componente principal
-export const FormProvider = ({children}: FormProviderProps) => {
+export const FormProvider = ({ children }: FormProviderProps) => {
   const [state, dispatch] = useReducer(formReducer, initialData);
   const value = { state, dispatch };
 
@@ -110,7 +120,7 @@ export const FormProvider = ({children}: FormProviderProps) => {
   //dispatch - função que eu uso para executar minhas ações
   //children serve para recebe o conteúdo que está dentro de FormProvider
   //cria o site inteiro e coloca dentro do FormContext, que será passado para o children
-}
+};
 //Context hook
 export const useFormPage = () => {
   const context = useContext(FormContext);//esta enviado FormContext
@@ -118,4 +128,4 @@ export const useFormPage = () => {
     throw new Error('useForm precisa ser usado dentro do FormProvider');
   }
   return context;
-}
+};

@@ -6,21 +6,16 @@ import { ChangeEvent, useEffect, useState } from "react"
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
+import { FormStep2Input } from "../../types/FormStep2"
 
-
-interface FormStep2Input {
-  dateAcquisition: string;
-  dateVisition: string;
-  lastMonthSpentData: 'janeiro' | 'fevereiro' | 'marco' | 'abril' | 'maio' | 'junho' | 'julho' | 'agosto' | 'setembro' | 'outubro' | 'novembro' | 'dezembro';
-  
-}
 
 const schema = yup.object({
   dateAcquisition: yup.string().required(),
   dateVisition: yup.string().required(),
   lastMonthSpentData: yup.string().required(),
-  phasePCFcity: yup.string().required(),
-
+  phasePCFCity: yup.string().required(),
+  expansionGoals: yup.string().required(),
+  referenceCenter: yup.string().required(),
 }).required();
 
 export const FormStep2 = () => {
@@ -48,6 +43,27 @@ export const FormStep2 = () => {
   const handleLastMonthSpentDataChange = (event: ChangeEvent<HTMLInputElement>) => {
     dispatch({
       type: FormActions.setLastMonthSpentData,
+      payload: event.target.value
+    });
+  };
+
+  const handlePhasePCFCityChange = (event: ChangeEvent<HTMLInputElement>) => {
+    dispatch({
+      type: FormActions.setPhasePCFCity,
+      payload: event.target.value
+    });
+  };
+
+  const handleExpansionGoalsChange = (event: ChangeEvent<HTMLInputElement>) => {
+    dispatch({
+      type: FormActions.setExpansionGoals,
+      payload: event.target.value
+    });
+  };
+
+  const handleReferenceCenterChange = (event: ChangeEvent<HTMLInputElement>) => {
+    dispatch({
+      type: FormActions.setReferenceCenter,
       payload: event.target.value
     });
   };
@@ -330,7 +346,7 @@ export const FormStep2 = () => {
         <div className="formQuestion">
           <p className="textFormRadioButton">
             Fase do PCF em seu município:
-            <span>{errors.lastMonthSpentData && " ⚠ *Campo obrigatório "}</span>
+            <span>{errors.phasePCFCity && " ⚠ *Campo obrigatório "}</span>
           </p>
 
           <div id="containerOption">
@@ -338,12 +354,12 @@ export const FormStep2 = () => {
               
               <div id="containerInputLabelRadioButton">
                 <input
-                  {...register("phasePCFcity")}
+                  {...register("phasePCFCity")}
                   id="phaseImplatation"
-                  name="phasePCFcity"
+                  name="phasePCFCity"
                   type="radio"
                   value="Implantação (até 4 meses)"
-                  onChange={handleLastMonthSpentDataChange}
+                  onChange={handlePhasePCFCityChange}
                 />
                 <label
                   className="containerTextLabel"
@@ -354,32 +370,32 @@ export const FormStep2 = () => {
 
               <div id="containerInputLabelRadioButton">
                 <input
-                    {...register("phasePCFcity")}
-                    id="lastMonthSpentFevereiro"
-                    name="phasePCFcity"
+                    {...register("phasePCFCity")}
+                    id="phaseExecutionI"
+                    name="phasePCFCity"
                     type="radio"
                     value="Execução Fase I (entre o 5º e o 7º mês do início da implantação)"
-                    onChange={handleLastMonthSpentDataChange}
+                    onChange={handlePhasePCFCityChange}
                 />
                 <label
                   className="containerTextLabel"
-                  htmlFor="lastMonthSpentFevereiro"
+                  htmlFor="phaseExecutionI"
                 >Execução Fase I (entre o 5º e o 7º mês do início da implantação)
                 </label>
               </div>
 
               <div id="containerInputLabelRadioButton">
                 <input
-                    {...register("phasePCFcity")}
-                    id="lastMonthSpentMarco"
-                    name="phasePCFcity"
+                    {...register("phasePCFCity")}
+                    id="phaseExecutionII"
+                    name="phasePCFCity"
                     type="radio"
                     value="Execução Fase II (a partir do 8º mês da implantação)"
-                    onChange={handleLastMonthSpentDataChange}
+                    onChange={handlePhasePCFCityChange}
                 />
                 <label
                   className="containerTextLabel"
-                  htmlFor="lastMonthSpentMarco"
+                  htmlFor="phaseExecutionII"
                 >Execução Fase II (a partir do 8º mês da implantação)
                 </label>
               </div>
@@ -393,7 +409,7 @@ export const FormStep2 = () => {
         <div className="formQuestion">
           <p className="textFormRadioButton">
             O município ampliou suas metas (de atendimento de famílias) no Programa?
-            <span>{errors.lastMonthSpentData && " ⚠ *Campo obrigatório "}</span>
+            <span>{errors.expansionGoals && " ⚠ *Campo obrigatório "}</span>
           </p>
 
           <div id="containerOption">
@@ -401,45 +417,48 @@ export const FormStep2 = () => {
               
               <div id="containerInputLabelRadioButton">
                 <input
-                    id="lastMonthSpentJaneiro"
-                    name="lastMonthSpentData"
-                    type="radio"
-                    value="sim"
-                    onChange={handleLastMonthSpentDataChange}
+                  {...register("expansionGoals")}
+                  id="expansionGoalsYes"
+                  name="expansionGoals"
+                  type="radio"
+                  value="sim"
+                  onChange={handleExpansionGoalsChange}
                 />
                 <label
                   className="containerTextLabel"
-                  htmlFor="lastMonthSpentJaneiro"
+                  htmlFor="expansionGoalsYes"
                 >Sim
                 </label>
               </div>
 
               <div id="containerInputLabelRadioButton">
                 <input
-                    id="lastMonthSpentFevereiro"
-                    name="lastMonthSpentData"
-                    type="radio"
-                    value="Não"
-                    onChange={handleLastMonthSpentDataChange}
+                  {...register("expansionGoals")}
+                  id="expansionGoalsNo"
+                  name="expansionGoals"
+                  type="radio"
+                  value="Não"
+                  onChange={handleExpansionGoalsChange}
                 />
                 <label
                   className="containerTextLabel"
-                  htmlFor="lastMonthSpentFevereiro"
+                  htmlFor="expansionGoalsNo"
                 >Não
                 </label>
               </div>
 
               <div id="containerInputLabelRadioButton">
                 <input
-                    id="lastMonthSpentMarco"
-                    name="lastMonthSpentData"
-                    type="radio"
-                    value="Não sei"
-                    onChange={handleLastMonthSpentDataChange}
+                  {...register("expansionGoals")}
+                  id="expansionGoalsDontKnow"
+                  name="expansionGoals"
+                  type="radio"
+                  value="Não sei"
+                  onChange={handleExpansionGoalsChange}
                 />
                 <label
                   className="containerTextLabel"
-                  htmlFor="lastMonthSpentMarco"
+                  htmlFor="expansionGoalsDontKnow"
                 >Não sei
                 </label>
               </div>
@@ -453,7 +472,7 @@ export const FormStep2 = () => {
         <div className="formQuestion">
           <p className="textFormRadioButton">
             Seu município tem Centro de Referência de Assistência Social (CRAS)?
-            <span>{errors.lastMonthSpentData && " ⚠ *Campo obrigatório "}</span>
+            <span>{errors.referenceCenter && " ⚠ *Campo obrigatório "}</span>
           </p>
 
           <div id="containerOption">
@@ -461,45 +480,45 @@ export const FormStep2 = () => {
               
               <div id="containerInputLabelRadioButton">
                 <input
-                    id="lastMonthSpentJaneiro"
-                    name="lastMonthSpentData"
+                    id="referenceCenterYes"
+                    name="referenceCenter"
                     type="radio"
                     value="sim"
-                    onChange={handleLastMonthSpentDataChange}
+                    onChange={handleReferenceCenterChange}
                 />
                 <label
                   className="containerTextLabel"
-                  htmlFor="lastMonthSpentJaneiro"
+                  htmlFor="referenceCenterYes"
                 >Sim
                 </label>
               </div>
 
               <div id="containerInputLabelRadioButton">
                 <input
-                    id="lastMonthSpentFevereiro"
-                    name="lastMonthSpentData"
+                    id="referenceCenterNo"
+                    name="referenceCenter"
                     type="radio"
                     value="Não"
-                    onChange={handleLastMonthSpentDataChange}
+                    onChange={handleReferenceCenterChange}
                 />
                 <label
                   className="containerTextLabel"
-                  htmlFor="lastMonthSpentFevereiro"
+                  htmlFor="referenceCenterNo"
                 >Não
                 </label>
               </div>
 
               <div id="containerInputLabelRadioButton">
                 <input
-                    id="lastMonthSpentMarco"
-                    name="lastMonthSpentData"
+                    id="referenceCenterDontKnow"
+                    name="referenceCenter"
                     type="radio"
                     value="Não sei"
-                    onChange={handleLastMonthSpentDataChange}
+                    onChange={handleReferenceCenterChange}
                 />
                 <label
                   className="containerTextLabel"
-                  htmlFor="lastMonthSpentMarco"
+                  htmlFor="referenceCenterDontKnow"
                 >Não sei
                 </label>
               </div>
