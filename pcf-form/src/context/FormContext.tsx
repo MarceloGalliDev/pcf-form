@@ -1,5 +1,9 @@
 //context, reducer, provider, hook
 import { createContext, useReducer, useContext, ReactNode } from "react";
+import { string } from "yup/lib/locale";
+import { initialWorkload, Workload } from "../types/FormStep4";
+
+
 
 //tipando os dados
 type State = {
@@ -23,8 +27,12 @@ type State = {
   knowTheMultiplier: string;
   steeringCommittee: string;
   steeringCommitteeMeeting: string;
+  numberOfSupervisors: string;
+  averagePay: string;
+  workload: Workload;
+  }
   //é o tipo de informação que está dentro do meu state
-};
+
 type Action = {
   type: FormActions;
   payload: any;
@@ -62,6 +70,9 @@ const initialData: State = {
   knowTheMultiplier: '',
   steeringCommittee: '',
   steeringCommitteeMeeting: '',
+  numberOfSupervisors: '',
+  averagePay: '',
+  workload: initialWorkload,
   //são os dados iniciais
 };
 
@@ -90,6 +101,10 @@ export enum FormActions {
   setKnowTheMultiplier,
   setSteeringCommittee,
   setSteeringCommitteeMeeting,
+  setNumberOfSupervisors,
+  setAveragePay,
+  setWorkload,
+  setWorkloadOther,
   //enum = é uma forma de tipificar dados em um objeto, como listas, são autoincrementados, e podem ser números, podem haver strings sem valores.
 };
 
@@ -136,6 +151,10 @@ const formReducer = (state: State, action: Action) => {//recebi os dados origina
       return { ...state, steeringCommittee: action.payload };
     case FormActions.setSteeringCommitteeMeeting:
       return { ...state, steeringCommitteeMeeting: action.payload };
+    case FormActions.setNumberOfSupervisors:
+      return { ...state, numberOfSupervisors: action.payload };
+    case FormActions.setAveragePay:
+      return { ...state, averagePay: action.payload };
     default://se não existir está ação retorna o state do jeito que veio
       return state;
   }

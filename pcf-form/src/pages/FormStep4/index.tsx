@@ -10,8 +10,8 @@ import { FormStep4Input } from "../../types/FormStep4"
 
 
 const schema = yup.object({
-  dateAcquisition: yup.string().required(),
-  dateVisition: yup.string().required(),
+  numberOfSupervisors: yup.string().required(),
+
 }).required();
 
 export const FormStep4 = () => {
@@ -22,30 +22,30 @@ export const FormStep4 = () => {
   const onSubmit = handleSubmit(data => navigate('/formstep3'))
 
 //função de captura de valores
-  const handleDateAcquisitionChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleNumberOfSupervisors = (event: ChangeEvent<HTMLInputElement>) => {
     dispatch({
-      type: FormActions.setDateAcquisition,
+      type: FormActions.setNumberOfSupervisors,
       payload: event.target.value
     });
   };
 
-  const handleDateVisitionChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleAveragePayChange = (event: ChangeEvent<HTMLInputElement>) => {
     dispatch({
-      type: FormActions.setDateVisition,
+      type: FormActions.setAveragePay,
       payload: event.target.value
     });
   };
 
-  const handleLastMonthSpentDataChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleWorkloadChange = (event: ChangeEvent<HTMLInputElement>) => {
     dispatch({
-      type: FormActions.setLastMonthSpentData,
+      type: FormActions.setWorkload,
       payload: event.target.value
     });
   };
 
-  const handleNameChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleWorkloadOtherChange = (event: ChangeEvent<HTMLInputElement>) => {
     dispatch({
-      type: FormActions.setName,
+      type: FormActions.setWorkloadOther,
       payload: event.target.value
     });
   };
@@ -91,14 +91,16 @@ export const FormStep4 = () => {
 
           <SC.ButtonTypeText>
             <div className="formQuestion">
-              <label htmlFor="name">
+              <label htmlFor="numberOfSupervisors">
                 Quantos Supervisores existem na equipe do PCF no seu município?
+                <span>{errors.numberOfSupervisors && " ⚠ *Campo obrigatório "}</span>
                 <input
-                  {...register("name")}
-                  name="name"
+                  {...register("numberOfSupervisors")}
+                  id="numberOfSupervisors"
+                  name="numberOfSupervisors"
                   type="text"
-                  value={state.name}
-                  onChange={handleNameChange}
+                  value={state.numberOfSupervisors}
+                  onChange={handleNumberOfSupervisors}
                   placeholder="Quantidade"
                 />
               </label>
@@ -107,14 +109,16 @@ export const FormStep4 = () => {
 
           <SC.ButtonTypeText>
             <div className="formQuestion">
-              <label htmlFor="name">
+              <label htmlFor="averagePay">
                 Qual a remuneração média em R$ (reais) dos Supervisores?
+                <span>{errors.averagePay && " ⚠ *Campo obrigatório "}</span>
                 <input
-                  {...register("name")}
-                  name="name"
+                  {...register("averagePay")}
+                  id="averagePay"
+                  name="averagePay"
                   type="text"
-                  value={state.name}
-                  onChange={handleNameChange}
+                  value={state.averagePay}
+                  onChange={handleAveragePayChange}
                   placeholder="Valor em R$"
                 />
               </label>
@@ -125,76 +129,82 @@ export const FormStep4 = () => {
             <div className="formQuestion">
               <p className="textFormRadioButton">
                 Qual a carga horária dos Supervisores?
+                <span>{errors.workload && " ⚠ *Campo obrigatório "}</span>
               </p>
               <div id="containerOption">
                 <div>
                 
                   <div id="containerInputLabelRadioButton">
                     <input
-                      id="lastMonthSpentJaneiro"
-                      name="lastMonthSpentData"
+                      {...register("workload")}
+                      id="workloadForty"
+                      name="workload"
                       type="checkbox"
-                      value="sim"
-                      onChange={handleLastMonthSpentDataChange}
+                      value="40 horas semanais"
+                      onChange={handleWorkloadChange}
                     />
                     <label
                       className="containerTextLabel"
-                      htmlFor="lastMonthSpentJaneiro"
+                      htmlFor="workloadForty"
                     >40 horas semanais
                     </label>
                   </div>
 
                   <div id="containerInputLabelRadioButton">
                     <input
-                      id="lastMonthSpentFevereiro"
-                      name="lastMonthSpentData"
+                      {...register("workload")}
+                      id="workloadThirty"
+                      name="workload"
                       type="checkbox"
-                      value="Não"
-                      onChange={handleLastMonthSpentDataChange}
+                      value="30 horas semanais"
+                      onChange={handleWorkloadChange}
                     />
                     <label
                       className="containerTextLabel"
-                      htmlFor="lastMonthSpentFevereiro"
+                      htmlFor="workloadThirty"
                     >30 horas semanais
                     </label>
                   </div>
 
                   <div id="containerInputLabelRadioButton">
                     <input
-                      id="lastMonthSpentFevereiro"
-                      name="lastMonthSpentData"
+                      {...register("workload")}
+                      id="workloadTwenty"
+                      name="workload"
                       type="checkbox"
-                      value="Não"
-                      onChange={handleLastMonthSpentDataChange}
+                      value="20 horas semanais"
+                      onChange={handleWorkloadChange}
                     />
                     <label
                       className="containerTextLabel"
-                      htmlFor="lastMonthSpentFevereiro"
+                      htmlFor="workloadTwenty"
                     >20 horas semanais
                     </label>
                   </div>
                 
                   <div id="containerInputLabelRadioButton">
                     <input
-                      id="lastMonthSpentFevereiro"
-                      name="lastMonthSpentData"
+                      {...register("workload")}
+                      id="workloadOthers"
+                      name="workload"
                       type="checkbox"
-                      value="Não"
-                      onChange={handleLastMonthSpentDataChange}
+                      value="Outro"
+                      onChange={handleWorkloadChange}
                     />
                     <label
                       className="containerTextLabel"
-                      htmlFor="lastMonthSpentFevereiro"
+                      htmlFor="workloadOthers"
                     >Outro:
                     </label>
-                      <input
-                        className="inputPlaceholderOther"
-                        name="name"
-                        type="text"
-                        value={state.name}
-                        onChange={handleNameChange}
-                        placeholder="Escreva aqui"
-                      />
+                    <input
+                      {...register("workload")}
+                      className="inputPlaceholderOther"
+                      name="workload"
+                      type="text"
+                      value={state.name}
+                      onChange={handleWorkloadOtherChange}
+                      placeholder="Escreva aqui"
+                    />
                   </div>
 
                 </div>

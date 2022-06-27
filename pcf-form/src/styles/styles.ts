@@ -209,6 +209,12 @@ export const ButtonTypeCheckbox = styled.div`
     .textFormRadioButton {
       font-size: 15px;
       font-weight: bold;
+
+      span {
+        font-weight: normal;
+        color: red;
+        margin-left: 10px;
+      }
     }
 
     #containerOption {

@@ -1,6 +1,22 @@
+
+export const initialWorkload: Workload = {
+  workloadCheckbox: '',
+  workloadOthers: '',
+};
+
+export enum setWorkloadActions {
+  setWorkloadCheckbox,
+  setWorkloadOthers,
+};
+
+export interface Workload {
+  workloadCheckbox: string;
+  workloadOthers?: string;
+};
+
 export interface FormStep4Input {
-  name: string;
-  dateAcquisition: string;
-  dateVisition: string;
-  lastMonthSpentData: 'janeiro' | 'fevereiro' | 'marco' | 'abril' | 'maio' | 'junho' | 'julho' | 'agosto' | 'setembro' | 'outubro' | 'novembro' | 'dezembro';
-}
+  numberOfSupervisors: string;
+  averagePay: string;
+  workload: Workload;
+};
+
