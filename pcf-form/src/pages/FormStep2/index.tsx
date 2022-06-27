@@ -8,25 +8,29 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 
 
-interface FormStep1Input {
+interface FormStep2Input {
   dateAcquisition: string;
   dateVisition: string;
   lastMonthSpentData: 'janeiro' | 'fevereiro' | 'marco' | 'abril' | 'maio' | 'junho' | 'julho' | 'agosto' | 'setembro' | 'outubro' | 'novembro' | 'dezembro';
+  
 }
 
 const schema = yup.object({
   dateAcquisition: yup.string().required(),
   dateVisition: yup.string().required(),
+  lastMonthSpentData: yup.string().required(),
+  phasePCFcity: yup.string().required(),
+
 }).required();
 
 export const FormStep2 = () => {
   const navigate = useNavigate();
   const { state, dispatch } = useFormPage();
 
-  const { register, handleSubmit, formState: {errors}} = useForm<FormStep1Input>({resolver: yupResolver(schema)})
+  const { register, handleSubmit, formState: {errors}} = useForm<FormStep2Input>({resolver: yupResolver(schema)})
   const onSubmit = handleSubmit(data => navigate('/formstep3'))
 
-//função de captura de valores
+
   const handleDateAcquisitionChange = (event: ChangeEvent<HTMLInputElement>) => {
     dispatch({
       type: FormActions.setDateAcquisition,
@@ -113,7 +117,6 @@ export const FormStep2 = () => {
         </div>
       </SC.ButtonTypeDate>
 
-
       <SC.ButtonTypeRadio>
         <div className="formQuestion">
           <p className="textFormRadioButton">
@@ -125,11 +128,12 @@ export const FormStep2 = () => {
 
               <div id="containerInputLabelRadioButton">
                 <input
-                    id="lastMonthSpentJaneiro"
-                    name="lastMonthSpentData"
-                    type="radio"
-                    value="janeiro"
-                    onChange={handleLastMonthSpentDataChange}
+                  {...register("lastMonthSpentData")}
+                  id="lastMonthSpentJaneiro"
+                  name="lastMonthSpentData"
+                  type="radio"
+                  value="janeiro"
+                  onChange={handleLastMonthSpentDataChange}
                 />
                 <label
                   className="containerTextLabel"
@@ -140,11 +144,12 @@ export const FormStep2 = () => {
 
               <div id="containerInputLabelRadioButton">
                 <input
-                    id="lastMonthSpentFevereiro"
-                    name="lastMonthSpentData"
-                    type="radio"
-                    value="Fevereiro"
-                    onChange={handleLastMonthSpentDataChange}
+                  {...register("lastMonthSpentData")}
+                  id="lastMonthSpentFevereiro"
+                  name="lastMonthSpentData"
+                  type="radio"
+                  value="Fevereiro"
+                  onChange={handleLastMonthSpentDataChange}
                 />
                 <label
                   className="containerTextLabel"
@@ -155,11 +160,12 @@ export const FormStep2 = () => {
 
               <div id="containerInputLabelRadioButton">
                 <input
-                    id="lastMonthSpentMarco"
-                    name="lastMonthSpentData"
-                    type="radio"
-                    value="Março"
-                    onChange={handleLastMonthSpentDataChange}
+                  {...register("lastMonthSpentData")}
+                  id="lastMonthSpentMarco"
+                  name="lastMonthSpentData"
+                  type="radio"
+                  value="Março"
+                  onChange={handleLastMonthSpentDataChange}
                 />
                 <label
                   className="containerTextLabel"
@@ -170,11 +176,12 @@ export const FormStep2 = () => {
 
               <div id="containerInputLabelRadioButton">
                 <input
-                    id="lastMonthSpentAbril"
-                    name="lastMonthSpentData"
-                    type="radio"
-                    value="Abril"
-                    onChange={handleLastMonthSpentDataChange}
+                  {...register("lastMonthSpentData")}
+                  id="lastMonthSpentAbril"
+                  name="lastMonthSpentData"
+                  type="radio"
+                  value="Abril"
+                  onChange={handleLastMonthSpentDataChange}
                 />
                 <label
                   className="containerTextLabel"
@@ -185,11 +192,12 @@ export const FormStep2 = () => {
 
               <div id="containerInputLabelRadioButton">
                 <input
-                    id="lastMonthSpentMaio"
-                    name="lastMonthSpentData"
-                    type="radio"
-                    value="Maio"
-                    onChange={handleLastMonthSpentDataChange}
+                  {...register("lastMonthSpentData")}
+                  id="lastMonthSpentMaio"
+                  name="lastMonthSpentData"
+                  type="radio"
+                  value="Maio"
+                  onChange={handleLastMonthSpentDataChange}
                 />
                 <label
                   className="containerTextLabel"
@@ -200,11 +208,12 @@ export const FormStep2 = () => {
 
               <div id="containerInputLabelRadioButton">
                 <input
-                    id="lastMonthSpentJunho"
-                    name="lastMonthSpentData"
-                    type="radio"
-                    value="Junho"
-                    onChange={handleLastMonthSpentDataChange}
+                  {...register("lastMonthSpentData")}
+                  id="lastMonthSpentJunho"
+                  name="lastMonthSpentData"
+                  type="radio"
+                  value="Junho"
+                  onChange={handleLastMonthSpentDataChange}
                 />
                 <label
                   className="containerTextLabel"
@@ -218,11 +227,12 @@ export const FormStep2 = () => {
 
               <div id="containerInputLabelRadioButton">
                 <input
-                    id="lastMonthSpentJulho"
-                    name="lastMonthSpentData"
-                    type="radio"
-                    value="Julho"
-                    onChange={handleLastMonthSpentDataChange}
+                  {...register("lastMonthSpentData")}
+                  id="lastMonthSpentJulho"
+                  name="lastMonthSpentData"
+                  type="radio"
+                  value="Julho"
+                  onChange={handleLastMonthSpentDataChange}
                 />
                 <label
                   className="containerTextLabel"
@@ -233,11 +243,12 @@ export const FormStep2 = () => {
 
               <div id="containerInputLabelRadioButton">
                 <input
-                    id="lastMonthSpentAgosto"
-                    name="lastMonthSpentData"
-                    type="radio"
-                    value="Agosto"
-                    onChange={handleLastMonthSpentDataChange}
+                  {...register("lastMonthSpentData")}
+                  id="lastMonthSpentAgosto"
+                  name="lastMonthSpentData"
+                  type="radio"
+                  value="Agosto"
+                  onChange={handleLastMonthSpentDataChange}
                 />
                 <label
                   className="containerTextLabel"
@@ -248,11 +259,12 @@ export const FormStep2 = () => {
 
               <div id="containerInputLabelRadioButton">
                 <input
-                    id="lastMonthSpentSetembro"
-                    name="lastMonthSpentData"
-                    type="radio"
-                    value="Setembro"
-                    onChange={handleLastMonthSpentDataChange}
+                  {...register("lastMonthSpentData")}
+                  id="lastMonthSpentSetembro"
+                  name="lastMonthSpentData"
+                  type="radio"
+                  value="Setembro"
+                  onChange={handleLastMonthSpentDataChange}
                 />
                 <label
                   className="containerTextLabel"
@@ -263,11 +275,12 @@ export const FormStep2 = () => {
 
               <div id="containerInputLabelRadioButton">
                 <input
-                    id="lastMonthSpentOutubro"
-                    name="lastMonthSpentData"
-                    type="radio"
-                    value="Outubro"
-                    onChange={handleLastMonthSpentDataChange}
+                  {...register("lastMonthSpentData")}
+                  id="lastMonthSpentOutubro"
+                  name="lastMonthSpentData"
+                  type="radio"
+                  value="Outubro"
+                  onChange={handleLastMonthSpentDataChange}
                 />
                 <label
                   className="containerTextLabel"
@@ -278,11 +291,12 @@ export const FormStep2 = () => {
 
               <div id="containerInputLabelRadioButton">
                 <input
-                    id="lastMonthSpentNovembro"
-                    name="lastMonthSpentData"
-                    type="radio"
-                    value="Novembro"
-                    onChange={handleLastMonthSpentDataChange}
+                  {...register("lastMonthSpentData")}
+                  id="lastMonthSpentNovembro"
+                  name="lastMonthSpentData"
+                  type="radio"
+                  value="Novembro"
+                  onChange={handleLastMonthSpentDataChange}
                 />
                 <label
                   className="containerTextLabel"
@@ -293,11 +307,12 @@ export const FormStep2 = () => {
 
               <div id="containerInputLabelRadioButton">
                 <input
-                    id="lastMonthSpentDezembro"
-                    name="lastMonthSpentData"
-                    type="radio"
-                    value="Dezembro"
-                    onChange={handleLastMonthSpentDataChange}
+                  {...register("lastMonthSpentData")}
+                  id="lastMonthSpentDezembro"
+                  name="lastMonthSpentData"
+                  type="radio"
+                  value="Dezembro"
+                  onChange={handleLastMonthSpentDataChange}
                 />
                 <label
                   className="containerTextLabel"
@@ -323,25 +338,27 @@ export const FormStep2 = () => {
               
               <div id="containerInputLabelRadioButton">
                 <input
-                    id="lastMonthSpentJaneiro"
-                    name="lastMonthSpentData"
-                    type="radio"
-                    value="janeiro"
-                    onChange={handleLastMonthSpentDataChange}
+                  {...register("phasePCFcity")}
+                  id="phaseImplatation"
+                  name="phasePCFcity"
+                  type="radio"
+                  value="Implantação (até 4 meses)"
+                  onChange={handleLastMonthSpentDataChange}
                 />
                 <label
                   className="containerTextLabel"
-                  htmlFor="lastMonthSpentJaneiro"
+                  htmlFor="phaseImplatation"
                 >Implantação (até 4 meses)
                 </label>
               </div>
 
               <div id="containerInputLabelRadioButton">
                 <input
+                    {...register("phasePCFcity")}
                     id="lastMonthSpentFevereiro"
-                    name="lastMonthSpentData"
+                    name="phasePCFcity"
                     type="radio"
-                    value="Fevereiro"
+                    value="Execução Fase I (entre o 5º e o 7º mês do início da implantação)"
                     onChange={handleLastMonthSpentDataChange}
                 />
                 <label
@@ -353,10 +370,11 @@ export const FormStep2 = () => {
 
               <div id="containerInputLabelRadioButton">
                 <input
+                    {...register("phasePCFcity")}
                     id="lastMonthSpentMarco"
-                    name="lastMonthSpentData"
+                    name="phasePCFcity"
                     type="radio"
-                    value="Março"
+                    value="Execução Fase II (a partir do 8º mês da implantação)"
                     onChange={handleLastMonthSpentDataChange}
                 />
                 <label

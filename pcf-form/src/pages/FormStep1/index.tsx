@@ -3,10 +3,11 @@ import { Theme } from "../../components/Theme"
 import { useNavigate } from "react-router-dom"
 import { useFormPage, FormActions } from "../../context/FormContext"
 import { ChangeEvent, useEffect, useState } from "react"
-import { useForm } from "react-hook-form";
+import { useForm, UseFormRegister } from "react-hook-form";
 import axios from "axios"
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
+import React from "react"
 
 type IBGEUFResponse = {
   id: number;
@@ -37,6 +38,7 @@ const schema = yup.object({
   city: yup.string().required(),
 }).required();
 
+
 export const FormStep1 = () => {
   const [ufs, setUfs] = useState<IBGEUFResponse[]>([]);
   const [cities, setCities] = useState<IBGECITYResponse[]>([]);
@@ -45,10 +47,10 @@ export const FormStep1 = () => {
   const navigate = useNavigate();
   const { state, dispatch } = useFormPage();
 
-
   //dropdown state e cities
   const { register, handleSubmit, formState: {errors}} = useForm<FormStep1Input>({resolver: yupResolver(schema)})
   const onSubmit = handleSubmit(data => navigate('/formstep2'))
+  console.log(state)
 //Aqui fizemos a função de troca de nome, usamos dispatch para realizar a troca, onde recebemos no payload o valor, e setamos no FormActions
   const handleNameChange = (event: ChangeEvent<HTMLInputElement>) => {
     dispatch({
@@ -85,7 +87,7 @@ export const FormStep1 = () => {
       type: FormActions.setUf,
       payload: event.target.value
     });
-  }
+  };
   
   function handleSelectedCity(event: ChangeEvent<HTMLSelectElement>) {
     const city = event.target.value
@@ -94,7 +96,7 @@ export const FormStep1 = () => {
       type: FormActions.setCity,
       payload: event.target.value
     });
-  }
+  };
 
   useEffect(() => {
     axios.get('https://servicodados.ibge.gov.br/api/v1/localidades/estados/').then((response) => {setUfs(response.data)})
