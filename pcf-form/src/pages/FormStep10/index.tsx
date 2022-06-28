@@ -6,11 +6,11 @@ import { ChangeEvent, useEffect, useState } from "react"
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
-import { Item } from "../../components/TableQuestion/types/Item"
-import { items } from "../../components/TableQuestion/data/items"
-import { categories } from "../../components/TableQuestion/data/categories"
-import { TableArea } from "../../components/TableQuestion/components/TableArea"
-import { InputArea } from "../../components/TableQuestion/components/InputArea"
+import { Item } from "../../components/Questions/TableQuestion/types/Item"
+import { items } from "../../components/Questions/TableQuestion/data/items"
+import { InputArea } from "../../components/Questions/TableQuestion/components/InputArea"
+import { TableArea } from "../../components/Questions/TableQuestion/components/TableArea"
+
 
 
 

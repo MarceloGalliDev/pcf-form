@@ -23,7 +23,8 @@ export const FormStep2 = () => {
   const navigate = useNavigate();
   const { state, dispatch } = useFormPage();
 
-  const { register, handleSubmit, formState: {errors}} = useForm<FormStep2Input>({resolver: yupResolver(schema)})
+  const { register, handleSubmit, formState: { errors } } = useForm<FormStep2Input>({ resolver: yupResolver(schema) })
+  
   const onSubmit = handleSubmit(data => navigate('/formstep3'))
 
 

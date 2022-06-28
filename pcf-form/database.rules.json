@@ -1,6 +1,16 @@
 {
   "rules": {
-    ".read": true,
-    ".write": true
+    "rooms": {
+      ".read": true,
+      ".write": true,
+      "$roomId":{
+        ".read": true,
+        ".write": true,
+        "questions": {
+          ".read": true,
+          ".write": true
+        }
+      }
+    }
   }
 }

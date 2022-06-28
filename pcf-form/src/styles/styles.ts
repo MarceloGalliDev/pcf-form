@@ -401,25 +401,15 @@ export const ButtonTypeFile = styled.div`
   }
 `;
 
-export const AllButtons = styled.div`
-  .buttonNext {
-    background-color: #D92525;
-    color: #F2F2F2;
-    font-size: 14px;
-    font-weight: bold;
-    padding: 10px 40px;
-    border: 0;
-    border-radius: 10px;
-    cursor: pointer;
-    margin: 30px 0;
-    transition: filter 0.2s;
-
-    &:hover {
-      filter: brightness(0.8);
-    }
-  }
-
-  .buttonBack {
+export const AllButtons = styled.button`
+  margin-top: 40px;
+  border: none;
+  display: flex;
+  gap: 20px;
+  background-color: #fff;
+  
+  .buttonAll {
+    width: 170px;
     background-color: #D92525;
     color: #F2F2F2;
     font-size: 14px;
@@ -428,7 +418,6 @@ export const AllButtons = styled.div`
     border: 0;
     border-radius: 10px;
     cursor: pointer;
-    margin: 30px 10px 0 0;
     text-decoration: none;
     transition: filter 0.2s;
 

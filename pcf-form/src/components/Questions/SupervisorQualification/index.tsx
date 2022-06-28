@@ -1,5 +1,5 @@
 import { useCallback, useState } from "react";
-import * as SC from "../styles/styles";
+import * as SC from "../../../styles/styles";
 
 
 export interface supervisorQualification {

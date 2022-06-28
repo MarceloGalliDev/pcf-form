@@ -6,7 +6,8 @@ import { ChangeEvent, useEffect, useState } from "react"
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
-import { FormStep4Input, SupervisorQualification } from "../../types/FormStep4"
+import { FormStep4Input } from "../../types/FormStep4"
+import { SupervisorQualification } from "../../components/Questions/SupervisorQualification"
 
 
 const schema = yup.object({
@@ -220,7 +221,8 @@ export const FormStep4 = () => {
             </div>
           </SC.ButtonTypeCheckbox>
 
-          <SupervisorQualification/>
+          <SupervisorQualification />
+          
           {/* <SC.ButtonTypeTextV3>
             <div className="formQuestion">
               <label htmlFor="">
