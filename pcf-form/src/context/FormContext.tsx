@@ -1,10 +1,6 @@
 //context, reducer, provider, hook
 import { createContext, useReducer, useContext, ReactNode } from "react";
 
-
-
-
-
 //tipando os dados
 type State = {
   currentStep: number;
@@ -29,6 +25,9 @@ type State = {
   steeringCommitteeMeeting: string;
   numberOfSupervisors: string;
   averagePay: string;
+  workload: string;
+  workloadOthers: string;
+  supervisorQualification: string;
 
   }
   //é o tipo de informação que está dentro do meu state
@@ -72,6 +71,8 @@ const initialData: State = {
   steeringCommitteeMeeting: '',
   numberOfSupervisors: '',
   averagePay: '',
+  workload: '', workloadOthers: '',
+  supervisorQualification: '',
 
   //são os dados iniciais
 };
@@ -104,7 +105,8 @@ export enum FormActions {
   setNumberOfSupervisors,
   setAveragePay,
   setWorkload,
-  setWorkloadOther,
+  setWorkloadOthers,
+  setSupervisorQualification,
   //enum = é uma forma de tipificar dados em um objeto, como listas, são autoincrementados, e podem ser números, podem haver strings sem valores.
 };
 
@@ -156,7 +158,11 @@ const formReducer = (state: State, action: Action) => {//recebi os dados origina
     case FormActions.setAveragePay:
       return { ...state, averagePay: action.payload };
     case FormActions.setWorkload:
-      return { ...state, Workload: action.payload };
+      return { ...state, workload: action.payload };
+    case FormActions.setWorkloadOthers:
+      return { ...state, workloadOthers: action.payload };
+    case FormActions.setSupervisorQualification:
+      return { ...state, supervisorQualification: action.payload };
     default://se não existir está ação retorna o state do jeito que veio
       return state;
   }

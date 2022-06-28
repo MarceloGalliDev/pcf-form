@@ -624,7 +624,7 @@ export const FormStep10 = () => {
       </SC.ButtonTypeFile>
 
       <SC.AllButtons>
-        <Link className="buttonBack" to="/">Voltar</Link>
+        <Link className="buttonBack" to="/formstep9">Voltar</Link>
         <button
           className="buttonNext"
           onClick={onSubmit}

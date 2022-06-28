@@ -362,6 +362,7 @@ export const ButtonTypeTextV3 = styled.div`
           border-right: none;
           border-top: none;
           border-bottom: 1px solid #8C1F28;
+          outline: none;
         }
       }
     }

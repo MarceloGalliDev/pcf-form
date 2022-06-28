@@ -6,12 +6,14 @@ import { ChangeEvent, useEffect, useState } from "react"
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
-import { FormStep4Input } from "../../types/FormStep4"
+import { FormStep4Input, SupervisorQualification } from "../../types/FormStep4"
 
 
 const schema = yup.object({
   numberOfSupervisors: yup.string().required(),
-
+  averagePay: yup.string().required(),
+  workload: yup.string().required(),
+  supervisorQualification: yup.string().required(),
 }).required();
 
 export const FormStep4 = () => {
@@ -43,6 +45,19 @@ export const FormStep4 = () => {
     });
   };
 
+  const handleWorkloadOthersChange = (event: ChangeEvent<HTMLInputElement>) => {
+    dispatch({
+      type: FormActions.setWorkloadOthers,
+      payload: event.target.value
+    });
+  };
+  
+  const handleSupervisorQualificationChange = (event: ChangeEvent<HTMLInputElement>) => {
+    dispatch({
+      type: FormActions.setSupervisorQualification,
+      payload: event.target.value
+    });
+  };
 
   //verificando se foi respondida, não passa para próxima etapa
   // useEffect(() => {
@@ -191,12 +206,11 @@ export const FormStep4 = () => {
                     >Outro:
                     </label>
                     <input
-                      {...register("workload")}
                       className="inputPlaceholderOther"
-                      name="workload"
+                      name="workloadOthers"
                       type="text"
-                      value=""
-                      onChange={handleWorkloadChange}
+                      value={state.workloadOthers}
+                      onChange={handleWorkloadOthersChange}
                       placeholder="Escreva aqui"
                     />
                   </div>
@@ -206,21 +220,26 @@ export const FormStep4 = () => {
             </div>
           </SC.ButtonTypeCheckbox>
 
+          <SupervisorQualification/>
           {/* <SC.ButtonTypeTextV3>
             <div className="formQuestion">
-              <label htmlFor="name">
+              <label htmlFor="">
                 Quantos Supervisores da equipe do PCF tem em seu município:
 
                 <div id="containerTextLabelCheckbox">
                   <label
                     className="labelForContainerTextLabelCheckbox"
-                    htmlFor="">Especialização:</label>
+                    htmlFor="supervisorSpecialization">
+                    Especialização:
+                  </label>
                   <input
+                     {...register("supervisorQualification")}
                     className="inputForContainerTextLabelCheckbox"
-                    name="name"
+                    id="supervisorSpecialization"
+                    name="supervisorQualification"
                     type="text"
-                    value={state.name}
-                    onChange={handleNameChange}
+                    value={state.supervisorQualification}
+                    onChange={handleSupervisorQualificationChange}
                     placeholder="Sua resposta"
                   />
                 </div>
@@ -228,13 +247,17 @@ export const FormStep4 = () => {
                 <div id="containerTextLabelCheckbox">
                   <label
                     className="labelForContainerTextLabelCheckbox"
-                    htmlFor="">Mestrado:</label>
+                    htmlFor="supervisorQualification"
+                  >Mestrado:
+                  </label>
                   <input
+                    {...register("supervisorQualification")}
+                    id="supervisorQualification"
                     className="inputForContainerTextLabelCheckbox"
-                    name="name"
+                    name="supervisorQualification"
                     type="text"
-                    value={state.name}
-                    onChange={handleNameChange}
+                    value={state.supervisorQualification}
+                    onChange={handleSupervisorQualificationChange}
                     placeholder="Sua resposta"
                   />
                 </div>
@@ -242,24 +265,26 @@ export const FormStep4 = () => {
                 <div id="containerTextLabelCheckbox">
                   <label
                     className="labelForContainerTextLabelCheckbox"
-                    htmlFor=""
+                    htmlFor="supervisorQualification"
                   >Doutorado:
                   </label>
                   <input
+                    {...register("supervisorQualification")}
+                    id="supervisorQualification"
                     className="inputForContainerTextLabelCheckbox"
                     name="name"
                     type="text"
-                    value={state.name}
-                    onChange={handleNameChange}
+                    value={state.supervisorQualification}
+                    onChange={handleSupervisorQualificationChange}
                     placeholder="Sua resposta"
                   />
                 </div>
 
               </label>
             </div>
-          </SC.ButtonTypeTextV3>
+          </SC.ButtonTypeTextV3> */}
 
-          <SC.ButtonTypeTextV3>
+          {/* <SC.ButtonTypeTextV3>
             <div className="formQuestion">
               <label htmlFor="name">
                 Quantos Supervisores da equipe do PCF são contratados nas seguintes categorias em seu município:
