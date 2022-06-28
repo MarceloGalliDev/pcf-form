@@ -11,8 +11,8 @@ export type IBGECITYResponse = {
 
 export interface FormStep1Input {
   name: string;
-  phoneNumber: string;
   email: string;
+  phoneNumber: string;
   functionPCF: string;
   uf: string;
   city: string;

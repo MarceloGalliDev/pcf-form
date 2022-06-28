@@ -1,14 +1,13 @@
 import * as SC from "../../styles/styles"
 import { Link, useNavigate } from "react-router-dom";
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { push, ref, set } from "firebase/database";
 import { database } from "../../services/firebase";
 import '../../styles/auth.scss';
 
-
 export const Home = () => {
-  const navigate = useNavigate()
-  const [newRoom, setNewRoom] = useState('') //sempre inicializar o useState com a tipagem que a newRoom será utilizada, ele ja reconhece.
+  const navigate = useNavigate();
+  const [newRoom, setNewRoom] = useState('');
 
   async function handleCreateRoom(event: FormEvent) {
     event.preventDefault();
@@ -16,16 +15,20 @@ export const Home = () => {
     const firebaseRoomsForm = ref(database, 'rooms');
     const firebaseForm = await push(firebaseRoomsForm);
     set(firebaseForm, {
-        municipio: newRoom,
-    })
-    
+      municipio: newRoom,
+    });
+
     navigate(`/${firebaseForm.key}/formstep1`)
+    // if (newRoom === '') {
+    //   alert('Preencha o Nome do Município')
+    // } else {
+    // }
   };
 
   return (
     <div id="page-auth">
       <aside>
-        <strong>Projeto Criança Feliz</strong>
+        <strong>Programa Criança Feliz</strong>
         <p>Responda a pesquisa sobre o projeto</p>
       </aside>
       <main>

@@ -405,6 +405,7 @@ export const AllButtons = styled.button`
   margin-top: 40px;
   border: none;
   display: flex;
+  flex-direction: row;
   gap: 20px;
   background-color: #fff;
   

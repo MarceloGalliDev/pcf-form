@@ -19,7 +19,7 @@ export const Router = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/:id/formstep1" element={<FormStep1 />} />
-        <Route path="/formstep2" element={<FormStep2 />} />
+        <Route path="/:id/formstep2" element={<FormStep2 />} />
         <Route path="/formstep3" element={<FormStep3 />} />
         <Route path="/formstep4" element={<FormStep4 />} />
         <Route path="/formstep5" element={<FormStep5 />} />

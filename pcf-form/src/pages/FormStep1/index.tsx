@@ -14,13 +14,13 @@ import {
 } from "../../types/FormStep1"
 import { database } from "../../services/firebase"
 import { ref, push, set } from "firebase/database"
-import { useRoom } from "../../hooks/useRoom"
+
 
 
 const schema = yup.object({
   name: yup.string().required(),
-  phoneNumber: yup.number().required(),
   email: yup.string().required(),
+  phoneNumber: yup.number().required(),
   functionPCF: yup.string().required(),
   uf: yup.string().required(),
   city: yup.string().required(),
@@ -36,6 +36,10 @@ export const FormStep1 = () => {
   const { state, dispatch } = useFormPage();
   const [questionOne, setQuestionOne] = useState('')
   const [questionTwo, setQuestionTwo] = useState('')
+  const [questionThree, setQuestionThree] = useState('')
+  const [questionFour, setQuestionFour] = useState('')
+  const [questionFive, setQuestionFive] = useState('')
+  const [questionSix, setQuestionSix] = useState('')
 
 
   type RoomParams = {
@@ -54,26 +58,28 @@ export const FormStep1 = () => {
     if (questionTwo.trim() === '') {
       return;
     };
+    if (questionTwo.trim() === '') {
+      return;
+    };
 
     const question = {
       pagina1: {
         questao1: questionOne,
         questao2: questionTwo,
+        questao3: questionThree,
+        questao4: questionFour,
+        questao5: selectedUf,
+        questao6: selectedCity,
       }
     }
 
     const firebaseRoomsQuestion = ref(database, `rooms/${roomId}/question`);
     const firebaseQuestion = await push(firebaseRoomsQuestion);
     set(firebaseQuestion, question)
-    
-    navigate('/formstep2')
+
+   navigate(`/${roomId}/formstep2`)
   };
-  
-  
-  //dropdown state e cities
-  const { register, handleSubmit, formState: {errors}} = useForm<FormStep1Input>({resolver: yupResolver(schema)})
-  
-//Aqui fizemos a função de troca de nome, usamos dispatch para realizar a troca, onde recebemos no payload o valor, e setamos no FormActions
+
   const handleNameChange = (event: ChangeEvent<HTMLInputElement>) => {
     setQuestionOne(event.target.value);
     dispatch({
@@ -83,6 +89,7 @@ export const FormStep1 = () => {
   };
 
   const handleEmailChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setQuestionTwo(event.target.value)
     dispatch({
       type: FormActions.setEmail,
       payload: event.target.value
@@ -90,6 +97,7 @@ export const FormStep1 = () => {
   };
 
   const handlePhoneNumberChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setQuestionThree(event.target.value)
     dispatch({
       type: FormActions.setPhoneNumber,
       payload: event.target.value
@@ -97,6 +105,7 @@ export const FormStep1 = () => {
   };
 
   const handleFunctionPCFChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setQuestionFour(event.target.value)
     dispatch({
       type: FormActions.setFunctionPCF,
       payload: event.target.value
@@ -154,9 +163,7 @@ export const FormStep1 = () => {
           <div className="formQuestion">
             <label htmlFor="name">
               Nome do entrevistado:
-              <span>{errors.name && " ⚠ *Campo obrigatório "}</span>
               <input
-                {...register("name")}
                 name="name"
                 type="text"
                 autoFocus
@@ -172,12 +179,10 @@ export const FormStep1 = () => {
           <div className="formQuestion">
             <label htmlFor="email">
               E-mail:
-              <span>{errors.email && " ⚠ *Campo obrigatório "}</span>
               <input
-                {...register("email")}
                 name="email"
                 type="email"
-                value={state.email}
+                value={questionTwo}
                 onChange={handleEmailChange}
                 placeholder="Seu e-mail"
               />
@@ -189,12 +194,10 @@ export const FormStep1 = () => {
           <div className="formQuestion">
             <label htmlFor="phoneNumber">
               Telefone para contato:
-              <span>{errors.phoneNumber && " ⚠ *Campo obrigatório "}</span>
               <input
-                {...register("phoneNumber")}
                 name="phoneNumber"
                 type="tel"
-                value={state.phoneNumber}
+                value={questionThree}
                 onChange={handlePhoneNumberChange}
                 placeholder="DDD + Telefone"
               />
@@ -206,12 +209,10 @@ export const FormStep1 = () => {
           <div className="formQuestion">
             <label htmlFor="functionPCF">
               Função no PCF:
-              <span>{errors.functionPCF && " ⚠ *Campo obrigatório "}</span>
               <input
-                {...register("functionPCF")}
                 name="functionPCF"
                 type="text"
-                value={state.functionPCF}
+                value={questionFour}
                 onChange={handleFunctionPCFChange}
                 placeholder="Sua resposta"
               />
@@ -222,12 +223,11 @@ export const FormStep1 = () => {
         <SC.ButtonTypeSelectOption>
           <div className="formQuestion">
             <label htmlFor="uf">
-              Local em que atua no PCF:
-              <span>{errors.uf && " ⚠ *Campo obrigatório "}</span>
+              Local em que atua no PCF
               <select
-                {...register("uf")}
                 name="uf"
                 id="uf"
+                value={selectedUf}
                 onChange={handleSelectedUf}
               >
                 <option value="0">Selecione o Estado</option>
@@ -235,9 +235,7 @@ export const FormStep1 = () => {
                   <option key={uf.id} value={uf.sigla}>{uf.nome}</option>
                 ))}
               </select>
-              <span>{errors.city && " ⚠ *Campo obrigatório "}</span>
               <select
-                {...register("city")}
                 name="city"
                 id="city"
                 value={selectedCity}
@@ -252,16 +250,14 @@ export const FormStep1 = () => {
           </div>
         </SC.ButtonTypeSelectOption>
 
-
         <SC.AllButtons>
+          <Link className="buttonAll" to="/">Voltar</Link>
           <button
             className="buttonAll"
             type="submit"
           >Próximo
           </button>
-          <Link className="buttonAll" to="/">Voltar</Link>
         </SC.AllButtons>
-
       </form>
     </Theme>
   )

@@ -24,8 +24,8 @@ export const FormStep2 = () => {
   const { state, dispatch } = useFormPage();
 
   const { register, handleSubmit, formState: { errors } } = useForm<FormStep2Input>({ resolver: yupResolver(schema) })
-  
   const onSubmit = handleSubmit(data => navigate('/formstep3'))
+  
 
 
   const handleDateAcquisitionChange = (event: ChangeEvent<HTMLInputElement>) => {
