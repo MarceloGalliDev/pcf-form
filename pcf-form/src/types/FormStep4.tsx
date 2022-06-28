@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import * as SC from "../styles/styles";
 
 export interface FormStep4Input {
@@ -23,8 +23,31 @@ export const SupervisorQualification = () => {
     doutorado: '',
   });
 
-  console.log({optionForm})
+  const handleSubmit = useCallback(
+    (event: React.FormEvent<HTMLFormElement>) => {
+      event.preventDefault();
 
+      const {especializacao, mestrado, doutorado} = optionForm
+
+      if (!especializacao || !mestrado || !doutorado) {
+        window.alert('Preencha todos os campos: \n "Quantos Supervisores da equipe do PCF tem em seu município"')
+        return;
+      }
+
+  }, [optionForm]);
+
+  const handleChangeInput = useCallback((event: React.FormEvent<HTMLInputElement>) => {
+    const targetInput = event.currentTarget;
+    const { value, name } = targetInput;
+
+    setOptionForm({
+      ...optionForm,
+      [name]: value,
+    })
+
+  }, [optionForm])
+  
+  console.log({ optionForm })
   return (
     <SC.ButtonTypeTextV3>
       <div className="formQuestion">
@@ -40,12 +63,10 @@ export const SupervisorQualification = () => {
             <input
               className="inputForContainerTextLabelCheckbox"
               id="supervisorSpecialization"
-              name="supervisorQualification"
+              name="especializacao"
               type="text"
-              onChange={(event) => setOptionForm({
-                ...optionForm,
-                especializacao: event.currentTarget?.value || "",
-              })}
+              value={optionForm.especializacao}
+              onChange={handleChangeInput}
               placeholder="Sua resposta"
             />
           </div>
@@ -59,12 +80,10 @@ export const SupervisorQualification = () => {
             <input
               id="supervisorQualification"
               className="inputForContainerTextLabelCheckbox"
-              name="supervisorQualification"
+              name="mestrado"
               type="text"
-              onChange={(event) => setOptionForm({
-                ...optionForm,
-                mestrado: event.currentTarget?.value || "",
-              })}
+              value={optionForm.mestrado}
+              onChange={handleChangeInput}
               
               placeholder="Sua resposta"
             />
@@ -79,12 +98,10 @@ export const SupervisorQualification = () => {
             <input
               id="supervisorQualification"
               className="inputForContainerTextLabelCheckbox"
-              name="name"
+              name="doutorado"
               type="text"
-              onChange={(event) => setOptionForm({
-                ...optionForm,
-                doutorado: event.currentTarget?.value || "",
-              })}
+              value={optionForm.doutorado}
+              onChange={handleChangeInput}
               placeholder="Sua resposta"
             />
           </div>
@@ -93,4 +110,22 @@ export const SupervisorQualification = () => {
       </div>
     </SC.ButtonTypeTextV3>
   )
-}
+};
+
+//checked={optionForm.nome}
+//onChange={(event) => setOptionForm({
+//  ...optionForm,
+//  nome: !!event.currentTarget?.checked
+//})
+
+/* validação
+  const [sucessQuestion, setSucessQuestion] = useState(false)
+
+  if(sucessQuestion) {
+  return 
+    <div>
+      <p>Formulario enviado</p>
+    </div>
+  }
+
+*/
