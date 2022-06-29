@@ -6,35 +6,23 @@ import { ChangeEvent, FormEvent, useEffect, useState } from "react"
 import { push, ref, set } from "firebase/database"
 import { database } from "../../services/firebase"
 
-// const schema = yup.object({
-//   dateAcquisition: yup.string().required(),
-//   dateVisition: yup.string().required(),
-//   lastMonthSpentData: yup.string().required(),
-//   phasePCFCity: yup.string().required(),
-//   expansionGoals: yup.string().required(),
-//   referenceCenter: yup.string().required(),
-//   actionPlan: yup.string().required(),
-// }).required();
-
-
 type RoomParams = {
   id: string;
 };
 
 export const FormStep2 = () => {
+  const params = useParams<RoomParams>()
+  const roomId = params.id
   const navigate = useNavigate();
   const { state, dispatch } = useFormPage();
   const [questionOne, setQuestionOne] = useState('')
   const [questionTwo, setQuestionTwo] = useState('')
-  const [questionThree, setQuestionThree] = useState(false)
-  const [questionFour, setQuestionFour] = useState(false)
-  const [questionFive, setQuestionFive] = useState(false)
-  const [questionSix, setQuestionSix] = useState(false)
-  const [questionSeven, setQuestionSeven] = useState(false)
+  const [questionThree, setQuestionThree] = useState('')
+  const [questionFour, setQuestionFour] = useState('')
+  const [questionFive, setQuestionFive] = useState('')
+  const [questionSix, setQuestionSix] = useState('')
+  const [questionSeven, setQuestionSeven] = useState('')
 
-
-  const params = useParams<RoomParams>()
-  const roomId = params.id
 
   async function handleSendQuestion(event: FormEvent) {
     event.preventDefault();
@@ -55,87 +43,37 @@ export const FormStep2 = () => {
     const firebaseQuestion = await push(firebaseRoomsQuestion);
     set(firebaseQuestion, question)
 
-   navigate(`/${roomId}/formstep3`)
+    navigate(`/${roomId}/formstep3`)
   };
 
   const handleDateAcquisitionChange = (event: ChangeEvent<HTMLInputElement>) => {
     setQuestionOne(event.target.value);
-    dispatch({
-      type: FormActions.setDateAcquisition,
-      payload: event.target.value
-    });
   };
 
   const handleDateVisitionChange = (event: ChangeEvent<HTMLInputElement>) => {
     setQuestionTwo(event.target.value);
-    dispatch({
-      type: FormActions.setDateVisition,
-      payload: event.target.value
-    });
   };
 
   const handleLastMonthSpentDataChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setQuestionThree(!!event.currentTarget?.checked);
-    dispatch({
-      type: FormActions.setLastMonthSpentData,
-      payload: event.target.value
-    });
+    setQuestionThree(event.target.value);
   };
 
   const handlePhasePCFCityChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setQuestionFour(!!event.currentTarget?.checked);
-    dispatch({
-      type: FormActions.setPhasePCFCity,
-      payload: event.target.value
-    });
+    setQuestionFour(event.target.value);
   };
 
   const handleExpansionGoalsChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setQuestionFive(!!event.currentTarget?.checked);
-    dispatch({
-      type: FormActions.setExpansionGoals,
-      payload: event.target.value
-    });
+    setQuestionFive(event.target.value);
   };
 
   const handleReferenceCenterChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setQuestionSix(!!event.currentTarget?.checked);
-    dispatch({
-      type: FormActions.setReferenceCenter,
-      payload: event.target.value
-    });
+    setQuestionSix(event.target.value);
   };
 
   const handleActionPlanChange = (event:
-  ChangeEvent<HTMLInputElement>) => {
-    setQuestionSeven(!!event.currentTarget?.checked);
-    dispatch({
-      type: FormActions.setActionPlan,
-      payload: event.target.value
-    });
+    ChangeEvent<HTMLInputElement>) => {
+    setQuestionSeven(event.target.value)
   };
-
-
-  // const { register, handleSubmit, formState: { errors } } = useForm<FormStep2Input>({ resolver: yupResolver(schema) })
-  // const onSubmit = handleSubmit(data => navigate('/formstep3'))
-
-  //verificando se foi respondida, não passa para próxima etapa
-  // useEffect(() => {
-  //   if (state.name === '' ||
-  //     state.phoneNumber === '' ||
-  //     state.email === '' ||
-  //     state.functionPCF === '' ||
-  //     state.uf === '' ||
-  //     state.city === '') {
-  //     navigate('/')
-  //   } else {
-  //     dispatch({
-  //       type: FormActions.setCurrentStep,
-  //       payload: 2
-  //     });
-  //   }
-  // }, []);
-
 
   useEffect(() => {
     dispatch({
@@ -150,7 +88,7 @@ export const FormStep2 = () => {
         <p>Etapa {state.currentStep}/10</p>
         <h1>Características do PCF</h1>
         <p>Características gerais do PCF</p>
-        <hr/>
+        <hr />
       </SC.Container>
 
       <form onSubmit={handleSendQuestion}>
@@ -195,8 +133,7 @@ export const FormStep2 = () => {
                     id="lastMonthSpentJaneiro"
                     name="lastMonthSpentData"
                     type="radio"
-                    checked={questionThree}
-                    value={questionThree == true ? "Janeiro" : ""}
+                    value="Janeiro"
                     onChange={handleLastMonthSpentDataChange}
                   />
                   <label
@@ -210,8 +147,7 @@ export const FormStep2 = () => {
                     id="lastMonthSpentFevereiro"
                     name="lastMonthSpentData"
                     type="radio"
-                    checked={questionThree}
-                    value={questionThree == true ? "Fevereiro" : ""}
+                    value="Fevereiro"
                     onChange={handleLastMonthSpentDataChange}
                   />
                   <label
@@ -225,8 +161,7 @@ export const FormStep2 = () => {
                     id="lastMonthSpentMarco"
                     name="lastMonthSpentData"
                     type="radio"
-                    checked={questionThree}
-                    value={questionThree == true ? "Março" : ""}
+                    value="Março"
                     onChange={handleLastMonthSpentDataChange}
                   />
                   <label
@@ -240,8 +175,7 @@ export const FormStep2 = () => {
                     id="lastMonthSpentAbril"
                     name="lastMonthSpentData"
                     type="radio"
-                    checked={questionThree}
-                    value={questionThree == true ? "Abril" : ""}
+                    value="Abril"
                     onChange={handleLastMonthSpentDataChange}
                   />
                   <label
@@ -255,8 +189,7 @@ export const FormStep2 = () => {
                     id="lastMonthSpentMaio"
                     name="lastMonthSpentData"
                     type="radio"
-                    checked={questionThree}
-                    value={questionThree == true ? "Maio" : ""}
+                    value="Maio"
                     onChange={handleLastMonthSpentDataChange}
                   />
                   <label
@@ -270,8 +203,7 @@ export const FormStep2 = () => {
                     id="lastMonthSpentJunho"
                     name="lastMonthSpentData"
                     type="radio"
-                    checked={questionThree}
-                    value={questionThree == true ? "Junho" : ""}
+                    value="Junho"
                     onChange={handleLastMonthSpentDataChange}
                   />
                   <label
@@ -287,8 +219,7 @@ export const FormStep2 = () => {
                     id="lastMonthSpentJulho"
                     name="lastMonthSpentData"
                     type="radio"
-                    checked={questionThree}
-                    value={questionThree == true ? "Julho" : ""}
+                    value="Julho"
                     onChange={handleLastMonthSpentDataChange}
                   />
                   <label
@@ -302,8 +233,7 @@ export const FormStep2 = () => {
                     id="lastMonthSpentAgosto"
                     name="lastMonthSpentData"
                     type="radio"
-                    checked={questionThree}
-                    value={questionThree == true ? "Agosto" : ""}
+                    value="Agosto"
                     onChange={handleLastMonthSpentDataChange}
                   />
                   <label
@@ -317,8 +247,7 @@ export const FormStep2 = () => {
                     id="lastMonthSpentSetembro"
                     name="lastMonthSpentData"
                     type="radio"
-                    checked={questionThree}
-                    value={questionThree == true ? "Setembro" : ""}
+                    value="Setembro"
                     onChange={handleLastMonthSpentDataChange}
                   />
                   <label
@@ -332,8 +261,7 @@ export const FormStep2 = () => {
                     id="lastMonthSpentOutubro"
                     name="lastMonthSpentData"
                     type="radio"
-                    checked={questionThree}
-                    value={questionThree == true ? "Outubro" : ""}
+                    value="Outubro"
                     onChange={handleLastMonthSpentDataChange}
                   />
                   <label
@@ -347,8 +275,7 @@ export const FormStep2 = () => {
                     id="lastMonthSpentNovembro"
                     name="lastMonthSpentData"
                     type="radio"
-                    checked={questionThree}
-                    value={questionThree == true ? "Novembro" : ""}
+                    value="Novembro"
                     onChange={handleLastMonthSpentDataChange}
                   />
                   <label
@@ -362,8 +289,7 @@ export const FormStep2 = () => {
                     id="lastMonthSpentDezembro"
                     name="lastMonthSpentData"
                     type="radio"
-                    checked={questionThree}
-                    value={questionThree == true ? "Novembro" : ""}
+                    value="Dezembro"
                     onChange={handleLastMonthSpentDataChange}
                   />
                   <label
@@ -390,8 +316,7 @@ export const FormStep2 = () => {
                     id="phaseImplatation"
                     name="phasePCFCity"
                     type="radio"
-                    checked={questionFour}
-                    value={questionFour == true ? "Implantação (até 4 meses)" : ""}
+                    value="Implantação (até 4 meses)"
                     onChange={handlePhasePCFCityChange}
                   />
                   <label
@@ -405,8 +330,7 @@ export const FormStep2 = () => {
                     id="phaseExecutionI"
                     name="phasePCFCity"
                     type="radio"
-                    checked={questionThree}
-                    value={questionFour == true ? "Execução Fase I (entre o 5º e o 7º mês do início da implantação)" : ""}
+                    value={"Execução Fase I (entre o 5º e o 7º mês do início da implantação"}
                     onChange={handlePhasePCFCityChange}
                   />
                   <label
@@ -417,11 +341,11 @@ export const FormStep2 = () => {
                 </div>
                 <div id="containerInputLabelRadioButton">
                   <input
-                      id="phaseExecutionII"
-                      name="phasePCFCity"
-                      type="radio"
-                      value={questionFour}
-                      onChange={handlePhasePCFCityChange}
+                    id="phaseExecutionII"
+                    name="phasePCFCity"
+                    type="radio"
+                    value={"Execução Fase II (a partir do 8º mês da implantação"}
+                    onChange={handlePhasePCFCityChange}
                   />
                   <label
                     className="containerTextLabel"
@@ -447,7 +371,7 @@ export const FormStep2 = () => {
                     id="expansionGoalsYes"
                     name="expansionGoals"
                     type="radio"
-                    value={questionFive}
+                    value={"Sim"}
                     onChange={handleExpansionGoalsChange}
                   />
                   <label
@@ -461,7 +385,7 @@ export const FormStep2 = () => {
                     id="expansionGoalsNo"
                     name="expansionGoals"
                     type="radio"
-                    value={questionFive}
+                    value={"Não"}
                     onChange={handleExpansionGoalsChange}
                   />
                   <label
@@ -475,7 +399,7 @@ export const FormStep2 = () => {
                     id="expansionGoalsDontKnow"
                     name="expansionGoals"
                     type="radio"
-                    value={questionFive}
+                    value={"Não sei"}
                     onChange={handleExpansionGoalsChange}
                   />
                   <label
@@ -502,7 +426,7 @@ export const FormStep2 = () => {
                     id="referenceCenterYes"
                     name="referenceCenter"
                     type="radio"
-                    value={questionSix}
+                    value={"Sim"}
                     onChange={handleReferenceCenterChange}
                   />
                   <label
@@ -516,7 +440,7 @@ export const FormStep2 = () => {
                     id="referenceCenterNo"
                     name="referenceCenter"
                     type="radio"
-                    value={questionSix}
+                    value={"Não"}
                     onChange={handleReferenceCenterChange}
                   />
                   <label
@@ -530,7 +454,7 @@ export const FormStep2 = () => {
                     id="referenceCenterDontKnow"
                     name="referenceCenter"
                     type="radio"
-                    value={questionSix}
+                    value={"Não sei"}
                     onChange={handleReferenceCenterChange}
                   />
                   <label
@@ -557,7 +481,7 @@ export const FormStep2 = () => {
                     id="actionPlanYes"
                     name="actionPlan"
                     type="radio"
-                    value={questionSeven}
+                    value={"Sim"}
                     onChange={handleActionPlanChange}
                   />
                   <label
@@ -571,7 +495,7 @@ export const FormStep2 = () => {
                     id="actionPlanNo"
                     name="actionPlan"
                     type="radio"
-                    value={questionSeven}
+                    value={"Não"}
                     onChange={handleActionPlanChange}
                   />
                   <label
@@ -585,7 +509,7 @@ export const FormStep2 = () => {
                     id="actionPlanDontKnow"
                     name="actionPlan"
                     type="radio"
-                    value={questionSeven}
+                    value={"Não sei"}
                     onChange={handleActionPlanChange}
                   />
                   <label
@@ -600,7 +524,7 @@ export const FormStep2 = () => {
         </SC.ButtonTypeRadio>
 
         <SC.AllButtons>
-          <Link className="buttonAll" to="/">Voltar</Link>
+          <Link className="buttonAll" to="/:id/formstep1">Voltar</Link>
           <button
             className="buttonAll"
             type="submit"
@@ -609,6 +533,35 @@ export const FormStep2 = () => {
         </SC.AllButtons>
       </form>
     </Theme>
-  )
-}
+  );
+};
 
+  // const { register, handleSubmit, formState: { errors } } = useForm<FormStep2Input>({ resolver: yupResolver(schema) })
+  // const onSubmit = handleSubmit(data => navigate('/formstep3'))
+
+  //verificando se foi respondida, não passa para próxima etapa
+  // useEffect(() => {
+  //   if (state.name === '' ||
+  //     state.phoneNumber === '' ||
+  //     state.email === '' ||
+  //     state.functionPCF === '' ||
+  //     state.uf === '' ||
+  //     state.city === '') {
+  //     navigate('/')
+  //   } else {
+  //     dispatch({
+  //       type: FormActions.setCurrentStep,
+  //       payload: 2
+  //     });
+  //   }
+  // }, []);
+
+  // const schema = yup.object({
+  //   dateAcquisition: yup.string().required(),
+  //   dateVisition: yup.string().required(),
+  //   lastMonthSpentData: yup.string().required(),
+  //   phasePCFCity: yup.string().required(),
+  //   expansionGoals: yup.string().required(),
+  //   referenceCenter: yup.string().required(),
+  //   actionPlan: yup.string().required(),
+  // }).required();

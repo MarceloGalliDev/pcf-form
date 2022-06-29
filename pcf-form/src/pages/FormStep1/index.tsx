@@ -11,20 +11,13 @@ import {
 import { database } from "../../services/firebase"
 import { ref, push, set } from "firebase/database"
 
-// const schema = yup.object({
-//   name: yup.string().required(),
-//   email: yup.string().required(),
-//   phoneNumber: yup.number().required(),
-//   functionPCF: yup.string().required(),
-//   uf: yup.string().required(),
-//   city: yup.string().required(),
-// }).required();
-
 type RoomParams = {
   id: string;
 };
 
 export const FormStep1 = () => {
+  const params = useParams<RoomParams>()
+  const roomId = params.id
   const [ufs, setUfs] = useState<IBGEUFResponse[]>([]);
   const [cities, setCities] = useState<IBGECITYResponse[]>([]);
   const [selectedUf, setSelectedUf] = useState('0')
@@ -39,8 +32,6 @@ export const FormStep1 = () => {
   const [questionSix, setQuestionSix] = useState('')
 
 
-  const params = useParams<RoomParams>()
-  const roomId = params.id
 
   async function handleSendQuestion(event: FormEvent) {
     event.preventDefault();
@@ -70,7 +61,7 @@ export const FormStep1 = () => {
     const firebaseQuestion = await push(firebaseRoomsQuestion);
     set(firebaseQuestion, question)
 
-   navigate(`/${roomId}/formstep2`)
+    navigate(`/${roomId}/formstep2`)
   };
 
   const handleNameChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -124,13 +115,13 @@ export const FormStep1 = () => {
   };
 
   useEffect(() => {
-    axios.get('https://servicodados.ibge.gov.br/api/v1/localidades/estados/').then((response) => {setUfs(response.data)})
+    axios.get('https://servicodados.ibge.gov.br/api/v1/localidades/estados/').then((response) => { setUfs(response.data) })
   }, []);
   
   useEffect(() => {
-    axios.get(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${selectedUf}/municipios`).then((response) => {setCities(response.data)})
+    axios.get(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${selectedUf}/municipios`).then((response) => { setCities(response.data) })
   }, [selectedUf]);//executa toda vez que {selectedUf} mudar
-  ufs.sort((a,b) => a.nome.localeCompare(b.nome))
+  ufs.sort((a, b) => a.nome.localeCompare(b.nome))
 
   useEffect(() => {
     dispatch({
@@ -145,7 +136,7 @@ export const FormStep1 = () => {
         <p>Etapa {state.currentStep}/10</p>
         <h1>Informações gerais</h1>
         <p>Identificação do entrevistado</p>
-        <hr/>
+        <hr />
       </SC.Container>
 
       <form onSubmit={handleSendQuestion}>
@@ -251,5 +242,16 @@ export const FormStep1 = () => {
         </SC.AllButtons>
       </form>
     </Theme>
-  )
-}
+  );
+};
+
+
+
+  // const schema = yup.object({
+  //   name: yup.string().required(),
+  //   email: yup.string().required(),
+  //   phoneNumber: yup.number().required(),
+  //   functionPCF: yup.string().required(),
+  //   uf: yup.string().required(),
+  //   city: yup.string().required(),
+  // }).required();

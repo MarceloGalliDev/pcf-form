@@ -2,29 +2,35 @@ import * as SC from "../../styles/styles"
 import { Theme } from "../../components/Theme"
 import { Link, useNavigate } from "react-router-dom"
 import { useFormPage, FormActions } from "../../context/FormContext"
-import { ChangeEvent, useEffect, useState } from "react"
-import { useForm } from "react-hook-form";
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from "yup";
-import { FormStep4Input } from "../../types/FormStep4"
-import { SupervisorQualification } from "../../components/Questions/SupervisorQualification"
+import { ChangeEvent, useEffect, useState, useCallback } from "react"
 
-
-const schema = yup.object({
-  numberOfSupervisors: yup.string().required(),
-  averagePay: yup.string().required(),
-  workload: yup.string().required(),
-  supervisorQualification: yup.string().required(),
-}).required();
+interface SupervisorQualification {
+  especializacao: string;
+  mestrado: string;
+  doutorado: string;
+};
 
 export const FormStep4 = () => {
   const navigate = useNavigate();
   const { state, dispatch } = useFormPage();
+  const [optionForm, setOptionForm] = useState<SupervisorQualification>({
+    especializacao: '',
+    mestrado: '',
+    doutorado: '',
+  });
 
-  const { register, handleSubmit, formState: {errors}} = useForm<FormStep4Input>({resolver: yupResolver(schema)})
-  const onSubmit = handleSubmit(data => navigate('/formstep3'))
+  const handleChangeInput = useCallback((event: React.FormEvent<HTMLInputElement>) => {
+    const targetInput = event.currentTarget;
+    const { value, name } = targetInput;
 
-//função de captura de valores
+    setOptionForm({
+      ...optionForm,
+      [name]: value,
+    })
+
+  }, [optionForm]);
+
+
   const handleNumberOfSupervisors = (event: ChangeEvent<HTMLInputElement>) => {
     dispatch({
       type: FormActions.setNumberOfSupervisors,
@@ -60,6 +66,364 @@ export const FormStep4 = () => {
     });
   };
 
+  useEffect(() => {
+    dispatch({
+      type: FormActions.setCurrentStep,
+      payload: 4
+    });
+  }, []);
+
+  return (
+    <Theme>
+      <SC.Container>
+        <p>Etapa {state.currentStep}/10</p>
+        <h1>Equipe do PCF</h1>
+        <p>Informações sobre os atores/ participantes da equipe do PCF</p>
+        <hr />
+      </SC.Container>
+
+      <form onSubmit="">
+        <SC.SubSection>
+          <div className="bgSubSection">
+            <p>Subseção Supervisores</p>
+          </div>
+          <div className="formQuestionV2">
+            <SC.ButtonTypeText>
+              <div className="formQuestion">
+                <label htmlFor="numberOfSupervisors">
+                  Quantos Supervisores existem na equipe do PCF no seu município?
+                  <input
+                    id="numberOfSupervisors"
+                    name="numberOfSupervisors"
+                    type="text"
+                    value={state.numberOfSupervisors}
+                    onChange={handleNumberOfSupervisors}
+                    placeholder="Quantidade"
+                  />
+                </label>
+              </div>
+            </SC.ButtonTypeText>
+            <SC.ButtonTypeText>
+              <div className="formQuestion">
+                <label htmlFor="averagePay">
+                  Qual a remuneração média em R$ (reais) dos Supervisores?
+                  <input
+                    id="averagePay"
+                    name="averagePay"
+                    type="text"
+                    value={state.averagePay}
+                    onChange={handleAveragePayChange}
+                    placeholder="Valor em R$"
+                  />
+                </label>
+              </div>
+            </SC.ButtonTypeText>
+            <SC.ButtonTypeCheckbox>
+              <div className="formQuestion">
+                <p className="textFormRadioButton">
+                  Qual a carga horária dos Supervisores?
+                </p>
+                <div id="containerOption">
+                  <div>
+                    <div id="containerInputLabelRadioButton">
+                      <input
+                        id="workloadForty"
+                        name="workload"
+                        type="checkbox"
+                        value="40 horas semanais"
+                        onChange={handleWorkloadChange}
+                      />
+                      <label
+                        className="containerTextLabel"
+                        htmlFor="workloadForty"
+                      >40 horas semanais
+                      </label>
+                    </div>
+                    <div id="containerInputLabelRadioButton">
+                      <input
+                        id="workloadThirty"
+                        name="workload"
+                        type="checkbox"
+                        value="30 horas semanais"
+                        onChange={handleWorkloadChange}
+                      />
+                      <label
+                        className="containerTextLabel"
+                        htmlFor="workloadThirty"
+                      >30 horas semanais
+                      </label>
+                    </div>
+                    <div id="containerInputLabelRadioButton">
+                      <input
+                        id="workloadTwenty"
+                        name="workload"
+                        type="checkbox"
+                        value="20 horas semanais"
+                        onChange={handleWorkloadChange}
+                      />
+                      <label
+                        className="containerTextLabel"
+                        htmlFor="workloadTwenty"
+                      >20 horas semanais
+                      </label>
+                    </div>
+        
+                    <div id="containerInputLabelRadioButton">
+                      <input
+                        id="workload"
+                        name="workload"
+                        type="checkbox"
+                        value="Outro"
+                        onChange={handleWorkloadChange}
+                      />
+                      <label
+                        className="containerTextLabel"
+                        htmlFor="workload"
+                      >Outro:
+                      </label>
+                      <input
+                        className="inputPlaceholderOther"
+                        name="workloadOthers"
+                        type="text"
+                        value={state.workloadOthers}
+                        onChange={handleWorkloadOthersChange}
+                        placeholder="Escreva aqui"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </SC.ButtonTypeCheckbox>
+            <SC.ButtonTypeTextV3>
+              <div className="formQuestion">
+                <label htmlFor="">
+                  Quantos Supervisores da equipe do PCF tem em seu município:
+                  <div id="containerTextLabelCheckbox">
+                    <label
+                      className="labelForContainerTextLabelCheckbox"
+                      htmlFor="supervisorSpecialization">
+                      Especialização:
+                    </label>
+                    <input
+                      className="inputForContainerTextLabelCheckbox"
+                      id="supervisorSpecialization"
+                      name="especializacao"
+                      type="text"
+                      value={optionForm.especializacao}
+                      onChange={handleChangeInput}
+                      placeholder="Sua resposta"
+                    />
+                  </div>
+                  <div id="containerTextLabelCheckbox">
+                    <label
+                      className="labelForContainerTextLabelCheckbox"
+                      htmlFor="supervisorQualification"
+                    >Mestrado:
+                    </label>
+                    <input
+                      id="supervisorQualification"
+                      className="inputForContainerTextLabelCheckbox"
+                      name="mestrado"
+                      type="text"
+                      value={optionForm.mestrado}
+                      onChange={handleChangeInput}
+        
+                      placeholder="Sua resposta"
+                    />
+                  </div>
+                  <div id="containerTextLabelCheckbox">
+                    <label
+                      className="labelForContainerTextLabelCheckbox"
+                      htmlFor="supervisorQualification"
+                    >Doutorado:
+                    </label>
+                    <input
+                      id="supervisorQualification"
+                      className="inputForContainerTextLabelCheckbox"
+                      name="doutorado"
+                      type="text"
+                      value={optionForm.doutorado}
+                      onChange={handleChangeInput}
+                      placeholder="Sua resposta"
+                    />
+                  </div>
+                </label>
+              </div>
+            </SC.ButtonTypeTextV3>
+            <SC.ButtonTypeTextV3>
+              <div className="formQuestion">
+                <label htmlFor="name">
+                  Quantos Supervisores da equipe do PCF são contratados nas seguintes categorias em seu município:
+                  <div id="containerLabelCheckboxBorder">
+                    <div id="containerTextLabelCheckbox">
+                      <label
+                        className="labelForContainerTextLabelCheckbox"
+                        htmlFor=""
+                      >Servidor(a) efetivo(a):
+                      </label>
+                      <input
+                        className="inputForContainerTextLabelCheckbox"
+                        name="name"
+                        type="text"
+                        value={state.name}
+                        onChange={handleNameChange}
+                        placeholder="Sua resposta"
+                      />
+                    </div>
+                    <div id="containerTextLabelCheckbox">
+                      <label
+                        className="labelForContainerTextLabelCheckbox"
+                        htmlFor="">Média Remuneração:</label>
+                      <input
+                        className="inputForContainerTextLabelCheckbox"
+                        name="name"
+                        type="text"
+                        value={state.name}
+                        onChange={handleNameChange}
+                        placeholder="Sua resposta"
+                      />
+                    </div>
+                  </div>
+                  <div id="containerLabelCheckboxBorder">
+                    <div id="containerTextLabelCheckbox">
+                      <label
+                        className="labelForContainerTextLabelCheckbox"
+                        htmlFor=""
+                      >Cargo comissionado:
+                      </label>
+                      <input
+                        className="inputForContainerTextLabelCheckbox"
+                        name="name"
+                        type="text"
+                        value={state.name}
+                        onChange={handleNameChange}
+                        placeholder="Sua resposta"
+                      />
+                    </div>
+                    <div id="containerTextLabelCheckbox">
+                      <label
+                        className="labelForContainerTextLabelCheckbox"
+                        htmlFor="">Média Remuneração:</label>
+                      <input
+                        className="inputForContainerTextLabelCheckbox"
+                        name="name"
+                        type="text"
+                        value={state.name}
+                        onChange={handleNameChange}
+                        placeholder="Sua resposta"
+                      />
+                    </div>
+                  </div>
+                  <div id="containerLabelCheckboxBorder">
+                    <div id="containerTextLabelCheckbox">
+                      <label
+                        className="labelForContainerTextLabelCheckbox"
+                        htmlFor=""
+                      >Servidor temporário:
+                      </label>
+                      <input
+                        className="inputForContainerTextLabelCheckbox"
+                        name="name"
+                        type="text"
+                        value={state.name}
+                        onChange={handleNameChange}
+                        placeholder="Sua resposta"
+                      />
+                    </div>
+                    <div id="containerTextLabelCheckbox">
+                      <label
+                        className="labelForContainerTextLabelCheckbox"
+                        htmlFor="">Média Remuneração:</label>
+                      <input
+                        className="inputForContainerTextLabelCheckbox"
+                        name="name"
+                        type="text"
+                        value={state.name}
+                        onChange={handleNameChange}
+                        placeholder="Sua resposta"
+                      />
+                    </div>
+                  </div>
+                  <div id="containerLabelCheckboxBorder">
+                    <div id="containerTextLabelCheckbox">
+                      <label
+                        className="labelForContainerTextLabelCheckbox"
+                        htmlFor=""
+                      >Bolsista:
+                      </label>
+                      <input
+                        className="inputForContainerTextLabelCheckbox"
+                        name="name"
+                        type="text"
+                        value={state.name}
+                        onChange={handleNameChange}
+                        placeholder="Sua resposta"
+                      />
+                    </div>
+                    <div id="containerTextLabelCheckbox">
+                      <label
+                        className="labelForContainerTextLabelCheckbox"
+                        htmlFor="">Média Remuneração:</label>
+                      <input
+                        className="inputForContainerTextLabelCheckbox"
+                        name="name"
+                        type="text"
+                        value={state.name}
+                        onChange={handleNameChange}
+                        placeholder="Sua resposta"
+                      />
+                    </div>
+                  </div>
+                  <div id="containerLabelCheckboxBorder">
+                    <div id="containerTextLabelCheckbox">
+                      <label
+                        className="labelForContainerTextLabelCheckbox"
+                        htmlFor=""
+                      >Outros:
+                      </label>
+                      <input
+                        className="inputForContainerTextLabelCheckbox"
+                        name="name"
+                        type="text"
+                        value={state.name}
+                        onChange={handleNameChange}
+                        placeholder="Sua resposta"
+                      />
+                    </div>
+                    <div id="containerTextLabelCheckbox">
+                      <label
+                        className="labelForContainerTextLabelCheckbox"
+                        htmlFor="">Média Remuneração:</label>
+                      <input
+                        className="inputForContainerTextLabelCheckbox"
+                        name="name"
+                        type="text"
+                        value={state.name}
+                        onChange={handleNameChange}
+                        placeholder="Sua resposta"
+                      />
+                    </div>
+                  </div>
+                </label>
+              </div>
+            </SC.ButtonTypeTextV3>
+          </div>
+        </SC.SubSection>
+      </form>
+
+      <SC.AllButtons>
+        <Link className="buttonAll" to="/:id/formstep3">Voltar</Link>
+        <button
+          className="buttonAll"
+          type="submit"
+        >Próximo
+        </button>
+      </SC.AllButtons>
+    </Theme>
+  );
+};
+
+
   //verificando se foi respondida, não passa para próxima etapa
   // useEffect(() => {
   //   if (state.name === '' ||
@@ -77,392 +441,12 @@ export const FormStep4 = () => {
   //   }
   // }, []);
 
-  useEffect(() => {
-    dispatch({
-      type: FormActions.setCurrentStep,
-      payload: 4
-    });
-  }, []);
+  // const schema = yup.object({
+  //   numberOfSupervisors: yup.string().required(),
+  //   averagePay: yup.string().required(),
+  //   workload: yup.string().required(),
+  //   supervisorQualification: yup.string().required(),
+  // }).required();
 
-  return (
-    <Theme>
-      <SC.Container>
-        <p>Etapa {state.currentStep}/10</p>
-        <h1>Equipe do PCF</h1>
-        <p>Informações sobre os atores/ participantes da equipe do PCF</p>
-        <hr />
-      </SC.Container>
-
-      <SC.SubSection>
-        <div className="bgSubSection">
-          <p>Subseção Supervisores</p>
-        </div>
-        <div className="formQuestionV2">
-
-          <SC.ButtonTypeText>
-            <div className="formQuestion">
-              <label htmlFor="numberOfSupervisors">
-                Quantos Supervisores existem na equipe do PCF no seu município?
-                <span>{errors.numberOfSupervisors && " ⚠ *Campo obrigatório "}</span>
-                <input
-                  {...register("numberOfSupervisors")}
-                  id="numberOfSupervisors"
-                  name="numberOfSupervisors"
-                  type="text"
-                  value={state.numberOfSupervisors}
-                  onChange={handleNumberOfSupervisors}
-                  placeholder="Quantidade"
-                />
-              </label>
-            </div>
-          </SC.ButtonTypeText>
-
-          <SC.ButtonTypeText>
-            <div className="formQuestion">
-              <label htmlFor="averagePay">
-                Qual a remuneração média em R$ (reais) dos Supervisores?
-                <span>{errors.averagePay && " ⚠ *Campo obrigatório "}</span>
-                <input
-                  {...register("averagePay")}
-                  id="averagePay"
-                  name="averagePay"
-                  type="text"
-                  value={state.averagePay}
-                  onChange={handleAveragePayChange}
-                  placeholder="Valor em R$"
-                />
-              </label>
-            </div>
-          </SC.ButtonTypeText>
-
-          <SC.ButtonTypeCheckbox>
-            <div className="formQuestion">
-              <p className="textFormRadioButton">
-                Qual a carga horária dos Supervisores?
-                <span>{errors.workload && " ⚠ *Campo obrigatório "}</span>
-              </p>
-              <div id="containerOption">
-                <div>
-                
-                  <div id="containerInputLabelRadioButton">
-                    <input
-                      {...register("workload")}
-                      id="workloadForty"
-                      name="workload"
-                      type="checkbox"
-                      value="40 horas semanais"
-                      onChange={handleWorkloadChange}
-                    />
-                    <label
-                      className="containerTextLabel"
-                      htmlFor="workloadForty"
-                    >40 horas semanais
-                    </label>
-                  </div>
-
-                  <div id="containerInputLabelRadioButton">
-                    <input
-                      {...register("workload")}
-                      id="workloadThirty"
-                      name="workload"
-                      type="checkbox"
-                      value="30 horas semanais"
-                      onChange={handleWorkloadChange}
-                    />
-                    <label
-                      className="containerTextLabel"
-                      htmlFor="workloadThirty"
-                    >30 horas semanais
-                    </label>
-                  </div>
-
-                  <div id="containerInputLabelRadioButton">
-                    <input
-                      {...register("workload")}
-                      id="workloadTwenty"
-                      name="workload"
-                      type="checkbox"
-                      value="20 horas semanais"
-                      onChange={handleWorkloadChange}
-                    />
-                    <label
-                      className="containerTextLabel"
-                      htmlFor="workloadTwenty"
-                    >20 horas semanais
-                    </label>
-                  </div>
-                
-                  <div id="containerInputLabelRadioButton">
-                    <input
-                      {...register("workload")}
-                      id="workload"
-                      name="workload"
-                      type="checkbox"
-                      value="Outro"
-                      onChange={handleWorkloadChange}
-                    />
-                    <label
-                      className="containerTextLabel"
-                      htmlFor="workload"
-                    >Outro:
-                    </label>
-                    <input
-                      className="inputPlaceholderOther"
-                      name="workloadOthers"
-                      type="text"
-                      value={state.workloadOthers}
-                      onChange={handleWorkloadOthersChange}
-                      placeholder="Escreva aqui"
-                    />
-                  </div>
-
-                </div>
-              </div>
-            </div>
-          </SC.ButtonTypeCheckbox>
-
-          <SupervisorQualification />
-          
-          {/* <SC.ButtonTypeTextV3>
-            <div className="formQuestion">
-              <label htmlFor="">
-                Quantos Supervisores da equipe do PCF tem em seu município:
-
-                <div id="containerTextLabelCheckbox">
-                  <label
-                    className="labelForContainerTextLabelCheckbox"
-                    htmlFor="supervisorSpecialization">
-                    Especialização:
-                  </label>
-                  <input
-                     {...register("supervisorQualification")}
-                    className="inputForContainerTextLabelCheckbox"
-                    id="supervisorSpecialization"
-                    name="supervisorQualification"
-                    type="text"
-                    value={state.supervisorQualification}
-                    onChange={handleSupervisorQualificationChange}
-                    placeholder="Sua resposta"
-                  />
-                </div>
-
-                <div id="containerTextLabelCheckbox">
-                  <label
-                    className="labelForContainerTextLabelCheckbox"
-                    htmlFor="supervisorQualification"
-                  >Mestrado:
-                  </label>
-                  <input
-                    {...register("supervisorQualification")}
-                    id="supervisorQualification"
-                    className="inputForContainerTextLabelCheckbox"
-                    name="supervisorQualification"
-                    type="text"
-                    value={state.supervisorQualification}
-                    onChange={handleSupervisorQualificationChange}
-                    placeholder="Sua resposta"
-                  />
-                </div>
-
-                <div id="containerTextLabelCheckbox">
-                  <label
-                    className="labelForContainerTextLabelCheckbox"
-                    htmlFor="supervisorQualification"
-                  >Doutorado:
-                  </label>
-                  <input
-                    {...register("supervisorQualification")}
-                    id="supervisorQualification"
-                    className="inputForContainerTextLabelCheckbox"
-                    name="name"
-                    type="text"
-                    value={state.supervisorQualification}
-                    onChange={handleSupervisorQualificationChange}
-                    placeholder="Sua resposta"
-                  />
-                </div>
-
-              </label>
-            </div>
-          </SC.ButtonTypeTextV3> */}
-
-          {/* <SC.ButtonTypeTextV3>
-            <div className="formQuestion">
-              <label htmlFor="name">
-                Quantos Supervisores da equipe do PCF são contratados nas seguintes categorias em seu município:
-
-                <div id="containerLabelCheckboxBorder">
-                  <div id="containerTextLabelCheckbox">
-                    <label
-                      className="labelForContainerTextLabelCheckbox"
-                      htmlFor=""
-                    >Servidor(a) efetivo(a):
-                    </label>
-                    <input
-                      className="inputForContainerTextLabelCheckbox"
-                      name="name"
-                      type="text"
-                      value={state.name}
-                      onChange={handleNameChange}
-                      placeholder="Sua resposta"
-                    />
-                  </div>
-
-                  <div id="containerTextLabelCheckbox">
-                    <label
-                      className="labelForContainerTextLabelCheckbox"
-                      htmlFor="">Média Remuneração:</label>
-                    <input
-                      className="inputForContainerTextLabelCheckbox"
-                      name="name"
-                      type="text"
-                      value={state.name}
-                      onChange={handleNameChange}
-                      placeholder="Sua resposta"
-                    />
-                  </div>
-                </div>
-
-                <div id="containerLabelCheckboxBorder">
-                  <div id="containerTextLabelCheckbox">
-                    <label
-                      className="labelForContainerTextLabelCheckbox"
-                      htmlFor=""
-                    >Cargo comissionado:
-                    </label>
-                    <input
-                      className="inputForContainerTextLabelCheckbox"
-                      name="name"
-                      type="text"
-                      value={state.name}
-                      onChange={handleNameChange}
-                      placeholder="Sua resposta"
-                    />
-                  </div>
-                  <div id="containerTextLabelCheckbox">
-                    <label
-                      className="labelForContainerTextLabelCheckbox"
-                      htmlFor="">Média Remuneração:</label>
-                    <input
-                      className="inputForContainerTextLabelCheckbox"
-                      name="name"
-                      type="text"
-                      value={state.name}
-                      onChange={handleNameChange}
-                      placeholder="Sua resposta"
-                    />
-                  </div>
-                </div>
-
-                <div id="containerLabelCheckboxBorder">
-                  <div id="containerTextLabelCheckbox">
-                    <label
-                      className="labelForContainerTextLabelCheckbox"
-                      htmlFor=""
-                    >Servidor temporário:
-                    </label>
-                    <input
-                      className="inputForContainerTextLabelCheckbox"
-                      name="name"
-                      type="text"
-                      value={state.name}
-                      onChange={handleNameChange}
-                      placeholder="Sua resposta"
-                    />
-                  </div>
-                  <div id="containerTextLabelCheckbox">
-                    <label
-                      className="labelForContainerTextLabelCheckbox"
-                      htmlFor="">Média Remuneração:</label>
-                    <input
-                      className="inputForContainerTextLabelCheckbox"
-                      name="name"
-                      type="text"
-                      value={state.name}
-                      onChange={handleNameChange}
-                      placeholder="Sua resposta"
-                    />
-                  </div>
-                </div>
-
-                <div id="containerLabelCheckboxBorder">
-                  <div id="containerTextLabelCheckbox">
-                    <label
-                      className="labelForContainerTextLabelCheckbox"
-                      htmlFor=""
-                    >Bolsista:
-                    </label>
-                    <input
-                      className="inputForContainerTextLabelCheckbox"
-                      name="name"
-                      type="text"
-                      value={state.name}
-                      onChange={handleNameChange}
-                      placeholder="Sua resposta"
-                    />
-                  </div>
-                  <div id="containerTextLabelCheckbox">
-                    <label
-                      className="labelForContainerTextLabelCheckbox"
-                      htmlFor="">Média Remuneração:</label>
-                    <input
-                      className="inputForContainerTextLabelCheckbox"
-                      name="name"
-                      type="text"
-                      value={state.name}
-                      onChange={handleNameChange}
-                      placeholder="Sua resposta"
-                    />
-                  </div>
-                </div>
-
-                <div id="containerLabelCheckboxBorder">
-                  <div id="containerTextLabelCheckbox">
-                    <label
-                      className="labelForContainerTextLabelCheckbox"
-                      htmlFor=""
-                    >Outros:
-                    </label>
-                    <input
-                      className="inputForContainerTextLabelCheckbox"
-                      name="name"
-                      type="text"
-                      value={state.name}
-                      onChange={handleNameChange}
-                      placeholder="Sua resposta"
-                    />
-                  </div>
-                  <div id="containerTextLabelCheckbox">
-                    <label
-                      className="labelForContainerTextLabelCheckbox"
-                      htmlFor="">Média Remuneração:</label>
-                    <input
-                      className="inputForContainerTextLabelCheckbox"
-                      name="name"
-                      type="text"
-                      value={state.name}
-                      onChange={handleNameChange}
-                      placeholder="Sua resposta"
-                    />
-                  </div>
-                </div>
-
-              </label>
-            </div>
-          </SC.ButtonTypeTextV3> */}
-
-        </div>
-      </SC.SubSection>
-
-      <SC.AllButtons>
-        <Link className="buttonBack" to="/">Voltar</Link>
-        <button
-          className="buttonNext"
-          onClick={onSubmit}
-        >Próximo
-        </button>
-      </SC.AllButtons>
-    </Theme>
-  )
-}
-
+  // const { register, handleSubmit, formState: { errors } } = useForm<FormStep4Input>({ resolver: yupResolver(schema) })
+  // const onSubmit = handleSubmit(data => navigate('/formstep3'))

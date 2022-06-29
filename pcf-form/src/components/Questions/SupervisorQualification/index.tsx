@@ -2,7 +2,7 @@ import { useCallback, useState } from "react";
 import * as SC from "../../../styles/styles";
 
 
-export interface SupervisorQualification {
+interface SupervisorQualification {
   especializacao: string;
   mestrado: string;
   doutorado: string;
@@ -37,14 +37,12 @@ export const SupervisorQualification = () => {
       [name]: value,
     })
 
-  }, [optionForm])
-  
-  console.log({ optionForm })
+  }, [optionForm]);
 
   return (
     <SC.ButtonTypeTextV3>
       <div className="formQuestion">
-        <label htmlFor="">
+        <label>
           Quantos Supervisores da equipe do PCF tem em seu município:
 
           <div id="containerTextLabelCheckbox">
