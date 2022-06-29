@@ -2,14 +2,14 @@ import { useCallback, useState } from "react";
 import * as SC from "../../../styles/styles";
 
 
-export interface supervisorQualification {
+export interface SupervisorQualification {
   especializacao: string;
   mestrado: string;
   doutorado: string;
 };
 
 export const SupervisorQualification = () => {
-  const [optionForm, setOptionForm] = useState<supervisorQualification>({
+  const [optionForm, setOptionForm] = useState<SupervisorQualification>({
     especializacao: '',
     mestrado: '',
     doutorado: '',
@@ -40,6 +40,7 @@ export const SupervisorQualification = () => {
   }, [optionForm])
   
   console.log({ optionForm })
+
   return (
     <SC.ButtonTypeTextV3>
       <div className="formQuestion">

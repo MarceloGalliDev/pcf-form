@@ -50,4 +50,4 @@ export const Home = () => {
       </main>
     </div>
   )
-}
+};

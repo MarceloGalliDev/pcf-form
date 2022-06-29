@@ -407,7 +407,7 @@ export const AllButtons = styled.button`
   display: flex;
   flex-direction: row;
   gap: 20px;
-  background-color: #fff;
+  background-color: #F2F2F2;
   
   .buttonAll {
     width: 170px;

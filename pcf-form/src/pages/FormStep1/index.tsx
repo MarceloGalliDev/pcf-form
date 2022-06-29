@@ -3,29 +3,26 @@ import { Theme } from "../../components/Theme"
 import { Link, useNavigate, useParams } from "react-router-dom"
 import { useFormPage, FormActions } from "../../context/FormContext"
 import { ChangeEvent, FormEvent, useEffect, useState } from "react"
-import { useForm } from "react-hook-form";
 import axios from "axios"
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from "yup";
 import {
   IBGEUFResponse,
   IBGECITYResponse,
-  FormStep1Input
 } from "../../types/FormStep1"
 import { database } from "../../services/firebase"
 import { ref, push, set } from "firebase/database"
 
+// const schema = yup.object({
+//   name: yup.string().required(),
+//   email: yup.string().required(),
+//   phoneNumber: yup.number().required(),
+//   functionPCF: yup.string().required(),
+//   uf: yup.string().required(),
+//   city: yup.string().required(),
+// }).required();
 
-
-const schema = yup.object({
-  name: yup.string().required(),
-  email: yup.string().required(),
-  phoneNumber: yup.number().required(),
-  functionPCF: yup.string().required(),
-  uf: yup.string().required(),
-  city: yup.string().required(),
-}).required();
-
+type RoomParams = {
+  id: string;
+};
 
 export const FormStep1 = () => {
   const [ufs, setUfs] = useState<IBGEUFResponse[]>([]);
@@ -41,10 +38,6 @@ export const FormStep1 = () => {
   const [questionFive, setQuestionFive] = useState('')
   const [questionSix, setQuestionSix] = useState('')
 
-
-  type RoomParams = {
-    id: string;
-  };
 
   const params = useParams<RoomParams>()
   const roomId = params.id
@@ -138,8 +131,7 @@ export const FormStep1 = () => {
     axios.get(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${selectedUf}/municipios`).then((response) => {setCities(response.data)})
   }, [selectedUf]);//executa toda vez que {selectedUf} mudar
   ufs.sort((a,b) => a.nome.localeCompare(b.nome))
-  
-  //Aqui ambiente da troca do passe, de acordo com a currentStep, controle de página
+
   useEffect(() => {
     dispatch({
       type: FormActions.setCurrentStep,
@@ -147,17 +139,16 @@ export const FormStep1 = () => {
     });
   }, []);
 
-
   return (
     <Theme>
-      <form onSubmit={handleSendQuestion}>
+      <SC.Container>
+        <p>Etapa {state.currentStep}/10</p>
+        <h1>Informações gerais</h1>
+        <p>Identificação do entrevistado</p>
+        <hr/>
+      </SC.Container>
 
-        <SC.Container>
-          <p>Etapa {state.currentStep}/10</p>
-          <h1>Informações gerais</h1>
-          <p>Identificação do entrevistado</p>
-          <hr/>
-        </SC.Container>
+      <form onSubmit={handleSendQuestion}>
 
         <SC.ButtonTypeText>
           <div className="formQuestion">
