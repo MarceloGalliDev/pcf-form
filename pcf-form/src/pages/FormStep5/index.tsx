@@ -24,10 +24,10 @@ export const FormStep5 = () => {
   const navigate = useNavigate();
   const { state, dispatch } = useFormPage();
 
-  const { register, handleSubmit, formState: {errors}} = useForm<FormStep1Input>({resolver: yupResolver(schema)})
+  const { register, handleSubmit, formState: { errors } } = useForm<FormStep1Input>({ resolver: yupResolver(schema) })
   const onSubmit = handleSubmit(data => navigate('/formstep3'))
 
-//função de captura de valores
+  //função de captura de valores
   const handleDateAcquisitionChange = (event: ChangeEvent<HTMLInputElement>) => {
     dispatch({
       type: FormActions.setDateAcquisition,
@@ -86,7 +86,7 @@ export const FormStep5 = () => {
         <p>Etapa {state.currentStep}/8</p>
         <h1>Equipe do PCF</h1>
         <p>Informações sobre os atores/ participantes da equipe do PCF</p>
-        <hr/>
+        <hr />
       </SC.Container>
 
       <SC.SubSection>
@@ -194,14 +194,14 @@ export const FormStep5 = () => {
                       htmlFor="lastMonthSpentFevereiro"
                     >Outro:
                     </label>
-                      <input
-                        className="inputPlaceholderOther"
-                        name="name"
-                        type="text"
-                        value={state.name}
-                        onChange={handleNameChange}
-                        placeholder="Escreva aqui"
-                      />
+                    <input
+                      className="inputPlaceholderOther"
+                      name="name"
+                      type="text"
+                      value={state.name}
+                      onChange={handleNameChange}
+                      placeholder="Escreva aqui"
+                    />
                   </div>
 
                 </div>
@@ -418,7 +418,7 @@ export const FormStep5 = () => {
                       placeholder="Sua resposta"
                     />
                   </div>
-                  </div>
+                </div>
               
                 <div id="containerLabelCheckboxBorder">
                   <div id="containerTextLabelCheckbox">
@@ -629,14 +629,15 @@ export const FormStep5 = () => {
       </SC.SubSection>
 
       <SC.AllButtons>
-        <Link className="buttonBack" to="/">Voltar</Link>
-        <button
-          className="buttonNext"
-          onClick={onSubmit}
+        <Link className="buttonAll" to="/:id/formstep4">Voltar</Link>
+        <Link className="buttonAll" to="/:id/formstep6">Próximo</Link>
+        {/* <button
+          className="buttonAll"
+          type="submit"
         >Próximo
-        </button>
+        </button> */}
       </SC.AllButtons>
     </Theme>
-  )
-}
+  );
+};
 

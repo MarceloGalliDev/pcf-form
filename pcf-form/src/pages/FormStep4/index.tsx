@@ -1,8 +1,10 @@
-import * as SC from "../../styles/styles"
-import { Theme } from "../../components/Theme"
-import { Link, useNavigate } from "react-router-dom"
-import { useFormPage, FormActions } from "../../context/FormContext"
-import { ChangeEvent, useEffect, useState, useCallback } from "react"
+import * as SC from "../../styles/styles";
+import { Theme } from "../../components/Theme";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { useFormPage, FormActions } from "../../context/FormContext";
+import { ChangeEvent, useEffect, useState, useCallback, FormEvent } from "react";
+import { push, ref, set } from "firebase/database";
+import { database } from "../../services/firebase";
 
 interface SupervisorQualification {
   especializacao: string;
@@ -10,61 +12,176 @@ interface SupervisorQualification {
   doutorado: string;
 };
 
+interface SupervisorTypeRemunaration1 {
+  ServidorEfetivo: string;
+  MédiaRemuneraçãoEfetivo: string;
+};
+interface SupervisorTypeRemunaration2 {
+  CargoComissionado: string;
+  MédiaRemuneraçãoComissionado: string;
+};
+interface SupervisorTypeRemunaration3 {
+  ServidorTemporário: string;
+  MédiaRemuneraçãoTemporário: string;
+};
+interface SupervisorTypeRemunaration4 {
+  Bolsista: string;
+  MédiaRemuneraçãoBolsista: string;
+};
+interface SupervisorTypeRemunaration5 {
+  OutrosCargos: string;
+  MédiaRemuneraçãoOutrosCargos: string;
+};
+
+interface Workload {
+  horasSemanais40: string;
+  horasSemanais30: string;
+  horasSemanais20: string;
+  horasSemanaisOutros: string;
+  horasSemanaisOutrosDescricao: string;
+}
+
+type RoomParams = {
+  id: string;
+};
+
 export const FormStep4 = () => {
+  const params = useParams<RoomParams>()
+  const roomId = params.id
   const navigate = useNavigate();
   const { state, dispatch } = useFormPage();
-  const [optionForm, setOptionForm] = useState<SupervisorQualification>({
+  const [questionOne, setQuestionOne] = useState('')
+  const [questionTwo, setQuestionTwo] = useState('')
+  const [questionThree, setQuestionThree] =
+  useState<Workload>({
+    horasSemanais40: '',
+    horasSemanais30: '',
+    horasSemanais20: '',
+    horasSemanaisOutros: '',
+    horasSemanaisOutrosDescricao: '',
+  });
+  const [questionFive, setQuestionFive] =
+  useState<SupervisorQualification>({
     especializacao: '',
     mestrado: '',
     doutorado: '',
   });
+  const [questionSix, setQuestionSix] = useState<SupervisorTypeRemunaration1>({
+    ServidorEfetivo: '',
+    MédiaRemuneraçãoEfetivo: '',
+  });
+  const [questionSeven, setQuestionSeven] = useState<SupervisorTypeRemunaration2>({
+    CargoComissionado: '',
+    MédiaRemuneraçãoComissionado: '',
+  });
+  const [questionEight, setQuestionEight] = useState<SupervisorTypeRemunaration3>({
+    ServidorTemporário: '',
+    MédiaRemuneraçãoTemporário: '',
+  });
+  const [questionNine, setQuestionNine] = useState<SupervisorTypeRemunaration4>({
+    Bolsista: '',
+    MédiaRemuneraçãoBolsista: '',
+  });
+  const [questionTen, setQuestionTen] = useState<SupervisorTypeRemunaration5>({
+    OutrosCargos: '',
+    MédiaRemuneraçãoOutrosCargos: '',
+  });
 
-  const handleChangeInput = useCallback((event: React.FormEvent<HTMLInputElement>) => {
-    const targetInput = event.currentTarget;
-    const { value, name } = targetInput;
+  async function handleSendQuestion(event: FormEvent) {
+    event.preventDefault();
 
-    setOptionForm({
-      ...optionForm,
-      [name]: value,
-    })
+    const question = {
+      pagina4: {
+        questao1: questionOne,
+        questao2: questionTwo,
+        questao3: questionThree,
 
-  }, [optionForm]);
+        questao5: questionFive,
+        questao6: questionSix,
+        questao7: questionSeven,
+        questao8: questionEight,
+        questao9: questionNine,
+        questaoX10: questionTen,
+      }
+    };
 
+    const firebaseRoomsQuestion = ref(database, `rooms/${roomId}/question`);
+    const firebaseQuestion = await push(firebaseRoomsQuestion);
+    set(firebaseQuestion, question)
+
+   navigate(`/${roomId}/formstep5`)
+  };
 
   const handleNumberOfSupervisors = (event: ChangeEvent<HTMLInputElement>) => {
-    dispatch({
-      type: FormActions.setNumberOfSupervisors,
-      payload: event.target.value
-    });
-  };
-
-  const handleAveragePayChange = (event: ChangeEvent<HTMLInputElement>) => {
-    dispatch({
-      type: FormActions.setAveragePay,
-      payload: event.target.value
-    });
-  };
-
-  const handleWorkloadChange = (event: ChangeEvent<HTMLInputElement>) => {
-    dispatch({
-      type: FormActions.setWorkload,
-      payload: event.target.value
-    });
-  };
-
-  const handleWorkloadOthersChange = (event: ChangeEvent<HTMLInputElement>) => {
-    dispatch({
-      type: FormActions.setWorkloadOthers,
-      payload: event.target.value
-    });
+    setQuestionOne(event.target.value);
   };
   
-  const handleSupervisorQualificationChange = (event: ChangeEvent<HTMLInputElement>) => {
-    dispatch({
-      type: FormActions.setSupervisorQualification,
-      payload: event.target.value
-    });
+  const handleAveragePayChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setQuestionTwo(event.target.value);
   };
+
+  const handleWorkloadChange = useCallback((event: React.FormEvent<HTMLInputElement>) => {
+    const targetInput = event.currentTarget;
+    const { value, name } = targetInput;
+    setQuestionThree({
+      ...questionThree,
+      [name]: value,
+    })
+  }, [questionThree]);
+
+  const handleSupervisorQualificationChange = useCallback((event: React.FormEvent<HTMLInputElement>) => {
+    const targetInput = event.currentTarget;
+    const { value, name } = targetInput;
+    setQuestionFive({
+      ...questionFive,
+      [name]: value,
+    })
+  }, [questionFive]);
+
+  const handleEffectiveRemunerationChange = useCallback((event: React.FormEvent<HTMLInputElement>) => {
+    const targetInput = event.currentTarget;
+    const { value, name } = targetInput;
+    setQuestionSix({
+      ...questionSix,
+      [name]: value,
+    })
+  }, [questionSix]);
+
+  const handleCommissionedRemunerationChange = useCallback((event: React.FormEvent<HTMLInputElement>) => {
+    const targetInput = event.currentTarget;
+    const { value, name } = targetInput;
+    setQuestionSeven({
+      ...questionSeven,
+      [name]: value,
+    })
+  }, [questionSeven]);
+
+  const handleTemporaryRemunerationChange = useCallback((event: React.FormEvent<HTMLInputElement>) => {
+    const targetInput = event.currentTarget;
+    const { value, name } = targetInput;
+    setQuestionEight({
+      ...questionEight,
+      [name]: value,
+    })
+  }, [questionEight]);
+
+  const handleScholarshipRemunerationChange = useCallback((event: React.FormEvent<HTMLInputElement>) => {
+    const targetInput = event.currentTarget;
+    const { value, name } = targetInput;
+    setQuestionNine({
+      ...questionNine,
+      [name]: value,
+    })
+  }, [questionNine]);
+
+  const handleOthersRemunerationChange = useCallback((event: React.FormEvent<HTMLInputElement>) => {
+    const targetInput = event.currentTarget;
+    const { value, name } = targetInput;
+    setQuestionTen({
+      ...questionTen,
+      [name]: value,
+    })
+  }, [questionTen]);
 
   useEffect(() => {
     dispatch({
@@ -82,12 +199,13 @@ export const FormStep4 = () => {
         <hr />
       </SC.Container>
 
-      <form onSubmit="">
+      <form onSubmit={handleSendQuestion}>
         <SC.SubSection>
           <div className="bgSubSection">
             <p>Subseção Supervisores</p>
           </div>
           <div className="formQuestionV2">
+
             <SC.ButtonTypeText>
               <div className="formQuestion">
                 <label htmlFor="numberOfSupervisors">
@@ -96,13 +214,14 @@ export const FormStep4 = () => {
                     id="numberOfSupervisors"
                     name="numberOfSupervisors"
                     type="text"
-                    value={state.numberOfSupervisors}
+                    value={questionOne}
                     onChange={handleNumberOfSupervisors}
                     placeholder="Quantidade"
                   />
                 </label>
               </div>
             </SC.ButtonTypeText>
+
             <SC.ButtonTypeText>
               <div className="formQuestion">
                 <label htmlFor="averagePay">
@@ -111,13 +230,14 @@ export const FormStep4 = () => {
                     id="averagePay"
                     name="averagePay"
                     type="text"
-                    value={state.averagePay}
+                    value={questionTwo}
                     onChange={handleAveragePayChange}
                     placeholder="Valor em R$"
                   />
                 </label>
               </div>
             </SC.ButtonTypeText>
+
             <SC.ButtonTypeCheckbox>
               <div className="formQuestion">
                 <p className="textFormRadioButton">
@@ -128,9 +248,9 @@ export const FormStep4 = () => {
                     <div id="containerInputLabelRadioButton">
                       <input
                         id="workloadForty"
-                        name="workload"
+                        name="horasSemanais40"
                         type="checkbox"
-                        value="40 horas semanais"
+                        value={questionThree.horasSemanais40}
                         onChange={handleWorkloadChange}
                       />
                       <label
@@ -142,9 +262,9 @@ export const FormStep4 = () => {
                     <div id="containerInputLabelRadioButton">
                       <input
                         id="workloadThirty"
-                        name="workload"
+                        name="horasSemanais30"
                         type="checkbox"
-                        value="30 horas semanais"
+                        value={questionThree.horasSemanais30}
                         onChange={handleWorkloadChange}
                       />
                       <label
@@ -156,9 +276,9 @@ export const FormStep4 = () => {
                     <div id="containerInputLabelRadioButton">
                       <input
                         id="workloadTwenty"
-                        name="workload"
+                        name="horasSemanais20"
                         type="checkbox"
-                        value="20 horas semanais"
+                        value={questionThree.horasSemanais20}
                         onChange={handleWorkloadChange}
                       />
                       <label
@@ -171,9 +291,9 @@ export const FormStep4 = () => {
                     <div id="containerInputLabelRadioButton">
                       <input
                         id="workload"
-                        name="workload"
+                        name="horasSemanaisOutros"
                         type="checkbox"
-                        value="Outro"
+                        value={questionThree.horasSemanaisOutros}
                         onChange={handleWorkloadChange}
                       />
                       <label
@@ -183,10 +303,10 @@ export const FormStep4 = () => {
                       </label>
                       <input
                         className="inputPlaceholderOther"
-                        name="workloadOthers"
+                        name="horasSemanaisOutrosDescricao"
                         type="text"
-                        value={state.workloadOthers}
-                        onChange={handleWorkloadOthersChange}
+                        value={questionThree.horasSemanaisOutrosDescricao}
+                        onChange={handleWorkloadChange}
                         placeholder="Escreva aqui"
                       />
                     </div>
@@ -194,6 +314,7 @@ export const FormStep4 = () => {
                 </div>
               </div>
             </SC.ButtonTypeCheckbox>
+
             <SC.ButtonTypeTextV3>
               <div className="formQuestion">
                 <label htmlFor="">
@@ -209,8 +330,8 @@ export const FormStep4 = () => {
                       id="supervisorSpecialization"
                       name="especializacao"
                       type="text"
-                      value={optionForm.especializacao}
-                      onChange={handleChangeInput}
+                      value={questionFive.especializacao}
+                      onChange={handleSupervisorQualificationChange}
                       placeholder="Sua resposta"
                     />
                   </div>
@@ -225,8 +346,8 @@ export const FormStep4 = () => {
                       className="inputForContainerTextLabelCheckbox"
                       name="mestrado"
                       type="text"
-                      value={optionForm.mestrado}
-                      onChange={handleChangeInput}
+                      value={questionFive.mestrado}
+                      onChange={handleSupervisorQualificationChange}
         
                       placeholder="Sua resposta"
                     />
@@ -242,183 +363,201 @@ export const FormStep4 = () => {
                       className="inputForContainerTextLabelCheckbox"
                       name="doutorado"
                       type="text"
-                      value={optionForm.doutorado}
-                      onChange={handleChangeInput}
+                      value={questionFive.doutorado}
+                      onChange={handleSupervisorQualificationChange}
                       placeholder="Sua resposta"
                     />
                   </div>
                 </label>
               </div>
             </SC.ButtonTypeTextV3>
+
             <SC.ButtonTypeTextV3>
               <div className="formQuestion">
                 <label htmlFor="name">
                   Quantos Supervisores da equipe do PCF são contratados nas seguintes categorias em seu município:
+
                   <div id="containerLabelCheckboxBorder">
                     <div id="containerTextLabelCheckbox">
                       <label
                         className="labelForContainerTextLabelCheckbox"
-                        htmlFor=""
+                        htmlFor="servidorefetivo"
                       >Servidor(a) efetivo(a):
                       </label>
                       <input
                         className="inputForContainerTextLabelCheckbox"
-                        name="name"
+                        id="servidorefetivo"
+                        name="ServidorEfetivo"
                         type="text"
-                        value={state.name}
-                        onChange={handleNameChange}
+                        value={questionSix.ServidorEfetivo}
+                        onChange={handleEffectiveRemunerationChange}
                         placeholder="Sua resposta"
                       />
                     </div>
                     <div id="containerTextLabelCheckbox">
                       <label
                         className="labelForContainerTextLabelCheckbox"
-                        htmlFor="">Média Remuneração:</label>
+                        htmlFor="mediaRemuneracaoEfetivo">Média Remuneração:</label>
                       <input
                         className="inputForContainerTextLabelCheckbox"
-                        name="name"
+                        id="mediaRemuneracaoEfetivo"
+                        name="MédiaRemuneraçãoEfetivo"
                         type="text"
-                        value={state.name}
-                        onChange={handleNameChange}
+                        value={questionSix.MédiaRemuneraçãoEfetivo}
+                        onChange={handleEffectiveRemunerationChange}
                         placeholder="Sua resposta"
                       />
                     </div>
                   </div>
+
                   <div id="containerLabelCheckboxBorder">
                     <div id="containerTextLabelCheckbox">
                       <label
                         className="labelForContainerTextLabelCheckbox"
-                        htmlFor=""
+                        htmlFor="cargoComissionado"
                       >Cargo comissionado:
                       </label>
                       <input
                         className="inputForContainerTextLabelCheckbox"
-                        name="name"
+                        id="cargoComissionado"
+                        name="CargoComissionado"
                         type="text"
-                        value={state.name}
-                        onChange={handleNameChange}
+                        value={questionSeven.CargoComissionado}
+                        onChange={handleCommissionedRemunerationChange}
                         placeholder="Sua resposta"
                       />
                     </div>
                     <div id="containerTextLabelCheckbox">
                       <label
                         className="labelForContainerTextLabelCheckbox"
-                        htmlFor="">Média Remuneração:</label>
+                        htmlFor="mediaRemuneracaoComissonado">Média Remuneração:</label>
                       <input
                         className="inputForContainerTextLabelCheckbox"
-                        name="name"
+                        id="mediaRemuneracaoComissonado"
+                        name="MédiaRemuneraçãoComissionado"
                         type="text"
-                        value={state.name}
-                        onChange={handleNameChange}
+                        value={questionSeven.MédiaRemuneraçãoComissionado}
+                        onChange={handleCommissionedRemunerationChange}
                         placeholder="Sua resposta"
                       />
                     </div>
                   </div>
+
                   <div id="containerLabelCheckboxBorder">
                     <div id="containerTextLabelCheckbox">
                       <label
                         className="labelForContainerTextLabelCheckbox"
-                        htmlFor=""
+                        htmlFor="servidorTemporario"
                       >Servidor temporário:
                       </label>
                       <input
                         className="inputForContainerTextLabelCheckbox"
-                        name="name"
+                        id="servidorTemporario"
+                        name="ServidorTemporário"
                         type="text"
-                        value={state.name}
-                        onChange={handleNameChange}
+                        value={questionEight.ServidorTemporário}
+                        onChange={handleTemporaryRemunerationChange}
                         placeholder="Sua resposta"
                       />
                     </div>
                     <div id="containerTextLabelCheckbox">
                       <label
                         className="labelForContainerTextLabelCheckbox"
-                        htmlFor="">Média Remuneração:</label>
+                        htmlFor="mediaRemuneracaoTemporario">Média Remuneração:</label>
                       <input
                         className="inputForContainerTextLabelCheckbox"
-                        name="name"
+                        id="mediaRemuneracaoTemporario"
+                        name="MédiaRemuneraçãoTemporário"
                         type="text"
-                        value={state.name}
-                        onChange={handleNameChange}
+                        value={questionEight.MédiaRemuneraçãoTemporário}
+                        onChange={handleTemporaryRemunerationChange}
                         placeholder="Sua resposta"
                       />
                     </div>
                   </div>
+
                   <div id="containerLabelCheckboxBorder">
                     <div id="containerTextLabelCheckbox">
                       <label
                         className="labelForContainerTextLabelCheckbox"
-                        htmlFor=""
+                        htmlFor="bolsista"
                       >Bolsista:
                       </label>
                       <input
                         className="inputForContainerTextLabelCheckbox"
-                        name="name"
+                        id="bolsista"
+                        name="Bolsista"
                         type="text"
-                        value={state.name}
-                        onChange={handleNameChange}
+                        value={questionNine.Bolsista}
+                        onChange={handleScholarshipRemunerationChange}
                         placeholder="Sua resposta"
                       />
                     </div>
                     <div id="containerTextLabelCheckbox">
                       <label
                         className="labelForContainerTextLabelCheckbox"
-                        htmlFor="">Média Remuneração:</label>
+                        htmlFor="mediaRemuneracaoBolsista">Média Remuneração:</label>
                       <input
                         className="inputForContainerTextLabelCheckbox"
-                        name="name"
+                        id="mediaRemuneracaoBolsista"
+                        name="MédiaRemuneraçãoBolsista"
                         type="text"
-                        value={state.name}
-                        onChange={handleNameChange}
+                        value={questionNine.MédiaRemuneraçãoBolsista}
+                        onChange={handleScholarshipRemunerationChange}
                         placeholder="Sua resposta"
                       />
                     </div>
                   </div>
+
                   <div id="containerLabelCheckboxBorder">
                     <div id="containerTextLabelCheckbox">
                       <label
                         className="labelForContainerTextLabelCheckbox"
-                        htmlFor=""
+                        htmlFor="outrosCargos"
                       >Outros:
                       </label>
                       <input
                         className="inputForContainerTextLabelCheckbox"
-                        name="name"
+                        id="outrosCargos"
+                        name="OutrosCargos"
                         type="text"
-                        value={state.name}
-                        onChange={handleNameChange}
+                        value={questionTen.OutrosCargos}
+                        onChange={handleOthersRemunerationChange}
                         placeholder="Sua resposta"
                       />
                     </div>
                     <div id="containerTextLabelCheckbox">
                       <label
                         className="labelForContainerTextLabelCheckbox"
-                        htmlFor="">Média Remuneração:</label>
+                        htmlFor="mediaRemuneracaoOutrosCargos">Média Remuneração:</label>
                       <input
                         className="inputForContainerTextLabelCheckbox"
-                        name="name"
+                        id="mediaRemuneracaoOutrosCargos"
+                        name="MédiaRemuneraçãoOutrosCargos"
                         type="text"
-                        value={state.name}
-                        onChange={handleNameChange}
+                        value={questionTen.MédiaRemuneraçãoOutrosCargos}
+                        onChange={handleOthersRemunerationChange}
                         placeholder="Sua resposta"
                       />
                     </div>
                   </div>
+
                 </label>
               </div>
             </SC.ButtonTypeTextV3>
           </div>
         </SC.SubSection>
-      </form>
 
-      <SC.AllButtons>
-        <Link className="buttonAll" to="/:id/formstep3">Voltar</Link>
-        <button
-          className="buttonAll"
-          type="submit"
-        >Próximo
-        </button>
-      </SC.AllButtons>
+        <SC.AllButtons>
+          <Link className="buttonAll" to="/:id/formstep3">Voltar</Link>
+          <Link className="buttonAll" to="/:id/formstep5">Próximo</Link>
+          {/* <button
+            className="buttonAll"
+            type="submit"
+            >Próximo
+          </button> */}
+        </SC.AllButtons>
+      </form>
     </Theme>
   );
 };

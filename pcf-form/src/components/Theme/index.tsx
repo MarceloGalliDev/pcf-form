@@ -4,7 +4,6 @@ import { Header } from "../Header";
 import { SidebarItem } from "../SidebarItem";
 import { useFormPage } from "../../context/FormContext"
 
-
 type Props = {
   children: ReactNode
 }
@@ -31,53 +30,53 @@ export const Theme = ({ children }: Props) => {
 
         <SC.Steps>
           <SC.Sidebar>
-            
+
             <SidebarItem
               title="Informações gerais"
               description="Identificação"
-              path="/"
+              path="/:id/formstep1"
               active={state.currentStep === routerActivate.routeDefault}
             />
 
             <SidebarItem
               title="Características do PCF"
               description="Características"
-              path="/formstep2"
+              path="/:id/formstep2"
               active={state.currentStep === routerActivate.routeFeatures}
             />
 
             <SidebarItem
               title="Gestão do PCF"
               description="Gestão e Comitê"
-              path="/formstep3"
+              path="/:id/formstep3"
               active={state.currentStep === routerActivate.routeManagement}
             />
 
             <SidebarItem
               title="Supervisores do PCF"
               description="Informações sobre os atores/ participantes da equipe do PCF"
-              path="/formstep4"
+              path="/:id/formstep4"
               active={state.currentStep === routerActivate.routeSupervisor}
             />
 
             <SidebarItem
               title="Visitadores do PCF"
               description="Informações sobre os atores/ participantes da equipe do PCF"
-              path="/formstep5"
+              path="/:id/formstep5"
               active={state.currentStep === routerActivate.routeVisitors}
             />
 
             <SidebarItem
               title="Outros profissionais"
               description="Informações sobre outros profissionais participantes da equipe do PCF"
-              path="/formstep6"
+              path="/:id/formstep6"
               active={state.currentStep === routerActivate.routeOtherProfessionals}
             />
 
             <SidebarItem
               title="Público atendido pelo PCF em seu município"
               description="Perfil das famílias atendidas"
-              path="/formstep7"
+              path="/:id/formstep7"
               active={state.currentStep === routerActivate.routePublicServed}
             />
 
@@ -85,21 +84,21 @@ export const Theme = ({ children }: Props) => {
             <SidebarItem
               title="Organizações parceiras"
               description="Informações sobre organizações parceira do PCF"
-              path="/formstep8"
+              path="/:id/formstep8"
               active={state.currentStep === routerActivate.routePartners}
             />
 
             <SidebarItem
               title="Recursos e Custos"
               description="Recursos e custos mensais diretos do PCF no município"
-              path="/formstep9"
+              path="/:id/formstep9"
               active={state.currentStep === routerActivate.routeResourceCost}
             />
 
             <SidebarItem
               title="Outros Custos"
               description="Outros custos, com transporte, diárias e recursos materiais "
-              path="/formstep10"
+              path="/:id/formstep10"
               active={state.currentStep === routerActivate.routeOtherCost}
             />
 

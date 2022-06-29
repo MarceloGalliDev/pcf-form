@@ -35,12 +35,12 @@ export const Home = () => {
         <div className="main-content">
           <h2>Iniciar Formulário</h2>
           <form onSubmit={handleCreateRoom}>
-            <input
+            {/* <input
               type="text"
               placeholder="Nome do município"
               onChange={event => setNewRoom(event.target.value)}
               value={newRoom}
-            />
+            /> */}
             <button
               type="submit"
             >Próximo

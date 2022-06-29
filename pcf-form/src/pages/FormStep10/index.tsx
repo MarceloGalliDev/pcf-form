@@ -624,13 +624,14 @@ export const FormStep10 = () => {
       </SC.ButtonTypeFile>
 
       <SC.AllButtons>
-        <Link className="buttonBack" to="/formstep9">Voltar</Link>
-        <button
-          className="buttonNext"
-          onClick={onSubmit}
-        >Próximo
-        </button>
-      </SC.AllButtons>
+          <Link className="buttonAll" to="/:id/formstep9">Voltar</Link>
+          <Link className="buttonAll" to="/:id/formstep9">Finalizar</Link>
+          {/* <button
+            className="buttonAll"
+            type="submit"
+            >Próximo
+          </button> */}
+        </SC.AllButtons>
     </Theme>
   )
 };

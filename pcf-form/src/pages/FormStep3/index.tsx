@@ -1,10 +1,10 @@
-import * as SC from "../../styles/styles"
-import { Theme } from "../../components/Theme"
-import { Link, useNavigate, useParams } from "react-router-dom"
-import { useFormPage, FormActions } from "../../context/FormContext"
-import { ChangeEvent, FormEvent, useEffect, useState } from "react"
-import { push, ref, set } from "firebase/database"
-import { database } from "../../services/firebase"
+import * as SC from "../../styles/styles";
+import { Theme } from "../../components/Theme";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { useFormPage, FormActions } from "../../context/FormContext";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import { push, ref, set } from "firebase/database";
+import { database } from "../../services/firebase";
 
 type RoomParams = {
   id: string;
@@ -444,11 +444,12 @@ export const FormStep3 = () => {
 
         <SC.AllButtons>
           <Link className="buttonAll" to="/:id/formstep2">Voltar</Link>
-          <button
+          <Link className="buttonAll" to="/:id/formstep4">Próximo</Link>
+          {/* <button
             className="buttonAll"
             type="submit"
           >Próximo
-          </button>
+          </button> */}
         </SC.AllButtons>
       </form>
     </Theme>

@@ -242,13 +242,14 @@ export const FormStep9 = () => {
       </SC.SubSection>
 
       <SC.AllButtons>
-        <Link className="buttonBack" to="/">Voltar</Link>
-        <button
-          className="buttonNext"
-          onClick={onSubmit}
-        >Próximo
-        </button>
-      </SC.AllButtons>
+          <Link className="buttonAll" to="/:id/formstep8">Voltar</Link>
+          <Link className="buttonAll" to="/:id/formstep10">Próximo</Link>
+          {/* <button
+            className="buttonAll"
+            type="submit"
+            >Próximo
+          </button> */}
+        </SC.AllButtons>
     </Theme>
   )
 }

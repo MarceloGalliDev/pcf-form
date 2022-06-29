@@ -525,11 +525,12 @@ export const FormStep2 = () => {
 
         <SC.AllButtons>
           <Link className="buttonAll" to="/:id/formstep1">Voltar</Link>
-          <button
+          <Link className="buttonAll" to="/:id/formstep3">Próximo</Link>
+          {/* <button
             className="buttonAll"
             type="submit"
           >Próximo
-          </button>
+          </button> */}
         </SC.AllButtons>
       </form>
     </Theme>

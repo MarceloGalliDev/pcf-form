@@ -402,7 +402,7 @@ export const ButtonTypeFile = styled.div`
 `;
 
 export const AllButtons = styled.button`
-  margin-top: 40px;
+  margin: 40px 0px;
   border: none;
   display: flex;
   flex-direction: row;

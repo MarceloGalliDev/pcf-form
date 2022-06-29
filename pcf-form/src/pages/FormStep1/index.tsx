@@ -1,15 +1,15 @@
-import * as SC from "../../styles/styles"
-import { Theme } from "../../components/Theme"
-import { Link, useNavigate, useParams } from "react-router-dom"
-import { useFormPage, FormActions } from "../../context/FormContext"
-import { ChangeEvent, FormEvent, useEffect, useState } from "react"
-import axios from "axios"
+import * as SC from "../../styles/styles";
+import { Theme } from "../../components/Theme";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { useFormPage, FormActions } from "../../context/FormContext";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import axios from "axios";
 import {
   IBGEUFResponse,
   IBGECITYResponse,
-} from "../../types/FormStep1"
-import { database } from "../../services/firebase"
-import { ref, push, set } from "firebase/database"
+} from "../../types/FormStep1";
+import { database } from "../../services/firebase";
+import { ref, push, set } from "firebase/database";
 
 type RoomParams = {
   id: string;
@@ -30,8 +30,6 @@ export const FormStep1 = () => {
   const [questionFour, setQuestionFour] = useState('')
   const [questionFive, setQuestionFive] = useState('')
   const [questionSix, setQuestionSix] = useState('')
-
-
 
   async function handleSendQuestion(event: FormEvent) {
     event.preventDefault();
@@ -66,52 +64,28 @@ export const FormStep1 = () => {
 
   const handleNameChange = (event: ChangeEvent<HTMLInputElement>) => {
     setQuestionOne(event.target.value);
-    dispatch({
-      type: FormActions.setName,
-      payload: event.target.value
-    });
   };
 
   const handleEmailChange = (event: ChangeEvent<HTMLInputElement>) => {
     setQuestionTwo(event.target.value)
-    dispatch({
-      type: FormActions.setEmail,
-      payload: event.target.value
-    });
   };
 
   const handlePhoneNumberChange = (event: ChangeEvent<HTMLInputElement>) => {
     setQuestionThree(event.target.value)
-    dispatch({
-      type: FormActions.setPhoneNumber,
-      payload: event.target.value
-    });
   };
 
   const handleFunctionPCFChange = (event: ChangeEvent<HTMLInputElement>) => {
     setQuestionFour(event.target.value)
-    dispatch({
-      type: FormActions.setFunctionPCF,
-      payload: event.target.value
-    });
   };
 
   function handleSelectedUf(event: ChangeEvent<HTMLSelectElement>) {
     const uf = event.target.value
     setSelectedUf(uf)
-    dispatch({
-      type: FormActions.setUf,
-      payload: event.target.value
-    });
   };
   
   function handleSelectedCity(event: ChangeEvent<HTMLSelectElement>) {
     const city = event.target.value
     setSelectedCity(city)
-    dispatch({
-      type: FormActions.setCity,
-      payload: event.target.value
-    });
   };
 
   useEffect(() => {
@@ -234,11 +208,12 @@ export const FormStep1 = () => {
 
         <SC.AllButtons>
           <Link className="buttonAll" to="/">Voltar</Link>
-          <button
+          <Link className="buttonAll" to="/:id/formstep2">Próximo</Link>
+          {/* <button
             className="buttonAll"
             type="submit"
           >Próximo
-          </button>
+          </button> */}
         </SC.AllButtons>
       </form>
     </Theme>
