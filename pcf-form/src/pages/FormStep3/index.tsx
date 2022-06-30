@@ -26,13 +26,13 @@ export const FormStep3 = () => {
     event.preventDefault();
 
     const question = {
-      pagina3: {
-        questao1: questionOne,
-        questao2: questionTwo,
-        questao3: questionThree,
-        questao4: questionFour,
-        questao5: questionFive,
-        questao6: questionSix,
+      C_Gestao_do_PCF: {
+        questao14: questionOne,
+        questao15: questionTwo,
+        questao16: questionThree,
+        questao17: questionFour,
+        questao18: questionFive,
+        questao19: questionSix,
       }
     };
 
@@ -444,12 +444,11 @@ export const FormStep3 = () => {
 
         <SC.AllButtons>
           <Link className="buttonAll" to="/:id/formstep2">Voltar</Link>
-          <Link className="buttonAll" to="/:id/formstep4">Próximo</Link>
-          {/* <button
+          <button
             className="buttonAll"
             type="submit"
           >Próximo
-          </button> */}
+          </button>
         </SC.AllButtons>
       </form>
     </Theme>

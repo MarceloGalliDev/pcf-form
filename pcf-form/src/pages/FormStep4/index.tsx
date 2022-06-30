@@ -34,12 +34,12 @@ interface SupervisorTypeRemunaration5 {
 };
 
 interface Workload {
-  horasSemanais40: string;
-  horasSemanais30: string;
-  horasSemanais20: string;
-  horasSemanaisOutros: string;
+  horasSemanais40: boolean;
+  horasSemanais30: boolean;
+  horasSemanais20: boolean;
+  horasSemanaisOutros: boolean;
   horasSemanaisOutrosDescricao: string;
-}
+};
 
 type RoomParams = {
   id: string;
@@ -52,12 +52,11 @@ export const FormStep4 = () => {
   const { state, dispatch } = useFormPage();
   const [questionOne, setQuestionOne] = useState('')
   const [questionTwo, setQuestionTwo] = useState('')
-  const [questionThree, setQuestionThree] =
-  useState<Workload>({
-    horasSemanais40: '',
-    horasSemanais30: '',
-    horasSemanais20: '',
-    horasSemanaisOutros: '',
+  const [questionThree, setQuestionThree] = useState<Workload>({
+    horasSemanais40: false,
+    horasSemanais30: false,
+    horasSemanais20: false,
+    horasSemanaisOutros: false,
     horasSemanaisOutrosDescricao: '',
   });
   const [questionFive, setQuestionFive] =
@@ -91,17 +90,16 @@ export const FormStep4 = () => {
     event.preventDefault();
 
     const question = {
-      pagina4: {
-        questao1: questionOne,
-        questao2: questionTwo,
-        questao3: questionThree,
-
-        questao5: questionFive,
-        questao6: questionSix,
-        questao7: questionSeven,
-        questao8: questionEight,
-        questao9: questionNine,
-        questaoX10: questionTen,
+      D_Supervisores_do_PCF: {
+        questao20: questionOne,
+        questao21: questionTwo,
+        questao22: questionThree,
+        questao23: questionFive,
+        questao24: questionSix,
+        questao25: questionSeven,
+        questao26: questionEight,
+        questao27: questionNine,
+        questao28: questionTen,
       }
     };
 
@@ -250,8 +248,11 @@ export const FormStep4 = () => {
                         id="workloadForty"
                         name="horasSemanais40"
                         type="checkbox"
-                        value={questionThree.horasSemanais40}
-                        onChange={handleWorkloadChange}
+                        checked={questionThree.horasSemanais40}
+                        onChange={(event) => setQuestionThree({
+                          ...questionThree,
+                          horasSemanais40: !!event.currentTarget?.checked
+                        })}
                       />
                       <label
                         className="containerTextLabel"
@@ -264,8 +265,11 @@ export const FormStep4 = () => {
                         id="workloadThirty"
                         name="horasSemanais30"
                         type="checkbox"
-                        value={questionThree.horasSemanais30}
-                        onChange={handleWorkloadChange}
+                        checked={questionThree.horasSemanais30}
+                        onChange={(event) => setQuestionThree({
+                          ...questionThree,
+                          horasSemanais30: !!event.currentTarget?.checked
+                        })}
                       />
                       <label
                         className="containerTextLabel"
@@ -278,8 +282,11 @@ export const FormStep4 = () => {
                         id="workloadTwenty"
                         name="horasSemanais20"
                         type="checkbox"
-                        value={questionThree.horasSemanais20}
-                        onChange={handleWorkloadChange}
+                        checked={questionThree.horasSemanais20}
+                        onChange={(event) => setQuestionThree({
+                          ...questionThree,
+                          horasSemanais20: !!event.currentTarget?.checked
+                        })}
                       />
                       <label
                         className="containerTextLabel"
@@ -293,8 +300,11 @@ export const FormStep4 = () => {
                         id="workload"
                         name="horasSemanaisOutros"
                         type="checkbox"
-                        value={questionThree.horasSemanaisOutros}
-                        onChange={handleWorkloadChange}
+                        checked={questionThree.horasSemanaisOutros}
+                        onChange={(event) => setQuestionThree({
+                          ...questionThree,
+                          horasSemanaisOutros: !!event.currentTarget?.checked
+                        })}
                       />
                       <label
                         className="containerTextLabel"
@@ -550,12 +560,11 @@ export const FormStep4 = () => {
 
         <SC.AllButtons>
           <Link className="buttonAll" to="/:id/formstep3">Voltar</Link>
-          <Link className="buttonAll" to="/:id/formstep5">Próximo</Link>
-          {/* <button
+          <button
             className="buttonAll"
             type="submit"
             >Próximo
-          </button> */}
+          </button>
         </SC.AllButtons>
       </form>
     </Theme>

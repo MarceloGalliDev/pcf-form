@@ -45,13 +45,13 @@ export const FormStep1 = () => {
     };
 
     const question = {
-      pagina1: {
-        questao1: questionOne,
-        questao2: questionTwo,
-        questao3: questionThree,
-        questao4: questionFour,
-        questao5: selectedUf,
-        questao6: selectedCity,
+      A_Informacoes_Gerais: {
+        questao01: questionOne,
+        questao02: questionTwo,
+        questao03: questionThree,
+        questao04: questionFour,
+        questao05: selectedUf,
+        questao06: selectedCity,
       }
     }
 
@@ -208,12 +208,11 @@ export const FormStep1 = () => {
 
         <SC.AllButtons>
           <Link className="buttonAll" to="/">Voltar</Link>
-          <Link className="buttonAll" to="/:id/formstep2">Próximo</Link>
-          {/* <button
+          <button
             className="buttonAll"
             type="submit"
           >Próximo
-          </button> */}
+          </button>
         </SC.AllButtons>
       </form>
     </Theme>

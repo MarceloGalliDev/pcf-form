@@ -28,14 +28,14 @@ export const FormStep2 = () => {
     event.preventDefault();
 
     const question = {
-      pagina2: {
-        questao1: questionOne,
-        questao2: questionTwo,
-        questao3: questionThree,
-        questao4: questionFour,
-        questao5: questionFive,
-        questao6: questionSix,
-        questao7: questionSeven,
+      B_Caracteristicas_do_PCF: {
+        questao07: questionOne,
+        questao08: questionTwo,
+        questao09: questionThree,
+        questao10: questionFour,
+        questao11: questionFive,
+        questao12: questionSix,
+        questao13: questionSeven,
       }
     }
 
@@ -525,12 +525,11 @@ export const FormStep2 = () => {
 
         <SC.AllButtons>
           <Link className="buttonAll" to="/:id/formstep1">Voltar</Link>
-          <Link className="buttonAll" to="/:id/formstep3">Próximo</Link>
-          {/* <button
+          <button
             className="buttonAll"
             type="submit"
           >Próximo
-          </button> */}
+          </button>
         </SC.AllButtons>
       </form>
     </Theme>
