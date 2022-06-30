@@ -6,6 +6,14 @@ import { ChangeEvent, useEffect, useState, useCallback, FormEvent } from "react"
 import { push, ref, set } from "firebase/database";
 import { database } from "../../services/firebase";
 
+interface Workload {
+  horasSemanais40: boolean;
+  horasSemanais30: boolean;
+  horasSemanais20: boolean;
+  horasSemanaisOutros: boolean;
+  horasSemanaisOutrosDescricao: string;
+};
+
 interface SupervisorQualification {
   especializacao: string;
   mestrado: string;
@@ -33,13 +41,6 @@ interface SupervisorTypeRemunaration5 {
   MédiaRemuneraçãoOutrosCargos: string;
 };
 
-interface Workload {
-  horasSemanais40: boolean;
-  horasSemanais30: boolean;
-  horasSemanais20: boolean;
-  horasSemanaisOutros: boolean;
-  horasSemanaisOutrosDescricao: string;
-};
 
 type RoomParams = {
   id: string;
@@ -329,6 +330,7 @@ export const FormStep4 = () => {
               <div className="formQuestion">
                 <label htmlFor="">
                   Quantos Supervisores da equipe do PCF tem em seu município:
+
                   <div id="containerTextLabelCheckbox">
                     <label
                       className="labelForContainerTextLabelCheckbox"
@@ -345,31 +347,32 @@ export const FormStep4 = () => {
                       placeholder="Sua resposta"
                     />
                   </div>
+
                   <div id="containerTextLabelCheckbox">
                     <label
                       className="labelForContainerTextLabelCheckbox"
-                      htmlFor="supervisorQualification"
+                      htmlFor="supervisorMaster"
                     >Mestrado:
                     </label>
                     <input
-                      id="supervisorQualification"
+                      id="supervisorMaster"
                       className="inputForContainerTextLabelCheckbox"
                       name="mestrado"
                       type="text"
                       value={questionFive.mestrado}
                       onChange={handleSupervisorQualificationChange}
-        
                       placeholder="Sua resposta"
                     />
                   </div>
+
                   <div id="containerTextLabelCheckbox">
                     <label
                       className="labelForContainerTextLabelCheckbox"
-                      htmlFor="supervisorQualification"
+                      htmlFor="supervisorDoctor"
                     >Doutorado:
                     </label>
                     <input
-                      id="supervisorQualification"
+                      id="supervisorDoctor"
                       className="inputForContainerTextLabelCheckbox"
                       name="doutorado"
                       type="text"

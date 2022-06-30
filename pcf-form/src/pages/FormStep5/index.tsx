@@ -18,6 +18,14 @@ interface WorkHoursVisitors {
   horasSemanaisOutrosDescricao: string;
 };
 
+interface VisitorsQualification {
+  superiorIncompleto: string;
+  superiorCompleto: string;
+  especializacao: string;
+  mestrado: string;
+  doutorado: string;
+};
+
 export const FormStep5 = () => {
   const params = useParams<RoomParams>()
   const roomId = params.id
@@ -32,7 +40,13 @@ export const FormStep5 = () => {
     horasSemanaisOutros: false,
     horasSemanaisOutrosDescricao: '',
   });
-  const [questionFour, setQuestionFour] = useState('')
+  const [questionFour, setQuestionFour] = useState<VisitorsQualification>({
+    superiorIncompleto: '',
+    superiorCompleto: '',
+    especializacao: '',
+    mestrado: '',
+    doutorado: '',
+  });
   const [questionFive, setQuestionFive] = useState('')
   const [questionSix, setQuestionSix] = useState('')
   const [questionSeven, setQuestionSeven] = useState('')
@@ -93,6 +107,14 @@ export const FormStep5 = () => {
     })
   }, [questionThree]);
 
+  const handleVisotorsQualificationChange = useCallback((event: React.FormEvent<HTMLInputElement>) => {
+    const targetInput = event.currentTarget;
+    const { value, name } = targetInput;
+    setQuestionFour({
+      ...questionFour,
+      [name]: value,
+    })
+  }, [questionFour]);
 
   const handleNumberOfSupervisors = (event: ChangeEvent<HTMLInputElement>) => {
     setQuestionOne(event.target.value);
@@ -161,6 +183,7 @@ export const FormStep5 = () => {
                 </p>
                 <div id="containerOption">
                   <div id="containerOptionSixOption">
+
                     <div id="containerInputLabelRadioButton">
                       <input
                         id="WorkHoursForty"
@@ -174,10 +197,11 @@ export const FormStep5 = () => {
                       />
                       <label
                         className="containerTextLabel"
-                        htmlFor="lastMonthSpentJaneiro"
+                        htmlFor="WorkHoursForty"
                       >40 horas semanais
                       </label>
                     </div>
+
                     <div id="containerInputLabelRadioButton">
                       <input
                         id="WorkHoursThirty"
@@ -233,7 +257,7 @@ export const FormStep5 = () => {
                         className="inputPlaceholderOther"
                         name="name"
                         type="text"
-                        value={state.name}
+                        value={questionThree.horasSemanaisOutrosDescricao}
                         onChange={handleWorkHoursVisitorsChange}
                         placeholder="Escreva aqui"
                       />
@@ -245,19 +269,20 @@ export const FormStep5 = () => {
 
             <SC.ButtonTypeTextV3>
               <div className="formQuestion">
-                <label htmlFor="name">
+                <label htmlFor="">
                   Quantos Visitadores da equipe do PCF tem em seu município:
 
                   <div id="containerTextLabelCheckbox">
                     <label
                       className="labelForContainerTextLabelCheckbox"
-                      htmlFor="">Superior Incompleto:</label>
+                      htmlFor="incompleteSuperiorVisitor">Superior Incompleto:</label>
                     <input
                       className="inputForContainerTextLabelCheckbox"
-                      name="name"
+                      id="incompleteSuperiorVisitor"
+                      name="superiorIncompleto"
                       type="text"
-                      value={state.name}
-                      onChange={handleNumberOfSupervisors}
+                      value={questionFour.superiorIncompleto}
+                      onChange={handleVisotorsQualificationChange}
                       placeholder="Sua resposta"
                     />
                   </div>
@@ -265,13 +290,14 @@ export const FormStep5 = () => {
                   <div id="containerTextLabelCheckbox">
                     <label
                       className="labelForContainerTextLabelCheckbox"
-                      htmlFor="">Superior Completo:</label>
+                      htmlFor="completeSuperiorVisitor">Superior Completo:</label>
                     <input
                       className="inputForContainerTextLabelCheckbox"
-                      name="name"
+                      id="completeSuperiorVisitor"
+                      name="superiorCompleto"
                       type="text"
-                      value={state.name}
-                      onChange={handleNumberOfSupervisors}
+                      value={questionFour.superiorCompleto}
+                      onChange={handleVisotorsQualificationChange}
                       placeholder="Sua resposta"
                     />
                   </div>
@@ -279,10 +305,11 @@ export const FormStep5 = () => {
                   <div id="containerTextLabelCheckbox">
                     <label
                       className="labelForContainerTextLabelCheckbox"
-                      htmlFor="">Especialização:</label>
+                      htmlFor="specialistVisitor">Especialização:</label>
                     <input
                       className="inputForContainerTextLabelCheckbox"
-                      name="name"
+                      id="specialistVisitor"
+                      name="especializacao"
                       type="text"
                       value={state.name}
                       onChange={handleNumberOfSupervisors}
