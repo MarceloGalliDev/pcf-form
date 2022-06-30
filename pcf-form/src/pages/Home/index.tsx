@@ -37,13 +37,24 @@ export const Home = () => {
           <form onSubmit={handleCreateRoom}>
             <input
               type="text"
-              placeholder="Nome do município"
+              placeholder="Coordenador"
               onChange={event => setNewRoom(event.target.value)}
               value={newRoom}
             />
             <button
               type="submit"
-            >Próximo
+            >Iniciar
+            </button>
+
+            <input
+              type="text"
+              placeholder="Supervisor"
+              onChange={event => setNewRoom(event.target.value)}
+              value={newRoom}
+            />
+            <button
+              type="submit"
+            >Iniciar
             </button>
           </form>
         </div>

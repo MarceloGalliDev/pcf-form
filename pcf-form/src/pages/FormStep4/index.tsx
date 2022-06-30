@@ -7,38 +7,38 @@ import { push, ref, set } from "firebase/database";
 import { database } from "../../services/firebase";
 
 interface Workload {
-  horasSemanais40: boolean;
-  horasSemanais30: boolean;
-  horasSemanais20: boolean;
-  horasSemanaisOutros: boolean;
-  horasSemanaisOutrosDescricao: string;
+  supervisoresHorasSemanais40: boolean;
+  supervisoresHorasSemanais30: boolean;
+  supervisoresHorasSemanais20: boolean;
+  supervisoresHorasSemanaisOutros: boolean;
+  supervisoresHorasSemanaisOutrosDescricao: string;
 };
 
 interface SupervisorQualification {
-  especializacao: string;
-  mestrado: string;
-  doutorado: string;
+  supervisoresEspecializacao: string;
+  supervisoresMestrado: string;
+  supervisoresDoutorado: string;
 };
 
 interface SupervisorTypeRemunaration1 {
-  ServidorEfetivo: string;
-  MédiaRemuneraçãoEfetivo: string;
+  supervisoresServidorEfetivo: string;
+  supervisoresMediaRemuneracaoEfetivo: string;
 };
 interface SupervisorTypeRemunaration2 {
-  CargoComissionado: string;
-  MédiaRemuneraçãoComissionado: string;
+  supervisoresCargoComissionado: string;
+  supervisoresMediaRemuneracaoComissionado: string;
 };
 interface SupervisorTypeRemunaration3 {
-  ServidorTemporário: string;
-  MédiaRemuneraçãoTemporário: string;
+  supervisoresServidorTemporario: string;
+  supervisoresMediaRemuneracaoTemporario: string;
 };
 interface SupervisorTypeRemunaration4 {
-  Bolsista: string;
-  MédiaRemuneraçãoBolsista: string;
+  supervisoresBolsista: string;
+  supervisoresMediaRemuneracaoBolsista: string;
 };
 interface SupervisorTypeRemunaration5 {
-  OutrosCargos: string;
-  MédiaRemuneraçãoOutrosCargos: string;
+  supervisoresOutrosCargos: string;
+  supervisoresMediaRemuneracaoOutrosCargos: string;
 };
 
 
@@ -54,37 +54,37 @@ export const FormStep4 = () => {
   const [questionOne, setQuestionOne] = useState('')
   const [questionTwo, setQuestionTwo] = useState('')
   const [questionThree, setQuestionThree] = useState<Workload>({
-    horasSemanais40: false,
-    horasSemanais30: false,
-    horasSemanais20: false,
-    horasSemanaisOutros: false,
-    horasSemanaisOutrosDescricao: '',
+    supervisoresHorasSemanais40: false,
+    supervisoresHorasSemanais30: false,
+    supervisoresHorasSemanais20: false,
+    supervisoresHorasSemanaisOutros: false,
+    supervisoresHorasSemanaisOutrosDescricao: '',
   });
   const [questionFive, setQuestionFive] =
   useState<SupervisorQualification>({
-    especializacao: '',
-    mestrado: '',
-    doutorado: '',
+    supervisoresEspecializacao: '',
+    supervisoresMestrado: '',
+    supervisoresDoutorado: '',
   });
   const [questionSix, setQuestionSix] = useState<SupervisorTypeRemunaration1>({
-    ServidorEfetivo: '',
-    MédiaRemuneraçãoEfetivo: '',
+    supervisoresServidorEfetivo: '',
+    supervisoresMediaRemuneracaoEfetivo: '',
   });
   const [questionSeven, setQuestionSeven] = useState<SupervisorTypeRemunaration2>({
-    CargoComissionado: '',
-    MédiaRemuneraçãoComissionado: '',
+    supervisoresCargoComissionado: '',
+    supervisoresMediaRemuneracaoComissionado: '',
   });
   const [questionEight, setQuestionEight] = useState<SupervisorTypeRemunaration3>({
-    ServidorTemporário: '',
-    MédiaRemuneraçãoTemporário: '',
+    supervisoresServidorTemporario: '',
+    supervisoresMediaRemuneracaoTemporario: '',
   });
   const [questionNine, setQuestionNine] = useState<SupervisorTypeRemunaration4>({
-    Bolsista: '',
-    MédiaRemuneraçãoBolsista: '',
+    supervisoresBolsista: '',
+    supervisoresMediaRemuneracaoBolsista: '',
   });
   const [questionTen, setQuestionTen] = useState<SupervisorTypeRemunaration5>({
-    OutrosCargos: '',
-    MédiaRemuneraçãoOutrosCargos: '',
+    supervisoresOutrosCargos: '',
+    supervisoresMediaRemuneracaoOutrosCargos: '',
   });
 
   async function handleSendQuestion(event: FormEvent) {
@@ -199,6 +199,7 @@ export const FormStep4 = () => {
       </SC.Container>
 
       <form onSubmit={handleSendQuestion}>
+
         <SC.SubSection>
           <div className="bgSubSection">
             <p>Subseção Supervisores</p>
@@ -211,8 +212,9 @@ export const FormStep4 = () => {
                   Quantos Supervisores existem na equipe do PCF no seu município?
                   <input
                     id="numberOfSupervisors"
-                    name="numberOfSupervisors"
+                    name="numeroDeSupervisores"
                     type="text"
+                    autoFocus
                     value={questionOne}
                     onChange={handleNumberOfSupervisors}
                     placeholder="Quantidade"
@@ -227,7 +229,7 @@ export const FormStep4 = () => {
                   Qual a remuneração média em R$ (reais) dos Supervisores?
                   <input
                     id="averagePay"
-                    name="averagePay"
+                    name="remuneracaoMediaSupervisor"
                     type="text"
                     value={questionTwo}
                     onChange={handleAveragePayChange}
@@ -249,10 +251,10 @@ export const FormStep4 = () => {
                         id="workloadForty"
                         name="horasSemanais40"
                         type="checkbox"
-                        checked={questionThree.horasSemanais40}
+                        checked={questionThree.supervisoresHorasSemanais40}
                         onChange={(event) => setQuestionThree({
                           ...questionThree,
-                          horasSemanais40: !!event.currentTarget?.checked
+                          supervisoresHorasSemanais40: !!event.currentTarget?.checked
                         })}
                       />
                       <label
@@ -266,10 +268,10 @@ export const FormStep4 = () => {
                         id="workloadThirty"
                         name="horasSemanais30"
                         type="checkbox"
-                        checked={questionThree.horasSemanais30}
+                        checked={questionThree.supervisoresHorasSemanais30}
                         onChange={(event) => setQuestionThree({
                           ...questionThree,
-                          horasSemanais30: !!event.currentTarget?.checked
+                          supervisoresHorasSemanais30: !!event.currentTarget?.checked
                         })}
                       />
                       <label
@@ -283,10 +285,10 @@ export const FormStep4 = () => {
                         id="workloadTwenty"
                         name="horasSemanais20"
                         type="checkbox"
-                        checked={questionThree.horasSemanais20}
+                        checked={questionThree.supervisoresHorasSemanais20}
                         onChange={(event) => setQuestionThree({
                           ...questionThree,
-                          horasSemanais20: !!event.currentTarget?.checked
+                          supervisoresHorasSemanais20: !!event.currentTarget?.checked
                         })}
                       />
                       <label
@@ -301,10 +303,10 @@ export const FormStep4 = () => {
                         id="workload"
                         name="horasSemanaisOutros"
                         type="checkbox"
-                        checked={questionThree.horasSemanaisOutros}
+                        checked={questionThree.supervisoresHorasSemanaisOutros}
                         onChange={(event) => setQuestionThree({
                           ...questionThree,
-                          horasSemanaisOutros: !!event.currentTarget?.checked
+                          supervisoresHorasSemanaisOutros: !!event.currentTarget?.checked
                         })}
                       />
                       <label
@@ -316,7 +318,7 @@ export const FormStep4 = () => {
                         className="inputPlaceholderOther"
                         name="horasSemanaisOutrosDescricao"
                         type="text"
-                        value={questionThree.horasSemanaisOutrosDescricao}
+                        value={questionThree.supervisoresHorasSemanaisOutrosDescricao}
                         onChange={handleWorkloadChange}
                         placeholder="Escreva aqui"
                       />
@@ -328,7 +330,7 @@ export const FormStep4 = () => {
 
             <SC.ButtonTypeTextV3>
               <div className="formQuestion">
-                <label htmlFor="">
+                <label htmlFor="containerTextLabelCheckbox">
                   Quantos Supervisores da equipe do PCF tem em seu município:
 
                   <div id="containerTextLabelCheckbox">
@@ -340,7 +342,7 @@ export const FormStep4 = () => {
                     <input
                       className="inputForContainerTextLabelCheckbox"
                       id="supervisorSpecialization"
-                      name="especializacao"
+                      name="especializacaoSupervisor"
                       type="text"
                       value={questionFive.especializacao}
                       onChange={handleSupervisorQualificationChange}
@@ -357,7 +359,7 @@ export const FormStep4 = () => {
                     <input
                       id="supervisorMaster"
                       className="inputForContainerTextLabelCheckbox"
-                      name="mestrado"
+                      name="mestradoSupervisor"
                       type="text"
                       value={questionFive.mestrado}
                       onChange={handleSupervisorQualificationChange}
@@ -374,7 +376,7 @@ export const FormStep4 = () => {
                     <input
                       id="supervisorDoctor"
                       className="inputForContainerTextLabelCheckbox"
-                      name="doutorado"
+                      name="doutoradoSupervisor"
                       type="text"
                       value={questionFive.doutorado}
                       onChange={handleSupervisorQualificationChange}
@@ -387,20 +389,20 @@ export const FormStep4 = () => {
 
             <SC.ButtonTypeTextV3>
               <div className="formQuestion">
-                <label htmlFor="name">
+                <label htmlFor="containerLabelCheckboxBorder">
                   Quantos Supervisores da equipe do PCF são contratados nas seguintes categorias em seu município:
 
                   <div id="containerLabelCheckboxBorder">
                     <div id="containerTextLabelCheckbox">
                       <label
                         className="labelForContainerTextLabelCheckbox"
-                        htmlFor="servidorefetivo"
+                        htmlFor="servidorEfetivoSupervisor"
                       >Servidor(a) efetivo(a):
                       </label>
                       <input
                         className="inputForContainerTextLabelCheckbox"
-                        id="servidorefetivo"
-                        name="ServidorEfetivo"
+                        id="servidorEfetivoSupervisor"
+                        name="servidorEfetivoSupervisor"
                         type="text"
                         value={questionSix.ServidorEfetivo}
                         onChange={handleEffectiveRemunerationChange}

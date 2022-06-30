@@ -141,51 +141,6 @@ export const FormStep7 = () => {
 
           <div className="containerBgLabel">
             <label className="containerTextLabel" htmlFor="name">
-              Crianças de até 6 anos afastadas do convívio familiar:
-              <span>{errors.name && " ⚠ *Campo obrigatório "}</span>
-              <input
-                {...register("name")}
-                name="name"
-                type="text"
-                value={state.name}
-                onChange={handleNameChange}
-                placeholder="Quantidade"
-              />
-            </label>
-          </div>
-          
-          <div className="containerBgLabel">
-            <label className="containerTextLabel" htmlFor="name">
-              Crianças de até 6 anos inseridas no CadÚnico, que perderam ao menos um de seus responsáveis familiares, independente da causa de morte, durante o período de Emergência em Saúde Pública de Importância Nacional (ESPIN) decorrente da Covid-19:
-              <span>{errors.name && " ⚠ *Campo obrigatório "}</span>
-              <input
-                {...register("name")}
-                name="name"
-                type="text"
-                value={state.name}
-                onChange={handleNameChange}
-                placeholder="Quantidade"
-              />
-            </label>
-          </div>
-
-          <div className="containerBgLabel">
-            <label className="containerTextLabel" htmlFor="name">
-              Crianças atendidas que não pertencem ao grupo prioritário do PCF:
-              <span>{errors.name && " ⚠ *Campo obrigatório "}</span>
-              <input
-                {...register("name")}
-                name="name"
-                type="text"
-                value={state.name}
-                onChange={handleNameChange}
-                placeholder="Quantidade"
-              />
-            </label>
-          </div>
-
-          <div className="containerBgLabel">
-            <label className="containerTextLabel" htmlFor="name">
               Quantos domicílios no seu município possuem mais de uma criança sendo atendida pelo PCF?
               <span>{errors.name && " ⚠ *Campo obrigatório "}</span>
               <input

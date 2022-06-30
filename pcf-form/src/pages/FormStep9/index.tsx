@@ -206,26 +206,14 @@ export const FormStep9 = () => {
               </div>
             </div>
           </div>
-        </SC.ButtonTypeCheckbox>
+          </SC.ButtonTypeCheckbox>
           
-        <SC.ButtonTypeFile>
-          <div className="formQuestion">
-            <label htmlFor="name">
-              Poderia enviar uma planilha com o endereço dos domicílios atendidos pelo PCF?
-              <input
-                {...register("name")}
-                name="name"
-                type="file"
-                accept=".doc,.docx,.xml,.xlsx, xlsm,.xltx,.xls,.txt,.pdf,.ods"
-              />
-            </label>
-          </div>
-        </SC.ButtonTypeFile>
+          //adicionar questao quantidade de visitas realizadas
 
         <SC.ButtonTypeText>
           <div className="formQuestion">
             <label htmlFor="name">
-              Qual o tempo médio (em minutos) da visita para cada um dos beneficiados:
+              Qual numero médio de visitas que o visitador faz por dia:
               <input
                 {...register("name")}
                 name="name"
