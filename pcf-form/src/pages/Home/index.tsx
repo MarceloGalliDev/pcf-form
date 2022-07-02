@@ -33,30 +33,53 @@ export const Home = () => {
       </aside>
       <main>
         <div className="main-content">
-          <h2>Iniciar Formulário</h2>
-          <form onSubmit={handleCreateRoom}>
-            <input
-              type="text"
-              placeholder="Coordenador"
-              onChange={event => setNewRoom(event.target.value)}
-              value={newRoom}
-            />
-            <button
-              type="submit"
-            >Iniciar
-            </button>
 
-            <input
+          <h2>Municípios <u>adeptos</u> ao PCF</h2>
+          <form onSubmit={handleCreateRoom}>
+            {/* <input
               type="text"
-              placeholder="Supervisor"
+              placeholder="Qual o seu município"
               onChange={event => setNewRoom(event.target.value)}
               value={newRoom}
-            />
+            /> */}
             <button
               type="submit"
-            >Iniciar
+            >Clique aqui
             </button>
           </form>
+
+          <hr />
+
+          <h2>Municípios <u>não adeptos</u> ao PCF</h2>
+          <form onSubmit={handleCreateRoom}>
+            {/* <input
+              type="text"
+              placeholder="Qual o seu município"
+              onChange={event => setNewRoom(event.target.value)}
+              value={newRoom}
+            /> */}
+            <button
+              type="submit"
+            >Clique aqui
+            </button>
+          </form>
+
+          <hr />
+
+          <h2>Municípios <u>desistentes</u> ao PCF</h2>
+          <form onSubmit={handleCreateRoom}>
+            {/* <input
+              type="text"
+              placeholder="Qual o seu município"
+              onChange={event => setNewRoom(event.target.value)}
+              value={newRoom}
+            /> */}
+            <button
+              type="submit"
+            >Clique aqui
+            </button>
+          </form>
+
         </div>
       </main>
     </div>

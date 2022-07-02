@@ -1,77 +1,46 @@
-import * as SC from "../../styles/styles"
-import { Theme } from "../../components/Theme"
-import { Link, useNavigate } from "react-router-dom"
-import { useFormPage, FormActions } from "../../context/FormContext"
-import { ChangeEvent, useEffect, useState } from "react"
-import { useForm } from "react-hook-form";
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from "yup";
+import * as SC from "../../styles/styles";
+import { Theme } from "../../components/Theme";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { useFormPage, FormActions } from "../../context/FormContext";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import { database } from "../../services/firebase";
+import { ref, push, set } from "firebase/database";
 
-
-interface FormStep1Input {
-  name: string;
-  dateAcquisition: string;
-  dateVisition: string;
-  lastMonthSpentData: 'janeiro' | 'fevereiro' | 'marco' | 'abril' | 'maio' | 'junho' | 'julho' | 'agosto' | 'setembro' | 'outubro' | 'novembro' | 'dezembro';
-}
-
-const schema = yup.object({
-  dateAcquisition: yup.string().required(),
-  dateVisition: yup.string().required(),
-}).required();
+type RoomParams = {
+  id: string;
+};
 
 export const FormStep6 = () => {
+  const params = useParams<RoomParams>()
+  const roomId = params.id
   const navigate = useNavigate();
   const { state, dispatch } = useFormPage();
+  const [questionOne, setQuestionOne] = useState('');
+  const [questionTwo, setQuestionTwo] = useState('');
+  const [questionThree, setQuestionThree] = useState('');
 
-  const { register, handleSubmit, formState: {errors}} = useForm<FormStep1Input>({resolver: yupResolver(schema)})
-  const onSubmit = handleSubmit(data => navigate('/formstep3'))
+  async function handleSendQuestionOthersProfessionals(event: FormEvent) {
+    event.preventDefault();
 
-//função de captura de valores
-  const handleDateAcquisitionChange = (event: ChangeEvent<HTMLInputElement>) => {
-    dispatch({
-      type: FormActions.setDateAcquisition,
-      payload: event.target.value
-    });
+    const question = {
+      E_Visitadores_do_PCF: {
+        questao42: questionOne,
+        questao43: questionTwo,
+        questao44: questionThree,
+      }
+    };
+
+    const firebaseRoomsQuestion = ref(database, `rooms/${roomId}/question`);
+    const firebaseQuestion = await push(firebaseRoomsQuestion);
+    set(firebaseQuestion, question)
+
+    navigate(`/${roomId}/formstep7`)
   };
 
-  const handleDateVisitionChange = (event: ChangeEvent<HTMLInputElement>) => {
-    dispatch({
-      type: FormActions.setDateVisition,
-      payload: event.target.value
-    });
+  const handleNumberOfVisitorsChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setQuestionOne(event.target.value);
   };
 
-  const handleLastMonthSpentDataChange = (event: ChangeEvent<HTMLInputElement>) => {
-    dispatch({
-      type: FormActions.setLastMonthSpentData,
-      payload: event.target.value
-    });
-  };
-
-  const handleNameChange = (event: ChangeEvent<HTMLInputElement>) => {
-    dispatch({
-      type: FormActions.setName,
-      payload: event.target.value
-    });
-  };
-
-  //verificando se foi respondida, não passa para próxima etapa
-  // useEffect(() => {
-  //   if (state.name === '' ||
-  //     state.phoneNumber === '' ||
-  //     state.email === '' ||
-  //     state.functionPCF === '' ||
-  //     state.uf === '' ||
-  //     state.city === '') {
-  //     navigate('/')
-  //   } else {
-  //     dispatch({
-  //       type: FormActions.setCurrentStep,
-  //       payload: 2
-  //     });
-  //   }
-  // }, []);
 
   useEffect(() => {
     dispatch({
@@ -83,71 +52,68 @@ export const FormStep6 = () => {
   return (
     <Theme>
       <SC.Container>
-        <p>Etapa {state.currentStep}/8</p>
+        <p>Etapa {state.currentStep}/10</p>
         <h1>Outros profissionais</h1>
         <p>Informações sobre os atores/ participantes da equipe do PCF</p>
         <hr/>
       </SC.Container>
 
+      <form onSubmit={handleSendQuestionOthersProfessionals}>
 
-      <SC.SubSection>
-        <div className="bgSubSection">
-          <p>Subseção Outros Profissionais</p>
-        </div>
-        <div className="formQuestionV2">
+        <SC.SubSection>
+          <div className="bgSubSection">
+            <p>Subseção Outros Profissionais</p>
+          </div>
+          <div className="formQuestionV2">
 
-          <SC.ButtonTypeText>
-            <div className="formQuestion">
-              <label htmlFor="name">
-                Indique outros profissionais remunerados pelo PCF?
-                <input
-                  {...register("name")}
-                  name="name"
-                  type="text"
-                  value={state.name}
-                  onChange={handleNameChange}
-                  placeholder="Sua resposta"
-                />
-              </label>
-            </div>
-          </SC.ButtonTypeText>
+            <SC.ButtonTypeText>
+              <div className="formQuestion">
+                <label htmlFor="name">
+                  Indique outros profissionais remunerados pelo PCF?
+                  <input
+                    name="name"
+                    type="text"
+                    value={state.name}
+                    onChange={handleNumberOfVisitorsChange}
+                    placeholder="Sua resposta"
+                  />
+                </label>
+              </div>
+            </SC.ButtonTypeText>
 
-          <SC.ButtonTypeText>
-            <div className="formQuestion">
-              <label htmlFor="name">
-                Qual a remuneração média em R$ (reais) desses outros profissionais?
-                <input
-                  {...register("name")}
-                  name="name"
-                  type="text"
-                  value={state.name}
-                  onChange={handleNameChange}
-                  placeholder="Valor em R$"
-                />
-              </label>
-            </div>
-          </SC.ButtonTypeText>
+            <SC.ButtonTypeText>
+              <div className="formQuestion">
+                <label htmlFor="name">
+                  Qual a remuneração média em R$ (reais) desses outros profissionais?
+                  <input
+                    name="name"
+                    type="text"
+                    value={state.name}
+                    onChange={handleNumberOfVisitorsChange}
+                    placeholder="Valor em R$"
+                  />
+                </label>
+              </div>
+            </SC.ButtonTypeText>
 
-          <SC.ButtonTypeText>
-            <div className="formQuestion">
-              <label htmlFor="name">
-                Observações:
-                <input
-                  {...register("name")}
-                  name="name"
-                  type="text"
-                  value={state.name}
-                  onChange={handleNameChange}
-                  placeholder="Sua resposta"
-                />
-              </label>
-            </div>
-          </SC.ButtonTypeText>
+            <SC.ButtonTypeText>
+              <div className="formQuestion">
+                <label htmlFor="name">
+                  Observações:
+                  <input
+                    name="name"
+                    type="text"
+                    value={state.name}
+                    onChange={handleNumberOfVisitorsChange}
+                    placeholder="Sua resposta"
+                  />
+                </label>
+              </div>
+            </SC.ButtonTypeText>
+          </div>
+        </SC.SubSection>
 
-        </div>
-      </SC.SubSection>
-
-      <SC.AllButtons>
+        <SC.AllButtons>
           <Link className="buttonAll" to="/:id/formstep5">Voltar</Link>
           <button
             className="buttonAll"
@@ -155,6 +121,8 @@ export const FormStep6 = () => {
             >Próximo
           </button>
         </SC.AllButtons>
+
+      </form>
     </Theme>
   )
 }

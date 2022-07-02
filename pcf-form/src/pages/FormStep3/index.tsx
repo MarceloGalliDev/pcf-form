@@ -40,7 +40,7 @@ export const FormStep3 = () => {
     const firebaseQuestion = await push(firebaseRoomsQuestion);
     set(firebaseQuestion, question)
 
-   navigate(`/${roomId}/formstep4`)
+    navigate(`/${roomId}/formstep4`)
   };
 
   const handleTeamCoordinatorChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -92,6 +92,7 @@ export const FormStep3 = () => {
             </p>
             <div id="containerOption">
               <div id="containerOptionSixOption">
+
                 <div id="containerInputLabelRadioButton">
                   <input
                     id="teamCoordinatorYes"
@@ -106,6 +107,7 @@ export const FormStep3 = () => {
                   >Sim
                   </label>
                 </div>
+
                 <div id="containerInputLabelRadioButton">
                   <input
                     id="teamCoordinatorNo"
@@ -120,6 +122,7 @@ export const FormStep3 = () => {
                   >Não
                   </label>
                 </div>
+
                 <div id="containerInputLabelRadioButton">
                   <input
                     id="teamCoordinatorDontKnow"
@@ -134,6 +137,7 @@ export const FormStep3 = () => {
                   >Não sei
                   </label>
                 </div>
+
               </div>
             </div>
           </div>

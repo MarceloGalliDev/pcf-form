@@ -609,20 +609,6 @@ export const FormStep10 = () => {
         </div>
       </SC.ButtonTypeRadio>
 
-      <SC.ButtonTypeFile>
-        <div className="formQuestion">
-          <label htmlFor="name">
-            Há uma planilha com os custos mensais do PCF que poderia ser disponibilizada?
-            <input
-              {...register("name")}
-              name="name"
-              type="file"
-              accept=".doc,.docx,.xml,.xlsx, xlsm,.xltx,.xls,.txt,.pdf,.ods"
-            />
-          </label>
-        </div>
-      </SC.ButtonTypeFile>
-
       <SC.AllButtons>
           <Link className="buttonAll" to="/:id/formstep9">Voltar</Link>
           <button

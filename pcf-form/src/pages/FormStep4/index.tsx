@@ -24,18 +24,22 @@ interface SupervisorTypeRemunaration1 {
   supervisoresServidorEfetivo: string;
   supervisoresMediaRemuneracaoEfetivo: string;
 };
+
 interface SupervisorTypeRemunaration2 {
   supervisoresCargoComissionado: string;
   supervisoresMediaRemuneracaoComissionado: string;
 };
+
 interface SupervisorTypeRemunaration3 {
   supervisoresServidorTemporario: string;
   supervisoresMediaRemuneracaoTemporario: string;
 };
+
 interface SupervisorTypeRemunaration4 {
   supervisoresBolsista: string;
   supervisoresMediaRemuneracaoBolsista: string;
 };
+
 interface SupervisorTypeRemunaration5 {
   supervisoresOutrosCargos: string;
   supervisoresMediaRemuneracaoOutrosCargos: string;
@@ -249,7 +253,7 @@ export const FormStep4 = () => {
                     <div id="containerInputLabelRadioButton">
                       <input
                         id="workloadForty"
-                        name="horasSemanais40"
+                        name="supervisoresHorasSemanais40"
                         type="checkbox"
                         checked={questionThree.supervisoresHorasSemanais40}
                         onChange={(event) => setQuestionThree({
@@ -266,7 +270,7 @@ export const FormStep4 = () => {
                     <div id="containerInputLabelRadioButton">
                       <input
                         id="workloadThirty"
-                        name="horasSemanais30"
+                        name="supervisoresHorasSemanais30"
                         type="checkbox"
                         checked={questionThree.supervisoresHorasSemanais30}
                         onChange={(event) => setQuestionThree({
@@ -283,7 +287,7 @@ export const FormStep4 = () => {
                     <div id="containerInputLabelRadioButton">
                       <input
                         id="workloadTwenty"
-                        name="horasSemanais20"
+                        name="supervisoresHorasSemanais20"
                         type="checkbox"
                         checked={questionThree.supervisoresHorasSemanais20}
                         onChange={(event) => setQuestionThree({
@@ -300,8 +304,8 @@ export const FormStep4 = () => {
         
                     <div id="containerInputLabelRadioButton">
                       <input
-                        id="workload"
-                        name="horasSemanaisOutros"
+                        id="workloadOthers"
+                        name="supervisoresHorasSemanaisOutros"
                         type="checkbox"
                         checked={questionThree.supervisoresHorasSemanaisOutros}
                         onChange={(event) => setQuestionThree({
@@ -311,12 +315,12 @@ export const FormStep4 = () => {
                       />
                       <label
                         className="containerTextLabel"
-                        htmlFor="workload"
+                        htmlFor="workloadOthers"
                       >Outro:
                       </label>
                       <input
                         className="inputPlaceholderOther"
-                        name="horasSemanaisOutrosDescricao"
+                        name="supervisoresHorasSemanaisOutrosDescricao"
                         type="text"
                         value={questionThree.supervisoresHorasSemanaisOutrosDescricao}
                         onChange={handleWorkloadChange}
@@ -344,7 +348,7 @@ export const FormStep4 = () => {
                       id="supervisorSpecialization"
                       name="especializacaoSupervisor"
                       type="text"
-                      value={questionFive.especializacao}
+                      value={questionFive.supervisoresEspecializacao}
                       onChange={handleSupervisorQualificationChange}
                       placeholder="Sua resposta"
                     />
@@ -361,7 +365,7 @@ export const FormStep4 = () => {
                       className="inputForContainerTextLabelCheckbox"
                       name="mestradoSupervisor"
                       type="text"
-                      value={questionFive.mestrado}
+                      value={questionFive.supervisoresMestrado}
                       onChange={handleSupervisorQualificationChange}
                       placeholder="Sua resposta"
                     />
@@ -378,7 +382,7 @@ export const FormStep4 = () => {
                       className="inputForContainerTextLabelCheckbox"
                       name="doutoradoSupervisor"
                       type="text"
-                      value={questionFive.doutorado}
+                      value={questionFive.supervisoresDoutorado}
                       onChange={handleSupervisorQualificationChange}
                       placeholder="Sua resposta"
                     />
@@ -402,9 +406,9 @@ export const FormStep4 = () => {
                       <input
                         className="inputForContainerTextLabelCheckbox"
                         id="servidorEfetivoSupervisor"
-                        name="servidorEfetivoSupervisor"
+                        name="supervisoresServidorEfetivo"
                         type="text"
-                        value={questionSix.ServidorEfetivo}
+                        value={questionSix.supervisoresServidorEfetivo}
                         onChange={handleEffectiveRemunerationChange}
                         placeholder="Sua resposta"
                       />
@@ -412,13 +416,13 @@ export const FormStep4 = () => {
                     <div id="containerTextLabelCheckbox">
                       <label
                         className="labelForContainerTextLabelCheckbox"
-                        htmlFor="mediaRemuneracaoEfetivo">Média Remuneração:</label>
+                        htmlFor="mediaRemuneracaoEfetivoSupervisor">Média Remuneração:</label>
                       <input
                         className="inputForContainerTextLabelCheckbox"
-                        id="mediaRemuneracaoEfetivo"
-                        name="MédiaRemuneraçãoEfetivo"
+                        id="mediaRemuneracaoEfetivoSupervisor"
+                        name="supervisoresMediaRemuneracaoEfetivo"
                         type="text"
-                        value={questionSix.MédiaRemuneraçãoEfetivo}
+                        value={questionSix.supervisoresMediaRemuneracaoEfetivo}
                         onChange={handleEffectiveRemunerationChange}
                         placeholder="Sua resposta"
                       />
@@ -429,15 +433,15 @@ export const FormStep4 = () => {
                     <div id="containerTextLabelCheckbox">
                       <label
                         className="labelForContainerTextLabelCheckbox"
-                        htmlFor="cargoComissionado"
+                        htmlFor="cargoComissionadoSupervisor"
                       >Cargo comissionado:
                       </label>
                       <input
                         className="inputForContainerTextLabelCheckbox"
-                        id="cargoComissionado"
-                        name="CargoComissionado"
+                        id="cargoComissionadoSupervisor"
+                        name="supervisoresCargoComissionado"
                         type="text"
-                        value={questionSeven.CargoComissionado}
+                        value={questionSeven.supervisoresCargoComissionado}
                         onChange={handleCommissionedRemunerationChange}
                         placeholder="Sua resposta"
                       />
@@ -445,13 +449,13 @@ export const FormStep4 = () => {
                     <div id="containerTextLabelCheckbox">
                       <label
                         className="labelForContainerTextLabelCheckbox"
-                        htmlFor="mediaRemuneracaoComissonado">Média Remuneração:</label>
+                        htmlFor="mediaRemuneracaoComissonadoSupervisor">Média Remuneração:</label>
                       <input
                         className="inputForContainerTextLabelCheckbox"
-                        id="mediaRemuneracaoComissonado"
-                        name="MédiaRemuneraçãoComissionado"
+                        id="mediaRemuneracaoComissonadoSupervisor"
+                        name="supervisoresMediaRemuneracaoComissionado"
                         type="text"
-                        value={questionSeven.MédiaRemuneraçãoComissionado}
+                        value={questionSeven.supervisoresMediaRemuneracaoComissionado}
                         onChange={handleCommissionedRemunerationChange}
                         placeholder="Sua resposta"
                       />
@@ -462,15 +466,15 @@ export const FormStep4 = () => {
                     <div id="containerTextLabelCheckbox">
                       <label
                         className="labelForContainerTextLabelCheckbox"
-                        htmlFor="servidorTemporario"
+                        htmlFor="servidorTemporarioSupervisor"
                       >Servidor temporário:
                       </label>
                       <input
                         className="inputForContainerTextLabelCheckbox"
-                        id="servidorTemporario"
-                        name="ServidorTemporário"
+                        id="servidorTemporarioSupervisor"
+                        name="supervisoresServidorTemporario"
                         type="text"
-                        value={questionEight.ServidorTemporário}
+                        value={questionEight.supervisoresServidorTemporario}
                         onChange={handleTemporaryRemunerationChange}
                         placeholder="Sua resposta"
                       />
@@ -478,13 +482,13 @@ export const FormStep4 = () => {
                     <div id="containerTextLabelCheckbox">
                       <label
                         className="labelForContainerTextLabelCheckbox"
-                        htmlFor="mediaRemuneracaoTemporario">Média Remuneração:</label>
+                        htmlFor="mediaRemuneracaoTemporarioSupervisor">Média Remuneração:</label>
                       <input
                         className="inputForContainerTextLabelCheckbox"
-                        id="mediaRemuneracaoTemporario"
-                        name="MédiaRemuneraçãoTemporário"
+                        id="mediaRemuneracaoTemporarioSupervisor"
+                        name="supervisoresMediaRemuneracaoTemporario"
                         type="text"
-                        value={questionEight.MédiaRemuneraçãoTemporário}
+                        value={questionEight.supervisoresMediaRemuneracaoTemporario}
                         onChange={handleTemporaryRemunerationChange}
                         placeholder="Sua resposta"
                       />
@@ -495,15 +499,15 @@ export const FormStep4 = () => {
                     <div id="containerTextLabelCheckbox">
                       <label
                         className="labelForContainerTextLabelCheckbox"
-                        htmlFor="bolsista"
+                        htmlFor="bolsistaSupervisor"
                       >Bolsista:
                       </label>
                       <input
                         className="inputForContainerTextLabelCheckbox"
-                        id="bolsista"
-                        name="Bolsista"
+                        id="bolsistaSupervisor"
+                        name="supervisoresBolsista"
                         type="text"
-                        value={questionNine.Bolsista}
+                        value={questionNine.supervisoresBolsista}
                         onChange={handleScholarshipRemunerationChange}
                         placeholder="Sua resposta"
                       />
@@ -511,13 +515,13 @@ export const FormStep4 = () => {
                     <div id="containerTextLabelCheckbox">
                       <label
                         className="labelForContainerTextLabelCheckbox"
-                        htmlFor="mediaRemuneracaoBolsista">Média Remuneração:</label>
+                        htmlFor="mediaRemuneracaoBolsistaSupervisor">Média Remuneração:</label>
                       <input
                         className="inputForContainerTextLabelCheckbox"
-                        id="mediaRemuneracaoBolsista"
-                        name="MédiaRemuneraçãoBolsista"
+                        id="mediaRemuneracaoBolsistaSupervisor"
+                        name="supervisoresMediaRemuneracaoBolsista"
                         type="text"
-                        value={questionNine.MédiaRemuneraçãoBolsista}
+                        value={questionNine.supervisoresMediaRemuneracaoBolsista}
                         onChange={handleScholarshipRemunerationChange}
                         placeholder="Sua resposta"
                       />
@@ -528,15 +532,15 @@ export const FormStep4 = () => {
                     <div id="containerTextLabelCheckbox">
                       <label
                         className="labelForContainerTextLabelCheckbox"
-                        htmlFor="outrosCargos"
+                        htmlFor="outrosCargosSupervisor"
                       >Outros:
                       </label>
                       <input
                         className="inputForContainerTextLabelCheckbox"
-                        id="outrosCargos"
-                        name="OutrosCargos"
+                        id="outrosCargosSupervisor"
+                        name="supervisoresOutrosCargos"
                         type="text"
-                        value={questionTen.OutrosCargos}
+                        value={questionTen.supervisoresOutrosCargos}
                         onChange={handleOthersRemunerationChange}
                         placeholder="Sua resposta"
                       />
@@ -544,13 +548,13 @@ export const FormStep4 = () => {
                     <div id="containerTextLabelCheckbox">
                       <label
                         className="labelForContainerTextLabelCheckbox"
-                        htmlFor="mediaRemuneracaoOutrosCargos">Média Remuneração:</label>
+                        htmlFor="mediaRemuneracaoOutrosCargosSupervisor">Média Remuneração:</label>
                       <input
                         className="inputForContainerTextLabelCheckbox"
-                        id="mediaRemuneracaoOutrosCargos"
-                        name="MédiaRemuneraçãoOutrosCargos"
+                        id="mediaRemuneracaoOutrosCargosSupervisor"
+                        name="supervisoresMediaRemuneracaoOutrosCargos"
                         type="text"
-                        value={questionTen.MédiaRemuneraçãoOutrosCargos}
+                        value={questionTen.supervisoresMediaRemuneracaoOutrosCargos}
                         onChange={handleOthersRemunerationChange}
                         placeholder="Sua resposta"
                       />
