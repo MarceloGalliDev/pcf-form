@@ -3,28 +3,12 @@ import { Theme } from "../../components/Theme"
 import { Link, useNavigate } from "react-router-dom"
 import { useFormPage, FormActions } from "../../context/FormContext"
 import { ChangeEvent, useEffect, useState } from "react"
-import { useForm } from "react-hook-form";
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from "yup";
 import { Item } from "../../components/Questions/TableQuestion/types/Item"
 import { items } from "../../components/Questions/TableQuestion/data/items"
 import { InputArea } from "../../components/Questions/TableQuestion/components/InputArea"
 import { TableArea } from "../../components/Questions/TableQuestion/components/TableArea"
 
 
-
-
-interface FormStep1Input {
-  name: string;
-  dateAcquisition: string;
-  dateVisition: string;
-  lastMonthSpentData: 'janeiro' | 'fevereiro' | 'marco' | 'abril' | 'maio' | 'junho' | 'julho' | 'agosto' | 'setembro' | 'outubro' | 'novembro' | 'dezembro';
-};
-
-const schema = yup.object({
-  dateAcquisition: yup.string().required(),
-  dateVisition: yup.string().required(),
-}).required();
 
 
 export const FormStep10 = () => {
@@ -37,8 +21,6 @@ export const FormStep10 = () => {
   const navigate = useNavigate();
   const { state, dispatch } = useFormPage();
 
-  const { register, handleSubmit, formState: { errors } } = useForm<FormStep1Input>({ resolver: yupResolver(schema) })
-  const onSubmit = handleSubmit(data => navigate('/formstep3'))
 
   const handleAddItem = (item: Item) => {
     let newList = [...list]
@@ -101,7 +83,6 @@ export const FormStep10 = () => {
           <div className="formQuestion">
             <p className="textFormRadioButton">
               O visitador paga pelo seu próprio transporte?
-              <span>{errors.lastMonthSpentData && " ⚠ *Campo obrigatório "}</span>
             </p>
 
             <div id="containerOption">
@@ -457,9 +438,7 @@ export const FormStep10 = () => {
           <div className="containerBgLabel">
             <label className="containerTextLabel" htmlFor="name">
               Se sim, Quais?
-              <span>{errors.name && " ⚠ *Campo obrigatório "}</span>
               <input
-                {...register("name")}
                 name="name"
                 type="text"
                 autoFocus
@@ -535,9 +514,7 @@ export const FormStep10 = () => {
           <div className="containerBgLabel">
             <label className="containerTextLabel" htmlFor="name">
               Se sim, Quais?
-              <span>{errors.name && " ⚠ *Campo obrigatório "}</span>
               <input
-                {...register("name")}
                 name="name"
                 type="text"
                 autoFocus
