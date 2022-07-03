@@ -6,13 +6,6 @@ import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { database } from "../../services/firebase";
 import { ref, push, set } from "firebase/database";
 
-import { ItemOthers } from "../../components/Questions/TableQuestionText/types/ItemOthers";
-import { itemsOthers } from "../../components/Questions/TableQuestionText/data/itemsOthers";
-
-import { InputAreaText } from "../../components/Questions/TableQuestionText/components/InputAreaText";
-import { TableAreaText } from "../../components/Questions/TableQuestionText/components/TableAreaText";
-
-
 type RoomParams = {
   id: string;
 };
@@ -23,8 +16,6 @@ export const FormStep6 = () => {
   const navigate = useNavigate();
   const { state, dispatch } = useFormPage();
 
-  const [listOthers, setListOthers] = useState<ItemOthers[]>(itemsOthers);
-  const [filteredListOthers, setFilteredListOthers] = useState<ItemOthers[]>([]);
 
   const [questionOne, setQuestionOne] = useState('');
 
@@ -45,19 +36,9 @@ export const FormStep6 = () => {
     navigate(`/${roomId}/formstep7`)
   };
 
-  const handleAddItemText = (itemOthers: ItemOthers) => {
-    let newList = [...listOthers]
-    newList.push(itemOthers)
-    setListOthers(newList)
-  };
-
   const handleNumberOfVisitorsChange = (event: ChangeEvent<HTMLInputElement>) => {
     setQuestionOne(event.target.value);
   };
-
-  useEffect(() => {
-    setFilteredListOthers(listOthers)
-  }, [listOthers]);
 
   useEffect(() => {
     dispatch({
@@ -81,12 +62,7 @@ export const FormStep6 = () => {
             <p>Subseção Outros Profissionais</p>
           </div>
           <div className="formQuestionV2">
-            <SC.ContainerV2>
-              <SC.Body>
-                <InputAreaText onAdd={handleAddItemText} />
-                <TableAreaText listOthers={filteredListOthers} />
-              </SC.Body>
-            </SC.ContainerV2>
+
             <SC.ButtonTypeText>
               <div className="formQuestion">
                 <label htmlFor="name">
@@ -101,8 +77,10 @@ export const FormStep6 = () => {
                 </label>
               </div>
             </SC.ButtonTypeText>
+
           </div>
         </SC.SubSection>
+
         <SC.AllButtons>
           <Link className="buttonAll" to="/:id/formstep5">Voltar</Link>
           <button
