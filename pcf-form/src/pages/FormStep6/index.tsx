@@ -5,6 +5,9 @@ import { useFormPage, FormActions } from "../../context/FormContext";
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { database } from "../../services/firebase";
 import { ref, push, set } from "firebase/database";
+import { InputArea } from "../../components/Questions/TableQuestionText/components/InputArea";
+import { TableArea } from "../../components/Questions/TableQuestionText/components/TableArea";
+import { Item } from "../../components/Questions/TableQuestionText/types/Item";
 
 type RoomParams = {
   id: string;
@@ -15,9 +18,9 @@ export const FormStep6 = () => {
   const roomId = params.id
   const navigate = useNavigate();
   const { state, dispatch } = useFormPage();
-
-
   const [questionOne, setQuestionOne] = useState('');
+  const [list, setList] = useState<Item[]>([]);
+  const [filteredList, setFilteredList] = useState<Item[]>([]);
 
 
   async function handleSendQuestionOthersProfessionals(event: FormEvent) {
@@ -47,6 +50,16 @@ export const FormStep6 = () => {
     });
   }, []);
 
+  const handleAddItem = (item: Item) => {
+    let newList = [...list]
+    newList.push(item)
+    setList(newList)
+  };
+
+  useEffect(() => {
+    setFilteredList(list)
+  }, [list]);
+
   return (
     <Theme>
       <SC.Container>
@@ -62,6 +75,16 @@ export const FormStep6 = () => {
             <p>Subseção Outros Profissionais</p>
           </div>
           <div className="formQuestionV2">
+
+            <SC.ContainerV2>
+              <SC.Body>
+
+                <InputArea onAdd={handleAddItem} />
+
+                <TableArea list={filteredList} />
+
+              </SC.Body>
+            </SC.ContainerV2>
 
             <SC.ButtonTypeText>
               <div className="formQuestion">

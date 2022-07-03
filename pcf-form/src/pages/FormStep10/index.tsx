@@ -12,8 +12,8 @@ import { TableArea } from "../../components/Questions/TableQuestion/components/T
 
 
 export const FormStep10 = () => {
-  const [list, setList] = useState<Item[]>(items);//lista geral
-  const [filteredList, setFilteredList] = useState<Item[]>([]);;//lista filtrada
+  const [list, setList] = useState<Item[]>(items);
+  const [filteredList, setFilteredList] = useState<Item[]>([]);
 
   console.log(list);
 
@@ -67,6 +67,7 @@ export const FormStep10 = () => {
         <div className="bgSubSection">
           <p>Recursos e custos diretos do PCF</p>
         </div>
+        
         <div className="formQuestionV2">
           <SC.ContainerV2>
             <SC.Body>
