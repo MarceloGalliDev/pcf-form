@@ -4,7 +4,6 @@ import { Link, useNavigate } from "react-router-dom"
 import { useFormPage, FormActions } from "../../context/FormContext"
 import { ChangeEvent, useEffect, useState } from "react"
 import { Item } from "../../components/Questions/TableQuestion/types/Item"
-import { items } from "../../components/Questions/TableQuestion/data/items"
 import { InputArea } from "../../components/Questions/TableQuestion/components/InputArea"
 import { TableArea } from "../../components/Questions/TableQuestion/components/TableArea"
 
@@ -12,7 +11,7 @@ import { TableArea } from "../../components/Questions/TableQuestion/components/T
 
 
 export const FormStep10 = () => {
-  const [list, setList] = useState<Item[]>(items);
+  const [list, setList] = useState<Item[]>([]);
   const [filteredList, setFilteredList] = useState<Item[]>([]);
 
   console.log(list);

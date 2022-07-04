@@ -12,7 +12,7 @@ export const TableArea = ({list}: Props) => {
       <thead>
         <tr>
           <SC.TableHeadColumn width={130}>Categoria</SC.TableHeadColumn>
-          <SC.TableHeadColumn width={130}>Tipo</SC.TableHeadColumn>
+          <SC.TableHeadColumn width={130}>Origem Recurso</SC.TableHeadColumn>
           <SC.TableHeadColumn width={150}>Valor</SC.TableHeadColumn>
         </tr>
       </thead>

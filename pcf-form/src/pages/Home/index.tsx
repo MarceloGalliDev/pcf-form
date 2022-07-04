@@ -9,7 +9,7 @@ export const Home = () => {
   const navigate = useNavigate();
   const [newRoom, setNewRoom] = useState('');
 
-  async function handleCreateRoom(event: FormEvent) {
+  async function handleCreateRoom1(event: FormEvent) {
     event.preventDefault();
 
     const firebaseRoomsForm = ref(database, 'rooms');
@@ -17,8 +17,37 @@ export const Home = () => {
     set(firebaseForm, {
       municipio: newRoom,
     });
-
     navigate(`/${firebaseForm.key}/formstep1`)
+    // if (newRoom === '') {
+    //   alert('Preencha o Nome do Município')
+    // } else {
+    // }
+  };
+
+  async function handleCreateRoom2(event: FormEvent) {
+    event.preventDefault();
+
+    const firebaseRoomsForm = ref(database, 'rooms');
+    const firebaseForm = await push(firebaseRoomsForm);
+    set(firebaseForm, {
+      municipio: newRoom,
+    });
+    navigate(`/${firebaseForm.key}/formstepA1`)
+    // if (newRoom === '') {
+    //   alert('Preencha o Nome do Município')
+    // } else {
+    // }
+  };
+
+  async function handleCreateRoom3(event: FormEvent) {
+    event.preventDefault();
+
+    const firebaseRoomsForm = ref(database, 'rooms');
+    const firebaseForm = await push(firebaseRoomsForm);
+    set(firebaseForm, {
+      municipio: newRoom,
+    });
+    navigate(`/${firebaseForm.key}/formstepB1`)
     // if (newRoom === '') {
     //   alert('Preencha o Nome do Município')
     // } else {
@@ -35,7 +64,7 @@ export const Home = () => {
         <div className="main-content">
 
           <h2>Municípios <u>adeptos</u> ao PCF</h2>
-          <form onSubmit={handleCreateRoom}>
+          <form onSubmit={handleCreateRoom1}>
             {/* <input
               type="text"
               placeholder="Qual o seu município"
@@ -50,8 +79,8 @@ export const Home = () => {
 
           <hr />
 
-          <h2>Municípios <u>não adeptos</u> ao PCF</h2>
-          <form onSubmit={handleCreateRoom}>
+          <h2>Municípios <u>elegíveis mas não adeptos</u> ao PCF</h2>
+          <form onSubmit={handleCreateRoom2}>
             {/* <input
               type="text"
               placeholder="Qual o seu município"
@@ -67,7 +96,7 @@ export const Home = () => {
           <hr />
 
           <h2>Municípios <u>desistentes</u> ao PCF</h2>
-          <form onSubmit={handleCreateRoom}>
+          <form onSubmit={handleCreateRoom3}>
             {/* <input
               type="text"
               placeholder="Qual o seu município"

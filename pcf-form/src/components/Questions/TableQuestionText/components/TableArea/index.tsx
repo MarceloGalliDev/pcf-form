@@ -1,28 +1,28 @@
-import { remove } from 'firebase/database';
 import { Trash } from 'phosphor-react';
-import { FormEvent } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import { Item } from '../../types/Item';
-import { TableItem } from '../TableItem';
 import * as SC from './styles';
 
 type Props = {
-  list: Item[]
+  list: Item[],
 };
 
-export const TableArea = ({ list }: Props) => {
+export const TableArea = ({ list }:Props ) => {
+  const [countItem, setCountItem] = useState([])
+  const [filterCountItem, setFilterCountItem] = useState([])
 
   function removeEvent(event: FormEvent) {
     event.preventDefault();
   };
+  
+  const removeItem = (index: number) => {
+    console.log(index)
 
-  const removeItem = (index: Number[]) => {
-    alert('deletar: ' + index)
-    
-    for (let i = 0; i < index.length; i++) {
-      if (index === index)
-    }
   };
 
+  useEffect(() => {
+    setCountItem(countItem)
+  }, [countItem])
 
   return (
     <SC.TableHead>
@@ -58,7 +58,7 @@ export const TableArea = ({ list }: Props) => {
               <SC.Value>
                 <form onSubmit={removeEvent}>
                   <SC.Button
-                    onClick={() => removeItem([index + 1])}
+                    onClick={() => removeItem(item.id)}
                   >
                     <Trash size={20} color="#d22d2d" weight="light" />
                   </SC.Button>

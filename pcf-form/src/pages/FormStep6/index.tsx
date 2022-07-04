@@ -45,6 +45,8 @@ export const FormStep6 = () => {
     newList.push(item)
     setList(newList)
   };
+ 
+  // console.log(list)
 
   const handleNumberOfVisitorsChange = (event: ChangeEvent<HTMLInputElement>) => {
     setQuestionTwo(event.target.value);
@@ -61,8 +63,6 @@ export const FormStep6 = () => {
   useEffect(() => {
     setFilteredList(list)
   }, [list]);
-
-
 
   // console.log(filteredList)
 

@@ -1,6 +1,8 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Home } from "./pages/Home";
 import { FormStep1 } from "./pages/FormStep1";
+import { FormStepA1 } from "./pages/FormStepA1";
+import { FormStepB1 } from "./pages/FormStepB1";
 import { FormStep2 } from "./pages/FormStep2";
 import { FormStep3 } from "./pages/FormStep3";
 import { FormStep4 } from "./pages/FormStep4";
@@ -19,6 +21,8 @@ export const Router = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/:id/formstep1" element={<FormStep1 />} />
+        <Route path="/:id/formstepA1" element={<FormStepA1 />} />
+        <Route path="/:id/formstepB1" element={<FormStepB1 />} />
         <Route path="/:id/formstep2" element={<FormStep2 />} />
         <Route path="/:id/formstep3" element={<FormStep3 />} />
         <Route path="/:id/formstep4" element={<FormStep4 />} />

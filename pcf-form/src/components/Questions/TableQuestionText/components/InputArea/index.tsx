@@ -1,5 +1,5 @@
 import * as SC from './styles';
-import { FormEvent, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import { Item } from '../../types/Item';
 import { Plus } from 'phosphor-react';
 
@@ -9,6 +9,7 @@ type Props = {
 };
 
 export const InputArea = ({ onAdd }: Props) => {
+  const [idCount, setIdCount] = useState(1)
   const [inputOneField, setInputOneField] = useState('');
   const [inputTwoField, setInputTwoField] = useState(0);
 
@@ -17,23 +18,24 @@ export const InputArea = ({ onAdd }: Props) => {
 
     let errors: string[] = [];
 
-    if(inputOneField == '') {
+    if (inputOneField == '') {
       errors.push('Insira a resposta!');
     }
-    if(inputTwoField <= 0) {
+    if (inputTwoField <= 0) {
       errors.push('Insira a resposta!');
     }
-
-    if(errors.length > 0) {
+    if (errors.length > 0) {
       alert(errors.join("\n"));
     } else {
       onAdd({
+        id: idCount,
         inputOne: inputOneField,
         inputTwo: inputTwoField,
       });
       clearFields();
+      setIdCount(idCount + 1);
     }
-  }
+  };
 
   const clearFields = () => {
     setInputOneField('');
@@ -55,7 +57,8 @@ export const InputArea = ({ onAdd }: Props) => {
 
       <SC.InputLabelButton>
         <SC.InputTitle>&nbsp;</SC.InputTitle>
-        <SC.Button onClick={handleAddEvent}><Plus size={20} color="#ffffff" weight="bold" /></SC.Button>
+        <SC.Button onClick={handleAddEvent}>
+          <Plus size={20} color="#ffffff" weight="bold" /></SC.Button>
       </SC.InputLabelButton>
 
     </SC.Container>
