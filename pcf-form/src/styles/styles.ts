@@ -401,7 +401,7 @@ export const ButtonTypeFile = styled.div`
   }
 `;
 
-export const AllButtons = styled.button`
+export const AllButtons = styled.div`
   margin: 40px 0px;
   border: none;
   display: flex;
@@ -421,6 +421,7 @@ export const AllButtons = styled.button`
     cursor: pointer;
     text-decoration: none;
     transition: filter 0.2s;
+    text-align: center;
 
     &:hover {
       filter: brightness(0.8);

@@ -19,3 +19,16 @@ export const Category = styled.div`
 export const Value = styled.div`
   color: #591C21;
 `;
+
+export const Button = styled.button`
+  background-color: #fff;
+  border: none;
+  border-radius: 50%;
+  margin-left: 19px;
+  cursor: pointer;
+
+  &:hover {
+    filter: brightness(0.8);
+    color: white;
+  }
+`;

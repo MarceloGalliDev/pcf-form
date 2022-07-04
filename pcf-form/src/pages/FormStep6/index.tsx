@@ -18,9 +18,9 @@ export const FormStep6 = () => {
   const roomId = params.id
   const navigate = useNavigate();
   const { state, dispatch } = useFormPage();
-  const [questionOne, setQuestionOne] = useState('');
   const [list, setList] = useState<Item[]>([]);
   const [filteredList, setFilteredList] = useState<Item[]>([]);
+  const [questionTwo, setQuestionTwo] = useState('');
 
 
   async function handleSendQuestionOthersProfessionals(event: FormEvent) {
@@ -28,7 +28,8 @@ export const FormStep6 = () => {
 
     const question = {
       E_Visitadores_do_PCF: {
-        questao42: questionOne,
+        questao42: filteredList,
+        questao43: questionTwo,
       }
     };
 
@@ -39,8 +40,14 @@ export const FormStep6 = () => {
     navigate(`/${roomId}/formstep7`)
   };
 
+  const handleAddItem = (item: Item) => {
+    let newList = [...list]
+    newList.push(item)
+    setList(newList)
+  };
+
   const handleNumberOfVisitorsChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setQuestionOne(event.target.value);
+    setQuestionTwo(event.target.value);
   };
 
   useEffect(() => {
@@ -50,15 +57,14 @@ export const FormStep6 = () => {
     });
   }, []);
 
-  const handleAddItem = (item: Item) => {
-    let newList = [...list]
-    newList.push(item)
-    setList(newList)
-  };
 
   useEffect(() => {
     setFilteredList(list)
   }, [list]);
+
+
+
+  // console.log(filteredList)
 
   return (
     <Theme>
@@ -81,7 +87,9 @@ export const FormStep6 = () => {
 
                 <InputArea onAdd={handleAddItem} />
 
-                <TableArea list={filteredList} />
+                <TableArea 
+                  list={filteredList}
+                />
 
               </SC.Body>
             </SC.ContainerV2>
