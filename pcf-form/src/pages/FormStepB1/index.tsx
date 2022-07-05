@@ -69,8 +69,8 @@ export const FormStepB1 = () => {
     <ThemeB1>
       <SC.Container>
         <p>Etapa {state.currentStep}</p>
-        <h1>Municipíos Desistentes</h1>
-        <p>Municipíos que deixaram de participar do PCF</p>
+        <h1>Municípios Desistentes</h1>
+        <p>Municípios que deixaram de participar do PCF</p>
         <hr />
       </SC.Container>
 
@@ -330,7 +330,7 @@ export const FormStepB1 = () => {
           <button
             className="buttonAll"
             type="submit"
-            >Próximo
+            >Finalizar
           </button>
         </SC.AllButtons>
       </form>

@@ -128,7 +128,7 @@ export const FormStep5 = () => {
     visitadoresOutro: false,
     visitadoresOutrosDescricao: '',
   });
-  const [questionThirteen, setQuestionThirteen] = useState('')
+  const [questionThirteen, setQuestionThirteen] = useState('');
 
   async function handleSendQuestionVisitor(event: FormEvent) {
     event.preventDefault();

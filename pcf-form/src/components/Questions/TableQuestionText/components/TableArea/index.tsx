@@ -2,17 +2,15 @@ import { Trash } from 'phosphor-react';
 import { FormEvent, useEffect, useState } from 'react';
 import { Item } from '../../types/Item';
 import * as SC from '../../styles/styles';
+import { RemoveRedEye, SplitscreenTwoTone } from '@mui/icons-material';
 // import { TableInput } from '../TableInput';
 
 type Props = {
   list: Item[],
+  remover: (index: number) => void;
 };
 
-type InputProps = {
-  removeItem: (item: Item) => void;
-}
-
-export const TableArea = ({ list }:Props, {removeItem}: InputProps ) => {
+export const TableArea = ({ list, remover }:Props) => {
 
   const removeDefault = (event: FormEvent) => {
     event.preventDefault();
@@ -61,7 +59,7 @@ export const TableArea = ({ list }:Props, {removeItem}: InputProps ) => {
                 <SC.ValueArea>
                   <form onSubmit={removeDefault}>
                     <SC.ButtonArea
-                    onClick={() => { item.id }}
+                    onClick={() => remover(index)}
                     >
                       <Trash size={20} color="#d22d2d" weight="light" />
                     </SC.ButtonArea>

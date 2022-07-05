@@ -63,7 +63,7 @@ export const Home = () => {
       <main>
         <div className="main-content">
 
-          <h2>Municípios <u>adeptos</u> ao PCF</h2>
+          <h2>Municípios que <u>aderiram</u> ao PCF</h2>
           <form onSubmit={handleCreateRoom1}>
             {/* <input
               type="text"
@@ -79,7 +79,7 @@ export const Home = () => {
 
           <hr />
 
-          <h2>Municípios <u>elegíveis mas não adeptos</u> ao PCF</h2>
+          <h2>Municípios <u>elegíveis mas que não aderiram</u> ao PCF</h2>
           <form onSubmit={handleCreateRoom2}>
             {/* <input
               type="text"
@@ -95,7 +95,7 @@ export const Home = () => {
 
           <hr />
 
-          <h2>Municípios <u>desistentes</u> ao PCF</h2>
+          <h2>Municípios que <u>deixaram de participar</u> ao PCF</h2>
           <form onSubmit={handleCreateRoom3}>
             {/* <input
               type="text"

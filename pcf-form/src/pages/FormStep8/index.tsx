@@ -1,77 +1,64 @@
 import * as SC from "../../styles/styles"
 import { Theme } from "../../components/Theme"
-import { Link, useNavigate } from "react-router-dom"
+import { Link, useNavigate, useParams } from "react-router-dom"
 import { useFormPage, FormActions } from "../../context/FormContext"
-import { ChangeEvent, useEffect, useState } from "react"
-import { useForm } from "react-hook-form";
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from "yup";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react"
+import { database } from "../../services/firebase";
+import { ref, push, set } from "firebase/database";
 
-
-interface FormStep1Input {
-  name: string;
-  dateAcquisition: string;
-  dateVisition: string;
-  lastMonthSpentData: 'janeiro' | 'fevereiro' | 'marco' | 'abril' | 'maio' | 'junho' | 'julho' | 'agosto' | 'setembro' | 'outubro' | 'novembro' | 'dezembro';
-}
-
-const schema = yup.object({
-  dateAcquisition: yup.string().required(),
-  dateVisition: yup.string().required(),
-}).required();
+type RoomParams = {
+  id: string;
+};
 
 export const FormStep8 = () => {
+  const params = useParams<RoomParams>()
+  const roomId = params.id
   const navigate = useNavigate();
   const { state, dispatch } = useFormPage();
+  const [questionOne, setQuestionOne] = useState('')
+  const [questionTwo, setQuestionTwo] = useState('')
+  const [questionThree, setQuestionThree] = useState('')
 
-  const { register, handleSubmit, formState: {errors}} = useForm<FormStep1Input>({resolver: yupResolver(schema)})
-  const onSubmit = handleSubmit(data => navigate('/formstep3'))
+  async function handleSendPartnerOrganizations(event: FormEvent) {
+    event.preventDefault();
 
-//função de captura de valores
-  const handleDateAcquisitionChange = (event: ChangeEvent<HTMLInputElement>) => {
-    dispatch({
-      type: FormActions.setDateAcquisition,
-      payload: event.target.value
-    });
+    if (questionOne.trim() === '') {
+      return;
+    };
+    if (questionThree.trim() === '') {
+      return;
+    };
+
+    const question = {
+      E_Visitadores_do_PCF: {
+        questao48: questionOne,
+        questao49: questionTwo,
+        questao50: questionThree,
+      }
+    };
+
+    const firebaseRoomsQuestion = ref(database, `rooms/${roomId}/question`);
+    const firebaseQuestion = await push(firebaseRoomsQuestion);
+    set(firebaseQuestion, question)
+
+    navigate(`/${roomId}/formstep9`)
   };
 
-  const handleDateVisitionChange = (event: ChangeEvent<HTMLInputElement>) => {
-    dispatch({
-      type: FormActions.setDateVisition,
-      payload: event.target.value
-    });
+  const handlePartnershipsOrganizationChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setQuestionOne(event.target.value);
+  };
+
+  const handleFinancialSupportChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setQuestionTwo(event.target.value);
   };
 
   const handleLastMonthSpentDataChange = (event: ChangeEvent<HTMLInputElement>) => {
-    dispatch({
-      type: FormActions.setLastMonthSpentData,
-      payload: event.target.value
-    });
+
   };
 
   const handleNameChange = (event: ChangeEvent<HTMLInputElement>) => {
-    dispatch({
-      type: FormActions.setName,
-      payload: event.target.value
-    });
-  };
 
-  //verificando se foi respondida, não passa para próxima etapa
-  // useEffect(() => {
-  //   if (state.name === '' ||
-  //     state.phoneNumber === '' ||
-  //     state.email === '' ||
-  //     state.functionPCF === '' ||
-  //     state.uf === '' ||
-  //     state.city === '') {
-  //     navigate('/')
-  //   } else {
-  //     dispatch({
-  //       type: FormActions.setCurrentStep,
-  //       payload: 2
-  //     });
-  //   }
-  // }, []);
+  };
 
   useEffect(() => {
     dispatch({
@@ -89,106 +76,103 @@ export const FormStep8 = () => {
         <hr/>
       </SC.Container>
 
-      <SC.ButtonTypeText>
-        <div className="formQuestion">
-          <label htmlFor="name">
-            Com qual(is) a(s) organização(ões) possui parceria?
-            <input
-              {...register("name")}
-              name="name"
-              type="text"
-              value={state.name}
-              onChange={handleNameChange}
-              placeholder="Sua resposta"
-            />
-          </label>
-        </div>
-      </SC.ButtonTypeText>
+      <form onSubmit={handleSendPartnerOrganizations}>
 
-      <SC.ButtonTypeRadio>
-        <div className="formQuestion">
-          <p className="textFormRadioButton">
-            Essas organizaões fazem aporte financeiros para o PCF?
-            <span>{errors.lastMonthSpentData && " ⚠ *Campo obrigatório "}</span>
-          </p>
+        <SC.ButtonTypeText>
+          <div className="formQuestion">
+            <label htmlFor="parceriasComOrganizacoes">
+              Com qual(is) a(s) organização(ões) possui parceria?
+              <input
+                id="parceriasComOrganizacoes"
+                name="PartnershipsOrganization"
+                type="text"
+                value={questionOne}
+                onChange={handlePartnershipsOrganizationChange}
+                placeholder="Sua resposta"
+              />
+            </label>
+          </div>
+        </SC.ButtonTypeText>
 
-          <div id="containerOption">
-            <div id="containerOptionSixOption">
-              
-              <div id="containerInputLabelRadioButton">
-                <input
-                  id="lastMonthSpentJaneiro"
-                  name="lastMonthSpentData"
-                  type="radio"
-                  value="sim"
-                  onChange={handleLastMonthSpentDataChange}
-                />
-                <label
-                  className="containerTextLabel"
-                  htmlFor="lastMonthSpentJaneiro"
-                >Sim
-                </label>
+        <SC.ButtonTypeRadio>
+          <div className="formQuestion">
+            <p className="textFormRadioButton">
+              Essas organizaões fazem aporte financeiros para o PCF?
+            </p>
+            <div id="containerOption">
+              <div id="containerOptionSixOption">
+        
+                <div id="containerInputLabelRadioButton">
+                  <input
+                    id="aporteFinanceiroYes"
+                    name="financialSupport"
+                    type="radio"
+                    value="sim"
+                    onChange={handleFinancialSupportChange}
+                  />
+                  <label
+                    className="containerTextLabel"
+                    htmlFor="aporteFinanceiroYes"
+                  >Sim
+                  </label>
+                </div>
+                <div id="containerInputLabelRadioButton">
+                  <input
+                    id="aporteFinanceiroNo"
+                    name="financialSupport"
+                    type="radio"
+                    value="Não"
+                    onChange={handleFinancialSupportChange}
+                  />
+                  <label
+                    className="containerTextLabel"
+                    htmlFor="aporteFinanceiroNo"
+                  >Não
+                  </label>
+                </div>
+                <div id="containerInputLabelRadioButton">
+                  <input
+                    id="aporteFinanceiroDontKnow"
+                    name="financialSupport"
+                    type="radio"
+                    value="Não sei"
+                    onChange={handleFinancialSupportChange}
+                  />
+                  <label
+                    className="containerTextLabel"
+                    htmlFor="aporteFinanceiroDontKnow"
+                  >Não sei
+                  </label>
+                </div>
               </div>
-
-              <div id="containerInputLabelRadioButton">
-                <input
-                  id="lastMonthSpentFevereiro"
-                  name="lastMonthSpentData"
-                  type="radio"
-                  value="Não"
-                  onChange={handleLastMonthSpentDataChange}
-                />
-                <label
-                  className="containerTextLabel"
-                  htmlFor="lastMonthSpentFevereiro"
-                >Não
-                </label>
-              </div>
-
-              <div id="containerInputLabelRadioButton">
-                <input
-                  id="lastMonthSpentMarco"
-                  name="lastMonthSpentData"
-                  type="radio"
-                  value="Não sei"
-                  onChange={handleLastMonthSpentDataChange}
-                />
-                <label
-                  className="containerTextLabel"
-                  htmlFor="lastMonthSpentMarco"
-                >Não sei
-                </label>
-              </div>
-
             </div>
           </div>
-        </div>
-      </SC.ButtonTypeRadio>
+        </SC.ButtonTypeRadio>
 
-      <SC.ButtonTypeText>
-        <div className="formQuestion">
-          <label htmlFor="name">
-            Qual o valor em Reais (R$) desse aporte financeiro?
-            <input
-              {...register("name")}
-              name="name"
-              type="text"
-              value={state.name}
-              onChange={handleNameChange}
-              placeholder="Sua resposta"
-            />
-          </label>
-        </div>
-      </SC.ButtonTypeText>
+        <SC.ButtonTypeText>
+          <div className="formQuestion">
+            <label htmlFor="name">
+              Qual o valor em Reais (R$) desse aporte financeiro?
+              <input
+                name="name"
+                type="text"
+                value={state.name}
+                onChange={handleNameChange}
+                placeholder="Sua resposta"
+              />
+            </label>
+          </div>
+        </SC.ButtonTypeText>
 
-      <SC.AllButtons>
-          <Link className="buttonAll" to="/:id/formstep7">Voltar</Link>
-          <button
-            className="buttonAll"
-            type="submit"
-            >Próximo
-          </button>
-        </SC.AllButtons>
+        <SC.AllButtons>
+            <Link className="buttonAll" to="/:id/formstep9">Voltar</Link>
+            <button
+              className="buttonAll"
+              type="submit"
+              >Próximo
+            </button>
+          </SC.AllButtons>
+      </form>
     </Theme>
   )
 }

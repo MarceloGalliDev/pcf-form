@@ -1,77 +1,72 @@
-import * as SC from "../../styles/styles"
-import { Theme } from "../../components/Theme"
-import { Link, useNavigate } from "react-router-dom"
-import { useFormPage, FormActions } from "../../context/FormContext"
-import { ChangeEvent, useEffect, useState } from "react"
-import { useForm } from "react-hook-form";
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from "yup";
+import * as SC from "../../styles/styles";
+import { Theme } from "../../components/Theme";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { useFormPage, FormActions } from "../../context/FormContext";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import { database } from "../../services/firebase";
+import { ref, push, set } from "firebase/database";
 
-
-interface FormStep1Input {
-  name: string;
-  dateAcquisition: string;
-  dateVisition: string;
-  lastMonthSpentData: 'janeiro' | 'fevereiro' | 'marco' | 'abril' | 'maio' | 'junho' | 'julho' | 'agosto' | 'setembro' | 'outubro' | 'novembro' | 'dezembro';
-}
-
-const schema = yup.object({
-  dateAcquisition: yup.string().required(),
-  dateVisition: yup.string().required(),
-}).required();
+type RoomParams = {
+  id: string;
+};
 
 export const FormStep7 = () => {
+  const params = useParams<RoomParams>();
+  const roomId = params.id;
   const navigate = useNavigate();
   const { state, dispatch } = useFormPage();
+  const [questionOne, setQuestionOne] = useState('');
+  const [questionTwo, setQuestionTwo] = useState('');
+  const [questionThree, setQuestionThree] = useState('');
+  const [questionFour, setQuestionFour] = useState('');
 
-  const { register, handleSubmit, formState: { errors } } = useForm<FormStep1Input>({ resolver: yupResolver(schema) })
-  const onSubmit = handleSubmit(data => navigate('/formstep3'))
+  async function handleSendPublicServed(event: FormEvent) {
+    event.preventDefault();
 
-  //função de captura de valores
-  const handleNameChange = (event: ChangeEvent<HTMLInputElement>) => {
-    dispatch({
-      type: FormActions.setName,
-      payload: event.target.value
-    });
+    if (questionOne.trim() === '') {
+      return;
+    };
+    if (questionTwo.trim() === '') {
+      return;
+    };
+    if (questionThree.trim() === '') {
+      return;
+    };
+    if (questionFour.trim() === '') {
+      return;
+    };
+
+    const question = {
+      G_Publico_Atendido_PCF: {
+        questao44: questionOne,
+        questao45: questionTwo,
+        questao46: questionThree,
+        questao47: questionFour,
+      }
+    };
+
+    const firebaseRoomsQuestion = ref(database, `rooms/${roomId}/question`);
+    const firebaseQuestion = await push(firebaseRoomsQuestion);
+    set(firebaseQuestion, question)
+
+    navigate(`/${roomId}/formstep8`)
+  };
+
+  const handlePregnantChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setQuestionOne(event.target.value);
   };
   
-  const handleDateAcquisitionChange = (event: ChangeEvent<HTMLInputElement>) => {
-    dispatch({
-      type: FormActions.setDateAcquisition,
-      payload: event.target.value
-    });
+  const handleChildrenAged_0_36Change = (event: ChangeEvent<HTMLInputElement>) => {
+    setQuestionTwo(event.target.value);
   };
 
-  const handleDateVisitionChange = (event: ChangeEvent<HTMLInputElement>) => {
-    dispatch({
-      type: FormActions.setDateVisition,
-      payload: event.target.value
-    });
+  const handleChildrenAged_0_72Change = (event: ChangeEvent<HTMLInputElement>) => {
+    setQuestionThree(event.target.value);
   };
 
-  const handleLastMonthSpentDataChange = (event: ChangeEvent<HTMLInputElement>) => {
-    dispatch({
-      type: FormActions.setLastMonthSpentData,
-      payload: event.target.value
-    });
+  const handleNumberOfChildrenChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setQuestionFour(event.target.value);
   };
-
-  //verificando se foi respondida, não passa para próxima etapa
-  // useEffect(() => {
-  //   if (state.name === '' ||
-  //     state.phoneNumber === '' ||
-  //     state.email === '' ||
-  //     state.functionPCF === '' ||
-  //     state.uf === '' ||
-  //     state.city === '') {
-  //     navigate('/')
-  //   } else {
-  //     dispatch({
-  //       type: FormActions.setCurrentStep,
-  //       payload: 2
-  //     });
-  //   }
-  // }, []);
 
   useEffect(() => {
     dispatch({
@@ -89,82 +84,74 @@ export const FormStep7 = () => {
         <hr />
       </SC.Container>
 
-      <SC.ButtonTypeTextV2>
-        <div className="formQuestion">
-          <p>Indique o número de pessoas atendidas pelo Programa em seu município no mês de referência mencionado anteriormente:</p>
-
-          <div className="containerBgLabel">
-            <label className="containerTextLabel" htmlFor="name">
-              Gestantes (inseridas no CadÚnico):
-              <span>{errors.name && " ⚠ *Campo obrigatório "}</span>
-              <input
-                {...register("name")}
-                name="name"
-                type="text"
-                autoFocus
-                value={state.name}
-                onChange={handleNameChange}
-                placeholder="Quantidade"
-              />
-            </label>
+      <form onSubmit={handleSendPublicServed}>
+        <SC.ButtonTypeTextV2>
+          <div className="formQuestion">
+            <p>Indique o número de pessoas atendidas pelo Programa em seu município no mês de referência mencionado anteriormente:</p>
+            <div className="containerBgLabel">
+              <label className="containerTextLabel" htmlFor="gravidaInput">
+                Gestantes:
+                <input
+                  id="gravidaInput"
+                  name="pregnant"
+                  type="text"
+                  autoFocus
+                  value={questionOne}
+                  onChange={handlePregnantChange}
+                  placeholder="Quantidade"
+                />
+              </label>
+            </div>
+            <div className="containerBgLabel">
+              <label className="containerTextLabel" htmlFor="crianca_0_36">
+                Crianças de 0-36 meses:
+                <input
+                  id="crianca_0_36"
+                  name="childrenAged_0_36"
+                  type="text"
+                  value={questionTwo}
+                  onChange={handleChildrenAged_0_36Change}
+                  placeholder="Quantidade"
+                />
+              </label>
+            </div>
+            <div className="containerBgLabel">
+              <label className="containerTextLabel" htmlFor="crianca_0_72">
+                Crianças de 0-72 meses:
+                <input
+                  id="crianca_0_72"
+                  name="childrenAged_0_72"
+                  type="text"
+                  value={questionThree}
+                  onChange={handleChildrenAged_0_72Change}
+                  placeholder="Quantidade"
+                />
+              </label>
+            </div>
+            <div className="containerBgLabel">
+              <label className="containerTextLabel" htmlFor="quantidadeDeCriancas">
+                Quantos domicílios no seu município possuem mais de uma criança sendo atendida pelo PCF?
+                <input
+                  id="quantidadeDeCriancas"
+                  name="numberOfChildren"
+                  type="text"
+                  value={questionFour}
+                  onChange={handleNumberOfChildrenChange}
+                  placeholder="Quantidade"
+                />
+              </label>
+            </div>
           </div>
-
-          <div className="containerBgLabel">
-            <label className="containerTextLabel" htmlFor="name">
-              Crianças de 0-36 meses (inseridas no CadÚnico):
-              <span>{errors.name && " ⚠ *Campo obrigatório "}</span>
-              <input
-                {...register("name")}
-                name="name"
-                type="text"
-                value={state.name}
-                onChange={handleNameChange}
-                placeholder="Quantidade"
-              />
-            </label>
-          </div>
-
-          <div className="containerBgLabel">
-            <label className="containerTextLabel" htmlFor="name">
-              Crianças de 0-72 meses (Beneficiárias do BPC):
-              <span>{errors.name && " ⚠ *Campo obrigatório "}</span>
-              <input
-                {...register("name")}
-                name="name"
-                type="text"
-                value={state.name}
-                onChange={handleNameChange}
-                placeholder="Quantidade"
-              />
-            </label>
-          </div>
-
-          <div className="containerBgLabel">
-            <label className="containerTextLabel" htmlFor="name">
-              Quantos domicílios no seu município possuem mais de uma criança sendo atendida pelo PCF?
-              <span>{errors.name && " ⚠ *Campo obrigatório "}</span>
-              <input
-                {...register("name")}
-                name="name"
-                type="text"
-                value={state.name}
-                onChange={handleNameChange}
-                placeholder="Quantidade"
-              />
-            </label>
-          </div>
-
-        </div>
-      </SC.ButtonTypeTextV2>
-
-      <SC.AllButtons>
-          <Link className="buttonAll" to="/:id/formstep6">Voltar</Link>
-          <button
-            className="buttonAll"
-            type="submit"
-            >Próximo
-          </button>
-        </SC.AllButtons>
+        </SC.ButtonTypeTextV2>
+        <SC.AllButtons>
+            <Link className="buttonAll" to="/:id/formstep8">Voltar</Link>
+            <button
+              className="buttonAll"
+              type="submit"
+              >Próximo
+            </button>
+          </SC.AllButtons>
+      </form>
     </Theme>
   )
 };

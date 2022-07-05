@@ -109,7 +109,7 @@ export const FormStep1 = () => {
       <SC.Container>
         <p>Etapa {state.currentStep}/10</p>
         <h1>Informações gerais</h1>
-        <p>Identificação do entrevistado</p>
+        <p>Informações do responsável por responder este questionário</p>
         <hr />
       </SC.Container>
 
@@ -219,7 +219,7 @@ export const FormStep1 = () => {
   );
 };
 
-
+{/* <span>{errors.name && " ⚠ *Campo obrigatório "}</span> */}
 
   // const schema = yup.object({
   //   name: yup.string().required(),

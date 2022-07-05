@@ -69,8 +69,8 @@ export const FormStepA1 = () => {
     <ThemeA1>
       <SC.Container>
         <p>Etapa {state.currentStep}</p>
-        <h1>Municipíos Elegíveis</h1>
-        <p>Municipíos elegíveis, mas que não aderiram ao programa</p>
+        <h1>Municípios Elegíveis</h1>
+        <p>Municípios elegíveis, mas que não aderiram ao programa</p>
         <hr />
       </SC.Container>
 
@@ -267,7 +267,7 @@ export const FormStepA1 = () => {
 
         <SC.ButtonTypeRadioText>
           <div className="formQuestion">
-            <p>Há algum outro custo direto pago com recurso do PCF?</p>
+            <p>O seu município possui algum Programa ou Serviço com o mesmo público-alvo do Programa Criança Feliz?</p>
 
             <div className="formQuestion">
               <div id="containerOption">
@@ -329,7 +329,7 @@ export const FormStepA1 = () => {
           <button
             className="buttonAll"
             type="submit"
-            >Próximo
+            >Finalizar
           </button>
         </SC.AllButtons>
       </form>

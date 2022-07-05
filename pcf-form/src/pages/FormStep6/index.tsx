@@ -29,15 +29,15 @@ export const FormStep6 = () => {
     setList(newList)
   };
 
-  useEffect(() => {
-    console.log(filteredList)
-  },[filteredList])
+  function removerDaLista(index: number) {
+    setFilteredList((previous) => previous.filter((item, indexPrevious) => index !== indexPrevious))
+  }
 
   async function handleSendQuestionOthersProfessionals(event: FormEvent) {
     event.preventDefault();
 
     const question = {
-      E_Visitadores_do_PCF: {
+      F_Outros_Profissionais: {
         questao42: filteredList,
         questao43: questionTwo,
       }
@@ -50,7 +50,7 @@ export const FormStep6 = () => {
     navigate(`/${roomId}/formstep7`)
   };
 
-  const handleNumberOfVisitorsChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleObservationChange = (event: ChangeEvent<HTMLInputElement>) => {
     setQuestionTwo(event.target.value);
   };
 
@@ -87,7 +87,7 @@ export const FormStep6 = () => {
 
                   <InputArea onAdd={handleAddItemText} />
 
-                  <TableArea list={filteredList} />
+                  <TableArea list={filteredList} remover={removerDaLista} />
 
                 </SC.Body>
               </SC.ContainerV2>
@@ -95,13 +95,14 @@ export const FormStep6 = () => {
 
             <SC.ButtonTypeText>
               <div className="formQuestion">
-                <label htmlFor="name">
+                <label htmlFor="observacaoText">
                   Observações:
                   <input
-                    name="name"
+                    id="observacaoText"
+                    name="observation"
                     type="text"
-                    value={state.name}
-                    onChange={handleNumberOfVisitorsChange}
+                    value={questionTwo}
+                    onChange={handleObservationChange}
                     placeholder="Sua resposta"
                   />
                 </label>
