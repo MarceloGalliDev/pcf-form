@@ -1,8 +1,13 @@
 import React from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Header from '../../components/Header';
 
 const TasksHome: React.FC = () => {
   return (
-    <h1>Tasks Home</h1>
+    <>
+      <Header />
+      <h1>Home Tasks</h1>
+    </>
   )
 }
 

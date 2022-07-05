@@ -115,54 +115,6 @@ const formReducer = (state: State, action: Action) => {//recebi os dados origina
   switch (action.type) {
     case FormActions.setCurrentStep://a ação é de o passo
       return { ...state, currentStep: action.payload };//pego o passo no action.payload, no currentStep e retorna o novo valor
-    case FormActions.setName:
-      return { ...state, name: action.payload };
-    case FormActions.setEmail:
-      return { ...state, email: action.payload };
-    case FormActions.setPhoneNumber:
-      return { ...state, phoneNumber: action.payload };
-    case FormActions.setFunctionPCF:
-      return { ...state, functionPCF: action.payload };
-    case FormActions.setUf:
-      return { ...state, uf: action.payload };
-    case FormActions.setCity:
-      return { ...state, city: action.payload };
-    case FormActions.setDateAcquisition:
-      return { ...state, dateAcquisition: action.payload };
-    case FormActions.setDateVisition:
-      return { ...state, dateVisition: action.payload };
-    case FormActions.setLastMonthSpentData:
-      return { ...state, lastMonthSpentData: action.payload };
-    case FormActions.setPhasePCFCity:
-      return { ...state, phasePCFCity: action.payload };
-    case FormActions.setExpansionGoals:
-      return { ...state, expansionGoals: action.payload };
-    case FormActions.setReferenceCenter:
-      return { ...state, referenceCenter: action.payload };
-    case FormActions.setActionPlan:
-      return { ...state, actionPlan: action.payload };
-    case FormActions.setTeamCoordinator:
-      return { ...state, teamCoordinator: action.payload };
-    case FormActions.setMeetTheCoordinator:
-      return { ...state, meetTheCoordinator: action.payload };
-    case FormActions.setContactCoordinator:
-      return { ...state, contactCoordinator: action.payload };
-    case FormActions.setKnowTheMultiplier:
-      return { ...state, knowTheMultiplier: action.payload };
-    case FormActions.setSteeringCommittee:
-      return { ...state, steeringCommittee: action.payload };
-    case FormActions.setSteeringCommitteeMeeting:
-      return { ...state, steeringCommitteeMeeting: action.payload };
-    case FormActions.setNumberOfSupervisors:
-      return { ...state, numberOfSupervisors: action.payload };
-    case FormActions.setAveragePay:
-      return { ...state, averagePay: action.payload };
-    case FormActions.setWorkload:
-      return { ...state, workload: action.payload };
-    case FormActions.setWorkloadOthers:
-      return { ...state, workloadOthers: action.payload };
-    case FormActions.setSupervisorQualification:
-      return { ...state, supervisorQualification: action.payload };
     default://se não existir está ação retorna o state do jeito que veio
       return state;
   }

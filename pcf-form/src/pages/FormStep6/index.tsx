@@ -1,6 +1,6 @@
 import * as SC from "../../styles/styles";
 import { Theme } from "../../components/Theme";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, Outlet, useNavigate, useParams } from "react-router-dom";
 import { useFormPage, FormActions } from "../../context/FormContext";
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { database } from "../../services/firebase";
@@ -28,6 +28,10 @@ export const FormStep6 = () => {
     newList.push(item)
     setList(newList)
   };
+
+  useEffect(() => {
+    console.log(filteredList)
+  },[filteredList])
 
   async function handleSendQuestionOthersProfessionals(event: FormEvent) {
     event.preventDefault();
@@ -61,8 +65,6 @@ export const FormStep6 = () => {
     setFilteredList(list)
   }, [list]);
 
-  
-
   return (
     <Theme>
       <SC.Container>
@@ -79,7 +81,17 @@ export const FormStep6 = () => {
           </div>
           <div className="formQuestionV2">
 
-            <TableQuestionMult></TableQuestionMult>
+            <div className="formQuestionV2">
+              <SC.ContainerV2>
+                <SC.Body>
+
+                  <InputArea onAdd={handleAddItemText} />
+
+                  <TableArea list={filteredList} />
+
+                </SC.Body>
+              </SC.ContainerV2>
+            </div>
 
             <SC.ButtonTypeText>
               <div className="formQuestion">
@@ -113,15 +125,5 @@ export const FormStep6 = () => {
   )
 };
 
-{/* <div className="formQuestionV2">
-<SC.ContainerV2>
-  <SC.Body>
 
-    <InputArea onAdd={handleAddItemText} />
-
-    <TableArea list={filteredList} />
-
-  </SC.Body>
-</SC.ContainerV2>
-</div> */}
 

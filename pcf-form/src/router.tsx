@@ -13,8 +13,6 @@ import { FormStep8 } from "./pages/FormStep8";
 import { FormStep9 } from "./pages/FormStep9";
 import { FormStep10 } from "./pages/FormStep10";
 
-
-
 export const Router = () => {
   return (
     <BrowserRouter>

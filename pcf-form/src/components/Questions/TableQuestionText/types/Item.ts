@@ -3,3 +3,7 @@ export type Item = {
   inputOne: string;
   inputTwo: number;
 };
+
+export type Delete = {
+  onDelete: () => void;
+}

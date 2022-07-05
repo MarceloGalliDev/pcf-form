@@ -1,7 +1,13 @@
 import React from 'react';
+import Header from '../../components/Header';
 
 const Tasks: React.FC = () => {
-  return <h1>TaskPage</h1>
+  return (
+    <>
+      <Header />
+      <h1>Tasks</h1>
+    </>
+  ) 
 }
 
 export default Tasks;
