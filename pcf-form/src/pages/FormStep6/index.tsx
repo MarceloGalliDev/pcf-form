@@ -61,13 +61,15 @@ export const FormStep6 = () => {
     setFilteredList(list)
   }, [list]);
 
+  
+
   return (
     <Theme>
       <SC.Container>
         <p>Etapa {state.currentStep}/10</p>
         <h1>Outros profissionais</h1>
         <p>Informações sobre os atores/ participantes da equipe do PCF</p>
-        <hr/>
+        <hr />
       </SC.Container>
 
       <form onSubmit={handleSendQuestionOthersProfessionals}>
@@ -77,19 +79,8 @@ export const FormStep6 = () => {
           </div>
           <div className="formQuestionV2">
 
-          <div className="formQuestionV2">
-            <SC.ContainerV2>
-              <SC.Body>
+            <TableQuestionMult></TableQuestionMult>
 
-                <InputArea onAdd={handleAddItemText} />
-
-                <TableArea list={filteredList} />
-
-              </SC.Body>
-            </SC.ContainerV2>
-          </div>
-
-            
             <SC.ButtonTypeText>
               <div className="formQuestion">
                 <label htmlFor="name">
@@ -113,12 +104,24 @@ export const FormStep6 = () => {
           <button
             className="buttonAll"
             type="submit"
-            >Próximo
+          >Próximo
           </button>
         </SC.AllButtons>
       </form>
 
     </Theme>
   )
-}
+};
+
+{/* <div className="formQuestionV2">
+<SC.ContainerV2>
+  <SC.Body>
+
+    <InputArea onAdd={handleAddItemText} />
+
+    <TableArea list={filteredList} />
+
+  </SC.Body>
+</SC.ContainerV2>
+</div> */}
 

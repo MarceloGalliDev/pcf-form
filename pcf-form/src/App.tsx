@@ -1,4 +1,3 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { FormProvider } from './context/FormContext';
 import { Router } from "./router";
 

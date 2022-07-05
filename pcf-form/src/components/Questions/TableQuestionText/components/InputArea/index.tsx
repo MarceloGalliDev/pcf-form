@@ -18,9 +18,6 @@ export const InputArea = ({ onAdd }: Props) => {
   const params = useParams<RoomParams>()
   const roomId = params.id
 
-  const [list, setList] = useState<Item[]>([]);
-  const [filteredList, setFilteredList] = useState<Item[]>([]);
-
   const [idCount, setIdCount] = useState(1)
   const [inputOneField, setInputOneField] = useState('');
   const [inputTwoField, setInputTwoField] = useState(0);
