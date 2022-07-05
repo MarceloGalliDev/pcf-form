@@ -13,10 +13,6 @@ import { TableArea } from "../../components/Questions/TableQuestion/components/T
 export const FormStep10 = () => {
   const [list, setList] = useState<Item[]>([]);
   const [filteredList, setFilteredList] = useState<Item[]>([]);
-
-  console.log(list);
-
-  
   const navigate = useNavigate();
   const { state, dispatch } = useFormPage();
 

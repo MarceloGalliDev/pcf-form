@@ -5,6 +5,7 @@ import { useFormPage, FormActions } from "../../context/FormContext";
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { database } from "../../services/firebase";
 import { ref, push, set } from "firebase/database";
+
 import { InputArea } from "../../components/Questions/TableQuestionText/components/InputArea";
 import { TableArea } from "../../components/Questions/TableQuestionText/components/TableArea";
 import { Item } from "../../components/Questions/TableQuestionText/types/Item";
@@ -22,6 +23,11 @@ export const FormStep6 = () => {
   const [filteredList, setFilteredList] = useState<Item[]>([]);
   const [questionTwo, setQuestionTwo] = useState('');
 
+  function handleAddItemText(item: Item) {
+    let newList = [...list]
+    newList.push(item)
+    setList(newList)
+  };
 
   async function handleSendQuestionOthersProfessionals(event: FormEvent) {
     event.preventDefault();
@@ -40,14 +46,6 @@ export const FormStep6 = () => {
     navigate(`/${roomId}/formstep7`)
   };
 
-  const handleAddItem = (item: Item) => {
-    let newList = [...list]
-    newList.push(item)
-    setList(newList)
-  };
- 
-  // console.log(list)
-
   const handleNumberOfVisitorsChange = (event: ChangeEvent<HTMLInputElement>) => {
     setQuestionTwo(event.target.value);
   };
@@ -59,12 +57,9 @@ export const FormStep6 = () => {
     });
   }, []);
 
-
   useEffect(() => {
     setFilteredList(list)
   }, [list]);
-
-  // console.log(filteredList)
 
   return (
     <Theme>
@@ -82,18 +77,19 @@ export const FormStep6 = () => {
           </div>
           <div className="formQuestionV2">
 
+          <div className="formQuestionV2">
             <SC.ContainerV2>
               <SC.Body>
 
-                <InputArea onAdd={handleAddItem} />
+                <InputArea onAdd={handleAddItemText} />
 
-                <TableArea 
-                  list={filteredList}
-                />
+                <TableArea list={filteredList} />
 
               </SC.Body>
             </SC.ContainerV2>
+          </div>
 
+            
             <SC.ButtonTypeText>
               <div className="formQuestion">
                 <label htmlFor="name">

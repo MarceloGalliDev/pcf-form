@@ -1,28 +1,22 @@
 import { Trash } from 'phosphor-react';
 import { FormEvent, useEffect, useState } from 'react';
 import { Item } from '../../types/Item';
-import * as SC from './styles';
+import * as SC from '../../styles/styles';
 
 type Props = {
   list: Item[],
 };
 
+const removeItem = () => {
+
+};
+
 export const TableArea = ({ list }:Props ) => {
-  const [countItem, setCountItem] = useState([])
-  const [filterCountItem, setFilterCountItem] = useState([])
 
   function removeEvent(event: FormEvent) {
     event.preventDefault();
   };
   
-  const removeItem = (index: number) => {
-    console.log(index)
-
-  };
-
-  useEffect(() => {
-    setCountItem(countItem)
-  }, [countItem])
 
   return (
     <SC.TableHead>
@@ -34,36 +28,36 @@ export const TableArea = ({ list }:Props ) => {
         </tr>
       </thead>
       <tbody>
-        {list.map((item, index) => (
+        {list.map((item, index, id) => (
           <SC.TableLine
             key={index}
           >
             <SC.TableColumn>
-              <SC.Value>
+              <SC.ValueArea>
                 <p>
                   {item.inputOne}
                 </p>
-              </SC.Value>
+              </SC.ValueArea>
             </SC.TableColumn>
 
             <SC.TableColumn>
-              <SC.Value>
+              <SC.ValueArea>
                 <p>
                   R$ {item.inputTwo}
                 </p>
-              </SC.Value>
+              </SC.ValueArea>
             </SC.TableColumn>
 
             <SC.TableColumn>
-              <SC.Value>
+              <SC.ValueArea>
                 <form onSubmit={removeEvent}>
-                  <SC.Button
-                    onClick={() => removeItem(item.id)}
+                  <SC.ButtonArea
+                    onClick={() => removeItem()}
                   >
                     <Trash size={20} color="#d22d2d" weight="light" />
-                  </SC.Button>
+                  </SC.ButtonArea>
                 </form>
-              </SC.Value>
+              </SC.ValueArea>
             </SC.TableColumn>
       
           </SC.TableLine>
