@@ -336,7 +336,7 @@ export const FormStep5 = () => {
 
                     <div id="containerInputLabelRadioButton">
                       <input
-                        id="WorkHoursForty"
+                        id="visitadoresHorasSemanais40"
                         name="visitadoresHorasSemanais40"
                         type="checkbox"
                         checked={questionThree.visitadoresHorasSemanais40}
@@ -347,14 +347,14 @@ export const FormStep5 = () => {
                       />
                       <label
                         className="containerTextLabel"
-                        htmlFor="WorkHoursForty"
+                        htmlFor="visitadoresHorasSemanais40"
                       >40 horas semanais
                       </label>
                     </div>
 
                     <div id="containerInputLabelRadioButton">
                       <input
-                        id="WorkHoursThirty"
+                        id="visitadoresHorasSemanais30"
                         name="horasSemanais30"
                         type="checkbox"
                         checked={questionThree.visitadoresHorasSemanais30}
@@ -365,13 +365,13 @@ export const FormStep5 = () => {
                       />
                       <label
                         className="containerTextLabel"
-                        htmlFor="lastMonthSpentFevereiro"
+                        htmlFor="visitadoresHorasSemanais30"
                       >30 horas semanais
                       </label>
                     </div>
                     <div id="containerInputLabelRadioButton">
                       <input
-                        id="lastMonthSpentFevereiro"
+                        id="visitadoresHorasSemanais20"
                         name="horasSemanais20"
                         type="checkbox"
                         checked={questionThree.visitadoresHorasSemanais20}
@@ -382,14 +382,14 @@ export const FormStep5 = () => {
                       />
                       <label
                         className="containerTextLabel"
-                        htmlFor="lastMonthSpentFevereiro"
+                        htmlFor="visitadoresHorasSemanais20"
                       >20 horas semanais
                       </label>
                     </div>
             
                     <div id="containerInputLabelRadioButton">
                       <input
-                        id="lastMonthSpentFevereiro"
+                        id="visitadoresHorasSemanaisOutros"
                         name="horasSemanaisOutros"
                         type="checkbox"
                         checked={questionThree.visitadoresHorasSemanaisOutros}
@@ -400,7 +400,7 @@ export const FormStep5 = () => {
                       />
                       <label
                         className="containerTextLabel"
-                        htmlFor="lastMonthSpentFevereiro"
+                        htmlFor="visitadoresHorasSemanaisOutros"
                       >Outro:
                       </label>
                       <input

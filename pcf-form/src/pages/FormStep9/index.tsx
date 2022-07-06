@@ -1,77 +1,74 @@
 import * as SC from "../../styles/styles"
 import { Theme } from "../../components/Theme"
-import { Link, useNavigate } from "react-router-dom"
+import { Link, useNavigate, useParams } from "react-router-dom"
 import { useFormPage, FormActions } from "../../context/FormContext"
-import { ChangeEvent, useEffect, useState } from "react"
-import { useForm } from "react-hook-form";
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from "yup";
+import { ChangeEvent, FormEvent, useCallback, useEffect, useState } from "react"
+import { push, ref, set } from "firebase/database";
+import { database } from "../../services/firebase";
 
+type RoomParams = {
+  id: string;
+};
 
-interface FormStep1Input {
-  name: string;
-  dateAcquisition: string;
-  dateVisition: string;
-  lastMonthSpentData: 'janeiro' | 'fevereiro' | 'marco' | 'abril' | 'maio' | 'junho' | 'julho' | 'agosto' | 'setembro' | 'outubro' | 'novembro' | 'dezembro';
-}
-
-const schema = yup.object({
-  dateAcquisition: yup.string().required(),
-  dateVisition: yup.string().required(),
-}).required();
+interface DistributionCriterion {
+  a_proximidadeDomicilioFamilia: boolean;
+  b_proximidadeDomicilioVisitadores: boolean;
+  c_caracteristicasCrianca: boolean;
+  d_atribuicaoPorVaga: boolean;
+  e_sorteio: boolean;
+  f_outroDistribuicao: boolean;
+  g_outroDistribuicaoText: string;
+};
 
 export const FormStep9 = () => {
+  const params = useParams<RoomParams>()
+  const roomId = params.id
   const navigate = useNavigate();
   const { state, dispatch } = useFormPage();
+  const [questionOne, setQuestionOne] = useState<DistributionCriterion>({
+    a_proximidadeDomicilioFamilia: false,
+    b_proximidadeDomicilioVisitadores: false,
+    c_caracteristicasCrianca: false,
+    d_atribuicaoPorVaga: false,
+    e_sorteio: false,
+    f_outroDistribuicao: false,
+    g_outroDistribuicaoText: '',
+  })
+  const [questionTwo, setQuestionTwo] = useState('')
 
-  const { register, handleSubmit, formState: {errors}} = useForm<FormStep1Input>({resolver: yupResolver(schema)})
-  const onSubmit = handleSubmit(data => navigate('/formstep3'))
+  async function handleSendOtherCostsAndResources(event: FormEvent) {
+    event.preventDefault();
 
-//função de captura de valores
-  const handleDateAcquisitionChange = (event: ChangeEvent<HTMLInputElement>) => {
-    dispatch({
-      type: FormActions.setDateAcquisition,
-      payload: event.target.value
-    });
+    if (questionTwo.trim() === '') {
+      return;
+    };
+
+    const question = {
+      I_Recursos_E_Custos : {
+        questao51: questionOne,
+        questao52: questionTwo,
+      }
+    };
+
+    const firebaseRoomsQuestion = ref(database, `rooms/${roomId}/question`);
+    const firebaseQuestion = await push(firebaseRoomsQuestion);
+    set(firebaseQuestion, question)
+
+    navigate(`/${roomId}/formstep10`)
   };
 
-  const handleDateVisitionChange = (event: ChangeEvent<HTMLInputElement>) => {
-    dispatch({
-      type: FormActions.setDateVisition,
-      payload: event.target.value
-    });
-  };
+  const handleDistributionCriterionChange = useCallback((event: React.FormEvent<HTMLInputElement>) => {
+    const targetInput = event.currentTarget;
+    const { value, name } = targetInput;
+    setQuestionOne({
+      ...questionOne,
+      [name]: value,
+    })
+  }, [questionOne]);
 
-  const handleLastMonthSpentDataChange = (event: ChangeEvent<HTMLInputElement>) => {
-    dispatch({
-      type: FormActions.setLastMonthSpentData,
-      payload: event.target.value
-    });
+  const handleNumberOfVisitsChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setQuestionTwo(event.target.value);
   };
-
-  const handleNameChange = (event: ChangeEvent<HTMLInputElement>) => {
-    dispatch({
-      type: FormActions.setName,
-      payload: event.target.value
-    });
-  };
-
-  //verificando se foi respondida, não passa para próxima etapa
-  // useEffect(() => {
-  //   if (state.name === '' ||
-  //     state.phoneNumber === '' ||
-  //     state.email === '' ||
-  //     state.functionPCF === '' ||
-  //     state.uf === '' ||
-  //     state.city === '') {
-  //     navigate('/')
-  //   } else {
-  //     dispatch({
-  //       type: FormActions.setCurrentStep,
-  //       payload: 2
-  //     });
-  //   }
-  // }, []);
 
   useEffect(() => {
     dispatch({
@@ -84,159 +81,176 @@ export const FormStep9 = () => {
     <Theme>
       <SC.Container>
         <p>Etapa {state.currentStep}/10</p>
-        <h1>Recursos e Custos</h1>
+        <h1>Recursos e Custos do PCF</h1>
         <p>Recursos e custos mensais diretos do PCF no município (incluindo recursos humanos, materiais, infraestrutura etc.)</p>
         <hr/>
       </SC.Container>
 
+      <form onSubmit={handleSendOtherCostsAndResources}>
 
-      <SC.SubSection>
-        <div className="bgSubSection">
-          <p>Recursos e custos diretos do PCF</p>
-        </div>
-        <div className="formQuestionV2">
+        <SC.SubSection>
+          <div className="bgSubSection">
+            <p>Recursos e custos diretos do PCF</p>
+          </div>
+          <div className="formQuestionV2">
 
-        <SC.ButtonTypeCheckbox>
-          <div className="formQuestion">
-            <p className="textFormRadioButton">
-            Qual o critério de distribuição das famílias por Visitador?
-            </p>
+          <SC.ButtonTypeCheckbox>
+            <div className="formQuestion">
+              <p className="textFormRadioButton">
+              Qual o critério de distribuição das famílias por Visitador?
+              </p>
+                <div id="containerOption">
+                  <div id="containerOptionSixOption">
 
-            <div id="containerOption">
-              <div id="containerOptionSixOption">
+                    <div id="containerInputLabelRadioButton">
+                      <input
+                        id="a_proximidadeDomicilioFamilia"
+                        name="a_proximidadeDomicilioFamilia"
+                        type="checkbox"
+                        checked={questionOne.a_proximidadeDomicilioFamilia}
+                        onChange={(event) => setQuestionOne({
+                          ...questionOne,
+                          a_proximidadeDomicilioFamilia: !!event.currentTarget?.checked
+                        })}
+                      />
+                      <label
+                        className="containerTextLabel"
+                        htmlFor="a_proximidadeDomicilioFamilia"
+                      >Proximidade entre os domicílios das famílias atendendias pelo PCF
+                      </label>
+                    </div>
 
-                <div id="containerInputLabelRadioButton">
-                  <input
-                    id="lastMonthSpentJaneiro"
-                    name="lastMonthSpentData"
-                    type="checkbox"
-                    value="sim"
-                    onChange={handleLastMonthSpentDataChange}
-                  />
-                  <label
-                    className="containerTextLabel"
-                    htmlFor="lastMonthSpentJaneiro"
-                  >Proximidade entre os domicílios das famílias atendendias pelo PCF
-                  </label>
+                    <div id="containerInputLabelRadioButton">
+                      <input
+                        id="b_proximidadeDomicilioVisitadores"
+                        name="b_proximidadeDomicilioVisitadores"
+                        type="checkbox"
+                        checked={questionOne.b_proximidadeDomicilioVisitadores}
+                        onChange={(event) => setQuestionOne({
+                          ...questionOne,
+                          b_proximidadeDomicilioVisitadores: !!event.currentTarget?.checked
+                        })}
+                      />
+                      <label
+                        className="containerTextLabel"
+                        htmlFor="b_proximidadeDomicilioVisitadores"
+                      >Proximidade entre os domicílios dos visitadores e das famílias
+                      </label>
+                    </div>
+
+                    <div id="containerInputLabelRadioButton">
+                      <input
+                        id="c_caracteristicasCrianca"
+                        name="c_caracteristicasCrianca"
+                        type="checkbox"
+                        checked={questionOne.c_caracteristicasCrianca}
+                        onChange={(event) => setQuestionOne({
+                          ...questionOne,
+                          c_caracteristicasCrianca: !!event.currentTarget?.checked
+                        })}
+                      />
+                      <label
+                        className="containerTextLabel"
+                        htmlFor="c_caracteristicasCrianca"
+                      >Característica da criança
+                      </label>
+                    </div>
+
+                    <div id="containerInputLabelRadioButton">
+                      <input
+                        id="d_atribuicaoPorVaga"
+                        name="d_atribuicaoPorVaga"
+                        type="checkbox"
+                        checked={questionOne.d_atribuicaoPorVaga}
+                        onChange={(event) => setQuestionOne({
+                          ...questionOne,
+                          d_atribuicaoPorVaga: !!event.currentTarget?.checked
+                        })}
+                      />
+                      <label
+                        className="containerTextLabel"
+                        htmlFor="d_atribuicaoPorVaga"
+                      >Atribuição por vaga na agenda do visitador
+                      </label>
+                    </div>
+
+                    <div id="containerInputLabelRadioButton">
+                      <input
+                        id="e_sorteio"
+                        name="e_sorteio"
+                        type="checkbox"
+                        checked={questionOne.e_sorteio}
+                        onChange={(event) => setQuestionOne({
+                          ...questionOne,
+                          e_sorteio: !!event.currentTarget?.checked
+                        })}
+                      />
+                      <label
+                        className="containerTextLabel"
+                        htmlFor="e_sorteio"
+                      >Sorteio
+                      </label>
+                    </div>
+
+                    <div id="containerInputLabelRadioButton">
+                      <input
+                        id="f_outroDistribuicao"
+                        name="f_outroDistribuicao"
+                        type="checkbox"
+                        checked={questionOne.f_outroDistribuicao}
+                        onChange={(event) => setQuestionOne({
+                          ...questionOne,
+                          f_outroDistribuicao: !!event.currentTarget?.checked
+                        })}
+                      />
+                      <label
+                        className="containerTextLabel"
+                        htmlFor="f_outroDistribuicao"
+                      >Outro:
+                      </label>
+                        <input
+                          className="inputPlaceholderOther"
+                          id="g_outroDistribuicaoText"
+                          name="g_outroDistribuicaoText"
+                          type="text"
+                          value={questionOne.g_outroDistribuicaoText}
+                          onChange={handleDistributionCriterionChange}
+                          placeholder="Escreva aqui"
+                        />
+                    </div>
                 </div>
-
-                <div id="containerInputLabelRadioButton">
-                  <input
-                    id="lastMonthSpentFevereiro"
-                    name="lastMonthSpentData"
-                    type="checkbox"
-                    value="Não"
-                    onChange={handleLastMonthSpentDataChange}
-                  />
-                  <label
-                    className="containerTextLabel"
-                    htmlFor="lastMonthSpentFevereiro"
-                  >Proximidade entre os domicílios dos visitadores e das famílias
-                  </label>
-                </div>
-
-                <div id="containerInputLabelRadioButton">
-                  <input
-                    id="lastMonthSpentFevereiro"
-                    name="lastMonthSpentData"
-                    type="checkbox"
-                    value="Não"
-                    onChange={handleLastMonthSpentDataChange}
-                  />
-                  <label
-                    className="containerTextLabel"
-                    htmlFor="lastMonthSpentFevereiro"
-                  >Característica da criança
-                  </label>
-                </div>
-              
-                <div id="containerInputLabelRadioButton">
-                  <input
-                    id="lastMonthSpentFevereiro"
-                    name="lastMonthSpentData"
-                    type="checkbox"
-                    value="Não"
-                    onChange={handleLastMonthSpentDataChange}
-                  />
-                  <label
-                    className="containerTextLabel"
-                    htmlFor="lastMonthSpentFevereiro"
-                  >Atribuição por vaga na agenda do visitador
-                  </label>
-                </div>
-
-                <div id="containerInputLabelRadioButton">
-                  <input
-                    id="lastMonthSpentFevereiro"
-                    name="lastMonthSpentData"
-                    type="checkbox"
-                    value="Não"
-                    onChange={handleLastMonthSpentDataChange}
-                  />
-                  <label
-                    className="containerTextLabel"
-                    htmlFor="lastMonthSpentFevereiro"
-                  >Sorteio
-                  </label>
-                </div>
-
-                <div id="containerInputLabelRadioButton">
-                  <input
-                    id="lastMonthSpentFevereiro"
-                    name="lastMonthSpentData"
-                    type="checkbox"
-                    value="Não"
-                    onChange={handleLastMonthSpentDataChange}
-                  />
-                  <label
-                    className="containerTextLabel"
-                    htmlFor="lastMonthSpentFevereiro"
-                  >Outro:
-                  </label>
-                    <input
-                      className="inputPlaceholderOther"
-                      name="name"
-                      type="text"
-                      value={state.name}
-                      onChange={handleNameChange}
-                      placeholder="Escreva aqui"
-                    />
-                </div>
-
               </div>
             </div>
-          </div>
           </SC.ButtonTypeCheckbox>
-          
-          //adicionar questao quantidade de visitas realizadas
-
-        <SC.ButtonTypeText>
-          <div className="formQuestion">
-            <label htmlFor="name">
-              Qual numero médio de visitas que o visitador faz por dia:
-              <input
-                {...register("name")}
-                name="name"
-                type="text"
-                value={state.name}
-                onChange={handleNameChange}
-                placeholder="Sua resposta"
-              />
-            </label>
+            
+          <SC.ButtonTypeText>
+            <div className="formQuestion">
+              <label htmlFor="numeroDeVisitas">
+                Qual numero médio de visitas que o visitador realiza por dia:
+                <input
+                  id="numeroDeVisitas"
+                  name="numberOfVisits"
+                  type="text"
+                  value={questionTwo}
+                  onChange={handleNumberOfVisitsChange}
+                  placeholder="Sua resposta"
+                />
+              </label>
+            </div>
+          </SC.ButtonTypeText>
           </div>
-        </SC.ButtonTypeText>
+        </SC.SubSection>
 
-        </div>
-      </SC.SubSection>
-
-      <SC.AllButtons>
-          <Link className="buttonAll" to="/:id/formstep8">Voltar</Link>
-          <button
-            className="buttonAll"
-            type="submit"
-            >Próximo
-          </button>
+        <SC.AllButtons>
+            <Link className="buttonAll" to="/:id/formstep8">Voltar</Link>
+            <button
+              className="buttonAll"
+              type="submit"
+              >Próximo
+            </button>
         </SC.AllButtons>
+
+      </form>
     </Theme>
   )
 }

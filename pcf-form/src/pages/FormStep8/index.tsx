@@ -30,7 +30,7 @@ export const FormStep8 = () => {
     };
 
     const question = {
-      E_Visitadores_do_PCF: {
+      H_Organizacoes_Parceiras: {
         questao48: questionOne,
         questao49: questionTwo,
         questao50: questionThree,
@@ -52,12 +52,8 @@ export const FormStep8 = () => {
     setQuestionTwo(event.target.value);
   };
 
-  const handleLastMonthSpentDataChange = (event: ChangeEvent<HTMLInputElement>) => {
-
-  };
-
-  const handleNameChange = (event: ChangeEvent<HTMLInputElement>) => {
-
+  const handleFinancialValuationChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setQuestionThree(event.target.value)
   };
 
   useEffect(() => {
@@ -151,13 +147,14 @@ export const FormStep8 = () => {
 
         <SC.ButtonTypeText>
           <div className="formQuestion">
-            <label htmlFor="name">
+            <label htmlFor="valorDoAporte">
               Qual o valor em Reais (R$) desse aporte financeiro?
               <input
-                name="name"
+                id="valorDoAporte"
+                name="financialValuation"
                 type="text"
-                value={state.name}
-                onChange={handleNameChange}
+                value={questionThree}
+                onChange={handleFinancialValuationChange}
                 placeholder="Sua resposta"
               />
             </label>

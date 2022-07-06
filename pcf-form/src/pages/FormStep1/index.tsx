@@ -28,8 +28,6 @@ export const FormStep1 = () => {
   const [questionTwo, setQuestionTwo] = useState('')
   const [questionThree, setQuestionThree] = useState('')
   const [questionFour, setQuestionFour] = useState('')
-  const [questionFive, setQuestionFive] = useState('')
-  const [questionSix, setQuestionSix] = useState('')
 
   async function handleSendQuestion(event: FormEvent) {
     event.preventDefault();

@@ -5,7 +5,6 @@ import { useFormPage, FormActions } from "../../context/FormContext";
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { database } from "../../services/firebase";
 import { ref, push, set } from "firebase/database";
-
 import { InputArea } from "../../components/Questions/TableQuestionText/components/InputArea";
 import { TableArea } from "../../components/Questions/TableQuestionText/components/TableArea";
 import { Item } from "../../components/Questions/TableQuestionText/types/Item";
@@ -31,7 +30,7 @@ export const FormStep6 = () => {
 
   function removerDaLista(index: number) {
     setFilteredList((previous) => previous.filter((item, indexPrevious) => index !== indexPrevious))
-  }
+  };
 
   async function handleSendQuestionOthersProfessionals(event: FormEvent) {
     event.preventDefault();
