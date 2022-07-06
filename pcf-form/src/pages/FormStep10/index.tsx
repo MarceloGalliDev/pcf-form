@@ -20,10 +20,18 @@ interface UsedTransport {
   d_veiculoProprioVisitadorSemAjuda: boolean;
   e_veiculoProprioPCF: boolean;
   f_veiculoAlugadoPCF: boolean;
-  f_veiculoMunicipio: boolean;
-  f_veiculoContratado: boolean;
-  f_veiculoUberTaxi: boolean;
-  g_veiculoOutroText: string;
+  g_veiculoMunicipio: boolean;
+  h_veiculoContratado: boolean;
+  i_veiculoUberTaxi: boolean;
+  j_veiculoOutro: boolean;
+  k_veiculoOutroText: string;
+};
+
+interface DirectCostPCFC {
+  directCostPCFYes: boolean;
+  directCostPCFNo: boolean;
+  directCostPCFDontKnow: boolean;
+  directCostPCFIfYesWhich: string;
 }
 
 export const FormStep10 = () => {
@@ -41,12 +49,18 @@ export const FormStep10 = () => {
     d_veiculoProprioVisitadorSemAjuda: false,
     e_veiculoProprioPCF: false,
     f_veiculoAlugadoPCF: false,
-    f_veiculoMunicipio: false,
-    f_veiculoContratado: false,
-    f_veiculoUberTaxi: false,
-    g_veiculoOutroText: '',
+    g_veiculoMunicipio: false,
+    h_veiculoContratado: false,
+    i_veiculoUberTaxi: false,
+    j_veiculoOutro: false,
+    k_veiculoOutroText: '',
   });
-  const [questionFour, setQuestionFour] = useState('');
+  const [questionFour, setQuestionFour] = useState<DirectCostPCFC>({
+    directCostPCFYes: false,
+    directCostPCFNo: false,
+    directCostPCFDontKnow: false,
+    directCostPCFIfYesWhich: '',
+  });
   const [questionFive, setQuestionFive] = useState('');
   const [questionSix, setQuestionSix] = useState('');
   const [questionSeven, setQuestionSeven] = useState('');
@@ -93,7 +107,7 @@ export const FormStep10 = () => {
   const handleVisitorPaysTransportChange = (event: ChangeEvent<HTMLInputElement>) => {
     setQuestionTwo(event.target.value);
   };
-
+  
   const handleUsedTransporteChange = useCallback((event: React.FormEvent<HTMLInputElement>) => {
     const targetInput = event.currentTarget;
     const { value, name } = targetInput;
@@ -102,6 +116,19 @@ export const FormStep10 = () => {
       [name]: value,
     })
   }, [questionThree]);
+
+  const handleDirectCostPCFChange = useCallback((event: React.FormEvent<HTMLInputElement>) => {
+    const targetInput = event.currentTarget;
+    const { value, name } = targetInput;
+    setQuestionFour({
+      ...questionFour,
+      [name]: value,
+    })
+  }, [questionFour]);
+
+  // const handleDirectCostPCFChange = (event: ChangeEvent<HTMLInputElement>) => {
+  //   setQuestionFour(event.target.value);
+  // };
 
   useEffect(() => {
     dispatch({
@@ -125,7 +152,7 @@ export const FormStep10 = () => {
       </SC.Container>
 
       <form onSubmit={handleSendOtherCosts}>
-        <SC.SubSection>
+        {/* <SC.SubSection>
           <div className="bgSubSection">
             <p>Outros custos</p>
           </div>
@@ -225,6 +252,7 @@ export const FormStep10 = () => {
           </SC.ButtonTypeRadioV2>
         
         </SC.SubSection>
+
         <SC.ButtonTypeCheckbox>
           <div className="formQuestion">
             <p className="textFormRadioButton">
@@ -344,79 +372,80 @@ export const FormStep10 = () => {
 
                 <div id="containerInputLabelRadioButton">
                   <input
-                    id="f_veiculoMunicipio"
-                    name="f_veiculoMunicipio"
+                    id="g_veiculoMunicipio"
+                    name="g_veiculoMunicipio"
                     type="checkbox"
-                    checked={questionThree.f_veiculoMunicipio}
+                    checked={questionThree.g_veiculoMunicipio}
                     onChange={(event) => setQuestionThree({
                       ...questionThree,
-                      f_veiculoMunicipio: !!event.currentTarget?.checked
+                      g_veiculoMunicipio: !!event.currentTarget?.checked
                     })}
                   />
                   <label
                     className="containerTextLabel"
-                    htmlFor="f_veiculoMunicipio"
+                    htmlFor="g_veiculoMunicipio"
                   >Veículo do município
                   </label>
                 </div>
 
                 <div id="containerInputLabelRadioButton">
                   <input
-                    id="f_veiculoContratado"
-                    name="f_veiculoContratado"
+                    id="h_veiculoContratado"
+                    name="h_veiculoContratado"
                     type="checkbox"
-                    checked={questionThree.f_veiculoContratado}
+                    checked={questionThree.h_veiculoContratado}
                     onChange={(event) => setQuestionThree({
                       ...questionThree,
-                      f_veiculoContratado: !!event.currentTarget?.checked
+                      h_veiculoContratado: !!event.currentTarget?.checked
                     })}
                   />
                   <label
                     className="containerTextLabel"
-                    htmlFor="f_veiculoContratado"
+                    htmlFor="h_veiculoContratado"
                   >Moto contratada/alugada
                   </label>
                 </div>
 
                 <div id="containerInputLabelRadioButton">
                   <input
-                    id="lastMonthSpentFevereiro"
-                    name="lastMonthSpentData"
+                    id="i_veiculoUberTaxi"
+                    name="i_veiculoUberTaxi"
                     type="checkbox"
-                    checked={questionOne.f_outroDistribuicao}
-                    onChange={(event) => setQuestionOne({
-                      ...questionOne,
-                      f_outroDistribuicao: !!event.currentTarget?.checked
+                    checked={questionThree.i_veiculoUberTaxi}
+                    onChange={(event) => setQuestionThree({
+                      ...questionThree,
+                      i_veiculoUberTaxi: !!event.currentTarget?.checked
                     })}
                   />
                   <label
                     className="containerTextLabel"
-                    htmlFor="lastMonthSpentFevereiro"
+                    htmlFor="i_veiculoUberTaxi"
                   >Taxi ou Uber contratado pelo município
                   </label>
                 </div>
+
                 <div id="containerInputLabelRadioButton">
                   <input
-                    id="lastMonthSpentFevereiro"
-                    name="lastMonthSpentData"
+                    id="j_veiculoOutro"
+                    name="j_veiculoOutro"
                     type="checkbox"
-                    checked={questionOne.f_outroDistribuicao}
-                    onChange={(event) => setQuestionOne({
-                      ...questionOne,
-                      f_outroDistribuicao: !!event.currentTarget?.checked
+                    checked={questionThree.j_veiculoOutro}
+                    onChange={(event) => setQuestionThree({
+                      ...questionThree,
+                      j_veiculoOutro: !!event.currentTarget?.checked
                     })}
                   />
                   <label
                     className="containerTextLabel"
-                    htmlFor="lastMonthSpentFevereiro"
+                    htmlFor="j_veiculoOutro"
                   >Outros
                   </label>
                   <input
-                    id="g_veiculoOutroText"
+                    id="k_veiculoOutroText"
                     className="inputPlaceholderOther"
-                    name="g_veiculoOutroText"
+                    name="k_veiculoOutroText"
                     type="text"
-                    value={questionThree.g_veiculoOutroText}
+                    value={questionThree.k_veiculoOutroText}
                     onChange={handleUsedTransporteChange}
                     placeholder="Escreva aqui"
                   />
@@ -425,7 +454,7 @@ export const FormStep10 = () => {
               </div>
             </div>
           </div>
-        </SC.ButtonTypeCheckbox>
+        </SC.ButtonTypeCheckbox> */}
 
         <SC.ButtonTypeRadioText>
           <div className="formQuestion">
@@ -436,66 +465,70 @@ export const FormStep10 = () => {
         
                   <div id="containerInputLabelRadioButton">
                     <input
-                      id="lastMonthSpentJaneiro"
-                      name="lastMonthSpentData"
+                      id="directCostPCFYes"
+                      name="directCostPCFYes"
                       type="radio"
-                      value="sim"
-                      onChange={handleLastMonthSpentDataChange}
+                      value={questionFour.directCostPCFYes}
+                      onChange={handleDirectCostPCFChange}
                     />
                     <label
                       className="containerTextLabel"
-                      htmlFor="lastMonthSpentJaneiro"
+                      htmlFor="directCostPCFYes"
                     >Sim
                     </label>
                   </div>
+
                   <div id="containerInputLabelRadioButton">
                     <input
-                      id="lastMonthSpentFevereiro"
-                      name="lastMonthSpentData"
+                      id="directCostPCFNo"
+                      name="directCostPCFNo"
                       type="radio"
-                      value="Não"
-                      onChange={handleLastMonthSpentDataChange}
+                      value={questionFour.directCostPCFNo}
+                      onChange={handleDirectCostPCFChange}
                     />
                     <label
                       className="containerTextLabel"
-                      htmlFor="lastMonthSpentFevereiro"
+                      htmlFor="directCostPCFNo"
                     >Não
                     </label>
                   </div>
+
                   <div id="containerInputLabelRadioButton">
                     <input
-                      id="lastMonthSpentFevereiro"
-                      name="lastMonthSpentData"
+                      id="directCostPCFDontKnow"
+                      name="directCostPCF"
                       type="radio"
                       value="Não"
-                      onChange={handleLastMonthSpentDataChange}
+                      onChange={handleDirectCostPCFChange}
                     />
                     <label
                       className="containerTextLabel"
-                      htmlFor="lastMonthSpentFevereiro"
+                      htmlFor="directCostPCFDontKnow"
                     >Não sei
                     </label>
                   </div>
+
                 </div>
               </div>
             </div>
+
             <div className="containerBgLabel">
               <label className="containerTextLabel" htmlFor="name">
                 Se sim, Quais?
                 <input
                   name="name"
                   type="text"
-                  autoFocus
                   value={state.name}
-                  onChange={handleVisitorPaysTransportChange}
+                  onChange={handleDirectCostPCFChange}
                   placeholder="Sua resposta"
                 />
               </label>
             </div>
+
           </div>
         </SC.ButtonTypeRadioText>
 
-        <SC.ButtonTypeRadioText>
+        {/* <SC.ButtonTypeRadioText>
           <div className="formQuestion">
             <p>
               Há algum outro custo considerado importante para o PCF não especificado anteriormente?
@@ -510,7 +543,7 @@ export const FormStep10 = () => {
                       name="lastMonthSpentData"
                       type="radio"
                       value="sim"
-                      onChange={handleLastMonthSpentDataChange}
+                      onChange={handleDirectCostPCFChange}
                     />
                     <label
                       className="containerTextLabel"
@@ -524,7 +557,7 @@ export const FormStep10 = () => {
                       name="lastMonthSpentData"
                       type="radio"
                       value="Não"
-                      onChange={handleLastMonthSpentDataChange}
+                      onChange={handleDirectCostPCFChange}
                     />
                     <label
                       className="containerTextLabel"
@@ -538,7 +571,7 @@ export const FormStep10 = () => {
                       name="lastMonthSpentData"
                       type="radio"
                       value="Não"
-                      onChange={handleLastMonthSpentDataChange}
+                      onChange={handleDirectCostPCFChange}
                     />
                     <label
                       className="containerTextLabel"
@@ -579,7 +612,7 @@ export const FormStep10 = () => {
                     name="lastMonthSpentData"
                     type="radio"
                     value="sim"
-                    onChange={handleLastMonthSpentDataChange}
+                    onChange={handleDirectCostPCFChange}
                   />
                   <label
                     className="containerTextLabel"
@@ -593,7 +626,7 @@ export const FormStep10 = () => {
                     name="lastMonthSpentData"
                     type="radio"
                     value="Não"
-                    onChange={handleLastMonthSpentDataChange}
+                    onChange={handleDirectCostPCFChange}
                   />
                   <label
                     className="containerTextLabel"
@@ -607,7 +640,7 @@ export const FormStep10 = () => {
                     name="lastMonthSpentData"
                     type="radio"
                     value="Não"
-                    onChange={handleLastMonthSpentDataChange}
+                    onChange={handleDirectCostPCFChange}
                   />
                   <label
                     className="containerTextLabel"
@@ -618,7 +651,7 @@ export const FormStep10 = () => {
               </div>
             </div>
           </div>
-        </SC.ButtonTypeRadio>
+        </SC.ButtonTypeRadio> */}
 
         <SC.AllButtons>
             <Link className="buttonAll" to="/:id/formstep9">Voltar</Link>
