@@ -1,27 +1,27 @@
-import * as SC from "../../styles/styles"
-import { Theme } from "../../components/Theme"
-import { Link, useNavigate, useParams } from "react-router-dom"
-import { useFormPage, FormActions } from "../../context/FormContext"
-import { ChangeEvent, FormEvent, useEffect, useState } from "react"
-import { push, ref, set } from "firebase/database"
-import { database } from "../../services/firebase"
+import * as SC from "../../styles/styles";
+import { Theme } from "../../components/Theme";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { useFormPage, FormActions } from "../../context/FormContext";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import { push, ref, set } from "firebase/database";
+import { database } from "../../services/firebase";
 
 type RoomParams = {
   id: string;
 };
 
 export const FormStep2 = () => {
-  const params = useParams<RoomParams>()
-  const roomId = params.id
+  const params = useParams<RoomParams>();
+  const roomId = params.id;
   const navigate = useNavigate();
   const { state, dispatch } = useFormPage();
-  const [questionOne, setQuestionOne] = useState('')
-  const [questionTwo, setQuestionTwo] = useState('')
-  const [questionThree, setQuestionThree] = useState('')
-  const [questionFour, setQuestionFour] = useState('')
-  const [questionFive, setQuestionFive] = useState('')
-  const [questionSix, setQuestionSix] = useState('')
-  const [questionSeven, setQuestionSeven] = useState('')
+  const [questionOne, setQuestionOne] = useState('');
+  const [questionTwo, setQuestionTwo] = useState('');
+  const [questionThree, setQuestionThree] = useState('');
+  const [questionFour, setQuestionFour] = useState('');
+  const [questionFive, setQuestionFive] = useState('');
+  const [questionSix, setQuestionSix] = useState('');
+  const [questionSeven, setQuestionSeven] = useState('');
 
 
   async function handleSendQuestion(event: FormEvent) {
@@ -37,7 +37,7 @@ export const FormStep2 = () => {
         questao12: questionSix,
         questao13: questionSeven,
       }
-    }
+    };
 
     const firebaseRoomsQuestion = ref(database, `rooms/${roomId}/question`);
     const firebaseQuestion = await push(firebaseRoomsQuestion);
@@ -124,9 +124,10 @@ export const FormStep2 = () => {
         <SC.ButtonTypeRadio>
           <div className="formQuestion">
             <p className="textFormRadioButton">
-              Qual é o último mês do ano de 2022 do qual o município possui dados dos gastos com o PCF:
+              Qual é o último mês do ano de 2022 no qual o município possui dados de gastos com o PCF:
             </p>
             <div id="containerOption">
+
               <div>
                 <div id="containerInputLabelRadioButton">
                   <input
@@ -142,6 +143,7 @@ export const FormStep2 = () => {
                   >Janeiro
                   </label>
                 </div>
+
                 <div id="containerInputLabelRadioButton">
                   <input
                     id="lastMonthSpentFevereiro"
@@ -156,6 +158,7 @@ export const FormStep2 = () => {
                   >Fevereiro
                   </label>
                 </div>
+
                 <div id="containerInputLabelRadioButton">
                   <input
                     id="lastMonthSpentMarco"
@@ -170,6 +173,7 @@ export const FormStep2 = () => {
                   >Março
                   </label>
                 </div>
+
                 <div id="containerInputLabelRadioButton">
                   <input
                     id="lastMonthSpentAbril"
@@ -184,6 +188,7 @@ export const FormStep2 = () => {
                   >Abril
                   </label>
                 </div>
+
                 <div id="containerInputLabelRadioButton">
                   <input
                     id="lastMonthSpentMaio"
@@ -198,6 +203,7 @@ export const FormStep2 = () => {
                   >Maio
                   </label>
                 </div>
+
                 <div id="containerInputLabelRadioButton">
                   <input
                     id="lastMonthSpentJunho"
@@ -213,6 +219,7 @@ export const FormStep2 = () => {
                   </label>
                 </div>
               </div>
+
               <div id="containerOptionSixOption">
                 <div id="containerInputLabelRadioButton">
                   <input
@@ -228,6 +235,7 @@ export const FormStep2 = () => {
                   >Julho
                   </label>
                 </div>
+
                 <div id="containerInputLabelRadioButton">
                   <input
                     id="lastMonthSpentAgosto"
@@ -242,6 +250,7 @@ export const FormStep2 = () => {
                   >Agosto
                   </label>
                 </div>
+
                 <div id="containerInputLabelRadioButton">
                   <input
                     id="lastMonthSpentSetembro"
@@ -256,6 +265,7 @@ export const FormStep2 = () => {
                   >Setembro
                   </label>
                 </div>
+
                 <div id="containerInputLabelRadioButton">
                   <input
                     id="lastMonthSpentOutubro"
@@ -270,6 +280,7 @@ export const FormStep2 = () => {
                   >Outubro
                   </label>
                 </div>
+
                 <div id="containerInputLabelRadioButton">
                   <input
                     id="lastMonthSpentNovembro"
@@ -284,6 +295,7 @@ export const FormStep2 = () => {
                   >Novembro
                   </label>
                 </div>
+
                 <div id="containerInputLabelRadioButton">
                   <input
                     id="lastMonthSpentDezembro"
@@ -299,6 +311,39 @@ export const FormStep2 = () => {
                   </label>
                 </div>
               </div>
+
+              <div id="containerOptionSixOption">
+                <div id="containerInputLabelRadioButton">
+                  <input
+                    id="lastMonthSpentDontKnow"
+                    name="lastMonthSpentData"
+                    type="radio"
+                    value="Outros"
+                    onChange={handleLastMonthSpentDataChange}
+                  />
+                  <label
+                    className="containerTextLabel"
+                    htmlFor="lastMonthSpentDontKnow"
+                  >Outros
+                  </label>
+                </div>
+
+                <div id="containerInputLabelRadioButton">
+                  <input
+                    id="lastMonthSpentNotApplicable"
+                    name="lastMonthSpentData"
+                    type="radio"
+                    value="Não_se_aplica"
+                    onChange={handleLastMonthSpentDataChange}
+                  />
+                  <label
+                    className="containerTextLabel"
+                    htmlFor="lastMonthSpentNotApplicable"
+                  >Não se aplica
+                  </label>
+                </div>
+              </div>
+
             </div>
           </div>
         </SC.ButtonTypeRadio>
@@ -310,13 +355,13 @@ export const FormStep2 = () => {
             </p>
             <div id="containerOption">
               <div id="containerOptionSixOption">
-        
+
                 <div id="containerInputLabelRadioButton">
                   <input
                     id="phaseImplatation"
                     name="phasePCFCity"
                     type="radio"
-                    value="Implantação (até 4 meses)"
+                    value="Implantação_(até_4_meses)"
                     onChange={handlePhasePCFCityChange}
                   />
                   <label
@@ -325,12 +370,13 @@ export const FormStep2 = () => {
                   >Implantação (até 4 meses)
                   </label>
                 </div>
+
                 <div id="containerInputLabelRadioButton">
                   <input
                     id="phaseExecutionI"
                     name="phasePCFCity"
                     type="radio"
-                    value={"Execução Fase I (entre o 5º e o 7º mês do início da implantação"}
+                    value="Execução_Fase_I_(entre_o_5º_e_7º_mês_do_início_da_implantação"
                     onChange={handlePhasePCFCityChange}
                   />
                   <label
@@ -339,12 +385,13 @@ export const FormStep2 = () => {
                   >Execução Fase I (entre o 5º e o 7º mês do início da implantação)
                   </label>
                 </div>
+
                 <div id="containerInputLabelRadioButton">
                   <input
                     id="phaseExecutionII"
                     name="phasePCFCity"
                     type="radio"
-                    value={"Execução Fase II (a partir do 8º mês da implantação"}
+                    value="Execução_Fase_II_(a_partir_do_8º_mês_da_implantação"
                     onChange={handlePhasePCFCityChange}
                   />
                   <label
@@ -353,6 +400,22 @@ export const FormStep2 = () => {
                   >Execução Fase II (a partir do 8º mês da implantação)
                   </label>
                 </div>
+
+                <div id="containerInputLabelRadioButton">
+                  <input
+                    id="phaseExecutionNotApplicable"
+                    name="phasePCFCity"
+                    type="radio"
+                    value="Não_se_Aplica"
+                    onChange={handlePhasePCFCityChange}
+                  />
+                  <label
+                    className="containerTextLabel"
+                    htmlFor="phaseExecutionNotApplicable"
+                  >Não se Aplica
+                  </label>
+                </div>
+
               </div>
             </div>
           </div>
@@ -365,13 +428,13 @@ export const FormStep2 = () => {
             </p>
             <div id="containerOption">
               <div id="containerOptionSixOption">
-        
+
                 <div id="containerInputLabelRadioButton">
                   <input
                     id="expansionGoalsYes"
                     name="expansionGoals"
                     type="radio"
-                    value={"Sim"}
+                    value="Sim"
                     onChange={handleExpansionGoalsChange}
                   />
                   <label
@@ -380,12 +443,13 @@ export const FormStep2 = () => {
                   >Sim
                   </label>
                 </div>
+
                 <div id="containerInputLabelRadioButton">
                   <input
                     id="expansionGoalsNo"
                     name="expansionGoals"
                     type="radio"
-                    value={"Não"}
+                    value="Não"
                     onChange={handleExpansionGoalsChange}
                   />
                   <label
@@ -394,20 +458,37 @@ export const FormStep2 = () => {
                   >Não
                   </label>
                 </div>
+
                 <div id="containerInputLabelRadioButton">
                   <input
                     id="expansionGoalsDontKnow"
                     name="expansionGoals"
                     type="radio"
-                    value={"Não sei"}
+                    value="Outros"
                     onChange={handleExpansionGoalsChange}
                   />
                   <label
                     className="containerTextLabel"
                     htmlFor="expansionGoalsDontKnow"
-                  >Não sei
+                  >Outros
                   </label>
                 </div>
+
+                <div id="containerInputLabelRadioButton">
+                  <input
+                    id="expansionGoalsNotApplicable"
+                    name="expansionGoals"
+                    type="radio"
+                    value="Não_se_aplica"
+                    onChange={handleExpansionGoalsChange}
+                  />
+                  <label
+                    className="containerTextLabel"
+                    htmlFor="expansionGoalsNotApplicable"
+                  >Não se aplica
+                  </label>
+                </div>
+
               </div>
             </div>
           </div>
@@ -420,13 +501,13 @@ export const FormStep2 = () => {
             </p>
             <div id="containerOption">
               <div id="containerOptionSixOption">
-        
+
                 <div id="containerInputLabelRadioButton">
                   <input
                     id="referenceCenterYes"
                     name="referenceCenter"
                     type="radio"
-                    value={"Sim"}
+                    value="Sim"
                     onChange={handleReferenceCenterChange}
                   />
                   <label
@@ -435,12 +516,13 @@ export const FormStep2 = () => {
                   >Sim
                   </label>
                 </div>
+
                 <div id="containerInputLabelRadioButton">
                   <input
                     id="referenceCenterNo"
                     name="referenceCenter"
                     type="radio"
-                    value={"Não"}
+                    value="Não"
                     onChange={handleReferenceCenterChange}
                   />
                   <label
@@ -449,20 +531,37 @@ export const FormStep2 = () => {
                   >Não
                   </label>
                 </div>
+
                 <div id="containerInputLabelRadioButton">
                   <input
                     id="referenceCenterDontKnow"
                     name="referenceCenter"
                     type="radio"
-                    value={"Não sei"}
+                    value="Outros"
                     onChange={handleReferenceCenterChange}
                   />
                   <label
                     className="containerTextLabel"
                     htmlFor="referenceCenterDontKnow"
-                  >Não sei
+                  >Outros
                   </label>
                 </div>
+
+                <div id="containerInputLabelRadioButton">
+                  <input
+                    id="referenceCenterNotApplicable"
+                    name="referenceCenter"
+                    type="radio"
+                    value="Não_se_aplica"
+                    onChange={handleReferenceCenterChange}
+                  />
+                  <label
+                    className="containerTextLabel"
+                    htmlFor="referenceCenterNotApplicable"
+                  >Não se aplica
+                  </label>
+                </div>
+
               </div>
             </div>
           </div>
@@ -475,13 +574,13 @@ export const FormStep2 = () => {
             </p>
             <div id="containerOption">
               <div id="containerOptionSixOption">
-        
+
                 <div id="containerInputLabelRadioButton">
                   <input
                     id="actionPlanYes"
                     name="actionPlan"
                     type="radio"
-                    value={"Sim"}
+                    value="Sim"
                     onChange={handleActionPlanChange}
                   />
                   <label
@@ -490,12 +589,13 @@ export const FormStep2 = () => {
                   >Sim
                   </label>
                 </div>
+
                 <div id="containerInputLabelRadioButton">
                   <input
                     id="actionPlanNo"
                     name="actionPlan"
                     type="radio"
-                    value={"Não"}
+                    value="Não"
                     onChange={handleActionPlanChange}
                   />
                   <label
@@ -504,20 +604,37 @@ export const FormStep2 = () => {
                   >Não
                   </label>
                 </div>
+
                 <div id="containerInputLabelRadioButton">
                   <input
                     id="actionPlanDontKnow"
                     name="actionPlan"
                     type="radio"
-                    value={"Não sei"}
+                    value="Outros"
                     onChange={handleActionPlanChange}
                   />
                   <label
                     className="containerTextLabel"
                     htmlFor="actionPlanDontKnow"
-                  >Não sei
+                  >Outros
                   </label>
                 </div>
+
+                <div id="containerInputLabelRadioButton">
+                  <input
+                    id="actionPlanNotApplicable"
+                    name="actionPlan"
+                    type="radio"
+                    value="Não_se_aplica"
+                    onChange={handleActionPlanChange}
+                  />
+                  <label
+                    className="containerTextLabel"
+                    htmlFor="actionPlanNotApplicable"
+                  >Não se aplica
+                  </label>
+                </div>
+
               </div>
             </div>
           </div>

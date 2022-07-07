@@ -11,64 +11,65 @@ type RoomParams = {
 };
 
 interface WorkHoursVisitors {
-  visitadoresHorasSemanais40: boolean;
-  visitadoresHorasSemanais30: boolean;
-  visitadoresHorasSemanais20: boolean;
-  visitadoresHorasSemanaisOutros: boolean;
-  visitadoresHorasSemanaisOutrosDescricao: string;
+  a_visitadoresHorasSemanais40: boolean;
+  b_visitadoresHorasSemanais30: boolean;
+  c_visitadoresHorasSemanais20: boolean;
+  d_visitadoresHorasSemanaisOutros: boolean;
+  e_visitadoresHorasSemanaisOutrosDescricao: string;
 };
 
 interface VisitorsQualification {
-  visitadoresEnsinoMedio: string;
-  visitadoresSuperiorIncompleto: string;
-  visitadoresSuperiorCompleto: string;
-  visitadoresEspecializacao: string;
-  visitadoresMestrado: string;
-  visitadoresDoutorado: string;
+  a_visitadoresEnsinoMedio: string;
+  b_visitadoresGraduacaoIncompleto: string;
+  c_visitadoresGraduacaoCompleto: string;
+  d_visitadoresEspecializacao: string;
+  e_visitadoresMestrado: string;
+  f_visitadoresDoutorado: string;
 };
 
 interface VisitorsTypeRemunaration1 {
-  visitadoresServidorEfetivo: string;
-  visitadoresMediaRemuneracaoEfetivo: string;
+  a_visitadoresServidorEfetivo: string;
+  b_visitadoresMediaRemuneracaoEfetivo: string;
 };
 
 interface VisitorTypeRemunaration2 {
-  visitadoresCargoComissionado: string;
-  visitadoresMediaRemuneracaoComissionado: string;
+  a_visitadoresCargoComissionado: string;
+  b_visitadoresMediaRemuneracaoComissionado: string;
 };
 
 interface VisitorTypeRemunaration3 {
-  visitadoresServidorTemporario: string;
-  visitadoresMediaRemuneracaoTemporario: string;
+  a_visitadoresServidorTemporario: string;
+  b_visitadoresMediaRemuneracaoTemporario: string;
 };
 
 interface VisitorTypeRemunaration4 {
-  visitadoresBolsista: string;
-  visitadoresMediaRemuneracaoBolsista: string;
+  a_visitadoresBolsista: string;
+  b_visitadoresMediaRemuneracaoBolsista: string;
 };
 
 interface VisitorTypeRemunaration5 {
-  visitadoresEstagiarioNivelSuperior: string;
-  visitadoresMediaRemuneracaoEstagiarioNivelSuperior: string;
+  a_visitadoresEstagiarioNivelSuperior: string;
+  b_visitadoresMediaRemuneracaoEstagiarioNivelSuperior: string;
 
 };
 
 interface VisitorTypeRemunaration6 {
-  visitadoresAutonomos: string;
-  visitadoresMediaRemuneracaoAutonomos: string;
+  a_visitadoresAutonomos: string;
+  b_visitadoresMediaRemuneracaoAutonomos: string;
 };
 
 interface VisitorTypeRemunaration7 {
-  visitadoresOutrosCargos: string;
-  visitadoresMediaRemuneracaoOutrosCargos: string;
+  a_visitadoresOutrosCargos: string;
+  b_visitadoresMediaRemuneracaoOutrosCargos: string;
 };
 
 interface HiringVisitorSupervisor {
-  visitadoresEdital: boolean;
-  visitadoresEquipePropria: boolean;
-  visitadoresContratacaoDireta: boolean;
-  visitadoresOutro: boolean;
-  visitadoresOutrosDescricao: string;
+  a_visitadoresEdital: boolean;
+  b_visitadoresEquipePropria: boolean;
+  c_visitadoresContratacaoDireta: boolean;
+  d_visitadoresNaoSeAplica: boolean;
+  e_visitadoresOutro: boolean;
+  f_visitadoresOutrosDescricao: string;
 }
 
 export const FormStep5 = () => {
@@ -79,66 +80,60 @@ export const FormStep5 = () => {
   const [questionOne, setQuestionOne] = useState('')
   const [questionTwo, setQuestionTwo] = useState('')
   const [questionThree, setQuestionThree] = useState<WorkHoursVisitors>({
-    visitadoresHorasSemanais40: false,
-    visitadoresHorasSemanais30: false,
-    visitadoresHorasSemanais20: false,
-    visitadoresHorasSemanaisOutros: false,
-    visitadoresHorasSemanaisOutrosDescricao: '',
+    a_visitadoresHorasSemanais40: false,
+    b_visitadoresHorasSemanais30: false,
+    c_visitadoresHorasSemanais20: false,
+    d_visitadoresHorasSemanaisOutros: false,
+    e_visitadoresHorasSemanaisOutrosDescricao: '',
   });
   const [questionFour, setQuestionFour] = useState<VisitorsQualification>({
-    visitadoresEnsinoMedio: '',
-    visitadoresSuperiorIncompleto: '',
-    visitadoresSuperiorCompleto: '',
-    visitadoresEspecializacao: '',
-    visitadoresMestrado: '',
-    visitadoresDoutorado: '',
+    a_visitadoresEnsinoMedio: '',
+    b_visitadoresGraduacaoIncompleto: '',
+    c_visitadoresGraduacaoCompleto: '',
+    d_visitadoresEspecializacao: '',
+    e_visitadoresMestrado: '',
+    f_visitadoresDoutorado: '',
   });
   const [questionFive, setQuestionFive] = useState<VisitorsTypeRemunaration1>({
-    visitadoresServidorEfetivo: '',
-    visitadoresMediaRemuneracaoEfetivo: '',
+    a_visitadoresServidorEfetivo: '',
+    b_visitadoresMediaRemuneracaoEfetivo: '',
   });
   const [questionSix, setQuestionSix] = useState<VisitorTypeRemunaration2>({
-    visitadoresCargoComissionado: '',
-    visitadoresMediaRemuneracaoComissionado: '',
+    a_visitadoresCargoComissionado: '',
+    b_visitadoresMediaRemuneracaoComissionado: '',
   });
   const [questionSeven, setQuestionSeven] = useState<VisitorTypeRemunaration3>({
-    visitadoresServidorTemporario: '',
-    visitadoresMediaRemuneracaoTemporario: '',
+    a_visitadoresServidorTemporario: '',
+    b_visitadoresMediaRemuneracaoTemporario: '',
   });
   const [questionEight, setQuestionEight] = useState<VisitorTypeRemunaration4>({
-    visitadoresBolsista: '',
-    visitadoresMediaRemuneracaoBolsista: '',
+    a_visitadoresBolsista: '',
+    b_visitadoresMediaRemuneracaoBolsista: '',
   });
   const [questionNine, setQuestionNine] = useState<VisitorTypeRemunaration5>({
-    visitadoresEstagiarioNivelSuperior: '',
-    visitadoresMediaRemuneracaoEstagiarioNivelSuperior: '',
+    a_visitadoresEstagiarioNivelSuperior: '',
+    b_visitadoresMediaRemuneracaoEstagiarioNivelSuperior: '',
   });
   const [questionTen, setQuestionTen] = useState<VisitorTypeRemunaration6>({
-    visitadoresAutonomos: '',
-    visitadoresMediaRemuneracaoAutonomos: '',
+    a_visitadoresAutonomos: '',
+    b_visitadoresMediaRemuneracaoAutonomos: '',
   });
   const [questionEleven, setQuestionEleven] = useState<VisitorTypeRemunaration7>({
-    visitadoresOutrosCargos: '',
-    visitadoresMediaRemuneracaoOutrosCargos: '',
+    a_visitadoresOutrosCargos: '',
+    b_visitadoresMediaRemuneracaoOutrosCargos: '',
   });
   const [questionTwelve, setQuestionTwelve] = useState<HiringVisitorSupervisor>({
-    visitadoresEdital: false,
-    visitadoresEquipePropria: false,
-    visitadoresContratacaoDireta: false,
-    visitadoresOutro: false,
-    visitadoresOutrosDescricao: '',
+    a_visitadoresEdital: false,
+    b_visitadoresEquipePropria: false,
+    c_visitadoresContratacaoDireta: false,
+    d_visitadoresNaoSeAplica: false,
+    e_visitadoresOutro: false,
+    f_visitadoresOutrosDescricao: '',
   });
   const [questionThirteen, setQuestionThirteen] = useState('');
 
   async function handleSendQuestionVisitor(event: FormEvent) {
     event.preventDefault();
-
-    if (questionOne.trim() === '') {
-      return;
-    };
-    if (questionTwo.trim() === '') {
-      return;
-    };
 
     const question = {
       E_Visitadores_do_PCF: {
@@ -292,23 +287,108 @@ export const FormStep5 = () => {
           </div>
           <div className="formQuestionV2">
 
-
-            <SC.ButtonTypeText>
+            <SC.ButtonTypeRadio>
               <div className="formQuestion">
-                <label htmlFor="numberOfVisitors">
+                <p className="textFormRadioButton">
                   Quantos Visitadores existem na equipe do PCF no seu município?
-                  <input
-                    id="numberOfVisitors"
-                    name="numeroDeVisitadores"
-                    type="text"
-                    autoFocus
-                    value={questionOne}
-                    onChange={handleNumberOfVisitorsChange}
-                    placeholder="Quantidade"
-                  />
-                </label>
+                </p>
+                <div id="containerOption">
+                  <div id="containerOptionSixOption">
+
+                    <div id="containerInputLabelRadioButton">
+                      <input
+                        id="NumberOfVisitorsZero"
+                        name="NumberOfVisitors"
+                        type="radio"
+                        value="0"
+                        onChange={handleNumberOfVisitorsChange}
+                      />
+                      <label
+                        className="containerTextLabel"
+                        htmlFor="NumberOfVisitorsZero"
+                      >0
+                      </label>
+                    </div>
+
+                    <div id="containerInputLabelRadioButton">
+                      <input
+                        id="NumberOfVisitorsOne"
+                        name="NumberOfVisitors"
+                        type="radio"
+                        value="1"
+                        onChange={handleNumberOfVisitorsChange}
+                      />
+                      <label
+                        className="containerTextLabel"
+                        htmlFor="NumberOfVisitorsOne"
+                      >1
+                      </label>
+                    </div>
+
+                    <div id="containerInputLabelRadioButton">
+                      <input
+                        id="NumberOfVisitorsTwo"
+                        name="NumberOfVisitors"
+                        type="radio"
+                        value="2"
+                        onChange={handleNumberOfVisitorsChange}
+                      />
+                      <label
+                        className="containerTextLabel"
+                        htmlFor="NumberOfVisitorsTwo"
+                      >2
+                      </label>
+                    </div>
+
+                    <div id="containerInputLabelRadioButton">
+                      <input
+                        id="NumberOfVisitorsThree"
+                        name="NumberOfVisitors"
+                        type="radio"
+                        value="3"
+                        onChange={handleNumberOfVisitorsChange}
+                      />
+                      <label
+                        className="containerTextLabel"
+                        htmlFor="NumberOfVisitorsThree"
+                      >3
+                      </label>
+                    </div>
+
+                    <div id="containerInputLabelRadioButton">
+                      <input
+                        id="NumberOfVisitorsFour"
+                        name="NumberOfVisitors"
+                        type="radio"
+                        value="4_ou_mais"
+                        onChange={handleNumberOfVisitorsChange}
+                      />
+                      <label
+                        className="containerTextLabel"
+                        htmlFor="NumberOfVisitorsFour"
+                      >4 ou mais
+                      </label>
+                    </div>
+
+                    <div id="containerInputLabelRadioButton">
+                      <input
+                        id="NumberOfVisitorsNotApplicable"
+                        name="NumberOfVisitors"
+                        type="radio"
+                        value="Não_se_aplica"
+                        onChange={handleNumberOfVisitorsChange}
+                      />
+                      <label
+                        className="containerTextLabel"
+                        htmlFor="NumberOfVisitorsNotApplicable"
+                      >Não se aplica
+                      </label>
+                    </div>
+
+                  </div>
+                </div>
               </div>
-            </SC.ButtonTypeText>
+            </SC.ButtonTypeRadio>
 
             <SC.ButtonTypeText>
               <div className="formQuestion">
@@ -337,12 +417,12 @@ export const FormStep5 = () => {
                     <div id="containerInputLabelRadioButton">
                       <input
                         id="visitadoresHorasSemanais40"
-                        name="visitadoresHorasSemanais40"
+                        name="a_visitadoresHorasSemanais40"
                         type="checkbox"
-                        checked={questionThree.visitadoresHorasSemanais40}
+                        checked={questionThree.a_visitadoresHorasSemanais40}
                         onChange={(event) => setQuestionThree({
                           ...questionThree,
-                          visitadoresHorasSemanais40: !!event.currentTarget?.checked
+                          a_visitadoresHorasSemanais40: !!event.currentTarget?.checked
                         })}
                       />
                       <label
@@ -355,12 +435,12 @@ export const FormStep5 = () => {
                     <div id="containerInputLabelRadioButton">
                       <input
                         id="visitadoresHorasSemanais30"
-                        name="horasSemanais30"
+                        name="b_visitadoresHorasSemanais30"
                         type="checkbox"
-                        checked={questionThree.visitadoresHorasSemanais30}
+                        checked={questionThree.b_visitadoresHorasSemanais30}
                         onChange={(event) => setQuestionThree({
                           ...questionThree,
-                          visitadoresHorasSemanais30: !!event.currentTarget?.checked
+                          b_visitadoresHorasSemanais30: !!event.currentTarget?.checked
                         })}
                       />
                       <label
@@ -369,15 +449,16 @@ export const FormStep5 = () => {
                       >30 horas semanais
                       </label>
                     </div>
+
                     <div id="containerInputLabelRadioButton">
                       <input
                         id="visitadoresHorasSemanais20"
-                        name="horasSemanais20"
+                        name="c_visitadoresHorasSemanais20"
                         type="checkbox"
-                        checked={questionThree.visitadoresHorasSemanais20}
+                        checked={questionThree.c_visitadoresHorasSemanais20}
                         onChange={(event) => setQuestionThree({
                           ...questionThree,
-                          visitadoresHorasSemanais20: !!event.currentTarget?.checked
+                          c_visitadoresHorasSemanais20: !!event.currentTarget?.checked
                         })}
                       />
                       <label
@@ -386,16 +467,16 @@ export const FormStep5 = () => {
                       >20 horas semanais
                       </label>
                     </div>
-            
+
                     <div id="containerInputLabelRadioButton">
                       <input
                         id="visitadoresHorasSemanaisOutros"
-                        name="horasSemanaisOutros"
+                        name="d_visitadoresHorasSemanaisOutros"
                         type="checkbox"
-                        checked={questionThree.visitadoresHorasSemanaisOutros}
+                        checked={questionThree.d_visitadoresHorasSemanaisOutros}
                         onChange={(event) => setQuestionThree({
                           ...questionThree,
-                          visitadoresHorasSemanaisOutros: !!event.currentTarget?.checked
+                          d_visitadoresHorasSemanaisOutros: !!event.currentTarget?.checked
                         })}
                       />
                       <label
@@ -405,9 +486,9 @@ export const FormStep5 = () => {
                       </label>
                       <input
                         className="inputPlaceholderOther"
-                        name="visitadoresHorasSemanaisOutrosDescricao"
+                        name="e_visitadoresHorasSemanaisOutrosDescricao"
                         type="text"
-                        value={questionThree.visitadoresHorasSemanaisOutrosDescricao}
+                        value={questionThree.e_visitadoresHorasSemanaisOutrosDescricao}
                         onChange={handleWorkHoursVisitorsChange}
                         placeholder="Escreva aqui"
                       />
@@ -421,7 +502,7 @@ export const FormStep5 = () => {
               <div className="formQuestion">
                 <label htmlFor="containerTextLabelCheckbox">
                   Quantos Visitadores da equipe do PCF tem em seu município:
-                
+
                   <div id="containerTextLabelCheckbox">
                     <label
                       className="labelForContainerTextLabelCheckbox"
@@ -429,9 +510,9 @@ export const FormStep5 = () => {
                     <input
                       className="inputForContainerTextLabelCheckbox"
                       id="highSchoolVisitor"
-                      name="visitadoresEnsinoMedio"
+                      name="a_visitadoresEnsinoMedio"
                       type="text"
-                      value={questionFour.visitadoresEnsinoMedio}
+                      value={questionFour.a_visitadoresEnsinoMedio}
                       onChange={handleVisitorsQualificationChange}
                       placeholder="Sua resposta"
                     />
@@ -440,13 +521,13 @@ export const FormStep5 = () => {
                   <div id="containerTextLabelCheckbox">
                     <label
                       className="labelForContainerTextLabelCheckbox"
-                      htmlFor="incompleteSuperiorVisitor">Superior Incompleto:</label>
+                      htmlFor="visitadoresGraduacaoIncompleto">Superior Incompleto:</label>
                     <input
                       className="inputForContainerTextLabelCheckbox"
-                      id="incompleteSuperiorVisitor"
-                      name="visitadoresSuperiorIncompleto"
+                      id="visitadoresGraduacaoIncompleto"
+                      name="b_visitadoresGraduacaoIncompleto"
                       type="text"
-                      value={questionFour.visitadoresSuperiorIncompleto}
+                      value={questionFour.b_visitadoresGraduacaoIncompleto}
                       onChange={handleVisitorsQualificationChange}
                       placeholder="Sua resposta"
                     />
@@ -455,13 +536,13 @@ export const FormStep5 = () => {
                   <div id="containerTextLabelCheckbox">
                     <label
                       className="labelForContainerTextLabelCheckbox"
-                      htmlFor="completeSuperiorVisitor">Superior Completo:</label>
+                      htmlFor="visitadoresGraduacaoCompleto">Superior Completo:</label>
                     <input
                       className="inputForContainerTextLabelCheckbox"
-                      id="completeSuperiorVisitor"
-                      name="visitadoresSuperiorCompleto"
+                      id="visitadoresGraduacaoCompleto"
+                      name="c_visitadoresGraduacaoCompleto"
                       type="text"
-                      value={questionFour.visitadoresSuperiorCompleto}
+                      value={questionFour.c_visitadoresGraduacaoCompleto}
                       onChange={handleVisitorsQualificationChange}
                       placeholder="Sua resposta"
                     />
@@ -474,9 +555,9 @@ export const FormStep5 = () => {
                     <input
                       className="inputForContainerTextLabelCheckbox"
                       id="specialistVisitor"
-                      name="visitadoresEspecializacao"
+                      name="d_visitadoresEspecializacao"
                       type="text"
-                      value={questionFour.visitadoresEspecializacao}
+                      value={questionFour.d_visitadoresEspecializacao}
                       onChange={handleVisitorsQualificationChange}
                       placeholder="Sua resposta"
                     />
@@ -489,9 +570,9 @@ export const FormStep5 = () => {
                     <input
                       className="inputForContainerTextLabelCheckbox"
                       id="mestradoVisitador"
-                      name="visitadoresMestrado"
+                      name="e_visitadoresMestrado"
                       type="text"
-                      value={questionFour.visitadoresMestrado}
+                      value={questionFour.e_visitadoresMestrado}
                       onChange={handleVisitorsQualificationChange}
                       placeholder="Sua resposta"
                     />
@@ -506,9 +587,9 @@ export const FormStep5 = () => {
                     <input
                       className="inputForContainerTextLabelCheckbox"
                       id="doutoradoVisitador"
-                      name="visitadoresDoutorado"
+                      name="f_visitadoresDoutorado"
                       type="text"
-                      value={questionFour.visitadoresDoutorado}
+                      value={questionFour.f_visitadoresDoutorado}
                       onChange={handleVisitorsQualificationChange}
                       placeholder="Sua resposta"
                     />
@@ -533,9 +614,9 @@ export const FormStep5 = () => {
                       <input
                         className="inputForContainerTextLabelCheckbox"
                         id="servidorEfetivoVisitadores"
-                        name="visitadoresServidorEfetivo"
+                        name="a_visitadoresServidorEfetivo"
                         type="text"
-                        value={questionFive.visitadoresServidorEfetivo}
+                        value={questionFive.a_visitadoresServidorEfetivo}
                         onChange={handleEffectiveRemunerationChange}
                         placeholder="Sua resposta"
                       />
@@ -547,9 +628,9 @@ export const FormStep5 = () => {
                       <input
                         className="inputForContainerTextLabelCheckbox"
                         id="mediaRemuneracaoEfetivoVisitadores"
-                        name="visitadoresMediaRemuneracaoEfetivo"
+                        name="b_visitadoresMediaRemuneracaoEfetivo"
                         type="text"
-                        value={questionFive.visitadoresMediaRemuneracaoEfetivo}
+                        value={questionFive.b_visitadoresMediaRemuneracaoEfetivo}
                         onChange={handleEffectiveRemunerationChange}
                         placeholder="Sua resposta"
                       />
@@ -566,9 +647,9 @@ export const FormStep5 = () => {
                       <input
                         className="inputForContainerTextLabelCheckbox"
                         id="cargoComissionadoVisitadores"
-                        name="visitadoresCargoComissionado"
+                        name="a_visitadoresCargoComissionado"
                         type="text"
-                        value={questionSix.visitadoresCargoComissionado}
+                        value={questionSix.a_visitadoresCargoComissionado}
                         onChange={handleCommissionedRemunerationChange}
                         placeholder="Sua resposta"
                       />
@@ -579,10 +660,10 @@ export const FormStep5 = () => {
                         htmlFor="mediaRemuneracaoComissonadoVisitador">Média Remuneração:</label>
                       <input
                         className="inputForContainerTextLabelCheckbox"
-                        id="mediaRemuneracaoComissonadoVisitador"
+                        id="b_mediaRemuneracaoComissonadoVisitador"
                         name="visitadoresMediaRemuneracaoComissionado"
                         type="text"
-                        value={questionSix.visitadoresMediaRemuneracaoComissionado}
+                        value={questionSix.b_visitadoresMediaRemuneracaoComissionado}
                         onChange={handleCommissionedRemunerationChange}
                         placeholder="Sua resposta"
                       />
@@ -599,9 +680,9 @@ export const FormStep5 = () => {
                       <input
                         className="inputForContainerTextLabelCheckbox"
                         id="servidorTemporarioSupervisor"
-                        name="visitadoresServidorTemporario"
+                        name="a_visitadoresServidorTemporario"
                         type="text"
-                        value={questionSeven.visitadoresServidorTemporario}
+                        value={questionSeven.a_visitadoresServidorTemporario}
                         onChange={handleTemporaryRemunerationChange}
                         placeholder="Sua resposta"
                       />
@@ -613,9 +694,9 @@ export const FormStep5 = () => {
                       <input
                         className="inputForContainerTextLabelCheckbox"
                         id="mediaRemuneracaoTemporarioVisitador"
-                        name="visitadoresMediaRemuneracaoTemporario"
+                        name="b_visitadoresMediaRemuneracaoTemporario"
                         type="text"
-                        value={questionSeven.visitadoresMediaRemuneracaoTemporario}
+                        value={questionSeven.b_visitadoresMediaRemuneracaoTemporario}
                         onChange={handleTemporaryRemunerationChange}
                         placeholder="Sua resposta"
                       />
@@ -632,9 +713,9 @@ export const FormStep5 = () => {
                       <input
                         className="inputForContainerTextLabelCheckbox"
                         id="bolsistaVisitador"
-                        name="visitadoresBolsista"
+                        name="a_visitadoresBolsista"
                         type="text"
-                        value={questionEight.visitadoresBolsista}
+                        value={questionEight.a_visitadoresBolsista}
                         onChange={handleScholarshipRemunerationChange}
                         placeholder="Sua resposta"
                       />
@@ -646,9 +727,9 @@ export const FormStep5 = () => {
                       <input
                         className="inputForContainerTextLabelCheckbox"
                         id="mediaRemuneracaoBolsistaVisitador"
-                        name="visitadoresMediaRemuneracaoBolsista"
+                        name="b_visitadoresMediaRemuneracaoBolsista"
                         type="text"
-                        value={questionEight.visitadoresMediaRemuneracaoBolsista}
+                        value={questionEight.b_visitadoresMediaRemuneracaoBolsista}
                         onChange={handleScholarshipRemunerationChange}
                         placeholder="Sua resposta"
                       />
@@ -660,14 +741,14 @@ export const FormStep5 = () => {
                       <label
                         className="labelForContainerTextLabelCheckbox"
                         htmlFor="estagiarioNivelSuperiorVisitador"
-                      >Estagiário de nivel superior:
+                      >Estagiário graduado/graduando:
                       </label>
                       <input
                         className="inputForContainerTextLabelCheckbox"
                         id="estagiarioNivelSuperiorVisitador"
-                        name="visitadoresEstagiarioNivelSuperior"
+                        name="a_visitadoresEstagiarioNivelSuperior"
                         type="text"
-                        value={questionNine.visitadoresEstagiarioNivelSuperior}
+                        value={questionNine.a_visitadoresEstagiarioNivelSuperior}
                         onChange={handleTopLevelInternChange}
                         placeholder="Sua resposta"
                       />
@@ -679,9 +760,9 @@ export const FormStep5 = () => {
                       <input
                         className="inputForContainerTextLabelCheckbox"
                         id="mediaRemuneracaoEstagiarioNivelSuperior"
-                        name="visitadoresMediaRemuneracaoEstagiarioNivelSuperior"
+                        name="b_visitadoresMediaRemuneracaoEstagiarioNivelSuperior"
                         type="text"
-                        value={questionNine.visitadoresMediaRemuneracaoEstagiarioNivelSuperior}
+                        value={questionNine.b_visitadoresMediaRemuneracaoEstagiarioNivelSuperior}
                         onChange={handleTopLevelInternChange}
                         placeholder="Sua resposta"
                       />
@@ -693,14 +774,14 @@ export const FormStep5 = () => {
                       <label
                         className="labelForContainerTextLabelCheckbox"
                         htmlFor="autonomoVisitador"
-                      >Autônomo:
+                      >Profissional autônomo:
                       </label>
                       <input
                         className="inputForContainerTextLabelCheckbox"
                         id="autonomoVisitador"
-                        name="visitadoresAutonomos"
+                        name="a_visitadoresAutonomos"
                         type="text"
-                        value={questionTen.visitadoresAutonomos}
+                        value={questionTen.a_visitadoresAutonomos}
                         onChange={handleAutonomousRemunerationChange}
                         placeholder="Sua resposta"
                       />
@@ -712,9 +793,9 @@ export const FormStep5 = () => {
                       <input
                         className="inputForContainerTextLabelCheckbox"
                         id="mediaRemuneracaoAutonomoVisitador"
-                        name="visitadoresMediaRemuneracaoAutonomos"
+                        name="b_visitadoresMediaRemuneracaoAutonomos"
                         type="text"
-                        value={questionTen.visitadoresMediaRemuneracaoAutonomos}
+                        value={questionTen.b_visitadoresMediaRemuneracaoAutonomos}
                         onChange={handleAutonomousRemunerationChange}
                         placeholder="Sua resposta"
                       />
@@ -731,9 +812,9 @@ export const FormStep5 = () => {
                       <input
                         className="inputForContainerTextLabelCheckbox"
                         id="outrosCargosVisitador"
-                        name="visitadoresOutrosCargos"
+                        name="a_visitadoresOutrosCargos"
                         type="text"
-                        value={questionEleven.visitadoresOutrosCargos}
+                        value={questionEleven.a_visitadoresOutrosCargos}
                         onChange={handleOthersRemunerationChange}
                         placeholder="Sua resposta"
                       />
@@ -745,9 +826,9 @@ export const FormStep5 = () => {
                       <input
                         className="inputForContainerTextLabelCheckbox"
                         id="mediaRemuneracaoOutrosCargosVisitador"
-                        name="visitadoresMediaRemuneracaoOutrosCargos"
+                        name="b_visitadoresMediaRemuneracaoOutrosCargos"
                         type="text"
-                        value={questionEleven.visitadoresMediaRemuneracaoOutrosCargos}
+                        value={questionEleven.b_visitadoresMediaRemuneracaoOutrosCargos}
                         onChange={handleOthersRemunerationChange}
                         placeholder="Sua resposta"
                       />
@@ -770,12 +851,12 @@ export const FormStep5 = () => {
                     <div id="containerInputLabelRadioButton">
                       <input
                         id="hiringVisitorSupervisorEdital"
-                        name="visitadoresEdital"
+                        name="a_visitadoresEdital"
                         type="checkbox"
-                        checked={questionTwelve.visitadoresEdital}
+                        checked={questionTwelve.a_visitadoresEdital}
                         onChange={(event) => setQuestionTwelve({
                           ...questionTwelve,
-                          visitadoresEdital: !!event.currentTarget?.checked
+                          a_visitadoresEdital: !!event.currentTarget?.checked
                         })}
                       />
                       <label
@@ -788,12 +869,12 @@ export const FormStep5 = () => {
                     <div id="containerInputLabelRadioButton">
                       <input
                         id="hiringVisitorSupervisorOwnTeam"
-                        name="visitadoresEquipePropria"
+                        name="b_visitadoresEquipePropria"
                         type="checkbox"
-                        checked={questionTwelve.visitadoresEquipePropria}
+                        checked={questionTwelve.b_visitadoresEquipePropria}
                         onChange={(event) => setQuestionTwelve({
                           ...questionTwelve,
-                          visitadoresEquipePropria: !!event.currentTarget?.checked
+                          b_visitadoresEquipePropria: !!event.currentTarget?.checked
                         })}
                       />
                       <label
@@ -806,12 +887,12 @@ export const FormStep5 = () => {
                     <div id="containerInputLabelRadioButton">
                       <input
                         id="hiringVisitorSupervisorDirectContracting"
-                        name="visitadoresContratacaoDireta"
+                        name="c_visitadoresContratacaoDireta"
                         type="checkbox"
-                        checked={questionTwelve.visitadoresContratacaoDireta}
+                        checked={questionTwelve.c_visitadoresContratacaoDireta}
                         onChange={(event) => setQuestionTwelve({
                           ...questionTwelve,
-                          visitadoresContratacaoDireta: !!event.currentTarget?.checked
+                          c_visitadoresContratacaoDireta: !!event.currentTarget?.checked
                         })}
                       />
                       <label
@@ -823,13 +904,31 @@ export const FormStep5 = () => {
 
                     <div id="containerInputLabelRadioButton">
                       <input
-                        id="hiringVisitorSupervisorOthers"
-                        name="visitadoresOutro"
+                        id="hiringVisitorSupervisorNotApplicable"
+                        name="d_visitadoresNaoSeAplica"
                         type="checkbox"
-                        checked={questionTwelve.visitadoresOutro}
+                        checked={questionTwelve.d_visitadoresNaoSeAplica}
                         onChange={(event) => setQuestionTwelve({
                           ...questionTwelve,
-                          visitadoresOutro: !!event.currentTarget?.checked
+                          d_visitadoresNaoSeAplica: !!event.currentTarget?.checked
+                        })}
+                      />
+                      <label
+                        className="containerTextLabel"
+                        htmlFor="hiringVisitorSupervisorNotApplicable"
+                      >Não se aplica
+                      </label>
+                    </div>
+
+                    <div id="containerInputLabelRadioButton">
+                      <input
+                        id="hiringVisitorSupervisorOthers"
+                        name="e_visitadoresOutro"
+                        type="checkbox"
+                        checked={questionTwelve.e_visitadoresOutro}
+                        onChange={(event) => setQuestionTwelve({
+                          ...questionTwelve,
+                          e_visitadoresOutro: !!event.currentTarget?.checked
                         })}
                       />
                       <label
@@ -839,13 +938,14 @@ export const FormStep5 = () => {
                       </label>
                       <input
                         className="inputPlaceholderOther"
-                        name="visitadoresOutrosDescricao"
+                        name="f_visitadoresOutrosDescricao"
                         type="text"
-                        value={questionTwelve.visitadoresOutrosDescricao}
+                        value={questionTwelve.f_visitadoresOutrosDescricao}
                         onChange={handleHiringVisitorSupervisorChange}
                         placeholder="Escreva aqui"
                       />
                     </div>
+
                   </div>
                 </div>
               </div>
@@ -894,13 +994,13 @@ export const FormStep5 = () => {
                         id="PartnershipAndContractingDontKnow"
                         name="PartnershipAndContracting"
                         type="radio"
-                        value="Não Sei"
+                        value="Outros"
                         onChange={handlePartnershipAndContractingChange}
                       />
                       <label
                         className="containerTextLabel"
                         htmlFor="PartnershipAndContractingDontKnow"
-                      >Não sei
+                      >Outros
                       </label>
                     </div>
 
@@ -925,3 +1025,19 @@ export const FormStep5 = () => {
   );
 };
 
+  {/* <SC.ButtonTypeText>
+    <div className="formQuestion">
+      <label htmlFor="numberOfVisitors">
+        Quantos Visitadores existem na equipe do PCF no seu município?
+        <input
+          id="numberOfVisitors"
+          name="numeroDeVisitadores"
+          type="text"
+          autoFocus
+          value={questionOne}
+          onChange={handleNumberOfVisitorsChange}
+          placeholder="Quantidade"
+        />
+      </label>
+    </div>
+  </SC.ButtonTypeText> */}

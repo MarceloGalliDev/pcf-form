@@ -16,18 +16,18 @@ type RoomParams = {
 };
 
 export const FormStep1 = () => {
-  const params = useParams<RoomParams>()
-  const roomId = params.id
+  const params = useParams<RoomParams>();
+  const roomId = params.id;
   const [ufs, setUfs] = useState<IBGEUFResponse[]>([]);
   const [cities, setCities] = useState<IBGECITYResponse[]>([]);
-  const [selectedUf, setSelectedUf] = useState('0')
-  const [selectedCity, setSelectedCity] = useState('0')
+  const [selectedUf, setSelectedUf] = useState('0');
+  const [selectedCity, setSelectedCity] = useState('0');
   const navigate = useNavigate();
   const { state, dispatch } = useFormPage();
-  const [questionOne, setQuestionOne] = useState('')
-  const [questionTwo, setQuestionTwo] = useState('')
-  const [questionThree, setQuestionThree] = useState('')
-  const [questionFour, setQuestionFour] = useState('')
+  const [questionOne, setQuestionOne] = useState('');
+  const [questionTwo, setQuestionTwo] = useState('');
+  const [questionThree, setQuestionThree] = useState('');
+  const [questionFour, setQuestionFour] = useState('');
 
   async function handleSendQuestion(event: FormEvent) {
     event.preventDefault();
@@ -51,7 +51,7 @@ export const FormStep1 = () => {
         questao05: selectedUf,
         questao06: selectedCity,
       }
-    }
+    };
 
     const firebaseRoomsQuestion = ref(database, `rooms/${roomId}/question`);
     const firebaseQuestion = await push(firebaseRoomsQuestion);

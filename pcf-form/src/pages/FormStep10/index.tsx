@@ -469,8 +469,8 @@ export const FormStep10 = () => {
                       id="directCostPCFYes"
                       name="directCostPCF"
                       type="radio"
-                      value={"sim"}
-                      onClick={() => setIsCheck("sim")}
+                      value={"sim_Q57"}
+                      onClick={() => setIsCheck("sim_Q57")}
                       onChange={handleDirectCostPCFChange}
                     />
                     <label
@@ -485,7 +485,8 @@ export const FormStep10 = () => {
                       id="directCostPCFNo"
                       name="directCostPCF"
                       type="radio"
-                      value={"Não"}
+                      value={"nao_Q57"}
+                      onClick={() => setIsCheck("nao_Q57")}
                       onChange={handleDirectCostPCFChange}
                     />
                     <label
@@ -500,7 +501,8 @@ export const FormStep10 = () => {
                       id="directCostPCFDontKnow"
                       name="directCostPCF"
                       type="radio"
-                      value={"NãoSei"}
+                      value={"naoSei_Q57"}
+                      onClick={() => setIsCheck("naoSei_Q57")}
                       onChange={handleDirectCostPCFChange}
                     />
                     <label
@@ -514,25 +516,22 @@ export const FormStep10 = () => {
               </div>
             </div>
 
-            {isCheck && (
+            {isCheck == "sim_Q57" ? (
               <>
-                <SC.QuestionChangeOnOff>
-                  <div className="containerBgLabel">
-                    <label className="containerTextLabel" htmlFor="directCostPCF">
-                      Se sim, Quais?
-                      <input
-                        name="directCostPCFText"
-                        type="text"
-                        value={questionFive}
-                        onChange={handleDirectCostPCFTextChange}
-                        placeholder="Sua resposta"
-                      />
-                    </label>
-                  </div>
-                </SC.QuestionChangeOnOff>
+                <div className="containerBgLabel">
+                  <label className="containerTextLabel" htmlFor="name">
+                    Quais?
+                    <input
+                      name="otherImportantCostsText"
+                      type="text"
+                      value={questionFive}
+                      onChange={handleDirectCostPCFTextChange}
+                      placeholder="Sua resposta"
+                    />
+                  </label>
+                </div>
               </>
-            )}
-
+            ) : '' }
           </div>
         </SC.ButtonTypeRadioText>
 
@@ -550,7 +549,8 @@ export const FormStep10 = () => {
                       id="otherImportantCostsYes"
                       name="otherImportantCosts"
                       type="radio"
-                      value="sim"
+                      value={"sim_Q59"}
+                      onClick={() => setIsCheck("sim_Q59")}
                       onChange={handleOtherImportantCostsChange}
                     />
                     <label
@@ -565,7 +565,8 @@ export const FormStep10 = () => {
                       id="otherImportantCostsNo"
                       name="otherImportantCosts"
                       type="radio"
-                      value="Não"
+                      value={"nao_Q59"}
+                      onClick={() => setIsCheck("nao_Q59")}
                       onChange={handleOtherImportantCostsChange}
                     />
                     <label
@@ -580,7 +581,8 @@ export const FormStep10 = () => {
                       id="otherImportantCostsDontKnow"
                       name="otherImportantCosts"
                       type="radio"
-                      value="Não"
+                      value={"naosei_Q59"}
+                      onClick={() => setIsCheck("naosei_Q59")}
                       onChange={handleOtherImportantCostsChange}
                     />
                     <label
@@ -594,19 +596,22 @@ export const FormStep10 = () => {
               </div>
             </div>
 
-            <div className="containerBgLabel">
-              <label className="containerTextLabel" htmlFor="name">
-                Se sim, Quais?
-                <input
-                  name="otherImportantCostsText"
-                  type="text"
-                  value={questionSeven}
-                  onChange={handleOtherImportantCostsTextChange}
-                  placeholder="Sua resposta"
-                />
-              </label>
-            </div>
-
+            {isCheck == "sim_Q59" ? (
+              <>
+                <div className="containerBgLabel">
+                  <label className="containerTextLabel" htmlFor="name">
+                    Quais?
+                    <input
+                      name="otherImportantCostsText"
+                      type="text"
+                      value={questionSeven}
+                      onChange={handleOtherImportantCostsTextChange}
+                      placeholder="Sua resposta"
+                    />
+                  </label>
+                </div>
+              </>
+            ) : '' }
           </div>
         </SC.ButtonTypeRadioText>
 
@@ -638,7 +643,7 @@ export const FormStep10 = () => {
                     id="monthlyRecordNo"
                     name="monthlyRecord"
                     type="radio"
-                    value="Não"
+                    value="nao"
                     onChange={handleMonthlyRecordChange}
                   />
                   <label
@@ -653,7 +658,7 @@ export const FormStep10 = () => {
                     id="monthlyRecordDontKnow"
                     name="monthlyRecord"
                     type="radio"
-                    value="Não"
+                    value="naosei"
                     onChange={handleMonthlyRecordChange}
                   />
                   <label

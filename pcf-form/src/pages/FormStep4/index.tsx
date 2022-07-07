@@ -7,42 +7,49 @@ import { push, ref, set } from "firebase/database";
 import { database } from "../../services/firebase";
 
 interface Workload {
-  supervisoresHorasSemanais40: boolean;
-  supervisoresHorasSemanais30: boolean;
-  supervisoresHorasSemanais20: boolean;
-  supervisoresHorasSemanaisOutros: boolean;
-  supervisoresHorasSemanaisOutrosDescricao: string;
+  a_supervisoresHorasSemanais40: boolean;
+  b_supervisoresHorasSemanais30: boolean;
+  c_supervisoresHorasSemanais20: boolean;
+  d_supervisoresHorasSemanaisOutros: boolean;
+  e_supervisoresHorasSemanaisOutrosDescricao: string;
 };
 
 interface SupervisorQualification {
-  supervisoresEspecializacao: string;
-  supervisoresMestrado: string;
-  supervisoresDoutorado: string;
+  a_supervisoresGraduacaoIncompleta: string;
+  b_supervisoresGraduacaoCompleta: string;
+  c_supervisoresEspecializacao: string;
+  d_supervisoresMestrado: string;
+  e_supervisoresDoutorado: string;
 };
 
 interface SupervisorTypeRemunaration1 {
-  supervisoresServidorEfetivo: string;
-  supervisoresMediaRemuneracaoEfetivo: string;
+  a_supervisoresServidorEfetivo: string;
+  b_supervisoresMediaRemuneracaoEfetivo: string;
 };
 
 interface SupervisorTypeRemunaration2 {
-  supervisoresCargoComissionado: string;
-  supervisoresMediaRemuneracaoComissionado: string;
+  a_supervisoresCargoComissionado: string;
+  b_supervisoresMediaRemuneracaoComissionado: string;
 };
 
 interface SupervisorTypeRemunaration3 {
-  supervisoresServidorTemporario: string;
-  supervisoresMediaRemuneracaoTemporario: string;
+  a_supervisoresServidorTemporario: string;
+  b_supervisoresMediaRemuneracaoTemporario: string;
 };
 
 interface SupervisorTypeRemunaration4 {
-  supervisoresBolsista: string;
-  supervisoresMediaRemuneracaoBolsista: string;
+  a_supervisoresBolsista: string;
+  b_supervisoresMediaRemuneracaoBolsista: string;
 };
 
 interface SupervisorTypeRemunaration5 {
-  supervisoresOutrosCargos: string;
-  supervisoresMediaRemuneracaoOutrosCargos: string;
+  a_supervisoresProfissionalAutonomo: string;
+  b_supervisoresMediaRemuneracaoProfissionalAutonomo: string;
+};
+
+interface SupervisorTypeRemunaration6 {
+  a_supervisoresOutrosCargos: string;
+  b_supervisoresMediaRemuneracaoOutrosCargos: string;
 };
 
 
@@ -58,37 +65,43 @@ export const FormStep4 = () => {
   const [questionOne, setQuestionOne] = useState('')
   const [questionTwo, setQuestionTwo] = useState('')
   const [questionThree, setQuestionThree] = useState<Workload>({
-    supervisoresHorasSemanais40: false,
-    supervisoresHorasSemanais30: false,
-    supervisoresHorasSemanais20: false,
-    supervisoresHorasSemanaisOutros: false,
-    supervisoresHorasSemanaisOutrosDescricao: '',
+    a_supervisoresHorasSemanais40: false,
+    b_supervisoresHorasSemanais30: false,
+    c_supervisoresHorasSemanais20: false,
+    d_supervisoresHorasSemanaisOutros: false,
+    e_supervisoresHorasSemanaisOutrosDescricao: '',
   });
   const [questionFive, setQuestionFive] =
   useState<SupervisorQualification>({
-    supervisoresEspecializacao: '',
-    supervisoresMestrado: '',
-    supervisoresDoutorado: '',
+    a_supervisoresGraduacaoIncompleta:'',
+    b_supervisoresGraduacaoCompleta:'',
+    c_supervisoresEspecializacao: '',
+    d_supervisoresMestrado: '',
+    e_supervisoresDoutorado: '',
   });
   const [questionSix, setQuestionSix] = useState<SupervisorTypeRemunaration1>({
-    supervisoresServidorEfetivo: '',
-    supervisoresMediaRemuneracaoEfetivo: '',
+    a_supervisoresServidorEfetivo: '',
+    b_supervisoresMediaRemuneracaoEfetivo: '',
   });
   const [questionSeven, setQuestionSeven] = useState<SupervisorTypeRemunaration2>({
-    supervisoresCargoComissionado: '',
-    supervisoresMediaRemuneracaoComissionado: '',
+    a_supervisoresCargoComissionado: '',
+    b_supervisoresMediaRemuneracaoComissionado: '',
   });
   const [questionEight, setQuestionEight] = useState<SupervisorTypeRemunaration3>({
-    supervisoresServidorTemporario: '',
-    supervisoresMediaRemuneracaoTemporario: '',
+    a_supervisoresServidorTemporario: '',
+    b_supervisoresMediaRemuneracaoTemporario: '',
   });
   const [questionNine, setQuestionNine] = useState<SupervisorTypeRemunaration4>({
-    supervisoresBolsista: '',
-    supervisoresMediaRemuneracaoBolsista: '',
+    a_supervisoresBolsista: '',
+    b_supervisoresMediaRemuneracaoBolsista: '',
   });
   const [questionTen, setQuestionTen] = useState<SupervisorTypeRemunaration5>({
-    supervisoresOutrosCargos: '',
-    supervisoresMediaRemuneracaoOutrosCargos: '',
+    a_supervisoresProfissionalAutonomo: '',
+    b_supervisoresMediaRemuneracaoProfissionalAutonomo: '',
+  });
+  const [questionEleven, setQuestionEleven] = useState<SupervisorTypeRemunaration6>({
+    a_supervisoresOutrosCargos: '',
+    b_supervisoresMediaRemuneracaoOutrosCargos: '',
   });
 
   async function handleSendQuestion(event: FormEvent) {
@@ -105,6 +118,7 @@ export const FormStep4 = () => {
         questao26: questionEight,
         questao27: questionNine,
         questao28: questionTen,
+        questao29: questionEleven,
       }
     };
 
@@ -177,7 +191,7 @@ export const FormStep4 = () => {
     })
   }, [questionNine]);
 
-  const handleOthersRemunerationChange = useCallback((event: React.FormEvent<HTMLInputElement>) => {
+  const handleAutonomousSupervisorChange = useCallback((event: React.FormEvent<HTMLInputElement>) => {
     const targetInput = event.currentTarget;
     const { value, name } = targetInput;
     setQuestionTen({
@@ -185,6 +199,15 @@ export const FormStep4 = () => {
       [name]: value,
     })
   }, [questionTen]);
+
+  const handleOthersRemunerationChange = useCallback((event: React.FormEvent<HTMLInputElement>) => {
+    const targetInput = event.currentTarget;
+    const { value, name } = targetInput;
+    setQuestionEleven({
+      ...questionEleven,
+      [name]: value,
+    })
+  }, [questionEleven]);
 
   useEffect(() => {
     dispatch({
@@ -210,22 +233,108 @@ export const FormStep4 = () => {
           </div>
           <div className="formQuestionV2">
 
-            <SC.ButtonTypeText>
+            <SC.ButtonTypeRadio>
               <div className="formQuestion">
-                <label htmlFor="numberOfSupervisors">
+                <p className="textFormRadioButton">
                   Quantos Supervisores existem na equipe do PCF no seu município?
-                  <input
-                    id="numberOfSupervisors"
-                    name="numeroDeSupervisores"
-                    type="text"
-                    autoFocus
-                    value={questionOne}
-                    onChange={handleNumberOfSupervisors}
-                    placeholder="Quantidade"
-                  />
-                </label>
+                </p>
+                <div id="containerOption">
+                  <div id="containerOptionSixOption">
+
+                    <div id="containerInputLabelRadioButton">
+                      <input
+                        id="numberOfSupervisorsZero"
+                        name="numberOfSupervisors"
+                        type="radio"
+                        value="0"
+                        onChange={handleNumberOfSupervisors}
+                      />
+                      <label
+                        className="containerTextLabel"
+                        htmlFor="numberOfSupervisorsZero"
+                      >0
+                      </label>
+                    </div>
+
+                    <div id="containerInputLabelRadioButton">
+                      <input
+                        id="numberOfSupervisorsOne"
+                        name="numberOfSupervisors"
+                        type="radio"
+                        value="1"
+                        onChange={handleNumberOfSupervisors}
+                      />
+                      <label
+                        className="containerTextLabel"
+                        htmlFor="numberOfSupervisorsOne"
+                      >1
+                      </label>
+                    </div>
+
+                    <div id="containerInputLabelRadioButton">
+                      <input
+                        id="numberOfSupervisorsTwo"
+                        name="numberOfSupervisors"
+                        type="radio"
+                        value="2"
+                        onChange={handleNumberOfSupervisors}
+                      />
+                      <label
+                        className="containerTextLabel"
+                        htmlFor="numberOfSupervisorsTwo"
+                      >2
+                      </label>
+                    </div>
+
+                    <div id="containerInputLabelRadioButton">
+                      <input
+                        id="numberOfSupervisorsThree"
+                        name="numberOfSupervisors"
+                        type="radio"
+                        value="3"
+                        onChange={handleNumberOfSupervisors}
+                      />
+                      <label
+                        className="containerTextLabel"
+                        htmlFor="numberOfSupervisorsThree"
+                      >3
+                      </label>
+                    </div>
+
+                    <div id="containerInputLabelRadioButton">
+                      <input
+                        id="numberOfSupervisorsFour"
+                        name="numberOfSupervisors"
+                        type="radio"
+                        value="4_ou_mais"
+                        onChange={handleNumberOfSupervisors}
+                      />
+                      <label
+                        className="containerTextLabel"
+                        htmlFor="numberOfSupervisorsFour"
+                      >4 ou mais
+                      </label>
+                    </div>
+
+                    <div id="containerInputLabelRadioButton">
+                      <input
+                        id="numberOfSupervisorsNotApplicable"
+                        name="numberOfSupervisors"
+                        type="radio"
+                        value="Não_se_aplica"
+                        onChange={handleNumberOfSupervisors}
+                      />
+                      <label
+                        className="containerTextLabel"
+                        htmlFor="numberOfSupervisorsNotApplicable"
+                      >Não se aplica
+                      </label>
+                    </div>
+
+                  </div>
+                </div>
               </div>
-            </SC.ButtonTypeText>
+            </SC.ButtonTypeRadio>
 
             <SC.ButtonTypeText>
               <div className="formQuestion">
@@ -250,15 +359,16 @@ export const FormStep4 = () => {
                 </p>
                 <div id="containerOption">
                   <div>
+
                     <div id="containerInputLabelRadioButton">
                       <input
                         id="workloadForty"
-                        name="supervisoresHorasSemanais40"
+                        name="a_supervisoresHorasSemanais40"
                         type="checkbox"
-                        checked={questionThree.supervisoresHorasSemanais40}
+                        checked={questionThree.a_supervisoresHorasSemanais40}
                         onChange={(event) => setQuestionThree({
                           ...questionThree,
-                          supervisoresHorasSemanais40: !!event.currentTarget?.checked
+                          a_supervisoresHorasSemanais40: !!event.currentTarget?.checked
                         })}
                       />
                       <label
@@ -267,15 +377,16 @@ export const FormStep4 = () => {
                       >40 horas semanais
                       </label>
                     </div>
+
                     <div id="containerInputLabelRadioButton">
                       <input
                         id="workloadThirty"
-                        name="supervisoresHorasSemanais30"
+                        name="b_supervisoresHorasSemanais30"
                         type="checkbox"
-                        checked={questionThree.supervisoresHorasSemanais30}
+                        checked={questionThree.b_supervisoresHorasSemanais30}
                         onChange={(event) => setQuestionThree({
                           ...questionThree,
-                          supervisoresHorasSemanais30: !!event.currentTarget?.checked
+                          b_supervisoresHorasSemanais30: !!event.currentTarget?.checked
                         })}
                       />
                       <label
@@ -284,15 +395,16 @@ export const FormStep4 = () => {
                       >30 horas semanais
                       </label>
                     </div>
+
                     <div id="containerInputLabelRadioButton">
                       <input
                         id="workloadTwenty"
-                        name="supervisoresHorasSemanais20"
+                        name="c_supervisoresHorasSemanais20"
                         type="checkbox"
-                        checked={questionThree.supervisoresHorasSemanais20}
+                        checked={questionThree.c_supervisoresHorasSemanais20}
                         onChange={(event) => setQuestionThree({
                           ...questionThree,
-                          supervisoresHorasSemanais20: !!event.currentTarget?.checked
+                          c_supervisoresHorasSemanais20: !!event.currentTarget?.checked
                         })}
                       />
                       <label
@@ -301,32 +413,33 @@ export const FormStep4 = () => {
                       >20 horas semanais
                       </label>
                     </div>
-        
+
                     <div id="containerInputLabelRadioButton">
                       <input
                         id="workloadOthers"
-                        name="supervisoresHorasSemanaisOutros"
+                        name="d_supervisoresHorasSemanaisOutros"
                         type="checkbox"
-                        checked={questionThree.supervisoresHorasSemanaisOutros}
+                        checked={questionThree.d_supervisoresHorasSemanaisOutros}
                         onChange={(event) => setQuestionThree({
                           ...questionThree,
-                          supervisoresHorasSemanaisOutros: !!event.currentTarget?.checked
+                          d_supervisoresHorasSemanaisOutros: !!event.currentTarget?.checked
                         })}
                       />
                       <label
                         className="containerTextLabel"
                         htmlFor="workloadOthers"
-                      >Outro:
+                      >Outros:
                       </label>
                       <input
                         className="inputPlaceholderOther"
-                        name="supervisoresHorasSemanaisOutrosDescricao"
+                        name="e_supervisoresHorasSemanaisOutrosDescricao"
                         type="text"
-                        value={questionThree.supervisoresHorasSemanaisOutrosDescricao}
+                        value={questionThree.e_supervisoresHorasSemanaisOutrosDescricao}
                         onChange={handleWorkloadChange}
                         placeholder="Escreva aqui"
                       />
                     </div>
+
                   </div>
                 </div>
               </div>
@@ -340,15 +453,49 @@ export const FormStep4 = () => {
                   <div id="containerTextLabelCheckbox">
                     <label
                       className="labelForContainerTextLabelCheckbox"
+                      htmlFor="supervisorGraduationIncomplete">
+                      Graduação incompleta:
+                    </label>
+                    <input
+                      className="inputForContainerTextLabelCheckbox"
+                      id="supervisorGraduationIncomplete"
+                      name="a_supervisoresGraduacaoIncompleta"
+                      type="text"
+                      value={questionFive.a_supervisoresGraduacaoIncompleta}
+                      onChange={handleSupervisorQualificationChange}
+                      placeholder="Sua resposta"
+                    />
+                  </div>
+
+                  <div id="containerTextLabelCheckbox">
+                    <label
+                      className="labelForContainerTextLabelCheckbox"
+                      htmlFor="supervisorGraduationComplete">
+                      Graduação completa:
+                    </label>
+                    <input
+                      className="inputForContainerTextLabelCheckbox"
+                      id="supervisorGraduationComplete"
+                      name="b_supervisoresGraduacaoCompleta"
+                      type="text"
+                      value={questionFive.b_supervisoresGraduacaoCompleta}
+                      onChange={handleSupervisorQualificationChange}
+                      placeholder="Sua resposta"
+                    />
+                  </div>
+
+                  <div id="containerTextLabelCheckbox">
+                    <label
+                      className="labelForContainerTextLabelCheckbox"
                       htmlFor="supervisorSpecialization">
                       Especialização:
                     </label>
                     <input
                       className="inputForContainerTextLabelCheckbox"
                       id="supervisorSpecialization"
-                      name="especializacaoSupervisor"
+                      name="c_especializacaoSupervisor"
                       type="text"
-                      value={questionFive.supervisoresEspecializacao}
+                      value={questionFive.c_supervisoresEspecializacao}
                       onChange={handleSupervisorQualificationChange}
                       placeholder="Sua resposta"
                     />
@@ -363,9 +510,9 @@ export const FormStep4 = () => {
                     <input
                       id="supervisorMaster"
                       className="inputForContainerTextLabelCheckbox"
-                      name="mestradoSupervisor"
+                      name="d_mestradoSupervisor"
                       type="text"
-                      value={questionFive.supervisoresMestrado}
+                      value={questionFive.d_supervisoresMestrado}
                       onChange={handleSupervisorQualificationChange}
                       placeholder="Sua resposta"
                     />
@@ -380,13 +527,14 @@ export const FormStep4 = () => {
                     <input
                       id="supervisorDoctor"
                       className="inputForContainerTextLabelCheckbox"
-                      name="doutoradoSupervisor"
+                      name="e_doutoradoSupervisor"
                       type="text"
-                      value={questionFive.supervisoresDoutorado}
+                      value={questionFive.e_supervisoresDoutorado}
                       onChange={handleSupervisorQualificationChange}
                       placeholder="Sua resposta"
                     />
                   </div>
+
                 </label>
               </div>
             </SC.ButtonTypeTextV3>
@@ -394,7 +542,7 @@ export const FormStep4 = () => {
             <SC.ButtonTypeTextV3>
               <div className="formQuestion">
                 <label htmlFor="containerLabelCheckboxBorder">
-                  Quantos Supervisores da equipe do PCF são contratados nas seguintes categorias em seu município:
+                Informe quantos Supervisores da equipe do PCF são contratados nas seguintes categorias em seu município e sua remuneração média:
 
                   <div id="containerLabelCheckboxBorder">
 
@@ -409,7 +557,7 @@ export const FormStep4 = () => {
                         id="servidorEfetivoSupervisor"
                         name="supervisoresServidorEfetivo"
                         type="text"
-                        value={questionSix.supervisoresServidorEfetivo}
+                        value={questionSix.a_supervisoresServidorEfetivo}
                         onChange={handleEffectiveRemunerationChange}
                         placeholder="Sua resposta"
                       />
@@ -424,7 +572,7 @@ export const FormStep4 = () => {
                         id="mediaRemuneracaoEfetivoSupervisor"
                         name="supervisoresMediaRemuneracaoEfetivo"
                         type="text"
-                        value={questionSix.supervisoresMediaRemuneracaoEfetivo}
+                        value={questionSix.b_supervisoresMediaRemuneracaoEfetivo}
                         onChange={handleEffectiveRemunerationChange}
                         placeholder="Sua resposta"
                       />
@@ -443,7 +591,7 @@ export const FormStep4 = () => {
                         id="cargoComissionadoSupervisor"
                         name="supervisoresCargoComissionado"
                         type="text"
-                        value={questionSeven.supervisoresCargoComissionado}
+                        value={questionSeven.a_supervisoresCargoComissionado}
                         onChange={handleCommissionedRemunerationChange}
                         placeholder="Sua resposta"
                       />
@@ -457,7 +605,7 @@ export const FormStep4 = () => {
                         id="mediaRemuneracaoComissonadoSupervisor"
                         name="supervisoresMediaRemuneracaoComissionado"
                         type="text"
-                        value={questionSeven.supervisoresMediaRemuneracaoComissionado}
+                        value={questionSeven.b_supervisoresMediaRemuneracaoComissionado}
                         onChange={handleCommissionedRemunerationChange}
                         placeholder="Sua resposta"
                       />
@@ -476,7 +624,7 @@ export const FormStep4 = () => {
                         id="servidorTemporarioSupervisor"
                         name="supervisoresServidorTemporario"
                         type="text"
-                        value={questionEight.supervisoresServidorTemporario}
+                        value={questionEight.a_supervisoresServidorTemporario}
                         onChange={handleTemporaryRemunerationChange}
                         placeholder="Sua resposta"
                       />
@@ -490,7 +638,7 @@ export const FormStep4 = () => {
                         id="mediaRemuneracaoTemporarioSupervisor"
                         name="supervisoresMediaRemuneracaoTemporario"
                         type="text"
-                        value={questionEight.supervisoresMediaRemuneracaoTemporario}
+                        value={questionEight.b_supervisoresMediaRemuneracaoTemporario}
                         onChange={handleTemporaryRemunerationChange}
                         placeholder="Sua resposta"
                       />
@@ -509,7 +657,7 @@ export const FormStep4 = () => {
                         id="bolsistaSupervisor"
                         name="supervisoresBolsista"
                         type="text"
-                        value={questionNine.supervisoresBolsista}
+                        value={questionNine.a_supervisoresBolsista}
                         onChange={handleScholarshipRemunerationChange}
                         placeholder="Sua resposta"
                       />
@@ -523,8 +671,41 @@ export const FormStep4 = () => {
                         id="mediaRemuneracaoBolsistaSupervisor"
                         name="supervisoresMediaRemuneracaoBolsista"
                         type="text"
-                        value={questionNine.supervisoresMediaRemuneracaoBolsista}
+                        value={questionNine.b_supervisoresMediaRemuneracaoBolsista}
                         onChange={handleScholarshipRemunerationChange}
+                        placeholder="Sua resposta"
+                      />
+                    </div>
+                  </div>
+
+                  <div id="containerLabelCheckboxBorder">
+                    <div id="containerTextLabelCheckbox">
+                      <label
+                        className="labelForContainerTextLabelCheckbox"
+                        htmlFor="profissionalAutonomoSupervisor"
+                      >Profissional autônomo:
+                      </label>
+                      <input
+                        className="inputForContainerTextLabelCheckbox"
+                        id="profissionalAutonomoSupervisor"
+                        name="supervisoresOutrosCargos"
+                        type="text"
+                        value={questionTen.a_supervisoresProfissionalAutonomo}
+                        onChange={handleAutonomousSupervisorChange}
+                        placeholder="Sua resposta"
+                      />
+                    </div>
+                    <div id="containerTextLabelCheckbox">
+                      <label
+                        className="labelForContainerTextLabelCheckbox"
+                        htmlFor="mediaRemuneracaoProfissionalAutonomoSupervisor">Média Remuneração:</label>
+                      <input
+                        className="inputForContainerTextLabelCheckbox"
+                        id="mediaRemuneracaoProfissionalAutonomoSupervisor"
+                        name="supervisoresMediaRemuneracaoOutrosCargos"
+                        type="text"
+                        value={questionTen.b_supervisoresMediaRemuneracaoProfissionalAutonomo}
+                        onChange={handleAutonomousSupervisorChange}
                         placeholder="Sua resposta"
                       />
                     </div>
@@ -542,7 +723,7 @@ export const FormStep4 = () => {
                         id="outrosCargosSupervisor"
                         name="supervisoresOutrosCargos"
                         type="text"
-                        value={questionTen.supervisoresOutrosCargos}
+                        value={questionEleven.a_supervisoresOutrosCargos}
                         onChange={handleOthersRemunerationChange}
                         placeholder="Sua resposta"
                       />
@@ -556,7 +737,7 @@ export const FormStep4 = () => {
                         id="mediaRemuneracaoOutrosCargosSupervisor"
                         name="supervisoresMediaRemuneracaoOutrosCargos"
                         type="text"
-                        value={questionTen.supervisoresMediaRemuneracaoOutrosCargos}
+                        value={questionEleven.b_supervisoresMediaRemuneracaoOutrosCargos}
                         onChange={handleOthersRemunerationChange}
                         placeholder="Sua resposta"
                       />
@@ -577,6 +758,7 @@ export const FormStep4 = () => {
             >Próximo
           </button>
         </SC.AllButtons>
+
       </form>
     </Theme>
   );
@@ -609,3 +791,20 @@ export const FormStep4 = () => {
 
   // const { register, handleSubmit, formState: { errors } } = useForm<FormStep4Input>({ resolver: yupResolver(schema) })
   // const onSubmit = handleSubmit(data => navigate('/formstep3'))
+
+  {/* <SC.ButtonTypeText>
+  <div className="formQuestion">
+    <label htmlFor="numberOfSupervisors">
+      Quantos Supervisores existem na equipe do PCF no seu município?
+      <input
+        id="numberOfSupervisors"
+        name="numeroDeSupervisores"
+        type="text"
+        autoFocus
+        value={questionOne}
+        onChange={handleNumberOfSupervisors}
+        placeholder="Quantidade"
+      />
+    </label>
+  </div>
+  </SC.ButtonTypeText> */}

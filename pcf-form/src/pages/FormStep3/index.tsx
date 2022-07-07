@@ -128,13 +128,13 @@ export const FormStep3 = () => {
                     id="teamCoordinatorDontKnow"
                     name="teamCoordinator"
                     type="radio"
-                    value="Não"
+                    value="Outros"
                     onChange={handleTeamCoordinatorChange}
                   />
                   <label
                     className="containerTextLabel"
                     htmlFor="teamCoordinatorDontKnow"
-                  >Não sei
+                  >Outros
                   </label>
                 </div>
 
@@ -191,7 +191,7 @@ export const FormStep3 = () => {
             </p>
             <div id="containerOption">
               <div id="containerOptionSixOption">
-        
+
                 <div id="containerInputLabelRadioButton">
                   <input
                     id="contactCoordinatorZero"
@@ -206,6 +206,7 @@ export const FormStep3 = () => {
                   >0
                   </label>
                 </div>
+
                 <div id="containerInputLabelRadioButton">
                   <input
                     id="contactCoordinatorOne"
@@ -220,6 +221,7 @@ export const FormStep3 = () => {
                   >1
                   </label>
                 </div>
+
                 <div id="containerInputLabelRadioButton">
                   <input
                     id="contactCoordinatorTwo"
@@ -234,6 +236,7 @@ export const FormStep3 = () => {
                   >2
                   </label>
                 </div>
+
                 <div id="containerInputLabelRadioButton">
                   <input
                     id="contactCoordinatorThree"
@@ -248,12 +251,13 @@ export const FormStep3 = () => {
                   >3
                   </label>
                 </div>
+
                 <div id="containerInputLabelRadioButton">
                   <input
                     id="contactCoordinatorFour"
                     name="contactCoordinator"
                     type="radio"
-                    value="4 ou mais"
+                    value="4_ou_mais"
                     onChange={handleContactCoordinatorChange}
                   />
                   <label
@@ -262,6 +266,22 @@ export const FormStep3 = () => {
                   >4 ou mais
                   </label>
                 </div>
+
+                <div id="containerInputLabelRadioButton">
+                  <input
+                    id="contactCoordinatorNotapplicable"
+                    name="contactCoordinator"
+                    type="radio"
+                    value="Não_se_aplica"
+                    onChange={handleContactCoordinatorChange}
+                  />
+                  <label
+                    className="containerTextLabel"
+                    htmlFor="contactCoordinatorNotapplicable"
+                  >Não se aplica
+                  </label>
+                </div>
+
               </div>
             </div>
           </div>
@@ -274,7 +294,7 @@ export const FormStep3 = () => {
             </p>
             <div id="containerOption">
               <div id="containerOptionSixOption">
-        
+
                 <div id="containerInputLabelRadioButton">
                   <input
                     id="knowTheMultiplierYes"
@@ -289,6 +309,7 @@ export const FormStep3 = () => {
                   >Sim
                   </label>
                 </div>
+
                 <div id="containerInputLabelRadioButton">
                   <input
                     id="knowTheMultiplierNo"
@@ -303,6 +324,7 @@ export const FormStep3 = () => {
                   >Não
                   </label>
                 </div>
+
               </div>
             </div>
           </div>
@@ -315,7 +337,7 @@ export const FormStep3 = () => {
             </p>
             <div id="containerOption">
               <div id="containerOptionSixOption">
-        
+
                 <div id="containerInputLabelRadioButton">
                   <input
                     id="steeringCommitteeYes"
@@ -330,6 +352,7 @@ export const FormStep3 = () => {
                   >Sim
                   </label>
                 </div>
+
                 <div id="containerInputLabelRadioButton">
                   <input
                     id="steeringCommitteeNo"
@@ -344,20 +367,37 @@ export const FormStep3 = () => {
                   >Não
                   </label>
                 </div>
+
                 <div id="containerInputLabelRadioButton">
                   <input
                     id="steeringCommitteeDontKnow"
                     name="steeringCommittee"
                     type="radio"
-                    value="Não sei"
+                    value="Outros"
                     onChange={handleSteeringCommitteeChange}
                   />
                   <label
                     className="containerTextLabel"
                     htmlFor="steeringCommitteeDontKnow"
-                  >Não sei
+                  >Outros
                   </label>
                 </div>
+
+                <div id="containerInputLabelRadioButton">
+                  <input
+                    id="steeringCommitteeNotAplicable"
+                    name="steeringCommittee"
+                    type="radio"
+                    value="Não_se_aplica"
+                    onChange={handleSteeringCommitteeChange}
+                  />
+                  <label
+                    className="containerTextLabel"
+                    htmlFor="steeringCommitteeNotAplicable"
+                  >Não se aplica
+                  </label>
+                </div>
+
               </div>
             </div>
           </div>
@@ -370,7 +410,7 @@ export const FormStep3 = () => {
             </p>
             <div id="containerOption">
               <div id="containerOptionSixOption">
-        
+
                 <div id="containerInputLabelRadioButton">
                   <input
                     id="steeringCommitteeMeetingZero"
@@ -385,6 +425,7 @@ export const FormStep3 = () => {
                   >0
                   </label>
                 </div>
+
                 <div id="containerInputLabelRadioButton">
                   <input
                     id="steeringCommitteeMeetingOne"
@@ -399,6 +440,7 @@ export const FormStep3 = () => {
                   >1
                   </label>
                 </div>
+
                 <div id="containerInputLabelRadioButton">
                   <input
                     id="steeringCommitteeMeetingTwo"
@@ -413,6 +455,7 @@ export const FormStep3 = () => {
                   >2
                   </label>
                 </div>
+
                 <div id="containerInputLabelRadioButton">
                   <input
                     id="steeringCommitteeMeetingThree"
@@ -427,12 +470,13 @@ export const FormStep3 = () => {
                   >3
                   </label>
                 </div>
+
                 <div id="containerInputLabelRadioButton">
                   <input
                     id="steeringCommitteeMeetingFour"
                     name="steeringCommitteeMeeting"
                     type="radio"
-                    value="4 ou mais"
+                    value="4_ou_mais"
                     onChange={handleSteeringCommitteeMeetingChange}
                   />
                   <label
@@ -441,6 +485,22 @@ export const FormStep3 = () => {
                   >4 ou mais
                   </label>
                 </div>
+
+                <div id="containerInputLabelRadioButton">
+                  <input
+                    id="steeringCommitteeMeetingNotApplicable"
+                    name="steeringCommitteeMeeting"
+                    type="radio"
+                    value="Não_se_aplica"
+                    onChange={handleSteeringCommitteeMeetingChange}
+                  />
+                  <label
+                    className="containerTextLabel"
+                    htmlFor="steeringCommitteeMeetingNotApplicable"
+                  >Não se aplica
+                  </label>
+                </div>
+
               </div>
             </div>
           </div>
