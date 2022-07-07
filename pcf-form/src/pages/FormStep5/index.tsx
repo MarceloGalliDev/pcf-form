@@ -482,7 +482,7 @@ export const FormStep5 = () => {
                       <label
                         className="containerTextLabel"
                         htmlFor="visitadoresHorasSemanaisOutros"
-                      >Outro:
+                      >Outros:
                       </label>
                       <input
                         className="inputPlaceholderOther"
@@ -521,10 +521,10 @@ export const FormStep5 = () => {
                   <div id="containerTextLabelCheckbox">
                     <label
                       className="labelForContainerTextLabelCheckbox"
-                      htmlFor="visitadoresGraduacaoIncompleto">Superior Incompleto:</label>
+                      htmlFor="visitadoresSuperiorIncompleto">Superior Incompleto:</label>
                     <input
                       className="inputForContainerTextLabelCheckbox"
-                      id="visitadoresGraduacaoIncompleto"
+                      id="visitadoresSuperiorIncompleto"
                       name="b_visitadoresGraduacaoIncompleto"
                       type="text"
                       value={questionFour.b_visitadoresGraduacaoIncompleto}
@@ -934,7 +934,7 @@ export const FormStep5 = () => {
                       <label
                         className="containerTextLabel"
                         htmlFor="hiringVisitorSupervisorOthers"
-                      >Outro:
+                      >Outros:
                       </label>
                       <input
                         className="inputPlaceholderOther"

@@ -454,7 +454,7 @@ export const FormStep4 = () => {
                     <label
                       className="labelForContainerTextLabelCheckbox"
                       htmlFor="supervisorGraduationIncomplete">
-                      Graduação incompleta:
+                      Superior incompleto:
                     </label>
                     <input
                       className="inputForContainerTextLabelCheckbox"
@@ -471,7 +471,7 @@ export const FormStep4 = () => {
                     <label
                       className="labelForContainerTextLabelCheckbox"
                       htmlFor="supervisorGraduationComplete">
-                      Graduação completa:
+                      Superior completo:
                     </label>
                     <input
                       className="inputForContainerTextLabelCheckbox"
