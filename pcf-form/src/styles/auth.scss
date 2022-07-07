@@ -5,7 +5,7 @@
 
   aside {
     flex: 7;
-    background: #D92525;
+    background: #2D7DB0;
     color: #fff;
     display: flex;
     flex-direction: column;
@@ -45,10 +45,11 @@
       width: 600px;
       margin: 40px 0px;
       text-align: center;
-      border: 1px solid #000;
+      border: 1px solid #2E7EB0;
     }
 
     h2 {
+      color: #46687D;
       font-size: 24px;
       font-family: 'Poppins', sans-serif;
     };
@@ -65,7 +66,7 @@
 
       button {
         margin-top: 10px;
-        background-color: #D92525;
+        background-color: #2D7DB0;
         color: #F2F2F2;
         font-size: 14px;
         font-weight: bold;
@@ -97,29 +98,6 @@
       a {
         color: #e559f9;
       }
-    }
-  }
-
-  .create-room {
-    cursor: pointer;
-    margin-top: 64px;
-    height: 50px;
-    border-radius: 8px;
-    font-weight: 500;
-    background: #ea4335;
-    color: #fff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 0;
-    transition: filter 0.2s;
-
-    .create-room-google {
-      margin-right: 8px;
-    }
-
-    &:hover {
-      filter: brightness(0.8);
     }
   }
 

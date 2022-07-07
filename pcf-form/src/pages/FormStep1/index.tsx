@@ -224,6 +224,4 @@ export const FormStep1 = () => {
   //   email: yup.string().required(),
   //   phoneNumber: yup.number().required(),
   //   functionPCF: yup.string().required(),
-  //   uf: yup.string().required(),
-  //   city: yup.string().required(),
   // }).required();

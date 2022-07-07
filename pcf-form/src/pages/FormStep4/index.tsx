@@ -397,6 +397,7 @@ export const FormStep4 = () => {
                   Quantos Supervisores da equipe do PCF são contratados nas seguintes categorias em seu município:
 
                   <div id="containerLabelCheckboxBorder">
+
                     <div id="containerTextLabelCheckbox">
                       <label
                         className="labelForContainerTextLabelCheckbox"
@@ -413,6 +414,7 @@ export const FormStep4 = () => {
                         placeholder="Sua resposta"
                       />
                     </div>
+
                     <div id="containerTextLabelCheckbox">
                       <label
                         className="labelForContainerTextLabelCheckbox"

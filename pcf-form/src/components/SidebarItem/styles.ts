@@ -21,21 +21,21 @@ export const Title = styled.div`
   font-weight: bold;
   margin-bottom: 5px;
   font-size: 15px;
-  color: #591C21;
+  color: #2D7DB0;
 `;
 
 export const Description = styled.div`
   text-align: right;
   font-size: 13px;
-  color: #591C21;
+  color: #2D7DB0;
 `;
 
 export const Point = styled.div<{ active: boolean }>`
   width: 10px;
   height: 10px;
-  border: 1px solid #591C21;
+  border: 1px solid #2D7DB0;
   border-radius: 50%;
   margin-left: 30px;
   margin-right: -5.5px;
-  background-color: ${props => props.active ? '#591C21' : '#F2F2F2'};
+  background-color: ${props => props.active ? '#2D7DB0' : '#F2F2F2'};
 `;

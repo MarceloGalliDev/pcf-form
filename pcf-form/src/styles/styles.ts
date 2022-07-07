@@ -3,7 +3,7 @@ import styled from "styled-components"
 export const Container = styled.div`
   p {
     font-size: 15px;
-    color: #591C21;
+    color: #2D7DB0;
   }
 
   h1 {
@@ -15,15 +15,15 @@ export const Container = styled.div`
   hr {
     height: 1px;
     border: 0;
-    background-color: #591C21;
+    background-color: #2D7DB0;
     margin: 30px 0;
   }
 `;
 
 export const SubSection = styled.div`
   .bgSubSection {
-    background-color: #AB6661;
-    border: 1px solid #8C1F28;
+    background-color: #3490C9;
+    border: 1px solid #3490C9;
     border-radius: 10px 10px 0px 0px;
     padding: 10px 10px;
     border-bottom: none;
@@ -36,7 +36,7 @@ export const SubSection = styled.div`
   }
 
   .formQuestionV2 {
-    border: 1px solid #8C1F28;
+    border: 1px solid #3490C9;
     background-color: #fff;
     border-radius: 0px 0px 10px 10px;
     padding: 10px 10px;
@@ -46,7 +46,7 @@ export const SubSection = styled.div`
 
 export const ButtonTypeRadio = styled.div`
   .formQuestion {
-    border: 1px solid #8C1F28;
+    border: 1px solid #2E7EB0;
     background-color: #fff;
     border-radius: 10px;
     padding: 10px 10px;
@@ -85,7 +85,7 @@ export const ButtonTypeRadio = styled.div`
 
 export const ButtonTypeRadioV2 = styled.div`
   .formQuestion {
-    border: 1px solid #8C1F28;
+    border: 1px solid #2E7EB0;
     background-color: #fff;
     border-radius: 10px;
     padding: 10px 10px;
@@ -124,7 +124,7 @@ export const ButtonTypeRadioV2 = styled.div`
         border-left: none;
         border-right: none;
         border-top: none;
-        border-bottom: 1px solid #8C1F28;
+        border-bottom: 1px solid #2E7EB0;
         outline: none;
       }
     }
@@ -133,7 +133,7 @@ export const ButtonTypeRadioV2 = styled.div`
 
 export const ButtonTypeDate = styled.div`
   .formQuestion {
-    border: 1px solid #8C1F28;
+    border: 1px solid #2E7EB0;
     background-color: #fff;
     border-radius: 10px;
     padding: 10px 10px;
@@ -154,8 +154,8 @@ export const ButtonTypeDate = styled.div`
         margin-top: 17px;
         width: 50% + 10vw;
         border: none;
-        border-bottom: 1px solid #8C1F28;
-        color: #591C21;
+        border-bottom: 1px solid #2E7EB0;
+        color: #46687D;
         outline: 0;
         font-size: 15px;
         padding: 5px 0;
@@ -166,7 +166,7 @@ export const ButtonTypeDate = styled.div`
 
 export const ButtonTypeSelectOption = styled.div`
   .formQuestion {
-    border: 1px solid #8C1F28;
+    border: 1px solid #2D7DB0;
     background-color: #fff;
     border-radius: 10px;
     padding: 10px 10px;
@@ -178,6 +178,7 @@ export const ButtonTypeSelectOption = styled.div`
       font-size: 15px;
       font-weight: bold;
       width: 50% + 10vw;
+      color: #2D7DB0;
 
       span {
         font-weight: normal;
@@ -190,9 +191,11 @@ export const ButtonTypeSelectOption = styled.div`
         width: 200px;
         margin-top: 17px;
         padding: 5px;
-        color: #591C21;
-        border: 1px solid #8C1F28;
+        color: #2D7DB0;
+        border: 1px solid #2D7DB0;
         border-radius: 5px;
+        text-decoration: #2D7DB0;
+        outline-color: #46687D;
       }
     }
   }
@@ -200,7 +203,7 @@ export const ButtonTypeSelectOption = styled.div`
 
 export const ButtonTypeCheckbox = styled.div`
   .formQuestion {
-    border: 1px solid #8C1F28;
+    border: 1px solid #2E7EB0;
     background-color: #fff;
     border-radius: 10px;
     padding: 10px 10px;
@@ -238,7 +241,7 @@ export const ButtonTypeCheckbox = styled.div`
           border-left: none;
           border-right: none;
           border-top: none;
-          border-bottom: 1px solid #8C1F28;
+          border-bottom: 1px solid #2E7EB0;
           outline: none;
         }
       }
@@ -248,7 +251,7 @@ export const ButtonTypeCheckbox = styled.div`
 
 export const ButtonTypeText = styled.div`
   .formQuestion {
-    border: 1px solid #8C1F28;
+    border: 1px solid #2D7DB0;
     background-color: #fff;
     border-radius: 10px;
     padding: 10px 10px;
@@ -257,6 +260,7 @@ export const ButtonTypeText = styled.div`
     label {
       font-size: 15px;
       font-weight: bold;
+      color: #2D7DB0;
 
       span {
         font-weight: normal;
@@ -269,11 +273,11 @@ export const ButtonTypeText = styled.div`
         margin-top: 17px;
         width: 100%;
         border: none;
-        border-bottom: 1px solid #8C1F28;
-        color: #591C21;
-        outline: 0;
+        border-bottom: 1px solid #2D7DB0;
+        color: #2D7DB0;
         font-size: 15px;
         padding: 5px 0;
+        outline: none;
       }
     }
   }
@@ -281,7 +285,7 @@ export const ButtonTypeText = styled.div`
 
 export const ButtonTypeTextV2 = styled.div`
   .formQuestion {
-    border: 1px solid #8C1F28;
+    border: 1px solid #2E7EB0;
     background-color: #fff;
     border-radius: 10px;
     padding: 10px 10px;
@@ -294,7 +298,7 @@ export const ButtonTypeTextV2 = styled.div`
     }
 
     .containerBgLabel {
-      border: 1px solid #8C1F28;
+      border: 1px solid #2E7EB0;
       border-radius: 10px;
       padding: 10px;
       margin-bottom: 10px;
@@ -315,9 +319,9 @@ export const ButtonTypeTextV2 = styled.div`
         margin-top: 17px;
         width: 10% + 10vw;
         border: none;
-        border-bottom: 1px solid #8C1F28;
+        border-bottom: 1px solid #2E7EB0;
         color: #591C21;
-        outline: 0;
+        outline: none;
         font-size: 15px;
         padding: 5px 0;
       }
@@ -327,16 +331,17 @@ export const ButtonTypeTextV2 = styled.div`
 
 export const ButtonTypeTextV3 = styled.div`
   .formQuestion {
-    border: 1px solid #8C1F28;
+    border: 1px solid #2E7EB0;
     background-color: #fff;
     border-radius: 10px;
     padding: 10px 10px;
     margin-bottom: 10px;
-
+    
     #containerLabelCheckboxBorder {
-      display: 1
+      display: 1;
       display: flex;
-      border: 1px solid #8C1F28;
+      flex-direction: column;
+      border: 1px solid #2E7EB0;
       border-radius: 10px;
       padding: 10px;
       margin-top: 10px;
@@ -361,7 +366,7 @@ export const ButtonTypeTextV3 = styled.div`
           border-left: none;
           border-right: none;
           border-top: none;
-          border-bottom: 1px solid #8C1F28;
+          border-bottom: 1px solid #2E7EB0;
           outline: none;
         }
       }
@@ -371,7 +376,7 @@ export const ButtonTypeTextV3 = styled.div`
 
 export const ButtonTypeFile = styled.div`
   .formQuestion {
-    border: 1px solid #8C1F28;
+    border: 1px solid #2E7EB0;
     background-color: #fff;
     border-radius: 10px;
     padding: 10px 10px;
@@ -407,11 +412,11 @@ export const AllButtons = styled.div`
   display: flex;
   flex-direction: row;
   gap: 20px;
-  background-color: #F2F2F2;
+  background-color: #f2f2f2;
   
   .buttonAll {
     width: 170px;
-    background-color: #D92525;
+    background-color: #2D7DB0;
     color: #F2F2F2;
     font-size: 14px;
     font-weight: bold;
@@ -453,7 +458,7 @@ export const ContainerV2 = styled.div`
 
 export const ButtonTypeRadioText = styled.div`
   .formQuestion {
-    border: 1px solid #8C1F28;
+    border: 1px solid #2E7EB0;
     background-color: #fff;
     border-radius: 10px;
     padding: 10px 10px;
@@ -490,7 +495,7 @@ export const ButtonTypeRadioText = styled.div`
   }
 
   .formQuestion {
-    border: 1px solid #8C1F28;
+    border: 1px solid #2E7EB0;
     background-color: #fff;
     border-radius: 10px;
     padding: 10px 10px;
@@ -503,7 +508,8 @@ export const ButtonTypeRadioText = styled.div`
     }
 
     .containerBgLabel {
-      border: 1px solid #8C1F28;
+      background-color: #fff;
+      border: 1px solid #2E7EB0;
       border-radius: 10px;
       padding: 10px;
       margin-bottom: 10px;
@@ -520,16 +526,51 @@ export const ButtonTypeRadioText = styled.div`
       }
 
       input {
+        background-color: #fff;
         display: block;
         margin-top: 17px;
         width: 100%;
         border: none;
-        border-bottom: 1px solid #8C1F28;
-        color: #591C21;
+        border-bottom: 1px solid #2E7EB0;
+        color: #2E7EB0;
         outline: 0;
         font-size: 15px;
         padding: 5px 0;
       }
+    }
+  }
+`;
+
+export const QuestionChangeOnOff = styled.div`
+  .containerBgLabel {
+    background-color: #fff;
+    border: 1px solid #2E7EB0;
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 10px;
+
+    .containerTextLabel {
+      font-size: 15px;
+      font-weight: 500;
+    }
+
+    span {
+      font-weight: normal;
+      color: red;
+      margin-left: 10px;
+    }
+
+    input {
+      background-color: #fff;
+      display: block;
+      margin-top: 17px;
+      width: 100%;
+      border: none;
+      border-bottom: 1px solid #2E7EB0;
+      color: #2E7EB0;
+      outline: 0;
+      font-size: 15px;
+      padding: 5px 0;
     }
   }
 `;
