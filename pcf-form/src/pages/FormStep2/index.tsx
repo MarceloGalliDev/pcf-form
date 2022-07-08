@@ -26,7 +26,7 @@ export const FormStep2 = () => {
 
   async function handleSendQuestion(event: FormEvent) {
     event.preventDefault();
-
+    
     const question = {
       B_Caracteristicas_do_PCF: {
         questao07: questionOne,
@@ -653,7 +653,7 @@ export const FormStep2 = () => {
   );
 };
 
-  // const { register, handleSubmit, formState: { errors } } = useForm<FormStep2Input>({ resolver: yupResolver(schema) })
+  // const { register, handleSubmit, formState: { errors } } = useForm({ resolver: yupResolver(schema) })
   // const onSubmit = handleSubmit(data => navigate('/formstep3'))
 
   //verificando se foi respondida, não passa para próxima etapa

@@ -63,6 +63,9 @@ export const InputArea = ({ onAdd }: Props) => {
           </>
         </SC.Select>
       </SC.InputLabel>
+      {categoryField === 'Transporte' && (
+        <h1>caixa aqui</h1>
+      )}
 
       <SC.InputLabel>
         <SC.InputTitle>Origem Recurso</SC.InputTitle>

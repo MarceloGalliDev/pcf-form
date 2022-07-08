@@ -55,7 +55,8 @@ export const FormStep10 = () => {
   const [questionSeven, setQuestionSeven] = useState('');
   const [questionEight, setQuestionEight] = useState('');
 
-  const [isCheck, setIsCheck] = useState<string>();
+  const [isCheckQ57, setIsCheckQ57] = useState<string>();
+  const [isCheckQ59, setIsCheckQ59] = useState<string>();
 
   function handleAddItem(item: Item) {
     let newList = [...list]
@@ -470,7 +471,7 @@ export const FormStep10 = () => {
                       name="directCostPCF"
                       type="radio"
                       value={"sim_Q57"}
-                      onClick={() => setIsCheck("sim_Q57")}
+                      onClick={() => setIsCheckQ57("sim_Q57")}
                       onChange={handleDirectCostPCFChange}
                     />
                     <label
@@ -486,7 +487,7 @@ export const FormStep10 = () => {
                       name="directCostPCF"
                       type="radio"
                       value={"nao_Q57"}
-                      onClick={() => setIsCheck("nao_Q57")}
+                      onClick={() => setIsCheckQ57("nao_Q57")}
                       onChange={handleDirectCostPCFChange}
                     />
                     <label
@@ -502,7 +503,7 @@ export const FormStep10 = () => {
                       name="directCostPCF"
                       type="radio"
                       value={"naoSei_Q57"}
-                      onClick={() => setIsCheck("naoSei_Q57")}
+                      onClick={() => setIsCheckQ57("naoSei_Q57")}
                       onChange={handleDirectCostPCFChange}
                     />
                     <label
@@ -516,7 +517,7 @@ export const FormStep10 = () => {
               </div>
             </div>
 
-            {isCheck == "sim_Q57" ? (
+            {isCheckQ57 === "sim_Q57" && (
               <>
                 <div className="containerBgLabel">
                   <label className="containerTextLabel" htmlFor="name">
@@ -531,7 +532,7 @@ export const FormStep10 = () => {
                   </label>
                 </div>
               </>
-            ) : '' }
+            )}
           </div>
         </SC.ButtonTypeRadioText>
 
@@ -550,7 +551,7 @@ export const FormStep10 = () => {
                       name="otherImportantCosts"
                       type="radio"
                       value={"sim_Q59"}
-                      onClick={() => setIsCheck("sim_Q59")}
+                      onClick={() => setIsCheckQ59("sim_Q59")}
                       onChange={handleOtherImportantCostsChange}
                     />
                     <label
@@ -566,7 +567,7 @@ export const FormStep10 = () => {
                       name="otherImportantCosts"
                       type="radio"
                       value={"nao_Q59"}
-                      onClick={() => setIsCheck("nao_Q59")}
+                      onClick={() => setIsCheckQ59("nao_Q59")}
                       onChange={handleOtherImportantCostsChange}
                     />
                     <label
@@ -582,7 +583,7 @@ export const FormStep10 = () => {
                       name="otherImportantCosts"
                       type="radio"
                       value={"naosei_Q59"}
-                      onClick={() => setIsCheck("naosei_Q59")}
+                      onClick={() => setIsCheckQ59("naosei_Q59")}
                       onChange={handleOtherImportantCostsChange}
                     />
                     <label
@@ -596,7 +597,7 @@ export const FormStep10 = () => {
               </div>
             </div>
 
-            {isCheck == "sim_Q59" ? (
+            {isCheckQ59 === "sim_Q59" && (
               <>
                 <div className="containerBgLabel">
                   <label className="containerTextLabel" htmlFor="name">
@@ -611,7 +612,7 @@ export const FormStep10 = () => {
                   </label>
                 </div>
               </>
-            ) : '' }
+            )}
           </div>
         </SC.ButtonTypeRadioText>
 

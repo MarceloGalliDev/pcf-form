@@ -1,7 +1,7 @@
 import { Category } from '../types/Category'
 
 export const categories: Category = {
-  transporteCombustivel: { title: 'Transporte(Combustível)' },
+  transporteCombustivel: { title: 'Transporte' },
   transporteAluguel: { title: 'Transporte(Aluguel)' },
   transporteSalario: { title: 'Transporte(Salário Motorista)' },
   transporteOutros: { title: 'Transporte(Outros)' },
