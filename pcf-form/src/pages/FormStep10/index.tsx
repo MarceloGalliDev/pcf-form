@@ -147,8 +147,8 @@ export const FormStep10 = () => {
     <Theme>
       <SC.Container>
         <p>Etapa {state.currentStep}/10</p>
-        <h1>Outros Custos</h1>
-        <p>Outros custos com transporte, diárias e recursos materiais.</p>
+        <h1>Recursos e Custos do PCF</h1>
+        <p>Recursos e custos mensais diretos do PCF no município (incluindo recursos humanos, materiais, infraestrutura etc.)</p>
         <hr />
       </SC.Container>
 
@@ -457,222 +457,198 @@ export const FormStep10 = () => {
           </div>
         </SC.ButtonTypeCheckbox>
 
-        <SC.ButtonTypeRadioText>
-          <div className="formQuestion">
-            <p>Há algum outro custo direto pago com recurso do PCF?</p>
-            <div className="formQuestion">
-              <div id="containerOption">
-                <div id="containerOptionSixOption">
-        
-                  <div id="containerInputLabelRadioButton">
-                    <input
-                      
-                      id="directCostPCFYes"
-                      name="directCostPCF"
-                      type="radio"
-                      value={"sim_Q57"}
-                      onClick={() => setIsCheckQ57("sim_Q57")}
-                      onChange={handleDirectCostPCFChange}
-                    />
-                    <label
-                      className="containerTextLabel"
-                      htmlFor="directCostPCFYes"
-                    >Sim
-                    </label>
-                  </div>
+        <SC.SubSection>
+          <div className="bgSubSection">
+            <p>Subseção Outros Custos</p>
+          </div>
+          <div className="formQuestionV2">
+            <SC.ButtonTypeRadioText>
+              <div className="formQuestion">
+                <p>Há algum outro custo direto pago com recurso do PCF?</p>
+                <div className="formQuestion">
+                  <div id="containerOption">
+                    <div id="containerOptionSixOption">
+            
+                      <div id="containerInputLabelRadioButton">
+                        <input
+                          
+                          id="directCostPCFYes"
+                          name="directCostPCF"
+                          type="radio"
+                          value={"sim_Q57"}
+                          onClick={() => setIsCheckQ57("sim_Q57")}
+                          onChange={handleDirectCostPCFChange}
+                        />
+                        <label
+                          className="containerTextLabel"
+                          htmlFor="directCostPCFYes"
+                        >Sim
+                        </label>
+                      </div>
 
-                  <div id="containerInputLabelRadioButton">
-                    <input
-                      id="directCostPCFNo"
-                      name="directCostPCF"
-                      type="radio"
-                      value={"nao_Q57"}
-                      onClick={() => setIsCheckQ57("nao_Q57")}
-                      onChange={handleDirectCostPCFChange}
-                    />
-                    <label
-                      className="containerTextLabel"
-                      htmlFor="directCostPCFNo"
-                    >Não
-                    </label>
-                  </div>
+                      <div id="containerInputLabelRadioButton">
+                        <input
+                          id="directCostPCFNo"
+                          name="directCostPCF"
+                          type="radio"
+                          value={"nao_Q57"}
+                          onClick={() => setIsCheckQ57("nao_Q57")}
+                          onChange={handleDirectCostPCFChange}
+                        />
+                        <label
+                          className="containerTextLabel"
+                          htmlFor="directCostPCFNo"
+                        >Não
+                        </label>
+                      </div>
 
-                  <div id="containerInputLabelRadioButton">
-                    <input
-                      id="directCostPCFDontKnow"
-                      name="directCostPCF"
-                      type="radio"
-                      value={"naoSei_Q57"}
-                      onClick={() => setIsCheckQ57("naoSei_Q57")}
-                      onChange={handleDirectCostPCFChange}
-                    />
-                    <label
-                      className="containerTextLabel"
-                      htmlFor="directCostPCFDontKnow"
-                    >Não sei
-                    </label>
-                  </div>
+                      <div id="containerInputLabelRadioButton">
+                        <input
+                          id="directCostPCFDontKnow"
+                          name="directCostPCF"
+                          type="radio"
+                          value={"naoSei_Q57"}
+                          onClick={() => setIsCheckQ57("naoSei_Q57")}
+                          onChange={handleDirectCostPCFChange}
+                        />
+                        <label
+                          className="containerTextLabel"
+                          htmlFor="directCostPCFDontKnow"
+                        >Desconheço
+                        </label>
+                      </div>
 
+                    </div>
+                  </div>
+                </div>
+
+                {isCheckQ57 === "sim_Q57" && (
+                  <>
+                    <div className="containerBgLabel">
+                      <label className="containerTextLabel" htmlFor="name">
+                        Quais?
+                        <input
+                          name="otherImportantCostsText"
+                          type="text"
+                          value={questionFive}
+                          onChange={handleDirectCostPCFTextChange}
+                          placeholder="Sua resposta"
+                        />
+                      </label>
+                    </div>
+                  </>
+                )}
+              </div>
+            </SC.ButtonTypeRadioText>
+
+            <SC.ButtonTypeRadioText>
+              <div className="formQuestion">
+                <p>
+                Existem outros gastos que são importantes para o funcionamento do programa e que não são cobertos pelos recursos repassados pelo PCF? (exemplo: protetor solar, guarda-chuva etc.)
+                </p>
+                <div className="formQuestion">
+                  <div id="containerOption">
+                    <div id="containerOptionSixOption">
+            
+                      <div id="containerInputLabelRadioButton">
+                        <input
+                          id="otherImportantCostsYes"
+                          name="otherImportantCosts"
+                          type="radio"
+                          value={"sim_Q59"}
+                          onClick={() => setIsCheckQ59("sim_Q59")}
+                          onChange={handleOtherImportantCostsChange}
+                        />
+                        <label
+                          className="containerTextLabel"
+                          htmlFor="otherImportantCostsYes"
+                        >Sim
+                        </label>
+                      </div>
+
+                      <div id="containerInputLabelRadioButton">
+                        <input
+                          id="otherImportantCostsNo"
+                          name="otherImportantCosts"
+                          type="radio"
+                          value={"nao_Q59"}
+                          onClick={() => setIsCheckQ59("nao_Q59")}
+                          onChange={handleOtherImportantCostsChange}
+                        />
+                        <label
+                          className="containerTextLabel"
+                          htmlFor="otherImportantCostsNo"
+                        >Não
+                        </label>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+
+                {isCheckQ59 === "sim_Q59" && (
+                  <>
+                    <div className="containerBgLabel">
+                      <label className="containerTextLabel" htmlFor="name">
+                        Quais?
+                        <input
+                          name="otherImportantCostsText"
+                          type="text"
+                          value={questionSeven}
+                          onChange={handleOtherImportantCostsTextChange}
+                          placeholder="Sua resposta"
+                        />
+                      </label>
+                    </div>
+                  </>
+                )}
+              </div>
+            </SC.ButtonTypeRadioText>
+
+            <SC.ButtonTypeRadio>
+              <div className="formQuestion">
+                <p className="textFormRadioButton">
+                  Há registros mensais destes custos?
+                </p>
+                <div id="containerOption">
+                  <div id="containerOptionSixOption">
+
+                    <div id="containerInputLabelRadioButton">
+                      <input
+                        id="monthlyRecordYes"
+                        name="monthlyRecord"
+                        type="radio"
+                        value="sim"
+                        onChange={handleMonthlyRecordChange}
+                      />
+                      <label
+                        className="containerTextLabel"
+                        htmlFor="monthlyRecordYes"
+                      >Sim
+                      </label>
+                    </div>
+
+                    <div id="containerInputLabelRadioButton">
+                      <input
+                        id="monthlyRecordNo"
+                        name="monthlyRecord"
+                        type="radio"
+                        value="nao"
+                        onChange={handleMonthlyRecordChange}
+                      />
+                      <label
+                        className="containerTextLabel"
+                        htmlFor="monthlyRecordNo"
+                      >Não
+                      </label>
+                    </div>
+
+                  </div>
                 </div>
               </div>
-            </div>
-
-            {isCheckQ57 === "sim_Q57" && (
-              <>
-                <div className="containerBgLabel">
-                  <label className="containerTextLabel" htmlFor="name">
-                    Quais?
-                    <input
-                      name="otherImportantCostsText"
-                      type="text"
-                      value={questionFive}
-                      onChange={handleDirectCostPCFTextChange}
-                      placeholder="Sua resposta"
-                    />
-                  </label>
-                </div>
-              </>
-            )}
+            </SC.ButtonTypeRadio>
           </div>
-        </SC.ButtonTypeRadioText>
-
-        <SC.ButtonTypeRadioText>
-          <div className="formQuestion">
-            <p>
-              Há algum outro custo considerado importante para o PCF não especificado anteriormente?
-            </p>
-            <div className="formQuestion">
-              <div id="containerOption">
-                <div id="containerOptionSixOption">
-        
-                  <div id="containerInputLabelRadioButton">
-                    <input
-                      id="otherImportantCostsYes"
-                      name="otherImportantCosts"
-                      type="radio"
-                      value={"sim_Q59"}
-                      onClick={() => setIsCheckQ59("sim_Q59")}
-                      onChange={handleOtherImportantCostsChange}
-                    />
-                    <label
-                      className="containerTextLabel"
-                      htmlFor="otherImportantCostsYes"
-                    >Sim
-                    </label>
-                  </div>
-
-                  <div id="containerInputLabelRadioButton">
-                    <input
-                      id="otherImportantCostsNo"
-                      name="otherImportantCosts"
-                      type="radio"
-                      value={"nao_Q59"}
-                      onClick={() => setIsCheckQ59("nao_Q59")}
-                      onChange={handleOtherImportantCostsChange}
-                    />
-                    <label
-                      className="containerTextLabel"
-                      htmlFor="otherImportantCostsNo"
-                    >Não
-                    </label>
-                  </div>
-
-                  <div id="containerInputLabelRadioButton">
-                    <input
-                      id="otherImportantCostsDontKnow"
-                      name="otherImportantCosts"
-                      type="radio"
-                      value={"naosei_Q59"}
-                      onClick={() => setIsCheckQ59("naosei_Q59")}
-                      onChange={handleOtherImportantCostsChange}
-                    />
-                    <label
-                      className="containerTextLabel"
-                      htmlFor="otherImportantCostsDontKnow"
-                    >Não sei
-                    </label>
-                  </div>
-
-                </div>
-              </div>
-            </div>
-
-            {isCheckQ59 === "sim_Q59" && (
-              <>
-                <div className="containerBgLabel">
-                  <label className="containerTextLabel" htmlFor="name">
-                    Quais?
-                    <input
-                      name="otherImportantCostsText"
-                      type="text"
-                      value={questionSeven}
-                      onChange={handleOtherImportantCostsTextChange}
-                      placeholder="Sua resposta"
-                    />
-                  </label>
-                </div>
-              </>
-            )}
-          </div>
-        </SC.ButtonTypeRadioText>
-
-        <SC.ButtonTypeRadio>
-          <div className="formQuestion">
-            <p className="textFormRadioButton">
-              Há registros mensais destes custos?
-            </p>
-            <div id="containerOption">
-              <div id="containerOptionSixOption">
-
-                <div id="containerInputLabelRadioButton">
-                  <input
-                    id="monthlyRecordYes"
-                    name="monthlyRecord"
-                    type="radio"
-                    value="sim"
-                    onChange={handleMonthlyRecordChange}
-                  />
-                  <label
-                    className="containerTextLabel"
-                    htmlFor="monthlyRecordYes"
-                  >Sim
-                  </label>
-                </div>
-
-                <div id="containerInputLabelRadioButton">
-                  <input
-                    id="monthlyRecordNo"
-                    name="monthlyRecord"
-                    type="radio"
-                    value="nao"
-                    onChange={handleMonthlyRecordChange}
-                  />
-                  <label
-                    className="containerTextLabel"
-                    htmlFor="monthlyRecordNo"
-                  >Não
-                  </label>
-                </div>
-
-                <div id="containerInputLabelRadioButton">
-                  <input
-                    id="monthlyRecordDontKnow"
-                    name="monthlyRecord"
-                    type="radio"
-                    value="naosei"
-                    onChange={handleMonthlyRecordChange}
-                  />
-                  <label
-                    className="containerTextLabel"
-                    htmlFor="monthlyRecordDontKnow"
-                  >Não sei
-                  </label>
-                </div>
-
-              </div>
-            </div>
-          </div>
-        </SC.ButtonTypeRadio>
+        </SC.SubSection>
 
         <SC.AllButtons>
             <Link className="buttonAll" to="/:id/formstep9">Voltar</Link>

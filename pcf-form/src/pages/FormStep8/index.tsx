@@ -78,6 +78,7 @@ export const FormStep8 = () => {
           <div className="formQuestion">
             <label htmlFor="parceriasComOrganizacoes">
               Com qual(is) a(s) organização(ões) possui parceria?
+              <p>exemplo: CIEE, ...</p>
               <input
                 id="parceriasComOrganizacoes"
                 name="PartnershipsOrganization"

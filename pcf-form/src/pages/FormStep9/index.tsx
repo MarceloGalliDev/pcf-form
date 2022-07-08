@@ -81,7 +81,7 @@ export const FormStep9 = () => {
     <Theme>
       <SC.Container>
         <p>Etapa {state.currentStep}/10</p>
-        <h1>Recursos e Custos do PCF</h1>
+        <h1>Visitas domiciliares</h1>
         <p>Recursos e custos mensais diretos do PCF no município (incluindo recursos humanos, materiais, infraestrutura etc.)</p>
         <hr/>
       </SC.Container>
@@ -226,7 +226,7 @@ export const FormStep9 = () => {
           <SC.ButtonTypeText>
             <div className="formQuestion">
               <label htmlFor="numeroDeVisitas">
-                Qual numero médio de visitas que o visitador realiza por dia:
+                Qual número médio de visitas que o visitador realiza por dia:
                 <input
                   id="numeroDeVisitas"
                   name="numberOfVisits"

@@ -188,6 +188,9 @@ export const FormStep2 = () => {
                   >Abril
                   </label>
                 </div>
+              </div>
+
+              <div id="containerOptionSixOption">
 
                 <div id="containerInputLabelRadioButton">
                   <input
@@ -218,9 +221,7 @@ export const FormStep2 = () => {
                   >Junho
                   </label>
                 </div>
-              </div>
 
-              <div id="containerOptionSixOption">
                 <div id="containerInputLabelRadioButton">
                   <input
                     id="lastMonthSpentJulho"
@@ -248,66 +249,6 @@ export const FormStep2 = () => {
                     className="containerTextLabel"
                     htmlFor="lastMonthSpentAgosto"
                   >Agosto
-                  </label>
-                </div>
-
-                <div id="containerInputLabelRadioButton">
-                  <input
-                    id="lastMonthSpentSetembro"
-                    name="lastMonthSpentData"
-                    type="radio"
-                    value="Setembro"
-                    onChange={handleLastMonthSpentDataChange}
-                  />
-                  <label
-                    className="containerTextLabel"
-                    htmlFor="lastMonthSpentSetembro"
-                  >Setembro
-                  </label>
-                </div>
-
-                <div id="containerInputLabelRadioButton">
-                  <input
-                    id="lastMonthSpentOutubro"
-                    name="lastMonthSpentData"
-                    type="radio"
-                    value="Outubro"
-                    onChange={handleLastMonthSpentDataChange}
-                  />
-                  <label
-                    className="containerTextLabel"
-                    htmlFor="lastMonthSpentOutubro"
-                  >Outubro
-                  </label>
-                </div>
-
-                <div id="containerInputLabelRadioButton">
-                  <input
-                    id="lastMonthSpentNovembro"
-                    name="lastMonthSpentData"
-                    type="radio"
-                    value="Novembro"
-                    onChange={handleLastMonthSpentDataChange}
-                  />
-                  <label
-                    className="containerTextLabel"
-                    htmlFor="lastMonthSpentNovembro"
-                  >Novembro
-                  </label>
-                </div>
-
-                <div id="containerInputLabelRadioButton">
-                  <input
-                    id="lastMonthSpentDezembro"
-                    name="lastMonthSpentData"
-                    type="radio"
-                    value="Dezembro"
-                    onChange={handleLastMonthSpentDataChange}
-                  />
-                  <label
-                    className="containerTextLabel"
-                    htmlFor="lastMonthSpentDezembro"
-                  >Dezembro
                   </label>
                 </div>
               </div>

@@ -89,14 +89,14 @@ export const Theme = ({ children }: Props) => {
             />
 
             <SidebarItem
-              title="Recursos e Custos do PCF"
+              title="Visitas domiciliares"
               description="Recursos e custos mensais diretos do PCF no município"
               path="/:id/formstep9"
               active={state.currentStep === routerActivate.routeResourceCost}
             />
 
             <SidebarItem
-              title="Outros Custos"
+              title="Recursos e Custos do PCF"
               description="Outros custos, com transporte, diárias e recursos materiais "
               path="/:id/formstep10"
               active={state.currentStep === routerActivate.routeOtherCost}

@@ -80,14 +80,14 @@ export const FormStep7 = () => {
       <SC.Container>
         <p>Etapa {state.currentStep}/10</p>
         <h1>Público atendido pelo PCF em seu município</h1>
-        <p>Perfil das famílias atendidas pelo PCF em seu município</p>
+        <p>Perfil das famílias acompanhadas pelo PCF em seu município</p>
         <hr />
       </SC.Container>
 
       <form onSubmit={handleSendPublicServed}>
         <SC.ButtonTypeTextV2>
           <div className="formQuestion">
-            <p>Indique o número de pessoas atendidas pelo Programa em seu município no mês de referência mencionado anteriormente:</p>
+            <p>Indique o número de pessoas atendidas pelo Programa Criança Feliz em seu município no mês de referência mencionado anteriormente:</p>
             <div className="containerBgLabel">
               <label className="containerTextLabel" htmlFor="gravidaInput">
                 Gestantes:
@@ -117,7 +117,7 @@ export const FormStep7 = () => {
             </div>
             <div className="containerBgLabel">
               <label className="containerTextLabel" htmlFor="crianca_0_72">
-                Crianças de 0-72 meses:
+                Crianças de 36-72 meses:
                 <input
                   id="crianca_0_72"
                   name="childrenAged_0_72"
@@ -130,7 +130,7 @@ export const FormStep7 = () => {
             </div>
             <div className="containerBgLabel">
               <label className="containerTextLabel" htmlFor="quantidadeDeCriancas">
-                Quantos domicílios no seu município possuem mais de uma criança sendo atendida pelo PCF?
+                Quantos domicílios no seu município possuem mais de uma criança sendo acompanhadas pelo PCF?
                 <input
                   id="quantidadeDeCriancas"
                   name="numberOfChildren"

@@ -28,8 +28,15 @@ export const FormStep6 = () => {
     setList(newList)
   };
 
-  function removerDaLista(index: number) {
+  console.log(filteredList)
+
+  function handleEventPrevent(event: FormEvent) {
+    event.preventDefault();
+  }
+
+  const removerDaLista = (index: number) => {
     setFilteredList((previous) => previous.filter((item, indexPrevious) => index !== indexPrevious))
+    return setFilteredList
   };
 
   async function handleSendQuestionOthersProfessionals(event: FormEvent) {
@@ -86,7 +93,10 @@ export const FormStep6 = () => {
 
                   <InputArea onAdd={handleAddItemText} />
 
-                  <TableArea list={filteredList} remover={removerDaLista} />
+                  <TableArea
+                    list={filteredList}
+                    remover={removerDaLista}
+                  />
 
                 </SC.Body>
               </SC.ContainerV2>

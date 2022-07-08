@@ -151,111 +151,7 @@ export const FormStepB1 = () => {
 
         <SC.ButtonTypeRadioText>
           <div className="formQuestion">
-            <p>Existe algum outro motivo que explique o fato de o município ter deixado o Programa Criança Feliz?</p>
-
-            <div className="formQuestion">
-              <div id="containerOption">
-                <div id="containerOptionSixOption">
-                  
-                  <div id="containerInputLabelRadioButton">
-                    <input
-                      id="lastMonthSpentJaneiro"
-                      name="lastMonthSpentData"
-                      type="radio"
-                      value="sim"
-                      onChange={handleTargetAudiencePCFChange}
-                    />
-                    <label
-                      className="containerTextLabel"
-                      htmlFor="lastMonthSpentJaneiro"
-                    >Sim
-                    </label>
-                  </div>
-
-                  <div id="containerInputLabelRadioButton">
-                    <input
-                      id="lastMonthSpentFevereiro"
-                      name="lastMonthSpentData"
-                      type="radio"
-                      value="Não"
-                      onChange={handleTargetAudiencePCFChange}
-                    />
-                    <label
-                      className="containerTextLabel"
-                      htmlFor="lastMonthSpentFevereiro"
-                    >Não
-                    </label>
-                  </div>
-
-                </div>
-              </div>
-            </div>
-
-            <div className="containerBgLabel">
-              <label className="containerTextLabel" htmlFor="name">
-                Se sim, qual?
-                <input
-                  name="name"
-                  type="text"
-                  autoFocus
-                  value={state.name}
-                  onChange={handleTargetAudiencePCFTextChange}
-                  placeholder="Sua resposta"
-                />
-              </label>
-            </div>
-
-          </div>
-        </SC.ButtonTypeRadioText>
-
-        <SC.ButtonTypeRadio>
-          <div className="formQuestion">
-            <p className="textFormRadioButton">
-             O seu município conhece o Programa Criança Feliz?
-            </p>
-            <div id="containerOption">
-              <div id="containerOptionSixOption">
-
-                <div id="containerInputLabelRadioButton">
-                  <input
-                    id="programPCFYes"
-                    name="programPCF"
-                    type="radio"
-                    value="Sim"
-                    onChange={handleProgramPCFChange}
-                  />
-                  <label
-                    className="containerTextLabel"
-                    htmlFor="teamCoordinatorYes"
-                  >Sim
-                  </label>
-                </div>
-
-                <div id="containerInputLabelRadioButton">
-                  <input
-                    id="programPCFNo"
-                    name="programPCF"
-                    type="radio"
-                    value="Não"
-                    onChange={handleProgramPCFChange}
-                  />
-                  <label
-                    className="containerTextLabel"
-                    htmlFor="programPCFNo"
-                  >Não
-                  </label>
-                </div>
-
-              </div>
-            </div>
-          </div>
-        </SC.ButtonTypeRadio>
-
-
-        <SC.ButtonTypeRadioText>
-          <div className="formQuestion">
-            <p>O seu município possui algum programa ou serviço com o mesmo público-alvo do Programa Criança Feliz?</p>
-
+            <p>Caso o seu município possua algum programa ou serviço do mesmo público-alvo: </p>
             <div className="formQuestion">
               <div id="containerOption">
                 <div id="containerOptionSixOption">
@@ -311,6 +207,65 @@ export const FormStepB1 = () => {
             <div className="containerBgLabel">
               <label className="containerTextLabel" htmlFor="name">
                 Se sim, qual o valor mensal gasto com esse Programa? 
+                <input
+                  name="name"
+                  type="text"
+                  autoFocus
+                  value={state.name}
+                  onChange={handleTargetAudiencePCFTextChange}
+                  placeholder="Sua resposta"
+                />
+              </label>
+            </div>
+
+          </div>
+        </SC.ButtonTypeRadioText>
+
+        <SC.ButtonTypeRadioText>
+          <div className="formQuestion">
+            <p>Existe algum outro motivo que explique o fato de o município ter deixado o Programa Criança Feliz?</p>
+
+            <div className="formQuestion">
+              <div id="containerOption">
+                <div id="containerOptionSixOption">
+                  
+                  <div id="containerInputLabelRadioButton">
+                    <input
+                      id="lastMonthSpentJaneiro"
+                      name="lastMonthSpentData"
+                      type="radio"
+                      value="sim"
+                      onChange={handleTargetAudiencePCFChange}
+                    />
+                    <label
+                      className="containerTextLabel"
+                      htmlFor="lastMonthSpentJaneiro"
+                    >Sim
+                    </label>
+                  </div>
+
+                  <div id="containerInputLabelRadioButton">
+                    <input
+                      id="lastMonthSpentFevereiro"
+                      name="lastMonthSpentData"
+                      type="radio"
+                      value="Não"
+                      onChange={handleTargetAudiencePCFChange}
+                    />
+                    <label
+                      className="containerTextLabel"
+                      htmlFor="lastMonthSpentFevereiro"
+                    >Não
+                    </label>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+            <div className="containerBgLabel">
+              <label className="containerTextLabel" htmlFor="name">
+                Se sim, qual?
                 <input
                   name="name"
                   type="text"

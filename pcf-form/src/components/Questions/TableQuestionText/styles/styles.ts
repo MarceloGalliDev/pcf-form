@@ -27,7 +27,7 @@ export const TableHead = styled.table`
   background-color: #fff;
   padding: 20px;
   box-shadow: 0px 0px 5px #ccc;
-  boprder-radius: 10px;
+  border-radius: 10px;
   margin-top: 20px;
 `;
 
@@ -49,12 +49,12 @@ export const Category = styled.div`
   display: inline-block;
   padding: 5px 10px;
   border-radius: 5px;
-  color: #591C21;
+  color: #2E7EB0;
   background-color: #fff;
 `;
 
 export const ValueArea = styled.div`
-  color: #591C21;
+  color: #2E7EB0;
 `;
 
 export const ButtonArea = styled.button`
@@ -89,11 +89,18 @@ export const InputTitle = styled.div`
   margin-bottom: 5px;
 `;
 
-export const InputArea = styled.input`
-  width: 250px;
+export const InputArea1 = styled.input`
+  width: 100%;
   height: 30px;
   padding: 0 5px;
-  border: 1px solid #AB6661;
+  border: 1px solid #2E7EB0;
+  border-radius: 5px;
+`;
+export const InputArea2 = styled.input`
+  width: 120px;
+  height: 30px;
+  padding: 0 5px;
+  border: 1px solid #2E7EB0;
   border-radius: 5px;
 `;
 
@@ -101,7 +108,7 @@ export const SelectArea = styled.select`
   width: 100%;
   height: 30px;
   padding: 0 5px;
-  border: 1px solid #AB6661;
+  border: 1px solid #2E7EB0;
   border-radius: 5px;
 `;
 
@@ -110,12 +117,12 @@ export const InputLabelButton = styled.div`
 `;
 
 export const ButtonInputArea = styled.button`
-  width: 30px;
+  width: 100px;
   height: 30px;
   padding: 0 5px;
-  border: 1px solid #AB6661;
+  border: 1px solid #2E7EB0;
   border-radius: 5px;
-  background-color: #AB6661;
+  background-color: #2E7EB0;
   color: #fff;
   cursor: pointer;
   margin-left: 20px;

@@ -121,7 +121,7 @@ export const FormStepA1 = () => {
 
         <SC.ButtonTypeRadioText>
           <div className="formQuestion">
-            <p>Há algum outro custo direto pago com recurso do PCF?</p>
+            <p>O seu município possui algum Programa ou Serviço com o mesmo público-alvo do Programa Criança Feliz?</p>
 
             <div className="formQuestion">
               <div id="containerOption">
@@ -256,7 +256,7 @@ export const FormStepA1 = () => {
                   <label
                     className="containerTextLabel"
                     htmlFor="programPCFNo"
-                  >A transferência de recurso financeiro é insuficiente para o município aderir ao programa
+                  >A transferência de recurso financeiro é insuficiente para o município manter o programa
                   </label>
                 </div>
 
@@ -267,7 +267,9 @@ export const FormStepA1 = () => {
 
         <SC.ButtonTypeRadioText>
           <div className="formQuestion">
-            <p>O seu município possui algum Programa ou Serviço com o mesmo público-alvo do Programa Criança Feliz?</p>
+            <p>
+            Existe algum outro motivo que explique o fato de o município não ter aderido ao Programa Criança Feliz e que não foi mencionado na questão anterior?
+            </p>
 
             <div className="formQuestion">
               <div id="containerOption">
