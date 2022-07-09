@@ -155,10 +155,11 @@ export const FormStep10 = () => {
       <form onSubmit={handleSendOtherCosts}>
         <SC.SubSection>
           <div className="bgSubSection">
-            <p>Outros custos</p>
+            <p>Subseção outros recursos</p>
           </div>
 
           <div className="formQuestionV2">
+            <div className="formQuestionV3">
             <SC.ContainerV2>
               <SC.Body>
 
@@ -168,6 +169,7 @@ export const FormStep10 = () => {
 
               </SC.Body>
             </SC.ContainerV2>
+            </div>
           </div>
 
           <SC.ButtonTypeRadioV2>
@@ -462,6 +464,7 @@ export const FormStep10 = () => {
             <p>Subseção Outros Custos</p>
           </div>
           <div className="formQuestionV2">
+
             <SC.ButtonTypeRadioText>
               <div className="formQuestion">
                 <p>Há algum outro custo direto pago com recurso do PCF?</p>

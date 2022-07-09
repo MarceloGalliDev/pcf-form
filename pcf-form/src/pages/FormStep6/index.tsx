@@ -8,6 +8,7 @@ import { ref, push, set } from "firebase/database";
 import { InputArea } from "../../components/Questions/TableQuestionText/components/InputArea";
 import { TableArea } from "../../components/Questions/TableQuestionText/components/TableArea";
 import { Item } from "../../components/Questions/TableQuestionText/types/Item";
+import { Info } from "phosphor-react";
 
 type RoomParams = {
   id: string;
@@ -87,7 +88,7 @@ export const FormStep6 = () => {
           </div>
           <div className="formQuestionV2">
 
-            <div className="formQuestionV2">
+            <div className="formQuestionV3">
               <SC.ContainerV2>
                 <SC.Body>
 

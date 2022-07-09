@@ -1,6 +1,7 @@
 import * as SC from '../../styles/styles';
 import { FormEvent, useState } from 'react';
 import { Item } from '../../types/Item';
+import { Info } from 'phosphor-react';
 
 type Props = {
   onAdd: (item: Item) => void;
@@ -48,12 +49,23 @@ export const InputArea = ({ onAdd }: Props) => {
 
       <SC.InputLabel>
         <SC.InputTitle>Tipo de profissional</SC.InputTitle>
-        <SC.InputArea1
-          type="text"
-          value={inputOneField}
-          onChange={event => setInputOneField(event.target.value)}
-          placeholder="Escreva aqui"
-        />
+        <div className='informationIcon'>
+          <SC.InputArea3
+            type="text"
+            value={inputOneField}
+            onChange={event => setInputOneField(event.target.value)}
+            placeholder="Escreva aqui"
+          />
+          <span
+            data-tooltip="Por exemplo: motorista, secretário, técnico administrativo ..."
+          >
+            <Info
+              size={20}
+              color="#2d56d2"
+              weight="light"
+            />
+          </span>
+        </div>
       </SC.InputLabel>
 
       <SC.InputLabel>
@@ -68,12 +80,23 @@ export const InputArea = ({ onAdd }: Props) => {
       
       <SC.InputLabel>
         <SC.InputTitle>Remuneração</SC.InputTitle>
-        <SC.InputArea2
-          type="text"
-          value={inputThreeField}
-          onChange={event => setInputThreeField(event.target.value)}
-          placeholder="R$"
-        />
+        <div className='informationIcon'>
+          <SC.InputArea4
+            type="text"
+            value={inputThreeField}
+            onChange={event => setInputThreeField(event.target.value)}
+            placeholder="R$"
+          />
+            <span
+            data-tooltip="Inserir com casas decimais (Exemplo: 106,38)"
+          >
+            <Info
+              size={20}
+              color="#2d56d2"
+              weight="light"
+            />
+          </span>
+        </div>
       </SC.InputLabel>
 
       <SC.InputLabelButton>

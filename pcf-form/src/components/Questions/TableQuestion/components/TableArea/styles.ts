@@ -6,7 +6,7 @@ export const Table = styled.table`
   background-color: #fff;
   padding: 20px;
   box-shadow: 0px 0px 5px #ccc;
-  boprder-radius: 10px;
+  border-radius: 10px;
   margin-top: 20px;
 `;
 

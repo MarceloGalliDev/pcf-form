@@ -37,10 +37,18 @@ export const SubSection = styled.div`
 
   .formQuestionV2 {
     border: 1px solid #3490C9;
-    background-color: #fff;
+    background-color: #2e7eb02e;
     border-radius: 0px 0px 10px 10px;
     padding: 10px 10px;
     margin-bottom: 10px;
+
+    .formQuestionV3 {
+      border: 1px solid #3490C9;
+      background-color: #2e7eb02e;
+      border-radius: 10px;
+      padding: 10px 10px;
+      margin-bottom: 10px;
+    }
   }
 `;
 

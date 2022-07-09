@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
-
 `;
 
 export const Header = styled.div`
@@ -22,6 +21,7 @@ export const Body = styled.div`
   max-width: 980px;
   margin-bottom: 50px;
 `;
+
 export const TableHead = styled.table`
   width: 100%;
   background-color: #fff;
@@ -38,7 +38,6 @@ export const TableHeadColumn = styled.th<{ width?: number }>`
 `;//width está sendo especificado para uso como props
 
 export const TableLine = styled.tr`
-
 `;
 
 export const TableColumn = styled.td`
@@ -82,6 +81,40 @@ export const ContainerInputArea = styled.div`
 
 export const InputLabel = styled.label`
   margin: 10px;
+
+  .informationIcon {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 30px;
+    padding: 0 5px;
+    border: 1px solid #2E7EB0;
+    border-radius: 5px;
+    align-items: center;
+  }
+
+  [data-tooltip] {
+    position: relative;
+    font-weight: bold;
+  }
+
+  [data-tooltip]:after {
+    display: none;
+    position: absolute;
+    top: 35px;
+    left: calc(100% + -180px);
+    padding: 5px;
+    border-radius: 3px;
+    content: attr(data-tooltip);
+    background-color: #cbe9fc;
+    color: #073f98;
+    border: 1px solid #2E7EB0;
+    white-space: nowrap;
+  }
+
+  [data-tooltip]:hover:after {
+    display: block;
+  }
 `;
 
 export const InputTitle = styled.div`
@@ -95,14 +128,36 @@ export const InputArea1 = styled.input`
   padding: 0 5px;
   border: 1px solid #2E7EB0;
   border-radius: 5px;
+  outline: none;
 `;
+
 export const InputArea2 = styled.input`
   width: 120px;
   height: 30px;
   padding: 0 5px;
   border: 1px solid #2E7EB0;
   border-radius: 5px;
+  outline: none;
 `;
+
+export const InputArea3 = styled.input`
+  width: 100%;
+  height: 30px;
+  padding: 0 5px;
+  border: none;
+  background-color: transparent;
+  outline: none;
+`;
+
+export const InputArea4 = styled.input`
+  width: 100px;
+  height: 30px;
+  padding: 0 5px;
+  border: none;
+  background-color: transparent;
+  outline: none;
+`;
+
 
 export const SelectArea = styled.select`
   width: 100%;
@@ -113,7 +168,6 @@ export const SelectArea = styled.select`
 `;
 
 export const InputLabelButton = styled.div`
-
 `;
 
 export const ButtonInputArea = styled.button`

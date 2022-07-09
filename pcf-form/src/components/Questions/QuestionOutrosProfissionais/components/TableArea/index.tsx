@@ -26,7 +26,7 @@ export const TableArea = ({ list, remover }:Props) => {
           <SC.TableHeadColumn width={15}>Excluir</SC.TableHeadColumn>
         </tr>
       </thead>
-        
+
       <tbody>
         {list.map((item, index,) => (
           <SC.TableLine
