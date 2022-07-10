@@ -5,9 +5,9 @@ import { useFormPage, FormActions } from "../../context/FormContext";
 import { ChangeEvent, FormEvent, useCallback, useEffect, useState } from "react";
 import { database } from "../../services/firebase";
 import { ref, push, set } from "firebase/database";
-import { InputArea } from "../../components/Questions/TableQuestion/components/InputArea";
-import { TableArea } from "../../components/Questions/TableQuestion/components/TableArea";
-import { Item } from "../../components/Questions/TableQuestion/types/Item";
+import { InputArea } from "../../components/Questions/QuestionRecursosCustos/components/InputArea";
+import { TableArea } from "../../components/Questions/QuestionRecursosCustos/components/TableArea";
+import { Item } from "../../components/Questions/QuestionRecursosCustos/types/Item";
 
 type RoomParams = {
   id: string;

@@ -26,11 +26,9 @@ export const InputArea = ({ onAdd }: Props) => {
     if(!resourceKeys.includes(resourceField)) {
       errors.push('Tipo inválido!');
     }
-
     if(valueField <= 0) {
       errors.push('Valor inválido!');
     }
-
     if(errors.length > 0) {
       alert(errors.join("\n"));
     } else {

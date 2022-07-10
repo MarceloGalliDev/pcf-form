@@ -5,6 +5,10 @@ import { useFormPage, FormActions } from "../../context/FormContext"
 import { ChangeEvent, FormEvent, useEffect, useState } from "react"
 import { database } from "../../services/firebase";
 import { ref, push, set } from "firebase/database";
+import { Item } from "../../components/Questions/QuestionOrganizacoesParceiras/types/Item"
+import { InputArea } from "../../components/Questions/QuestionOrganizacoesParceiras/components/InputArea"
+import { TableArea } from "../../components/Questions/QuestionOrganizacoesParceiras/components/TableArea"
+
 
 type RoomParams = {
   id: string;
@@ -15,24 +19,32 @@ export const FormStep8 = () => {
   const roomId = params.id
   const navigate = useNavigate();
   const { state, dispatch } = useFormPage();
+  
   const [questionOne, setQuestionOne] = useState('')
   const [questionTwo, setQuestionTwo] = useState('')
   const [questionThree, setQuestionThree] = useState('')
 
+  const [list, setList] = useState<Item[]>([]);
+  const [filteredList, setFilteredList] = useState<Item[]>([]);
+
+  function handleAddItemPartner(item: Item) {
+    let newList = [...list]
+    newList.push(item)
+    setList(newList)
+  };
+
+  const removerDaLista = (index: number) => {
+    setFilteredList((previous) => previous.filter((item, indexPrevious) => index !== indexPrevious))
+    return setFilteredList
+  };
+
   async function handleSendPartnerOrganizations(event: FormEvent) {
     event.preventDefault();
-
-    if (questionOne.trim() === '') {
-      return;
-    };
-    if (questionThree.trim() === '') {
-      return;
-    };
 
     const question = {
       H_Organizacoes_Parceiras: {
         questao48: questionOne,
-        questao49: questionTwo,
+        questao49: filteredList,
         questao50: questionThree,
       }
     };
@@ -44,18 +56,6 @@ export const FormStep8 = () => {
     navigate(`/${roomId}/formstep9`)
   };
 
-  const handlePartnershipsOrganizationChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setQuestionOne(event.target.value);
-  };
-
-  const handleFinancialSupportChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setQuestionTwo(event.target.value);
-  };
-
-  const handleFinancialValuationChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setQuestionThree(event.target.value)
-  };
-
   useEffect(() => {
     dispatch({
       type: FormActions.setCurrentStep,
@@ -63,8 +63,13 @@ export const FormStep8 = () => {
     });
   }, []);
 
+  useEffect(() => {
+    setFilteredList(list)
+  }, [list]);
+
   return (
     <Theme>
+
       <SC.Container> 
         <p>Etapa {state.currentStep}/10</p>
         <h1>Organizações parceiras</h1>
@@ -74,102 +79,29 @@ export const FormStep8 = () => {
 
       <form onSubmit={handleSendPartnerOrganizations}>
 
-        <SC.ButtonTypeText>
-          <div className="formQuestion">
-            <label htmlFor="parceriasComOrganizacoes">
-              Com qual(is) a(s) organização(ões) possui parceria?
-              <p>exemplo: CIEE, ...</p>
-              <input
-                id="parceriasComOrganizacoes"
-                name="PartnershipsOrganization"
-                type="text"
-                value={questionOne}
-                onChange={handlePartnershipsOrganizationChange}
-                placeholder="Sua resposta"
-              />
-            </label>
-          </div>
-        </SC.ButtonTypeText>
+        <div className="formQuestionV3">
+          <SC.ContainerV2>
+            <SC.Body>
 
-        <SC.ButtonTypeRadio>
-          <div className="formQuestion">
-            <p className="textFormRadioButton">
-              Essas organizaões fazem aporte financeiros para o PCF?
-            </p>
-            <div id="containerOption">
-              <div id="containerOptionSixOption">
-        
-                <div id="containerInputLabelRadioButton">
-                  <input
-                    id="aporteFinanceiroYes"
-                    name="financialSupport"
-                    type="radio"
-                    value="sim"
-                    onChange={handleFinancialSupportChange}
-                  />
-                  <label
-                    className="containerTextLabel"
-                    htmlFor="aporteFinanceiroYes"
-                  >Sim
-                  </label>
-                </div>
-                <div id="containerInputLabelRadioButton">
-                  <input
-                    id="aporteFinanceiroNo"
-                    name="financialSupport"
-                    type="radio"
-                    value="Não"
-                    onChange={handleFinancialSupportChange}
-                  />
-                  <label
-                    className="containerTextLabel"
-                    htmlFor="aporteFinanceiroNo"
-                  >Não
-                  </label>
-                </div>
-                <div id="containerInputLabelRadioButton">
-                  <input
-                    id="aporteFinanceiroDontKnow"
-                    name="financialSupport"
-                    type="radio"
-                    value="Não sei"
-                    onChange={handleFinancialSupportChange}
-                  />
-                  <label
-                    className="containerTextLabel"
-                    htmlFor="aporteFinanceiroDontKnow"
-                  >Não sei
-                  </label>
-                </div>
-              </div>
-            </div>
-          </div>
-        </SC.ButtonTypeRadio>
+              <InputArea onAdd={handleAddItemPartner} />
 
-        <SC.ButtonTypeText>
-          <div className="formQuestion">
-            <label htmlFor="valorDoAporte">
-              Qual o valor em Reais (R$) desse aporte financeiro?
-              <input
-                id="valorDoAporte"
-                name="financialValuation"
-                type="text"
-                value={questionThree}
-                onChange={handleFinancialValuationChange}
-                placeholder="Sua resposta"
+              <TableArea
+                list={filteredList}
+                remover={removerDaLista}
               />
-            </label>
-          </div>
-        </SC.ButtonTypeText>
+
+            </SC.Body>
+          </SC.ContainerV2>
+        </div>
 
         <SC.AllButtons>
-            <Link className="buttonAll" to="/:id/formstep9">Voltar</Link>
-            <button
-              className="buttonAll"
-              type="submit"
-              >Próximo
-            </button>
-          </SC.AllButtons>
+          <Link className="buttonAll" to="/:id/formstep9">Voltar</Link>
+          <button
+            className="buttonAll"
+            type="submit"
+            >Próximo
+          </button>
+        </SC.AllButtons>
       </form>
     </Theme>
   )

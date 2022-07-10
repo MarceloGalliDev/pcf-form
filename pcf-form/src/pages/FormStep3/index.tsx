@@ -2,7 +2,7 @@ import * as SC from "../../styles/styles";
 import { Theme } from "../../components/Theme";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useFormPage, FormActions } from "../../context/FormContext";
-import { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import { ChangeEvent, FormEvent, useCallback, useEffect, useState }from "react";
 import { push, ref, set } from "firebase/database";
 import { database } from "../../services/firebase";
 
@@ -10,17 +10,34 @@ type RoomParams = {
   id: string;
 };
 
+interface HiringVisitorSupervisor {
+  a_visitadoresEdital: boolean;
+  b_visitadoresEquipePropria: boolean;
+  c_visitadoresContratacaoDireta: boolean;
+  d_visitadoresNaoSeAplica: boolean;
+  e_visitadoresOutro: boolean;
+  f_visitadoresOutrosDescricao: string;
+}
+
 export const FormStep3 = () => {
-  const params = useParams<RoomParams>()
+  const params = useParams<RoomParams>();
   const roomId = params.id
   const navigate = useNavigate();
   const { state, dispatch } = useFormPage();
-  const [questionOne, setQuestionOne] = useState('')
-  const [questionTwo, setQuestionTwo] = useState('')
-  const [questionThree, setQuestionThree] = useState('')
-  const [questionFour, setQuestionFour] = useState('')
-  const [questionFive, setQuestionFive] = useState('')
-  const [questionSix, setQuestionSix] = useState('')
+  const [questionOne, setQuestionOne] = useState('');
+  const [questionTwo, setQuestionTwo] = useState('');
+  const [questionThree, setQuestionThree] = useState('');
+  const [questionFour, setQuestionFour] = useState('');
+  const [questionFive, setQuestionFive] = useState('');
+  const [questionSix, setQuestionSix] = useState('');
+  const [questionSeven, setQuestionSeven] = useState<HiringVisitorSupervisor>({
+    a_visitadoresEdital: false,
+    b_visitadoresEquipePropria: false,
+    c_visitadoresContratacaoDireta: false,
+    d_visitadoresNaoSeAplica: false,
+    e_visitadoresOutro: false,
+    f_visitadoresOutrosDescricao: '',
+  });
 
   async function handleSendQuestion(event: FormEvent) {
     event.preventDefault();
@@ -33,6 +50,7 @@ export const FormStep3 = () => {
         questao17: questionFour,
         questao18: questionFive,
         questao19: questionSix,
+        question20: questionSeven,
       }
     };
 
@@ -66,6 +84,15 @@ export const FormStep3 = () => {
   const handleSteeringCommitteeMeetingChange = (event: ChangeEvent<HTMLInputElement>) => {
     setQuestionSix(event.target.value);
   };
+
+  const handleHiringVisitorSupervisorChange = useCallback((event: React.FormEvent<HTMLInputElement>) => {
+    const targetInput = event.currentTarget;
+    const { value, name } = targetInput;
+    setQuestionSeven({
+      ...questionSeven,
+      [name]: value,
+    })
+  }, [questionSeven]);
 
   useEffect(() => {
     dispatch({
@@ -505,6 +532,118 @@ export const FormStep3 = () => {
             </div>
           </div>
         </SC.ButtonTypeRadio>
+
+        <SC.ButtonTypeCheckbox>
+              <div className="formQuestion">
+                <p className="textFormRadioButton">
+                  Como são realizadas as contratações dos profissionais em seu município?
+                </p>
+            
+                <div id="containerOption">
+                  <div id="containerOptionSixOption">
+
+                    <div id="containerInputLabelRadioButton">
+                      <input
+                        id="hiringVisitorSupervisorEdital"
+                        name="a_visitadoresEdital"
+                        type="checkbox"
+                        checked={questionSeven.a_visitadoresEdital}
+                        onChange={(event) => setQuestionSeven({
+                          ...questionSeven,
+                          a_visitadoresEdital: !!event.currentTarget?.checked
+                        })}
+                      />
+                      <label
+                        className="containerTextLabel"
+                        htmlFor="hiringVisitorSupervisorEdital"
+                      >Edital
+                      </label>
+                    </div>
+
+                    <div id="containerInputLabelRadioButton">
+                      <input
+                        id="hiringVisitorSupervisorOwnTeam"
+                        name="b_visitadoresEquipePropria"
+                        type="checkbox"
+                        checked={questionSeven.b_visitadoresEquipePropria}
+                        onChange={(event) => setQuestionSeven({
+                          ...questionSeven,
+                          b_visitadoresEquipePropria: !!event.currentTarget?.checked
+                        })}
+                      />
+                      <label
+                        className="containerTextLabel"
+                        htmlFor="hiringVisitorSupervisorOwnTeam"
+                      >Equipe própria
+                      </label>
+                    </div>
+
+                    <div id="containerInputLabelRadioButton">
+                      <input
+                        id="hiringVisitorSupervisorDirectContracting"
+                        name="c_visitadoresContratacaoDireta"
+                        type="checkbox"
+                        checked={questionSeven.c_visitadoresContratacaoDireta}
+                        onChange={(event) => setQuestionSeven({
+                          ...questionSeven,
+                          c_visitadoresContratacaoDireta: !!event.currentTarget?.checked
+                        })}
+                      />
+                      <label
+                        className="containerTextLabel"
+                        htmlFor="hiringVisitorSupervisorDirectContracting"
+                      >Contratação direta
+                      </label>
+                    </div>
+
+                    <div id="containerInputLabelRadioButton">
+                      <input
+                        id="hiringVisitorSupervisorNotApplicable"
+                        name="d_visitadoresNaoSeAplica"
+                        type="checkbox"
+                        checked={questionSeven.d_visitadoresNaoSeAplica}
+                        onChange={(event) => setQuestionSeven({
+                          ...questionSeven,
+                          d_visitadoresNaoSeAplica: !!event.currentTarget?.checked
+                        })}
+                      />
+                      <label
+                        className="containerTextLabel"
+                        htmlFor="hiringVisitorSupervisorNotApplicable"
+                      >Não se aplica
+                      </label>
+                    </div>
+
+                    <div id="containerInputLabelRadioButton">
+                      <input
+                        id="hiringVisitorSupervisorOthers"
+                        name="e_visitadoresOutro"
+                        type="checkbox"
+                        checked={questionSeven.e_visitadoresOutro}
+                        onChange={(event) => setQuestionSeven({
+                          ...questionSeven,
+                          e_visitadoresOutro: !!event.currentTarget?.checked
+                        })}
+                      />
+                      <label
+                        className="containerTextLabel"
+                        htmlFor="hiringVisitorSupervisorOthers"
+                      >Outros:
+                      </label>
+                      <input
+                        className="inputPlaceholderOther"
+                        name="f_visitadoresOutrosDescricao"
+                        type="text"
+                        value={questionSeven.f_visitadoresOutrosDescricao}
+                        onChange={handleHiringVisitorSupervisorChange}
+                        placeholder="Escreva aqui"
+                      />
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </SC.ButtonTypeCheckbox>
 
         <SC.AllButtons>
           <Link className="buttonAll" to="/:id/formstep2">Voltar</Link>

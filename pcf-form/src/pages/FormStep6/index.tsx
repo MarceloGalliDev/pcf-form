@@ -1,14 +1,14 @@
 import * as SC from "../../styles/styles";
 import { Theme } from "../../components/Theme";
-import { Link, Outlet, useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useFormPage, FormActions } from "../../context/FormContext";
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { database } from "../../services/firebase";
 import { ref, push, set } from "firebase/database";
-import { InputArea } from "../../components/Questions/TableQuestionText/components/InputArea";
-import { TableArea } from "../../components/Questions/TableQuestionText/components/TableArea";
-import { Item } from "../../components/Questions/TableQuestionText/types/Item";
-import { Info } from "phosphor-react";
+import { InputArea } from "../../components/Questions/QuestionOutrosProfissionais/components/InputArea";
+import { TableArea } from "../../components/Questions/QuestionOutrosProfissionais/components/TableArea";
+import { Item } from "../../components/Questions/QuestionOutrosProfissionais/types/Item";
+
 
 type RoomParams = {
   id: string;
@@ -28,8 +28,6 @@ export const FormStep6 = () => {
     newList.push(item)
     setList(newList)
   };
-
-  console.log(filteredList)
 
   function handleEventPrevent(event: FormEvent) {
     event.preventDefault();
