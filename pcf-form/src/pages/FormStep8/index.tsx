@@ -90,6 +90,7 @@ export const FormStep8 = () => {
 
             <SC.Body>
               <InputArea onAdd={handleAddItemPartner} />
+
               <TableArea
                 list={filteredList}
                 remover={removerDaLista}

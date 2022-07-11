@@ -35,23 +35,27 @@ export const InputArea = ({ onAdd }: Props) => {
 
 
     if(!inputOneKeys.includes(inputOneField)) {
-      errors.push('Categoria inválida!');
-    }
+      errors.push('Tipo de despesa inválido!');
+    };
     if(!inputTwoKeys.includes(inputTwoField)) {
-      errors.push('Categoria inválida!');
-    }
+      errors.push('Tipo de recurso inválido!');
+    };
     if (inputThreeField == '') {
-      errors.push('Insira a resposta!');
-    }
-    if(!inputFourKeys.includes(inputFourField)) {
-      errors.push('Categoria inválida!');
-    }
-    if(!inputFiveKeys.includes(inputFiveField)) {
-      errors.push('Categoria inválida!');
-    }
-    if(!inputSixKeys.includes(inputSixField)) {
-      errors.push('Categoria inválida!');
-    }
+      errors.push('Insira o valor!');
+    };
+    if (inputFourField === 'transporte') {
+      if(!inputFourKeys.includes(inputFourField)) {
+        errors.push('Tipo de gasto inválido!');
+      }
+      if(!inputFiveKeys.includes(inputFiveField)) {
+        errors.push('Tipo de veículo inválido!');
+      }
+    };
+    if (inputSixField === 'alimentacao') {
+      if(!inputSixKeys.includes(inputSixField)) {
+        errors.push('Tipo de alimentação inválida!');
+      }
+    };
     if (errors.length > 0) {
       alert(errors.join("\n"));
     } else {
@@ -134,42 +138,48 @@ export const InputArea = ({ onAdd }: Props) => {
       </SC.ContainerInputAreaV1>
 
       <SC.ContainerInputAreaV2>
+        {inputOneField === 'Transporte' && (
+          <>
+            <SC.InputLabel>
+              <SC.InputTitle>Tipo de gasto</SC.InputTitle>
+              <SC.SelectArea value={inputFourField} onChange={event => setInputFourField(event.target.value)}>
+                <>
+                  <option></option>
+                  {inputFourKeys.map((key, index) => (
+                    <option key={index} value={key}>{spending[key].type}</option>
+                  ))}
+                </>
+              </SC.SelectArea>
+            </SC.InputLabel>
 
-        <SC.InputLabel>
-          <SC.InputTitle>Tipo de gasto</SC.InputTitle>
-          <SC.SelectArea value={inputFourField} onChange={event => setInputFourField(event.target.value)}>
-            <>
-              <option></option>
-              {inputFourKeys.map((key, index) => (
-                <option key={index} value={key}>{spending[key].type}</option>
-              ))}
-            </>
-          </SC.SelectArea>
-        </SC.InputLabel>
-
-        <SC.InputLabel>
-          <SC.InputTitle>Tipo de veículo</SC.InputTitle>
-          <SC.SelectArea value={inputFiveField} onChange={event => setInputFiveField(event.target.value)}>
-            <>
-              <option></option>
-              {inputFiveKeys.map((key, index) => (
-                <option key={index} value={key}>{transports[key].type}</option>
-              ))}
-            </>
-          </SC.SelectArea>
-        </SC.InputLabel>
-
-        <SC.InputLabel>
-          <SC.InputTitle>Tipo da alimentação</SC.InputTitle>
-          <SC.SelectArea value={inputSixField} onChange={event => setInputSixField(event.target.value)}>
-            <>
-              <option></option>
-              {inputSixKeys.map((key, index) => (
-                <option key={index} value={key}>{feedings[key].type}</option>
-              ))}
-            </>
-          </SC.SelectArea>
-        </SC.InputLabel>
+            <SC.InputLabel>
+              <SC.InputTitle>Tipo de veículo</SC.InputTitle>
+              <SC.SelectArea value={inputFiveField} onChange={event => setInputFiveField(event.target.value)}>
+                <>
+                  <option></option>
+                  {inputFiveKeys.map((key, index) => (
+                    <option key={index} value={key}>{transports[key].type}</option>
+                  ))}
+                </>
+              </SC.SelectArea>
+            </SC.InputLabel>
+          </>
+        )}
+        {inputOneField === 'Alimentação' && (
+          <>
+            <SC.InputLabel>
+              <SC.InputTitle>Tipo da alimentação</SC.InputTitle>
+              <SC.SelectArea value={inputSixField} onChange={event => setInputSixField(event.target.value)}>
+                <>
+                  <option></option>
+                  {inputSixKeys.map((key, index) => (
+                    <option key={index} value={key}>{feedings[key].type}</option>
+                  ))}
+                </>
+              </SC.SelectArea>
+            </SC.InputLabel>
+          </>
+        )}
 
       </SC.ContainerInputAreaV2>
     </>

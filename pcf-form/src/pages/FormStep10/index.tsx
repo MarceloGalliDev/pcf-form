@@ -6,8 +6,13 @@ import { ChangeEvent, FormEvent, useCallback, useEffect, useState } from "react"
 import { database } from "../../services/firebase";
 import { ref, push, set } from "firebase/database";
 import { Item } from "../../components/Questions/QuestionRecursosCustos/types/Item";
+import { Item1 } from "../../components/Questions/QuestionOutrosCustos1/types/Item";
+import { Item2 } from "../../components/Questions/QuestionOutrosCustos2/types/Item";
 import { InputArea } from "../../components/Questions/QuestionRecursosCustos/components/InputArea";
 import { TableArea } from "../../components/Questions/QuestionRecursosCustos/components/TableArea";
+import { InputAreaOutrosCustos1 } from "../../components/Questions/QuestionOutrosCustos1/components/InputArea";
+import { TableAreaOutrosCustos1 } from "../../components/Questions/QuestionOutrosCustos1/components/TableArea";
+
 
 
 
@@ -59,16 +64,30 @@ export const FormStep10 = () => {
   const [questionSeven, setQuestionSeven] = useState('');
   const [questionEight, setQuestionEight] = useState('');
 
-  const [isCheckQ57, setIsCheckQ57] = useState<string>();
-  const [isCheckQ59, setIsCheckQ59] = useState<string>();
-
   function handleAddItemOthersCosts(item: Item) {
     let newList = [...list]
     newList.push(item)
     setList(newList)
   };
+  function removerDaListaOthersCosts(index: number) {
+    setFilteredList((previous) => previous.filter((item, indexPrevious) => index !== indexPrevious))
+  };
 
-  function removerDaLista(index: number) {
+  function handleAddItemOthersCosts1(item: Item1) {
+    let newList = [...list]
+    newList.push(item)
+    setList(newList)
+  };
+  function removerDaListaOthersCosts1(index: number) {
+    setFilteredList((previous) => previous.filter((item, indexPrevious) => index !== indexPrevious))
+  };
+
+  function handleAddItemOthersCosts2(item: Item2) {
+    let newList = [...list]
+    newList.push(item)
+    setList(newList)
+  };
+  function removerDaListaOthersCosts2(index: number) {
     setFilteredList((previous) => previous.filter((item, indexPrevious) => index !== indexPrevious))
   };
 
@@ -168,9 +187,10 @@ export const FormStep10 = () => {
                 <SC.Body>
 
                   <InputArea onAdd={handleAddItemOthersCosts} />
+
                   <TableArea
                     list={filteredList}
-                    remover={removerDaLista}
+                    remover={removerDaListaOthersCosts}
                   />
 
                 </SC.Body>
@@ -259,7 +279,7 @@ export const FormStep10 = () => {
               </div>
             </div>
           </SC.ButtonTypeRadioV2>
-        
+
         </SC.SubSection>
 
         <SC.ButtonTypeCheckbox>
@@ -471,149 +491,30 @@ export const FormStep10 = () => {
           </div>
           <div className="formQuestionV2">
 
-            <SC.ButtonTypeRadioText>
-              <div className="formQuestion">
-                <p>Há algum outro custo direto pago com recurso do PCF?</p>
-                <div className="formQuestion">
-                  <div id="containerOption">
-                    <div id="containerOptionSixOption">
+          <div className="formQuestionV1">
+            <p>Há algum outro custo direto pago com recurso do PCF?</p>
+            <SC.Body>
+              <InputAreaOutrosCustos1 onAdd1={handleAddItemOthersCosts1} />
+
+              <TableAreaOutrosCustos1
+                list={filteredList}
+                remover={removerDaListaOthersCosts1}
+              />
+            </SC.Body>
+          </div>
+
+          <div className="formQuestionV1">
+            <p>Existem outros gastos que são importantes para o funcionamento do programa e que não são cobertos pelos recursos repassados pelo PCF? </p>
+            <SC.Body>
+              <InputAreaOutrosCustos1 onAdd1={handleAddItemOthersCosts1} />
+
+              <TableAreaOutrosCustos1
+                list={filteredList}
+                remover={removerDaListaOthersCosts1}
+              />
+            </SC.Body>
+          </div>
             
-                      <div id="containerInputLabelRadioButton">
-                        <input
-                          
-                          id="directCostPCFYes"
-                          name="directCostPCF"
-                          type="radio"
-                          value={"sim_Q57"}
-                          onClick={() => setIsCheckQ57("sim_Q57")}
-                          onChange={handleDirectCostPCFChange}
-                        />
-                        <label
-                          className="containerTextLabel"
-                          htmlFor="directCostPCFYes"
-                        >Sim
-                        </label>
-                      </div>
-
-                      <div id="containerInputLabelRadioButton">
-                        <input
-                          id="directCostPCFNo"
-                          name="directCostPCF"
-                          type="radio"
-                          value={"nao_Q57"}
-                          onClick={() => setIsCheckQ57("nao_Q57")}
-                          onChange={handleDirectCostPCFChange}
-                        />
-                        <label
-                          className="containerTextLabel"
-                          htmlFor="directCostPCFNo"
-                        >Não
-                        </label>
-                      </div>
-
-                      <div id="containerInputLabelRadioButton">
-                        <input
-                          id="directCostPCFDontKnow"
-                          name="directCostPCF"
-                          type="radio"
-                          value={"naoSei_Q57"}
-                          onClick={() => setIsCheckQ57("naoSei_Q57")}
-                          onChange={handleDirectCostPCFChange}
-                        />
-                        <label
-                          className="containerTextLabel"
-                          htmlFor="directCostPCFDontKnow"
-                        >Desconheço
-                        </label>
-                      </div>
-
-                    </div>
-                  </div>
-                </div>
-
-                {isCheckQ57 === "sim_Q57" && (
-                  <>
-                    <div className="containerBgLabel">
-                      <label className="containerTextLabel" htmlFor="name">
-                        Quais?
-                        <input
-                          name="otherImportantCostsText"
-                          type="text"
-                          value={questionFive}
-                          onChange={handleDirectCostPCFTextChange}
-                          placeholder="Sua resposta"
-                        />
-                      </label>
-                    </div>
-                  </>
-                )}
-              </div>
-            </SC.ButtonTypeRadioText>
-
-            <SC.ButtonTypeRadioText>
-              <div className="formQuestion">
-                <p>
-                Existem outros gastos que são importantes para o funcionamento do programa e que não são cobertos pelos recursos repassados pelo PCF? (exemplo: protetor solar, guarda-chuva etc.)
-                </p>
-                <div className="formQuestion">
-                  <div id="containerOption">
-                    <div id="containerOptionSixOption">
-            
-                      <div id="containerInputLabelRadioButton">
-                        <input
-                          id="otherImportantCostsYes"
-                          name="otherImportantCosts"
-                          type="radio"
-                          value={"sim_Q59"}
-                          onClick={() => setIsCheckQ59("sim_Q59")}
-                          onChange={handleOtherImportantCostsChange}
-                        />
-                        <label
-                          className="containerTextLabel"
-                          htmlFor="otherImportantCostsYes"
-                        >Sim
-                        </label>
-                      </div>
-
-                      <div id="containerInputLabelRadioButton">
-                        <input
-                          id="otherImportantCostsNo"
-                          name="otherImportantCosts"
-                          type="radio"
-                          value={"nao_Q59"}
-                          onClick={() => setIsCheckQ59("nao_Q59")}
-                          onChange={handleOtherImportantCostsChange}
-                        />
-                        <label
-                          className="containerTextLabel"
-                          htmlFor="otherImportantCostsNo"
-                        >Não
-                        </label>
-                      </div>
-
-                    </div>
-                  </div>
-                </div>
-
-                {isCheckQ59 === "sim_Q59" && (
-                  <>
-                    <div className="containerBgLabel">
-                      <label className="containerTextLabel" htmlFor="name">
-                        Quais?
-                        <input
-                          name="otherImportantCostsText"
-                          type="text"
-                          value={questionSeven}
-                          onChange={handleOtherImportantCostsTextChange}
-                          placeholder="Sua resposta"
-                        />
-                      </label>
-                    </div>
-                  </>
-                )}
-              </div>
-            </SC.ButtonTypeRadioText>
-
             <SC.ButtonTypeRadio>
               <div className="formQuestion">
                 <p className="textFormRadioButton">
@@ -657,6 +558,7 @@ export const FormStep10 = () => {
               </div>
             </SC.ButtonTypeRadio>
           </div>
+
         </SC.SubSection>
 
         <SC.AllButtons>
@@ -672,3 +574,145 @@ export const FormStep10 = () => {
   )
 };
 
+{/* <SC.ButtonTypeRadioText>
+<div className="formQuestion">
+  <p>Há algum outro custo direto pago com recurso do PCF?</p>
+  <div className="formQuestion">
+    <div id="containerOption">
+      <div id="containerOptionSixOption">
+
+        <div id="containerInputLabelRadioButton">
+          <input
+            
+            id="directCostPCFYes"
+            name="directCostPCF"
+            type="radio"
+            value={"sim_Q57"}
+            onClick={() => setIsCheckQ57("sim_Q57")}
+            onChange={handleDirectCostPCFChange}
+          />
+          <label
+            className="containerTextLabel"
+            htmlFor="directCostPCFYes"
+          >Sim
+          </label>
+        </div>
+
+        <div id="containerInputLabelRadioButton">
+          <input
+            id="directCostPCFNo"
+            name="directCostPCF"
+            type="radio"
+            value={"nao_Q57"}
+            onClick={() => setIsCheckQ57("nao_Q57")}
+            onChange={handleDirectCostPCFChange}
+          />
+          <label
+            className="containerTextLabel"
+            htmlFor="directCostPCFNo"
+          >Não
+          </label>
+        </div>
+
+        <div id="containerInputLabelRadioButton">
+          <input
+            id="directCostPCFDontKnow"
+            name="directCostPCF"
+            type="radio"
+            value={"naoSei_Q57"}
+            onClick={() => setIsCheckQ57("naoSei_Q57")}
+            onChange={handleDirectCostPCFChange}
+          />
+          <label
+            className="containerTextLabel"
+            htmlFor="directCostPCFDontKnow"
+          >Desconheço
+          </label>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  {isCheckQ57 === "sim_Q57" && (
+    <>
+      <div className="containerBgLabel">
+        <label className="containerTextLabel" htmlFor="name">
+          Quais?
+          <input
+            name="otherImportantCostsText"
+            type="text"
+            value={questionFive}
+            onChange={handleDirectCostPCFTextChange}
+            placeholder="Sua resposta"
+          />
+        </label>
+      </div>
+    </>
+  )}
+</div>
+</SC.ButtonTypeRadioText> */}
+
+{/* <SC.ButtonTypeRadioText>
+  <div className="formQuestion">
+    <p>
+    Existem outros gastos que são importantes para o funcionamento do programa e que não são cobertos pelos recursos repassados pelo PCF? (exemplo: protetor solar, guarda-chuva etc.)
+    </p>
+    <div className="formQuestion">
+      <div id="containerOption">
+        <div id="containerOptionSixOption">
+
+          <div id="containerInputLabelRadioButton">
+            <input
+              id="otherImportantCostsYes"
+              name="otherImportantCosts"
+              type="radio"
+              value={"sim_Q59"}
+              onClick={() => setIsCheckQ59("sim_Q59")}
+              onChange={handleOtherImportantCostsChange}
+            />
+            <label
+              className="containerTextLabel"
+              htmlFor="otherImportantCostsYes"
+            >Sim
+            </label>
+          </div>
+
+          <div id="containerInputLabelRadioButton">
+            <input
+              id="otherImportantCostsNo"
+              name="otherImportantCosts"
+              type="radio"
+              value={"nao_Q59"}
+              onClick={() => setIsCheckQ59("nao_Q59")}
+              onChange={handleOtherImportantCostsChange}
+            />
+            <label
+              className="containerTextLabel"
+              htmlFor="otherImportantCostsNo"
+            >Não
+            </label>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    {isCheckQ59 === "sim_Q59" && (
+      <>
+        <div className="containerBgLabel">
+          <label className="containerTextLabel" htmlFor="name">
+            Quais?
+            <input
+              name="otherImportantCostsText"
+              type="text"
+              value={questionSeven}
+              onChange={handleOtherImportantCostsTextChange}
+              placeholder="Sua resposta"
+            />
+          </label>
+        </div>
+      </>
+    )}
+  </div>
+</SC.ButtonTypeRadioText> */}

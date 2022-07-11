@@ -1,14 +1,14 @@
 import { Trash } from 'phosphor-react';
 import { FormEvent } from 'react';
-import { Item } from '../../types/Item';
+import { Item1 } from '../../types/Item1';
 import * as SC from '../../styles/styles';
 
 type Props = {
-  list: Item[],
+  list: Item1[],
   remover: (index: number) => void;
 };
 
-export const TableArea = ({ list, remover }:Props) => {
+export const TableAreaOutrosCustos1 = ({ list, remover }:Props) => {
 
   const removeDefault = (event: FormEvent) => {
     event.preventDefault();
@@ -19,8 +19,7 @@ export const TableArea = ({ list, remover }:Props) => {
       <thead>
         <tr>
           <SC.TableHeadColumn width={150}>Tipo de organização</SC.TableHeadColumn>
-          <SC.TableHeadColumn width={15}>Aporte</SC.TableHeadColumn>
-          <SC.TableHeadColumn width={30}>Valor</SC.TableHeadColumn>
+          <SC.TableHeadColumn width={100}>Valor</SC.TableHeadColumn>
           <SC.TableHeadColumn width={30}>Excluir</SC.TableHeadColumn>
         </tr>
       </thead>
@@ -30,7 +29,7 @@ export const TableArea = ({ list, remover }:Props) => {
           <SC.TableLine
             key={index}
           >
-            
+
             {/* <SC.TableColumn>
               <SC.ValueArea>
                 <p>
@@ -43,9 +42,6 @@ export const TableArea = ({ list, remover }:Props) => {
               <SC.ValueArea>
                 <p>
                   {item.b_inputOne}
-                  ({item.e_inputFour} {item.f_inputFive}
-                  {item.g_inputSix})
-                  
                 </p>
               </SC.ValueArea>
             </SC.TableColumn>
@@ -53,15 +49,7 @@ export const TableArea = ({ list, remover }:Props) => {
             <SC.TableColumn>
               <SC.ValueArea>
                 <p>
-                  {item.c_inputTwo}
-                </p>
-              </SC.ValueArea>
-            </SC.TableColumn>
-          
-            <SC.TableColumn>
-              <SC.ValueArea>
-                <p>
-                  R$ {item.d_inputThree}
+                  R$ {item.c_inputTwo}
                 </p>
               </SC.ValueArea>
             </SC.TableColumn>
@@ -85,8 +73,3 @@ export const TableArea = ({ list, remover }:Props) => {
     </SC.TableHead>
   )
 }
-
-{/* <TableItem
-item={item}
-key={index}
-/> */}
