@@ -14,8 +14,6 @@ export const TableArea = ({ list, remover }:Props) => {
     event.preventDefault();
   };
 
- 
-
   return (
     <SC.TableHead>
       <thead>

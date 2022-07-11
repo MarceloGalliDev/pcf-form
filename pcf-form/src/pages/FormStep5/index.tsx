@@ -113,7 +113,7 @@ export const FormStep5 = () => {
     a_visitadoresOutrosCargos: '',
     b_visitadoresMediaRemuneracaoOutrosCargos: '',
   });
-  const [questionThirteen, setQuestionThirteen] = useState('');
+ 
 
   async function handleSendQuestionVisitor(event: FormEvent) {
     event.preventDefault();
@@ -131,7 +131,6 @@ export const FormStep5 = () => {
         questao37: questionNine,
         questao38: questionTen,
         questao39: questionEleven,
-        questap41: questionThirteen,
       }
     };
 
@@ -231,10 +230,6 @@ export const FormStep5 = () => {
       [name]: value,
     })
   }, [questionEleven]);
-
-  const handlePartnershipAndContractingChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setQuestionThirteen(event.target.value);
-  };
 
   useEffect(() => {
     dispatch({
@@ -811,64 +806,6 @@ export const FormStep5 = () => {
                 </label>
               </div>
             </SC.ButtonTypeTextV3>
-
-            <SC.ButtonTypeRadio>
-              <div className="formQuestion">
-                <p className="textFormRadioButton">
-                  O município tem parcerias com organizações da sociedade civil para contratação de equipe?
-                </p>
-                <div id="containerOption">
-                  <div id="containerOptionSixOption">
-
-                    <div id="containerInputLabelRadioButton">
-                      <input
-                        id="PartnershipAndContractingYes"
-                        name="PartnershipAndContracting"
-                        type="radio"
-                        value="sim"
-                        onChange={handlePartnershipAndContractingChange}
-                      />
-                      <label
-                        className="containerTextLabel"
-                        htmlFor="PartnershipAndContractingYes"
-                      >Sim
-                      </label>
-                    </div>
-
-                    <div id="containerInputLabelRadioButton">
-                      <input
-                        id="PartnershipAndContractingNo"
-                        name="PartnershipAndContracting"
-                        type="radio"
-                        value="Não"
-                        onChange={handlePartnershipAndContractingChange}
-                      />
-                      <label
-                        className="containerTextLabel"
-                        htmlFor="PartnershipAndContractingNo"
-                      >Não
-                      </label>
-                    </div>
-
-                    <div id="containerInputLabelRadioButton">
-                      <input
-                        id="PartnershipAndContractingDontKnow"
-                        name="PartnershipAndContracting"
-                        type="radio"
-                        value="Outros"
-                        onChange={handlePartnershipAndContractingChange}
-                      />
-                      <label
-                        className="containerTextLabel"
-                        htmlFor="PartnershipAndContractingDontKnow"
-                      >Outros
-                      </label>
-                    </div>
-
-                  </div>
-                </div>
-              </div>
-            </SC.ButtonTypeRadio>
 
           </div>
         </SC.SubSection>

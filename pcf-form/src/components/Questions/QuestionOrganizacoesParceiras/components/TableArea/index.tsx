@@ -16,13 +16,12 @@ export const TableArea = ({ list, remover }:Props) => {
 
   return (
     <SC.TableHead>
-
       <thead>
         <tr>
           <SC.TableHeadColumn width={150}>Tipo de organização</SC.TableHeadColumn>
           <SC.TableHeadColumn width={15}>Aporte</SC.TableHeadColumn>
-          <SC.TableHeadColumn width={150}>Remuneração</SC.TableHeadColumn>
-          <SC.TableHeadColumn width={15}>Excluir</SC.TableHeadColumn>
+          <SC.TableHeadColumn width={150}>Valor</SC.TableHeadColumn>
+          <SC.TableHeadColumn width={30}>Excluir</SC.TableHeadColumn>
         </tr>
       </thead>
 

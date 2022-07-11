@@ -5,9 +5,11 @@ import { useFormPage, FormActions } from "../../context/FormContext";
 import { ChangeEvent, FormEvent, useCallback, useEffect, useState } from "react";
 import { database } from "../../services/firebase";
 import { ref, push, set } from "firebase/database";
+import { Item } from "../../components/Questions/QuestionRecursosCustos/types/Item";
 import { InputArea } from "../../components/Questions/QuestionRecursosCustos/components/InputArea";
 import { TableArea } from "../../components/Questions/QuestionRecursosCustos/components/TableArea";
-import { Item } from "../../components/Questions/QuestionRecursosCustos/types/Item";
+
+
 
 type RoomParams = {
   id: string;
@@ -32,8 +34,10 @@ export const FormStep10 = () => {
   const roomId = params.id
   const navigate = useNavigate();
   const { state, dispatch } = useFormPage();
+
   const [list, setList] = useState<Item[]>([]);
   const [filteredList, setFilteredList] = useState<Item[]>([]);
+ 
   const [questionTwo, setQuestionTwo] = useState('');
   const [questionTwoText, setquestionTwoText] = useState('');
   const [questionThree, setQuestionThree] = useState<UsedTransport>({
@@ -58,7 +62,7 @@ export const FormStep10 = () => {
   const [isCheckQ57, setIsCheckQ57] = useState<string>();
   const [isCheckQ59, setIsCheckQ59] = useState<string>();
 
-  function handleAddItem(item: Item) {
+  function handleAddItemOthersCosts(item: Item) {
     let newList = [...list]
     newList.push(item)
     setList(newList)
@@ -160,15 +164,17 @@ export const FormStep10 = () => {
 
           <div className="formQuestionV2">
             <div className="formQuestionV3">
-            <SC.ContainerV2>
-              <SC.Body>
+              <SC.ContainerV2>
+                <SC.Body>
 
-                <InputArea onAdd={handleAddItem} />
+                  <InputArea onAdd={handleAddItemOthersCosts} />
+                  <TableArea
+                    list={filteredList}
+                    remover={removerDaLista}
+                  />
 
-                <TableArea list={filteredList} />
-
-              </SC.Body>
-            </SC.ContainerV2>
+                </SC.Body>
+              </SC.ContainerV2>
             </div>
           </div>
 
@@ -461,7 +467,7 @@ export const FormStep10 = () => {
 
         <SC.SubSection>
           <div className="bgSubSection">
-            <p>Subseção Outros Custos</p>
+            <p>Subseção outros custos</p>
           </div>
           <div className="formQuestionV2">
 

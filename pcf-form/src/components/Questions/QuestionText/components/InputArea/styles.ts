@@ -21,23 +21,23 @@ export const Input = styled.input`
     width: 100%;
     height: 30px;
     padding: 0 5px;
-    border: 1px solid #AB6661;
+    border: 1px solid #2E7EB0;
     border-radius: 5px;
 `;
 export const Select = styled.select`
     width: 100%;
     height: 30px;
     padding: 0 5px;
-    border: 1px solid #AB6661;
+    border: 1px solid #2E7EB0;
     border-radius: 5px;
 `;
 export const Button = styled.button`
     width: 100%;
     height: 30px;
     padding: 0 5px;
-    border: 1px solid #AB6661;
+    border: 1px solid #2E7EB0;
     border-radius: 5px;
-    background-color: #AB6661;
+    background-color: #2E7EB0;
     color: #fff;
     cursor: pointer;
 

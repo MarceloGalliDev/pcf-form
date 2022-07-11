@@ -23,6 +23,7 @@ export const FormStep8 = () => {
   const [questionOne, setQuestionOne] = useState('')
   const [questionTwo, setQuestionTwo] = useState('')
   const [questionThree, setQuestionThree] = useState('')
+  const [questionFour, setQuestionFour] = useState('');
 
   const [list, setList] = useState<Item[]>([]);
   const [filteredList, setFilteredList] = useState<Item[]>([]);
@@ -46,6 +47,7 @@ export const FormStep8 = () => {
         questao48: questionOne,
         questao49: filteredList,
         questao50: questionThree,
+        questao51: questionFour,
       }
     };
 
@@ -54,6 +56,10 @@ export const FormStep8 = () => {
     set(firebaseQuestion, question)
 
     navigate(`/${roomId}/formstep9`)
+  };
+
+  const handlePartnershipAndContractingChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setQuestionFour(event.target.value);
   };
 
   useEffect(() => {
@@ -82,19 +88,74 @@ export const FormStep8 = () => {
           <div className="formQuestionV1">
             <p>Com qual(is) a(s) organização(ões) possui parceria(s)?</p>
 
-              <div className="containerTable">
-                <SC.Body>
-                  <InputArea onAdd={handleAddItemPartner} />
-                  <TableArea
-                    list={filteredList}
-                    remover={removerDaLista}
-                  />
-                </SC.Body>
-              </div>
+            <SC.Body>
+              <InputArea onAdd={handleAddItemPartner} />
+              <TableArea
+                list={filteredList}
+                remover={removerDaLista}
+              />
+            </SC.Body>
 
           </div>
         </SC.SubSection>
 
+        <SC.ButtonTypeRadio>
+          <div className="formQuestion">
+            <p className="textFormRadioButton">
+              O município tem parcerias com organizações da sociedade civil para contratação de equipe?
+            </p>
+            <div id="containerOption">
+              <div id="containerOptionSixOption">
+
+                <div id="containerInputLabelRadioButton">
+                  <input
+                    id="PartnershipAndContractingYes"
+                    name="PartnershipAndContracting"
+                    type="radio"
+                    value="sim"
+                    onChange={handlePartnershipAndContractingChange}
+                  />
+                  <label
+                    className="containerTextLabel"
+                    htmlFor="PartnershipAndContractingYes"
+                  >Sim
+                  </label>
+                </div>
+
+                <div id="containerInputLabelRadioButton">
+                  <input
+                    id="PartnershipAndContractingNo"
+                    name="PartnershipAndContracting"
+                    type="radio"
+                    value="Não"
+                    onChange={handlePartnershipAndContractingChange}
+                  />
+                  <label
+                    className="containerTextLabel"
+                    htmlFor="PartnershipAndContractingNo"
+                  >Não
+                  </label>
+                </div>
+
+                <div id="containerInputLabelRadioButton">
+                  <input
+                    id="PartnershipAndContractingDontKnow"
+                    name="PartnershipAndContracting"
+                    type="radio"
+                    value="Outros"
+                    onChange={handlePartnershipAndContractingChange}
+                  />
+                  <label
+                    className="containerTextLabel"
+                    htmlFor="PartnershipAndContractingDontKnow"
+                  >Outros
+                  </label>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </SC.ButtonTypeRadio>
 
 
         <SC.AllButtons>

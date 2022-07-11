@@ -70,10 +70,10 @@ export const ButtonArea = styled.button`
 `;
 
 export const ContainerInputArea = styled.div`
+  padding: 20px;
   background-color: #FFF;
   box-shadow: 0px 0px 5px #CCC;
   border-radius: 10px;
-  padding: 20px;
   margin-top: 20px;
   display: flex;
   align-items: center;

@@ -1,4 +1,4 @@
-export type Category = {
+export type Spent = {
   [tag: string]: {
     type: string,
   }

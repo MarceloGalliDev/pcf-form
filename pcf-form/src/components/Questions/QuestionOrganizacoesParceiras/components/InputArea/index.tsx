@@ -105,6 +105,7 @@ export const InputArea = ({ onAdd }: Props) => {
       </SC.InputLabel>
 
       <SC.InputLabelButton>
+
         <SC.InputTitle>&nbsp;</SC.InputTitle>
         <SC.ButtonInputArea onClick={handleAddEvent}>
           Adicionar

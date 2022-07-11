@@ -50,6 +50,8 @@ export const SubSection = styled.div`
     .containerTable {
       border: 1px solid #3490C9;
       border-radius: 10px;
+      display: flex;
+      align-items: center;
     }
   }
 

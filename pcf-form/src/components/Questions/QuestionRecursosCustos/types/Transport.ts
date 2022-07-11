@@ -1,4 +1,4 @@
-export type Category = {
+export type Transport = {
   [tag: string]: {
     type: string,
   }
