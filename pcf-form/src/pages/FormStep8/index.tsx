@@ -78,21 +78,24 @@ export const FormStep8 = () => {
       </SC.Container>
 
       <form onSubmit={handleSendPartnerOrganizations}>
+        <SC.SubSection>
+          <div className="formQuestionV1">
+            <p>Com qual(is) a(s) organização(ões) possui parceria(s)?</p>
 
-        <div className="formQuestionV3">
-          <SC.ContainerV2>
-            <SC.Body>
+              <div className="containerTable">
+                <SC.Body>
+                  <InputArea onAdd={handleAddItemPartner} />
+                  <TableArea
+                    list={filteredList}
+                    remover={removerDaLista}
+                  />
+                </SC.Body>
+              </div>
 
-              <InputArea onAdd={handleAddItemPartner} />
+          </div>
+        </SC.SubSection>
 
-              <TableArea
-                list={filteredList}
-                remover={removerDaLista}
-              />
 
-            </SC.Body>
-          </SC.ContainerV2>
-        </div>
 
         <SC.AllButtons>
           <Link className="buttonAll" to="/:id/formstep9">Voltar</Link>

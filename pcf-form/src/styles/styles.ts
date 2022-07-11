@@ -35,6 +35,24 @@ export const SubSection = styled.div`
     }
   }
 
+  .formQuestionV1 {
+    border: 1px solid #3490C9;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 10px 10px;
+    margin-bottom: 10px;
+
+    p { 
+      font-weight: 500;
+      margin: 10px 0px 20px 0px;
+    }
+
+    .containerTable {
+      border: 1px solid #3490C9;
+      border-radius: 10px;
+    }
+  }
+
   .formQuestionV2 {
     border: 1px solid #3490C9;
     background-color: #2e7eb02e;
