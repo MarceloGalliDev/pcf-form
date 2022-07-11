@@ -4,7 +4,7 @@ import { Item2 } from '../../types/Item2';
 import { Info } from 'phosphor-react';
 
 type Props = {
-  onAdd2: (item: Item2) => void;
+  onAdd2: (item2: Item2) => void;
 };
 
 export const InputAreaOutrosCustos2 = ({ onAdd2 }: Props) => {
@@ -12,7 +12,7 @@ export const InputAreaOutrosCustos2 = ({ onAdd2 }: Props) => {
   const [inputOneField, setInputOneField] = useState('');
   const [inputTwoField, setInputTwoField] = useState('');
 
-  const handleAddEvent = async(event: FormEvent) => {
+  const handleAddEvent2 = async(event: FormEvent) => {
     event.preventDefault();
 
     let errors: string[] = [];
@@ -86,7 +86,7 @@ export const InputAreaOutrosCustos2 = ({ onAdd2 }: Props) => {
       <SC.InputLabelButton>
 
         <SC.InputTitle>&nbsp;</SC.InputTitle>
-        <SC.ButtonInputArea onClick={handleAddEvent}>
+        <SC.ButtonInputArea onClick={handleAddEvent2}>
           Adicionar
         </SC.ButtonInputArea>
       </SC.InputLabelButton>

@@ -4,13 +4,13 @@ import { Item1 } from '../../types/Item1';
 import * as SC from '../../styles/styles';
 
 type Props = {
-  list: Item1[],
-  remover: (index: number) => void;
+  list1: Item1[],
+  remover1: (index1: number) => void;
 };
 
-export const TableAreaOutrosCustos1 = ({ list, remover }:Props) => {
+export const TableAreaOutrosCustos1 = ({ list1, remover1 }:Props) => {
 
-  const removeDefault = (event: FormEvent) => {
+  const removeDefault1 = (event: FormEvent) => {
     event.preventDefault();
   };
 
@@ -25,9 +25,9 @@ export const TableAreaOutrosCustos1 = ({ list, remover }:Props) => {
       </thead>
 
       <tbody>
-        {list.map((item, index,) => (
+        {list1.map((item1, index1,) => (
           <SC.TableLine
-            key={index}
+            key={index1}
           >
 
             {/* <SC.TableColumn>
@@ -41,7 +41,7 @@ export const TableAreaOutrosCustos1 = ({ list, remover }:Props) => {
             <SC.TableColumn>
               <SC.ValueArea>
                 <p>
-                  {item.b_inputOne}
+                  {item1.b_inputOne}
                 </p>
               </SC.ValueArea>
             </SC.TableColumn>
@@ -49,16 +49,16 @@ export const TableAreaOutrosCustos1 = ({ list, remover }:Props) => {
             <SC.TableColumn>
               <SC.ValueArea>
                 <p>
-                  R$ {item.c_inputTwo}
+                  R$ {item1.c_inputTwo}
                 </p>
               </SC.ValueArea>
             </SC.TableColumn>
 
             <SC.TableColumn>
               <SC.ValueArea>
-                <form onSubmit={removeDefault}>
+                <form onSubmit={removeDefault1}>
                   <SC.ButtonArea
-                  onClick={() => remover(index)}
+                  onClick={() => remover1(index1)}
                   >
                     <Trash size={20} color="#d22d2d" weight="light" />
                   </SC.ButtonArea>

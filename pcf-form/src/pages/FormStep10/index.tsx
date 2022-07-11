@@ -6,15 +6,14 @@ import { ChangeEvent, FormEvent, useCallback, useEffect, useState } from "react"
 import { database } from "../../services/firebase";
 import { ref, push, set } from "firebase/database";
 import { Item } from "../../components/Questions/QuestionRecursosCustos/types/Item";
-import { Item1 } from "../../components/Questions/QuestionOutrosCustos1/types/Item";
-import { Item2 } from "../../components/Questions/QuestionOutrosCustos2/types/Item";
+import { Item1 } from "../../components/Questions/QuestionOutrosCustos1/types/Item1";
+import { Item2 } from "../../components/Questions/QuestionOutrosCustos2/types/Item2";
 import { InputArea } from "../../components/Questions/QuestionRecursosCustos/components/InputArea";
 import { TableArea } from "../../components/Questions/QuestionRecursosCustos/components/TableArea";
 import { InputAreaOutrosCustos1 } from "../../components/Questions/QuestionOutrosCustos1/components/InputArea";
 import { TableAreaOutrosCustos1 } from "../../components/Questions/QuestionOutrosCustos1/components/TableArea";
-
-
-
+import { InputAreaOutrosCustos2 } from "../../components/Questions/QuestionOutrosCustos2/components/InputArea";
+import { TableAreaOutrosCustos2 } from "../../components/Questions/QuestionOutrosCustos2/components/TableArea";
 
 type RoomParams = {
   id: string;
@@ -39,10 +38,8 @@ export const FormStep10 = () => {
   const roomId = params.id
   const navigate = useNavigate();
   const { state, dispatch } = useFormPage();
-
   const [list, setList] = useState<Item[]>([]);
   const [filteredList, setFilteredList] = useState<Item[]>([]);
- 
   const [questionTwo, setQuestionTwo] = useState('');
   const [questionTwoText, setquestionTwoText] = useState('');
   const [questionThree, setQuestionThree] = useState<UsedTransport>({
@@ -58,11 +55,11 @@ export const FormStep10 = () => {
     j_veiculoOutro: false,
     k_veiculoOutroText: '',
   });
-  const [questionFour, setQuestionFour] = useState('');
-  const [questionFive, setQuestionFive] = useState('');
+  const [list1, setList1] = useState<Item1[]>([]);
+  const [filteredList1, setFilteredList1] = useState<Item1[]>([]);
+  const [list2, setList2] = useState<Item2[]>([]);
+  const [filteredList2, setFilteredList2] = useState<Item2[]>([]);
   const [questionSix, setQuestionSix] = useState('');
-  const [questionSeven, setQuestionSeven] = useState('');
-  const [questionEight, setQuestionEight] = useState('');
 
   function handleAddItemOthersCosts(item: Item) {
     let newList = [...list]
@@ -73,22 +70,22 @@ export const FormStep10 = () => {
     setFilteredList((previous) => previous.filter((item, indexPrevious) => index !== indexPrevious))
   };
 
-  function handleAddItemOthersCosts1(item: Item1) {
-    let newList = [...list]
-    newList.push(item)
-    setList(newList)
+  function handleAddItemOthersCosts1(item1: Item1) {
+    let newList1 = [...list1]
+    newList1.push(item1)
+    setList1(newList1)
   };
-  function removerDaListaOthersCosts1(index: number) {
-    setFilteredList((previous) => previous.filter((item, indexPrevious) => index !== indexPrevious))
+  function removerDaListaOthersCosts1(index1: number) {
+    setFilteredList1((previous1) => previous1.filter((item1, indexPrevious1) => index1 !== indexPrevious1))
   };
 
-  function handleAddItemOthersCosts2(item: Item2) {
-    let newList = [...list]
-    newList.push(item)
-    setList(newList)
+  function handleAddItemOthersCosts2(item2: Item2) {
+    let newList2 = [...list2]
+    newList2.push(item2)
+    setList2(newList2)
   };
-  function removerDaListaOthersCosts2(index: number) {
-    setFilteredList((previous) => previous.filter((item, indexPrevious) => index !== indexPrevious))
+  function removerDaListaOthersCosts2(index2: number) {
+    setFilteredList2((previous2) => previous2.filter((item2, indexPrevious2) => index2 !== indexPrevious2))
   };
 
   async function handleSendOtherCosts(event: FormEvent) {
@@ -103,11 +100,9 @@ export const FormStep10 = () => {
           questionTwoText,
         },
         questao55: questionThree,
-        questao56: questionFour,
-        questao57: questionFive,
+        questao56: filteredList1,
+        questao57: filteredList2,
         questao58: questionSix,
-        questao59: questionSeven,
-        questao60: questionEight,
       }
     };
 
@@ -135,24 +130,8 @@ export const FormStep10 = () => {
     })
   }, [questionThree]);
 
-  const handleDirectCostPCFChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setQuestionFour(event.target.value);
-  };
-
-  const handleDirectCostPCFTextChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setQuestionFive(event.target.value);
-  };
-
-  const handleOtherImportantCostsChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setQuestionSix(event.target.value);
-  };
-
-  const handleOtherImportantCostsTextChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setQuestionSeven(event.target.value);
-  };
-
   const handleMonthlyRecordChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setQuestionEight(event.target.value);
+    setQuestionSix(event.target.value);
   };
 
   useEffect(() => {
@@ -165,6 +144,14 @@ export const FormStep10 = () => {
   useEffect(() => {
     setFilteredList(list)
   }, [list]);
+
+  useEffect(() => {
+    setFilteredList1(list1)
+  }, [list1]);
+
+  useEffect(() => {
+    setFilteredList2(list2)
+  }, [list2]);
 
   return (
     <Theme>
@@ -497,8 +484,8 @@ export const FormStep10 = () => {
               <InputAreaOutrosCustos1 onAdd1={handleAddItemOthersCosts1} />
 
               <TableAreaOutrosCustos1
-                list={filteredList}
-                remover={removerDaListaOthersCosts1}
+                list1={filteredList1}
+                remover1={removerDaListaOthersCosts1}
               />
             </SC.Body>
           </div>
@@ -506,11 +493,11 @@ export const FormStep10 = () => {
           <div className="formQuestionV1">
             <p>Existem outros gastos que são importantes para o funcionamento do programa e que não são cobertos pelos recursos repassados pelo PCF? </p>
             <SC.Body>
-              <InputAreaOutrosCustos1 onAdd1={handleAddItemOthersCosts1} />
+              <InputAreaOutrosCustos2 onAdd2={handleAddItemOthersCosts2} />
 
-              <TableAreaOutrosCustos1
-                list={filteredList}
-                remover={removerDaListaOthersCosts1}
+              <TableAreaOutrosCustos2
+                list2={filteredList2}
+                remover2={removerDaListaOthersCosts2}
               />
             </SC.Body>
           </div>

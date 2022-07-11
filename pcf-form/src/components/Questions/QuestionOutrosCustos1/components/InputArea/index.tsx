@@ -12,7 +12,7 @@ export const InputAreaOutrosCustos1 = ({ onAdd1 }: Props) => {
   const [inputOneField, setInputOneField] = useState('');
   const [inputTwoField, setInputTwoField] = useState('');
 
-  const handleAddEvent = async(event: FormEvent) => {
+  const handleAddEvent1 = async(event: FormEvent) => {
     event.preventDefault();
 
     let errors: string[] = [];
@@ -86,7 +86,7 @@ export const InputAreaOutrosCustos1 = ({ onAdd1 }: Props) => {
       <SC.InputLabelButton>
 
         <SC.InputTitle>&nbsp;</SC.InputTitle>
-        <SC.ButtonInputArea onClick={handleAddEvent}>
+        <SC.ButtonInputArea onClick={handleAddEvent1}>
           Adicionar
         </SC.ButtonInputArea>
       </SC.InputLabelButton>
