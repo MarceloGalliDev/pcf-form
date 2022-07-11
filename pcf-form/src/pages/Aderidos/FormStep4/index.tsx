@@ -1,10 +1,10 @@
-import * as SC from "../../styles/styles";
-import { Theme } from "../../components/Theme";
+import * as SC from "../../../styles/styles";
+import { Theme } from "../../../components/Theme";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { useFormPage, FormActions } from "../../context/FormContext";
+import { useFormPage, FormActions } from "../../../context/FormContext";
 import { ChangeEvent, useEffect, useState, useCallback, FormEvent } from "react";
 import { push, ref, set } from "firebase/database";
-import { database } from "../../services/firebase";
+import { database } from "../../../services/firebase";
 
 interface Workload {
   a_supervisoresHorasSemanais40: boolean;

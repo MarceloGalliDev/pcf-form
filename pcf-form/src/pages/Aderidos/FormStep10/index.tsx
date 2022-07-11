@@ -1,19 +1,19 @@
-import * as SC from "../../styles/styles";
-import { Theme } from "../../components/Theme";
+import * as SC from "../../../styles/styles";
+import { Theme } from "../../../components/Theme";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { useFormPage, FormActions } from "../../context/FormContext";
+import { useFormPage, FormActions } from "../../../context/FormContext";
 import { ChangeEvent, FormEvent, useCallback, useEffect, useState } from "react";
-import { database } from "../../services/firebase";
+import { database } from "../../../services/firebase";
 import { ref, push, set } from "firebase/database";
-import { Item } from "../../components/Questions/QuestionRecursosCustos/types/Item";
-import { Item1 } from "../../components/Questions/QuestionOutrosCustos1/types/Item1";
-import { Item2 } from "../../components/Questions/QuestionOutrosCustos2/types/Item2";
-import { InputArea } from "../../components/Questions/QuestionRecursosCustos/components/InputArea";
-import { TableArea } from "../../components/Questions/QuestionRecursosCustos/components/TableArea";
-import { InputAreaOutrosCustos1 } from "../../components/Questions/QuestionOutrosCustos1/components/InputArea";
-import { TableAreaOutrosCustos1 } from "../../components/Questions/QuestionOutrosCustos1/components/TableArea";
-import { InputAreaOutrosCustos2 } from "../../components/Questions/QuestionOutrosCustos2/components/InputArea";
-import { TableAreaOutrosCustos2 } from "../../components/Questions/QuestionOutrosCustos2/components/TableArea";
+import { Item } from "../../../components/Questions/QuestionRecursosCustos/types/Item";
+import { Item1 } from "../../../components/Questions/QuestionOutrosCustos1/types/Item1";
+import { Item2 } from "../../../components/Questions/QuestionOutrosCustos2/types/Item2";
+import { InputArea } from "../../../components/Questions/QuestionRecursosCustos/components/InputArea";
+import { TableArea } from "../../../components/Questions/QuestionRecursosCustos/components/TableArea";
+import { InputAreaOutrosCustos1 } from "../../../components/Questions/QuestionOutrosCustos1/components/InputArea";
+import { TableAreaOutrosCustos1 } from "../../../components/Questions/QuestionOutrosCustos1/components/TableArea";
+import { InputAreaOutrosCustos2 } from "../../../components/Questions/QuestionOutrosCustos2/components/InputArea";
+import { TableAreaOutrosCustos2 } from "../../../components/Questions/QuestionOutrosCustos2/components/TableArea";
 
 type RoomParams = {
   id: string;

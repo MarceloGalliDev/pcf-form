@@ -1,13 +1,13 @@
-import * as SC from "../../styles/styles"
-import { Theme } from "../../components/Theme"
-import { Link, useNavigate, useParams } from "react-router-dom"
-import { useFormPage, FormActions } from "../../context/FormContext"
-import { ChangeEvent, FormEvent, useEffect, useState } from "react"
-import { database } from "../../services/firebase";
+import * as SC from "../../../styles/styles";
+import { Theme } from "../../../components/Theme";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { useFormPage, FormActions } from "../../../context/FormContext";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import { database } from "../../../services/firebase";
 import { ref, push, set } from "firebase/database";
-import { Item } from "../../components/Questions/QuestionOrganizacoesParceiras/types/Item"
-import { InputArea } from "../../components/Questions/QuestionOrganizacoesParceiras/components/InputArea"
-import { TableArea } from "../../components/Questions/QuestionOrganizacoesParceiras/components/TableArea"
+import { Item } from "../../../components/Questions/QuestionOrganizacoesParceiras/types/Item";
+import { InputArea } from "../../../components/Questions/QuestionOrganizacoesParceiras/components/InputArea";
+import { TableArea } from "../../../components/Questions/QuestionOrganizacoesParceiras/components/TableArea";
 
 
 type RoomParams = {

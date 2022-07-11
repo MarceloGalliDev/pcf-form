@@ -6,13 +6,14 @@ import { useFormPage } from "../../context/FormContext"
 
 type Props = {
   children: ReactNode
-}
+};
 
 export const ThemeB1 = ({ children }: Props) => {
   const { state } = useFormPage();
 
   const routerActivate = {
-    routeDefault: 1,
+    routeFormStepB1: 1,
+    routeFormStepB2: 2,
   }
   return (
     <SC.Container>
@@ -22,11 +23,18 @@ export const ThemeB1 = ({ children }: Props) => {
         <SC.Steps>
           <SC.Sidebar>
 
+          <SidebarItem
+              title="Informações Gerais"
+              description="Informações do responsável por responder este questionário"
+              path="/:id/formstepB1"
+              active={state.currentStep === routerActivate.routeFormStepB1}
+            />
+
             <SidebarItem
               title="Municipíos Desistentes"
               description="Municipíos que deixaram de participar do PCF"
-              path="/:id/formstepB1"
-              active={state.currentStep === routerActivate.routeDefault}
+              path="/:id/formstepB2"
+              active={state.currentStep === routerActivate.routeFormStepB2}
             />
 
           </SC.Sidebar>

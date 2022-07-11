@@ -1,48 +1,62 @@
-import * as SC from "../../styles/styles";
-import { ThemeA1 } from "../../components/ThemeA1";
+import * as SC from "../../../styles/styles";
+import { ThemeA1 } from "../../../components/ThemeA1";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { useFormPage, FormActions } from "../../context/FormContext";
+import { useFormPage, FormActions } from "../../../context/FormContext";
 import { ChangeEvent, useEffect, useState, useCallback, FormEvent } from "react";
 import { push, ref, set } from "firebase/database";
-import { database } from "../../services/firebase";
+import { database } from "../../../services/firebase";
 
 type RoomParams = {
   id: string;
 };
 
-export const FormStepA1 = () => {
+export const FormStepA2 = () => {
   const params = useParams<RoomParams>()
   const roomId = params.id
   const navigate = useNavigate();
   const { state, dispatch } = useFormPage();
 
-  const [questionOne, setQuestionOne] = useState('')
-  const [questionTwo, setQuestionTwo] = useState('')
-  const [questionThree, setQuestionThree] = useState('')
-  const [questionFour, setQuestionFour] = useState('')
+  const [questionOne, setQuestionOne] = useState('');
+  const [questionTwo, setQuestionTwo] = useState('');
+  const [questionThree, setQuestionThree] = useState('');
+  const [questionFour, setQuestionFour] = useState('');
+  const [questionFive, setQuestionFive] = useState('');
+  const [questionSix, setQuestionSix] = useState('');
+  const [questionSeven, setQuestionSeven] = useState('');
+  
+  const [isCheckQ08, setIsCheckQ08] = useState('');
+  const [isCheckQ13, setIsCheckQ13] = useState('');
 
 
-  async function handleSendQuestion(event: FormEvent) {
+  async function handleEligibleMunicipalities(event: FormEvent) {
     event.preventDefault();
 
     const question = {
       A_Elegiveis_ao_PCF: {
-        questao01: questionOne,
-        questao02: questionTwo,
-        questao03: questionThree,
-        questao04: questionFour,
-
+        questao07: questionOne,
+        questao08:
+        {
+          questionTwo,
+          questionThree,
+          questionFour,
+        },
+        questao09: questionFive,
+        questao10:
+        {
+          questionSix,
+          questionSeven,
+        },
       }
     };
 
-    const firebaseRoomsQuestion = ref(database, `rooms/${roomId}/question`);
+    const firebaseRoomsQuestion = ref(database, `rooms/${roomId}/nao_aderidos/question`);
     const firebaseQuestion = await push(firebaseRoomsQuestion);
     set(firebaseQuestion, question)
 
    navigate(`/`)
   };
 
-  const handleProgramPCFChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleYouKnowProgramPCFChange = (event: ChangeEvent<HTMLInputElement>) => {
     setQuestionOne(event.target.value);
   };
 
@@ -50,31 +64,44 @@ export const FormStepA1 = () => {
     setQuestionTwo(event.target.value);
   };
 
-  const handleTargetAudiencePCFTextChange =(event:ChangeEvent<HTMLInputElement>) => {
+  const handleTargetAudiencePCFTextBeneficiaryChange =(event:ChangeEvent<HTMLInputElement>) => {
     setQuestionThree(event.target.value);
   };
 
-  const handleAdherenceReasonChange =(event:ChangeEvent<HTMLInputElement>) => {
+  const handleTargetAudiencePCFTextValueChange =(event:ChangeEvent<HTMLInputElement>) => {
     setQuestionFour(event.target.value);
   };
+
+  const handleReasonNotIncludedChange =(event:ChangeEvent<HTMLInputElement>) => {
+    setQuestionFive(event.target.value);
+  };
+
+  const handleExplainTheReasonChange =(event:ChangeEvent<HTMLInputElement>) => {
+    setQuestionSix(event.target.value);
+  };
+
+  const handleExplainTheReasonTextChange =(event:ChangeEvent<HTMLInputElement>) => {
+    setQuestionSeven(event.target.value);
+  };
+
 
   useEffect(() => {
     dispatch({
       type: FormActions.setCurrentStep,
-      payload: 1
+      payload: 2
     });
   }, []);
 
   return (
     <ThemeA1>
       <SC.Container>
-        <p>Etapa {state.currentStep}</p>
+        <p>Etapa {state.currentStep}/2</p>
         <h1>Municípios Elegíveis</h1>
         <p>Municípios elegíveis, mas que não aderiram ao programa</p>
         <hr />
       </SC.Container>
 
-      <form onSubmit={handleSendQuestion}>
+      <form onSubmit={handleEligibleMunicipalities}>
 
         <SC.ButtonTypeRadio>
           <div className="formQuestion">
@@ -86,30 +113,30 @@ export const FormStepA1 = () => {
 
                 <div id="containerInputLabelRadioButton">
                   <input
-                    id="programPCFYes"
-                    name="programPCF"
+                    id="youKnowProgramPCFYes"
+                    name="youKnowProgramPCF"
                     type="radio"
                     value="Sim"
-                    onChange={handleProgramPCFChange}
+                    onChange={handleYouKnowProgramPCFChange}
                   />
                   <label
                     className="containerTextLabel"
-                    htmlFor="teamCoordinatorYes"
+                    htmlFor="youKnowProgramPCFYes"
                   >Sim
                   </label>
                 </div>
 
                 <div id="containerInputLabelRadioButton">
                   <input
-                    id="programPCFNo"
-                    name="programPCF"
+                    id="youKnowProgramPCFNo"
+                    name="youKnowProgramPCF"
                     type="radio"
                     value="Não"
-                    onChange={handleProgramPCFChange}
+                    onChange={handleYouKnowProgramPCFChange}
                   />
                   <label
                     className="containerTextLabel"
-                    htmlFor="programPCFNo"
+                    htmlFor="youKnowProgramPCFNo"
                   >Não
                   </label>
                 </div>
@@ -129,30 +156,32 @@ export const FormStepA1 = () => {
                   
                   <div id="containerInputLabelRadioButton">
                     <input
-                      id="lastMonthSpentJaneiro"
-                      name="lastMonthSpentData"
+                      id="targetAudiencePCFYes"
+                      name="targetAudiencePCF"
                       type="radio"
-                      value="sim"
+                      value={"sim_Q08"}
+                      onClick={() => setIsCheckQ08("sim_Q08")}
                       onChange={handleTargetAudiencePCFChange}
                     />
                     <label
                       className="containerTextLabel"
-                      htmlFor="lastMonthSpentJaneiro"
+                      htmlFor="targetAudiencePCFYes"
                     >Sim
                     </label>
                   </div>
 
                   <div id="containerInputLabelRadioButton">
                     <input
-                      id="lastMonthSpentFevereiro"
-                      name="lastMonthSpentData"
+                      id="targetAudiencePCFNo"
+                      name="targetAudiencePCF"
                       type="radio"
-                      value="Não"
+                      value={"nao_Q08"}
+                      onClick={() => setIsCheckQ08("nao_Q08")}
                       onChange={handleTargetAudiencePCFChange}
                     />
                     <label
                       className="containerTextLabel"
-                      htmlFor="lastMonthSpentFevereiro"
+                      htmlFor="targetAudiencePCFNo"
                     >Não
                     </label>
                   </div>
@@ -161,33 +190,37 @@ export const FormStepA1 = () => {
               </div>
             </div>
 
-            <div className="containerBgLabel">
-              <label className="containerTextLabel" htmlFor="name">
-                Se sim, quantos beneficiários são atendidos por este programa?
-                <input
-                  name="name"
-                  type="text"
-                  autoFocus
-                  value={state.name}
-                  onChange={handleTargetAudiencePCFTextChange}
-                  placeholder="Sua resposta"
-                />
-              </label>
-            </div>
-              
-            <div className="containerBgLabel">
-              <label className="containerTextLabel" htmlFor="name">
-                Se sim, qual o valor mensal gasto com esse Programa? 
-                <input
-                  name="name"
-                  type="text"
-                  autoFocus
-                  value={state.name}
-                  onChange={handleTargetAudiencePCFTextChange}
-                  placeholder="Sua resposta"
-                />
-              </label>
-            </div>
+            {isCheckQ08 === "sim_Q08" && (
+              <>
+                <div className="containerBgLabel">
+                  <label className="containerTextLabel" htmlFor="targetAudiencePCFTextBeneficiary">
+                    Se sim, quantos beneficiários são atendidos por este programa?
+                    <input
+                      id="targetAudiencePCFTextBeneficiary"
+                      name="targetAudiencePCFTextBeneficiary"
+                      type="text"
+                      value={questionThree}
+                      onChange={handleTargetAudiencePCFTextBeneficiaryChange}
+                      placeholder="Sua resposta"
+                    />
+                  </label>
+                </div>
+
+                <div className="containerBgLabel">
+                  <label className="containerTextLabel" htmlFor="targetAudiencePCFTextValue">
+                    Se sim, qual o valor mensal gasto com esse Programa? 
+                    <input
+                      id="targetAudiencePCFTextValue"
+                      name="targetAudiencePCFTextValue"
+                      type="text"
+                      value={questionFour}
+                      onChange={handleTargetAudiencePCFTextValueChange}
+                      placeholder="Sua resposta"
+                    />
+                  </label>
+                </div>
+              </>
+            )}
 
           </div>
         </SC.ButtonTypeRadioText>
@@ -202,60 +235,60 @@ export const FormStepA1 = () => {
 
                 <div id="containerInputLabelRadioButton">
                   <input
-                    id="programPCFYes"
-                    name="programPCF"
+                    id="reasonNotIncludedNotInterest"
+                    name="reasonNotIncluded"
                     type="radio"
-                    value="Sim"
-                    onChange={handleProgramPCFChange}
+                    value="nao_houve_interesse_do_municipio"
+                    onChange={handleReasonNotIncludedChange}
                   />
                   <label
                     className="containerTextLabel"
-                    htmlFor="teamCoordinatorYes"
+                    htmlFor="reasonNotIncludedNotInterest"
                   >Não houve interesse do município 
                   </label>
                 </div>
 
                 <div id="containerInputLabelRadioButton">
                   <input
-                    id="programPCFNo"
-                    name="programPCF"
+                    id="reasonNotIncludedAlreadyHave"
+                    name="reasonNotIncluded"
                     type="radio"
-                    value="Não"
-                    onChange={handleProgramPCFChange}
+                    value="ja_possui_programa_semelhante"
+                    onChange={handleReasonNotIncludedChange}
                   />
                   <label
                     className="containerTextLabel"
-                    htmlFor="programPCFNo"
-                  >O município já possui um programa semelhante ao Criança Feliz
+                    htmlFor="reasonNotIncludedAlreadyHave"
+                  >O município possui um programa semelhante ao Criança Feliz
                   </label>
                 </div>
 
                 <div id="containerInputLabelRadioButton">
                   <input
-                    id="programPCFNo"
-                    name="programPCF"
+                    id="reasonNotIncludedDontKnowThePCF"
+                    name="reasonNotIncluded"
                     type="radio"
-                    value="Não"
-                    onChange={handleProgramPCFChange}
+                    value="nao_conhece_o_PCF"
+                    onChange={handleReasonNotIncludedChange}
                   />
                   <label
                     className="containerTextLabel"
-                    htmlFor="programPCFNo"
+                    htmlFor="reasonNotIncludedDontKnowThePCF"
                   >O município não conhece o Programa Criança Feliz
                   </label>
                 </div>
 
                 <div id="containerInputLabelRadioButton">
                   <input
-                    id="programPCFNo"
-                    name="programPCF"
+                    id="reasonNotIncludedInsufficientResource"
+                    name="reasonNotIncluded"
                     type="radio"
-                    value="Não"
-                    onChange={handleProgramPCFChange}
+                    value="recurso_financeiro_insuficiente"
+                    onChange={handleReasonNotIncludedChange}
                   />
                   <label
                     className="containerTextLabel"
-                    htmlFor="programPCFNo"
+                    htmlFor="reasonNotIncludedInsufficientResource"
                   >A transferência de recurso financeiro é insuficiente para o município manter o programa
                   </label>
                 </div>
@@ -268,7 +301,7 @@ export const FormStepA1 = () => {
         <SC.ButtonTypeRadioText>
           <div className="formQuestion">
             <p>
-            Existe algum outro motivo que explique o fato de o município não ter aderido ao Programa Criança Feliz e que não foi mencionado na questão anterior?
+              Existe algum outro motivo que explique o fato de o município não ter aderido ao Programa Criança Feliz e que não foi mencionado na questão anterior?
             </p>
 
             <div className="formQuestion">
@@ -277,30 +310,32 @@ export const FormStepA1 = () => {
                   
                   <div id="containerInputLabelRadioButton">
                     <input
-                      id="lastMonthSpentJaneiro"
-                      name="lastMonthSpentData"
+                      id="explainTheReasonYes"
+                      name="explainTheReason"
                       type="radio"
-                      value="sim"
-                      onChange={handleTargetAudiencePCFChange}
+                      value={"sim_Q13"}
+                      onClick={() => setIsCheckQ13("sim_Q13")}
+                      onChange={handleExplainTheReasonChange}
                     />
                     <label
                       className="containerTextLabel"
-                      htmlFor="lastMonthSpentJaneiro"
+                      htmlFor="explainTheReasonYes"
                     >Sim
                     </label>
                   </div>
 
                   <div id="containerInputLabelRadioButton">
                     <input
-                      id="lastMonthSpentFevereiro"
-                      name="lastMonthSpentData"
+                      id="explainTheReasonNo"
+                      name="explainTheReason"
                       type="radio"
-                      value="Não"
-                      onChange={handleTargetAudiencePCFChange}
+                      value={"nao_Q13"}
+                      onClick={() => setIsCheckQ13("nao_Q13")}
+                      onChange={handleExplainTheReasonChange}
                     />
                     <label
                       className="containerTextLabel"
-                      htmlFor="lastMonthSpentFevereiro"
+                      htmlFor="explainTheReasonNo"
                     >Não
                     </label>
                   </div>
@@ -308,26 +343,31 @@ export const FormStepA1 = () => {
                 </div>
               </div>
             </div>
-
-            <div className="containerBgLabel">
-              <label className="containerTextLabel" htmlFor="name">
-                Se sim, qual?
-                <input
-                  name="name"
-                  type="text"
-                  autoFocus
-                  value={state.name}
-                  onChange={handleTargetAudiencePCFTextChange}
-                  placeholder="Sua resposta"
-                />
-              </label>
-            </div>
+            
+            {isCheckQ13 === "sim_Q13" && (
+              <>
+                <div className="containerBgLabel">
+                  <label
+                    className="containerTextLabel" htmlFor="explainTheReasonText"
+                  >Se sim, qual?
+                    <input
+                      id="explainTheReasonText"
+                      name="explainTheReasonText"
+                      type="text"
+                      value={questionSeven}
+                      onChange={handleExplainTheReasonTextChange}
+                      placeholder="Sua resposta"
+                    />
+                  </label>
+                </div>
+              </>
+            )}
 
           </div>
         </SC.ButtonTypeRadioText>
         
         <SC.AllButtons>
-          <Link className="buttonAll" to="/">Voltar</Link>
+          <Link className="buttonAll" to="/:id/formstepA1">Voltar</Link>
           <button
             className="buttonAll"
             type="submit"

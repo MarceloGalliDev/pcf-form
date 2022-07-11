@@ -28,7 +28,6 @@ type State = {
   workload: string;
   workloadOthers: string;
   supervisorQualification: string;
-
   }
   //é o tipo de informação que está dentro do meu state
 

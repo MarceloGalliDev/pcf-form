@@ -50,15 +50,6 @@ export const InputAreaOutrosCustos1 = ({ onAdd1 }: Props) => {
             onChange={event => setInputOneField(event.target.value)}
             placeholder="Escreva aqui"
           />
-          <span
-            data-tooltip="Por exemplo: CIEE, Ong's, igreja, empresas(terceiras) ..."
-          >
-            <Info
-              size={20}
-              color="#2d56d2"
-              weight="light"
-            />
-          </span>
         </div>
       </SC.InputLabel>
 

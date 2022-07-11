@@ -12,7 +12,8 @@ export const ThemeA1 = ({ children }: Props) => {
   const { state } = useFormPage();
 
   const routerActivate = {
-    routeDefault: 1,
+    routeFormStepA1: 1,
+    routeFormStepA2: 2,
   }
   return (
     <SC.Container>
@@ -23,10 +24,17 @@ export const ThemeA1 = ({ children }: Props) => {
           <SC.Sidebar>
 
             <SidebarItem
+              title="Informações Gerais"
+              description="Informações do responsável por responder este questionário"
+              path="/:id/formstepA1"
+              active={state.currentStep === routerActivate.routeFormStepA1}
+            />
+
+            <SidebarItem
               title="Municípios elegíveis"
               description="Elegíveis mas não adeptos"
-              path="/:id/formstepA1"
-              active={state.currentStep === routerActivate.routeDefault}
+              path="/:id/formstepA2"
+              active={state.currentStep === routerActivate.routeFormStepA2}
             />
 
           </SC.Sidebar>

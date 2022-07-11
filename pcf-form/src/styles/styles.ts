@@ -64,7 +64,7 @@ export const SubSection = styled.div`
 
     .formQuestionV3 {
       border: 1px solid #3490C9;
-      background-color: #2e7eb02e;
+      background-color: #fff;
       border-radius: 10px;
       padding: 10px 10px;
       margin-bottom: 10px;

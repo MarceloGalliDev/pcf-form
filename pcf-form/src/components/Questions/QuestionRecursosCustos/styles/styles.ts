@@ -85,6 +85,7 @@ export const ContainerInputAreaV2 = styled.div`
   padding: 0px 20px 20px 20px;
   background-color: #FFF;
   border-radius: 0px 0px 10px 10px;
+  box-shadow: 0px 4px 5px #CCC;
   display: flex;
   outline: none;
 `;

@@ -1,21 +1,21 @@
-import * as SC from "../../styles/styles";
-import { Theme } from "../../components/Theme";
+import * as SC from "../../../styles/styles";
+import { ThemeA1 } from "../../../components/ThemeA1";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { useFormPage, FormActions } from "../../context/FormContext";
+import { useFormPage, FormActions } from "../../../context/FormContext";
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import axios from "axios";
 import {
   IBGEUFResponse,
   IBGECITYResponse,
-} from "../../types/FormStep1";
-import { database } from "../../services/firebase";
+} from "../../../types/IBGE";
+import { database } from "../../../services/firebase";
 import { ref, push, set } from "firebase/database";
 
 type RoomParams = {
   id: string;
 };
 
-export const FormStep1 = () => {
+export const FormStepA1 = () => {
   const params = useParams<RoomParams>();
   const roomId = params.id;
   const [ufs, setUfs] = useState<IBGEUFResponse[]>([]);
@@ -32,18 +32,8 @@ export const FormStep1 = () => {
   async function handleSendQuestion(event: FormEvent) {
     event.preventDefault();
 
-    if (questionOne.trim() === '') {
-      return;
-    };
-    if (questionTwo.trim() === '') {
-      return;
-    };
-    if (questionTwo.trim() === '') {
-      return;
-    };
-
     const question = {
-      A_Informacoes_Gerais: {
+      A_Informacoes_Gerais_Nao_Aderidos: {
         questao01: questionOne,
         questao02: questionTwo,
         questao03: questionThree,
@@ -53,11 +43,11 @@ export const FormStep1 = () => {
       }
     };
 
-    const firebaseRoomsQuestion = ref(database, `rooms/${roomId}/question`);
+    const firebaseRoomsQuestion = ref(database, `rooms/${roomId}/nao_aderidos/question`);
     const firebaseQuestion = await push(firebaseRoomsQuestion);
     set(firebaseQuestion, question)
 
-    navigate(`/${roomId}/formstep2`)
+    navigate(`/${roomId}/formstepA2`)
   };
 
   const handleNameChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -103,9 +93,9 @@ export const FormStep1 = () => {
   }, []);
 
   return (
-    <Theme>
+    <ThemeA1>
       <SC.Container>
-        <p>Etapa {state.currentStep}/10</p>
+        <p>Etapa {state.currentStep}/2</p>
         <h1>Informações gerais</h1>
         <p>Informações do responsável por responder este questionário</p>
         <hr />
@@ -213,7 +203,7 @@ export const FormStep1 = () => {
           </button>
         </SC.AllButtons>
       </form>
-    </Theme>
+    </ThemeA1>
   );
 };
 
