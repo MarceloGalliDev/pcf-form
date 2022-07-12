@@ -4,7 +4,7 @@
   height: 100vh;
 
   aside {
-    flex: 5;
+    flex: 4;
     background: #2D7DB0;
     color: #fff;
     display: flex;
@@ -35,24 +35,45 @@
   }
 
   .main-content {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    gap: 10px;
     width: 100%;
     text-align: center;
     align-items: center;
+    grid-template-areas: 
+      'A1 B1'
+      'C1 C1'
+      'A2 B2'
+      'C2 C2'
+      'A3 B3'
+      ;
 
-    .mainContentHome {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-
-      .alinhamentoP {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
+      .buttonHomeA1 {
+        grid-area: A1;
       }
-    }
+      .buttonHomeB1 {
+        grid-area: B1;
+      }
+      .buttonHomeC1 {
+        grid-area: C1;
+        width: 100%;
+      }
+      .buttonHomeA2 {
+        grid-area: A2;
+      }
+      .buttonHomeB2 {
+        grid-area: B2;
+      }
+      .buttonHomeC2 {
+        grid-area: C2;
+        width: 100%;
+      }
+      .buttonHomeA3 {
+        grid-area: A3;
+      }
+      .buttonHomeB3 {
+        grid-area: B3;
+      }
 
     hr {
       width: 600px;
@@ -69,12 +90,13 @@
 
     form {
       input {
-        margin-top: 10px;
-        height: 50px;
+        margin: 10px 10px 0px 0px;
         border-radius: 8px;
         padding: 0 16px;
         background: #fff;
         border: 1px solid #a8a8b3;
+        width: 200px;
+        height: 50px;
         max-width: 320px;
       };
 
@@ -97,10 +119,6 @@
         &:hover {
           filter: brightness(0.8);
         }
-      }
-
-      input {
-        width: 100%;
       }
     }
 

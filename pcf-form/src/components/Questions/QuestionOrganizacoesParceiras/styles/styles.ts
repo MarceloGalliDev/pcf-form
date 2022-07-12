@@ -76,8 +76,8 @@ export const ContainerInputArea = styled.div`
   border-radius: 10px;
   margin-top: 20px;
   display: flex;
-  align-items: center;
   justify-content: space-evenly;
+  align-items: flex-end;
   outline: none;
 `;
 
@@ -161,7 +161,7 @@ export const InputArea4 = styled.input`
 `;
 
 export const InputArea5 = styled.input`
-  width: 100%;
+  width: 150px;
   height: 30px;
   padding: 0 5px;
   border: none;
@@ -170,7 +170,7 @@ export const InputArea5 = styled.input`
 `;
 
 export const SelectArea = styled.select`
-  width: 100%;
+  width: 100px;
   height: 30px;
   padding: 0 5px;
   border: 1px solid #2E7EB0;
@@ -179,6 +179,7 @@ export const SelectArea = styled.select`
 `;
 
 export const InputLabelButton = styled.div`
+  margin-bottom: 10px;
 `;
 
 export const ButtonInputArea = styled.button`

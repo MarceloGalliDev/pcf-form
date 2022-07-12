@@ -72,7 +72,7 @@ export const InputArea = ({ onAdd }: Props) => {
       </SC.InputLabel>
 
       <SC.InputLabel>
-        <SC.InputTitle>Aporte</SC.InputTitle>
+        <SC.InputTitle>Possui aporte financeiro?</SC.InputTitle>
         <SC.SelectArea value={inputTwoField} onChange={event => setInputTwoField(event.target.value)}>
           <>
             <option></option>
@@ -105,7 +105,6 @@ export const InputArea = ({ onAdd }: Props) => {
       </SC.InputLabel>
 
       <SC.InputLabelButton>
-
         <SC.InputTitle>&nbsp;</SC.InputTitle>
         <SC.ButtonInputArea onClick={handleAddEvent}>
           Adicionar

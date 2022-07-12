@@ -122,7 +122,7 @@ export const FormStep4 = () => {
       }
     };
 
-    const firebaseRoomsQuestion = ref(database, `rooms/${roomId}/question`);
+    const firebaseRoomsQuestion = ref(database, `rooms/${roomId}/aderidos/question`);
     const firebaseQuestion = await push(firebaseRoomsQuestion);
     set(firebaseQuestion, question)
 

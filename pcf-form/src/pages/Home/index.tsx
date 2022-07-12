@@ -55,7 +55,7 @@ export const Home = () => {
     // }
   };
 
-  async function handleJoinRoom(event: FormEvent) {
+  async function handleJoinRoom1(event: FormEvent) {
     event.preventDefault();
 
     if (roomCode.trim() === '') {
@@ -76,6 +76,49 @@ export const Home = () => {
     navigate(`/${roomCode}/formstep1`)
   };
 
+  async function handleJoinRoom2(event: FormEvent) {
+    event.preventDefault();
+
+    if (roomCode.trim() === '') {
+      alert('Insira o código')
+      return;
+    };
+
+    const roomRef = await get(ref(database, `rooms/${roomCode}`))
+
+    if (!roomRef.exists()) {
+      alert('Questionário não existe!')
+      return;
+    }
+    if (roomRef.val().endedAt) {
+      alert('Questionário Finalizado.')
+      return;
+    }
+    navigate(`/${roomCode}/formstepA1`)
+  };
+
+  async function handleJoinRoom3(event: FormEvent) {
+    event.preventDefault();
+
+    if (roomCode.trim() === '') {
+      alert('Insira o código')
+      return;
+    };
+
+    const roomRef = await get(ref(database, `rooms/${roomCode}`))
+
+    if (!roomRef.exists()) {
+      alert('Questionário não existe!')
+      return;
+    }
+    if (roomRef.val().endedAt) {
+      alert('Questionário Finalizado.')
+      return;
+    }
+    navigate(`/${roomCode}/formstepB1`)
+  };
+
+
   return (
     <div id="page-auth">
       <aside>
@@ -85,8 +128,7 @@ export const Home = () => {
       <main>
         <div className="main-content">
 
-          <div className="mainContentHome">
-            <div>
+            <div className="buttonHomeA1">
               <h2>Municípios <u>aderidos</u> ao PCF</h2>
               <form onSubmit={handleCreateRoom1}>
                 {/* <input
@@ -102,9 +144,9 @@ export const Home = () => {
               </form>
             </div>
 
-            <div>
-              <p>ou digite o <u>código</u> do formulário</p>
-              <form onSubmit={handleJoinRoom}>
+            <div className="buttonHomeB1">
+              <h2>ou digite o <u>código</u> do formulário</h2>
+              <form onSubmit={handleJoinRoom1}>
                 <input
                   type="text"
                   placeholder="Código do formulário"
@@ -117,13 +159,11 @@ export const Home = () => {
                 </button>
               </form>
             </div>
-          </div>
 
-          <hr />
+          <hr className="buttonHomeC1"/>
 
-          <div className="mainContentHome">
-            <div>
-              <h2>Municípios <u>elegíveis <br/> mas não aderidos</u> ao PCF</h2>
+            <div className="buttonHomeA2">
+              <h2>Municípios <u>elegíveis mas não aderidos</u> ao PCF</h2>
               <form onSubmit={handleCreateRoom2}>
                 {/* <input
                   type="text"
@@ -138,9 +178,9 @@ export const Home = () => {
               </form>
             </div>
 
-            <div>
-              <p>ou digite o <u>código</u> do formulário</p>
-              <form onSubmit={handleJoinRoom}>
+            <div className="buttonHomeB2">
+              <h2>ou digite o <u>código</u> do formulário</h2>
+              <form onSubmit={handleJoinRoom2}>
                 <input
                   type="text"
                   placeholder="Código do formulário"
@@ -153,12 +193,10 @@ export const Home = () => {
                 </button>
               </form>
             </div>
-          </div>
 
-          <hr />
+            <hr className="buttonHomeC2"/>
 
-          <div className="mainContentHome">
-            <div>
+            <div className="buttonHomeA3">
               <h2>Municípios <u>desistentes</u> do PCF</h2>
               <form onSubmit={handleCreateRoom3}>
                 {/* <input
@@ -174,9 +212,9 @@ export const Home = () => {
               </form>
             </div>
 
-            <div>
-              <p>ou digite o <u>código</u> do formulário</p>
-              <form onSubmit={handleJoinRoom}>
+            <div className="buttonHomeB3">
+              <h2>ou digite o <u>código</u> do formulário</h2>
+              <form onSubmit={handleJoinRoom3}>
                 <input
                   type="text"
                   placeholder="Código do formulário"
@@ -189,7 +227,6 @@ export const Home = () => {
                 </button>
               </form>
             </div>
-          </div>
 
         </div>
       </main>
