@@ -2,12 +2,20 @@ import * as SC from "../../../styles/styles";
 import { ThemeB1 } from "../../../components/ThemeB1";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useFormPage, FormActions } from "../../../context/FormContext";
-import { ChangeEvent, useEffect, useState, FormEvent } from "react";
+import { ChangeEvent, useEffect, useState, FormEvent, useCallback } from "react";
 import { push, ref, set } from "firebase/database";
 import { database } from "../../../services/firebase";
+import { RoomCode } from "../../../components/RoomCode";
 
 type RoomParams = {
   id: string;
+};
+
+interface ReasonForGivingUpChange {
+  a_recursoFinanceiroInsuficiente: boolean;
+  b_naoHaInteresseMunicipio: boolean;
+  c_possuiPrograma: boolean;
+  d_criouPrograma: boolean;
 };
 
 export const FormStepB2 = () => {
@@ -16,7 +24,12 @@ export const FormStepB2 = () => {
   const navigate = useNavigate();
   const { state, dispatch } = useFormPage();
 
-  const [questionOne, setQuestionOne] = useState('')
+  const [questionOne, setQuestionOne] = useState<ReasonForGivingUpChange>({
+    a_recursoFinanceiroInsuficiente: false,
+    b_naoHaInteresseMunicipio: false,
+    c_possuiPrograma: false,
+    d_criouPrograma: false,
+  });
   const [questionTwo, setQuestionTwo] = useState('')
   const [questionThree, setQuestionThree] = useState('')
   const [questionFour, setQuestionFour] = useState('')
@@ -32,12 +45,12 @@ export const FormStepB2 = () => {
 
     const question = {
       B_Desistentes: {
-        questao07: questionOne,
-        questao08: {
+        questao07: {
           questionTwo,
           questionThree,
           questionFour,
         },
+        questao08: questionOne,
         questao09: { 
           questionFive,
           questionSix,
@@ -50,10 +63,6 @@ export const FormStepB2 = () => {
     set(firebaseQuestion, question)
 
    navigate(`/`)
-  };
-
-  const handleReasonForGivingUpChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setQuestionOne(event.target.value);
   };
 
   const handleHaveTargetAudiencePCFChange =(event:ChangeEvent<HTMLInputElement>) => {
@@ -93,79 +102,6 @@ export const FormStepB2 = () => {
       </SC.Container>
 
       <form onSubmit={handleDropoutMunicipalities}>
-
-        <SC.ButtonTypeRadio>
-          <div className="formQuestion">
-            <p className="textFormRadioButton">
-            Qual foi o motivo que levou seu município a deixar o Programa Criança Feliz?
-            </p>
-            <div id="containerOption">
-              <div id="containerOptionSixOption">
-
-                <div id="containerInputLabelRadioButton">
-                  <input
-                    id="reasonForGivingUpInsufficientResources"
-                    name="reasonForGivingUp"
-                    type="radio"
-                    value="recurso_financeiro_insuficiente"
-                    onChange={handleReasonForGivingUpChange}
-                  />
-                  <label
-                    className="containerTextLabel"
-                    htmlFor="reasonForGivingUpInsufficientResources"
-                  >A transferência de recurso financeiro é insuficiente para o município manter o programa 
-                  </label>
-                </div>
-
-                <div id="containerInputLabelRadioButton">
-                  <input
-                    id="reasonForGivingUpNotInterest"
-                    name="reasonForGivingUp"
-                    type="radio"
-                    value="nao_houve_interesse_do_municipio"
-                    onChange={handleReasonForGivingUpChange}
-                  />
-                  <label
-                    className="containerTextLabel"
-                    htmlFor="reasonForGivingUpNotInterest"
-                  >Não há mais interesse do município em manter o programa
-                  </label>
-                </div>
-
-                <div id="containerInputLabelRadioButton">
-                  <input
-                    id="reasonForGivingUpAlreadyHave"
-                    name="reasonForGivingUp"
-                    type="radio"
-                    value="ja_possui_programa_semelhante"
-                    onChange={handleReasonForGivingUpChange}
-                  />
-                  <label
-                    className="containerTextLabel"
-                    htmlFor="reasonForGivingUpAlreadyHave"
-                  >O município possui um programa semelhante ao Criança Feliz
-                  </label>
-                </div>
-
-                <div id="containerInputLabelRadioButton">
-                  <input
-                    id="reasonForGivingUpCreatedProgramming"
-                    name="reasonForGivingUp"
-                    type="radio"
-                    value="criou_programa_semelhante"
-                    onChange={handleReasonForGivingUpChange}
-                  />
-                  <label
-                    className="containerTextLabel"
-                    htmlFor="reasonForGivingUpCreatedProgramming"
-                  >O município criou um programa semelhante ao Criança Feliz
-                  </label>
-                </div>
-
-              </div>
-            </div>
-          </div>
-        </SC.ButtonTypeRadio>
 
         <SC.ButtonTypeRadioText>
           <div className="formQuestion">
@@ -212,7 +148,8 @@ export const FormStepB2 = () => {
               <>
                 <div className="containerBgLabel">
                   <label
-                    className="containerTextLabel" htmlFor="haveTargetAudiencePCFBeneficiary"
+                    className="containerTextLabel"
+                    htmlFor="haveTargetAudiencePCFBeneficiary"
                   >Se sim, quantos beneficiários são atendidos por este programa?
                     <input
                       id="haveTargetAudiencePCFBeneficiary"
@@ -245,6 +182,91 @@ export const FormStepB2 = () => {
 
           </div>
         </SC.ButtonTypeRadioText>
+
+        <SC.ButtonTypeCheckbox>
+          <div className="formQuestion">
+            <p className="textFormRadioButton">
+            Qual foi o motivo que levou seu município a deixar o Programa Criança Feliz?
+            </p>
+            <div id="containerOption">
+              <div>
+
+                <div id="containerInputLabelRadioButton">
+                  <input
+                    id="recursoFinanceiroInsuficiente"
+                    name="a_recursoFinanceiroInsuficiente"
+                    type="checkbox"
+                    checked={questionOne.a_recursoFinanceiroInsuficiente}
+                    onChange={(event) => setQuestionOne({
+                      ...questionOne,
+                      a_recursoFinanceiroInsuficiente: !!event.currentTarget?.checked
+                    })}
+                  />
+                  <label
+                    className="containerTextLabel"
+                    htmlFor="recursoFinanceiroInsuficiente"
+                  >A transferência de recurso financeiro é insuficiente para o município manter o programa
+                  </label>
+                </div>
+
+                <div id="containerInputLabelRadioButton">
+                  <input
+                    id="naoHaInteresseMunicipio"
+                    name="b_naoHaInteresseMunicipio"
+                    type="checkbox"
+                    checked={questionOne.b_naoHaInteresseMunicipio}
+                    onChange={(event) => setQuestionOne({
+                      ...questionOne,
+                      b_naoHaInteresseMunicipio: !!event.currentTarget?.checked
+                    })}
+                  />
+                  <label
+                    className="containerTextLabel"
+                    htmlFor="naoHaInteresseMunicipio"
+                  >Não há mais interesse do município em manter o programa
+                  </label>
+                </div>
+
+                <div id="containerInputLabelRadioButton">
+                  <input
+                    id="possuiPrograma"
+                    name="c_possuiPrograma"
+                    type="checkbox"
+                    checked={questionOne.c_possuiPrograma}
+                    onChange={(event) => setQuestionOne({
+                      ...questionOne,
+                      c_possuiPrograma: !!event.currentTarget?.checked
+                    })}
+                  />
+                  <label
+                    className="containerTextLabel"
+                    htmlFor="possuiPrograma"
+                  >O município possui um programa semelhante ao Criança Feliz
+                  </label>
+                </div>
+
+                <div id="containerInputLabelRadioButton">
+                  <input
+                    id="criouPrograma"
+                    name="d_criouPrograma"
+                    type="checkbox"
+                    checked={questionOne.d_criouPrograma}
+                    onChange={(event) => setQuestionOne({
+                      ...questionOne,
+                      d_criouPrograma: !!event.currentTarget?.checked
+                    })}
+                  />
+                  <label
+                    className="containerTextLabel"
+                    htmlFor="criouPrograma"
+                  >O município criou um programa semelhante ao Criança Feliz
+                  </label>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </SC.ButtonTypeCheckbox>
 
         <SC.ButtonTypeRadioText>
           <div className="formQuestion">
@@ -318,6 +340,7 @@ export const FormStepB2 = () => {
             type="submit"
             >Finalizar
           </button>
+          <RoomCode/>
         </SC.AllButtons>
       </form>
     </ThemeB1>

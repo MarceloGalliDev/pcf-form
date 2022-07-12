@@ -10,6 +10,7 @@ import {
 } from "../../../types/IBGE";
 import { database } from "../../../services/firebase";
 import { ref, push, set } from "firebase/database";
+import { RoomCode } from "../../../components/RoomCode";
 
 type RoomParams = {
   id: string;
@@ -105,12 +106,12 @@ export const FormStepA1 = () => {
 
         <SC.ButtonTypeText>
           <div className="formQuestion">
-            <label htmlFor="name">
-              Nome do entrevistado:
+            <label
+              htmlFor="name"
+            >Nome do entrevistado:
               <input
                 name="name"
                 type="text"
-                autoFocus
                 value={questionOne}
                 onChange={handleNameChange}
                 placeholder="Seu nome"
@@ -121,8 +122,9 @@ export const FormStepA1 = () => {
 
         <SC.ButtonTypeText>
           <div className="formQuestion">
-            <label htmlFor="email">
-              E-mail:
+            <label
+              htmlFor="email"
+            >E-mail:
               <input
                 name="email"
                 type="email"
@@ -136,8 +138,9 @@ export const FormStepA1 = () => {
 
         <SC.ButtonTypeText>
           <div className="formQuestion">
-            <label htmlFor="phoneNumber">
-              Telefone para contato:
+            <label
+              htmlFor="phoneNumber"
+            >Telefone para contato:
               <input
                 name="phoneNumber"
                 type="tel"
@@ -151,8 +154,9 @@ export const FormStepA1 = () => {
 
         <SC.ButtonTypeText>
           <div className="formQuestion">
-            <label htmlFor="functionPCF">
-              Função no PCF:
+            <label
+              htmlFor="functionPCF"
+            >Função no PCF:
               <input
                 name="functionPCF"
                 type="text"
@@ -166,8 +170,9 @@ export const FormStepA1 = () => {
 
         <SC.ButtonTypeSelectOption>
           <div className="formQuestion">
-            <label htmlFor="uf">
-              Local em que atua no PCF
+            <label
+              htmlFor="uf"
+            >Local em que atua no PCF
               <select
                 name="uf"
                 id="uf"
@@ -201,6 +206,7 @@ export const FormStepA1 = () => {
             type="submit"
           >Próximo
           </button>
+          <RoomCode/>
         </SC.AllButtons>
       </form>
     </ThemeA1>

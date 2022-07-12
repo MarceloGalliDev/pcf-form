@@ -10,6 +10,7 @@ import {
 } from "../../../types/IBGE";
 import { database } from "../../../services/firebase";
 import { ref, push, set } from "firebase/database";
+import { RoomCode } from "../../../components/RoomCode";
 
 type RoomParams = {
   id: string;
@@ -120,7 +121,6 @@ export const FormStep1 = () => {
               <input
                 name="name"
                 type="text"
-                autoFocus
                 value={questionOne}
                 onChange={handleNameChange}
                 placeholder="Seu nome"
@@ -211,6 +211,7 @@ export const FormStep1 = () => {
             type="submit"
           >Próximo
           </button>
+          <RoomCode/>
         </SC.AllButtons>
       </form>
     </Theme>

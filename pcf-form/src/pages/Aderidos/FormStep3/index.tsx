@@ -5,6 +5,7 @@ import { useFormPage, FormActions } from "../../../context/FormContext";
 import { ChangeEvent, FormEvent, useCallback, useEffect, useState }from "react";
 import { push, ref, set } from "firebase/database";
 import { database } from "../../../services/firebase";
+import { RoomCode } from "../../../components/RoomCode";
 
 type RoomParams = {
   id: string;
@@ -652,6 +653,7 @@ export const FormStep3 = () => {
             type="submit"
           >Próximo
           </button>
+          <RoomCode/>
         </SC.AllButtons>
       </form>
     </Theme>

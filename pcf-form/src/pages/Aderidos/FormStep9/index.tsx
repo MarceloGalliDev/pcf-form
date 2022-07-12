@@ -5,6 +5,7 @@ import { useFormPage, FormActions } from "../../../context/FormContext";
 import { ChangeEvent, FormEvent, useCallback, useEffect, useState } from "react";
 import { push, ref, set } from "firebase/database";
 import { database } from "../../../services/firebase";
+import { RoomCode } from "../../../components/RoomCode";
 
 type RoomParams = {
   id: string;
@@ -242,14 +243,14 @@ export const FormStep9 = () => {
         </SC.SubSection>
 
         <SC.AllButtons>
-            <Link className="buttonAll" to="/:id/formstep8">Voltar</Link>
-            <button
-              className="buttonAll"
-              type="submit"
-              >Próximo
-            </button>
+          <Link className="buttonAll" to="/:id/formstep8">Voltar</Link>
+          <button
+            className="buttonAll"
+            type="submit"
+            >Próximo
+          </button>
+          <RoomCode/>
         </SC.AllButtons>
-
       </form>
     </Theme>
   )

@@ -8,6 +8,7 @@ import { ref, push, set } from "firebase/database";
 import { Item } from "../../../components/Questions/QuestionOrganizacoesParceiras/types/Item";
 import { InputArea } from "../../../components/Questions/QuestionOrganizacoesParceiras/components/InputArea";
 import { TableArea } from "../../../components/Questions/QuestionOrganizacoesParceiras/components/TableArea";
+import { RoomCode } from "../../../components/RoomCode";
 
 
 type RoomParams = {
@@ -44,10 +45,10 @@ export const FormStep8 = () => {
 
     const question = {
       H_Organizacoes_Parceiras: {
-        questao48: questionOne,
-        questao49: filteredList,
-        questao50: questionThree,
-        questao51: questionFour,
+        questao47: questionOne,
+        questao48: filteredList,
+        questao49: questionThree,
+        questao50: questionFour,
       }
     };
 
@@ -113,7 +114,7 @@ export const FormStep8 = () => {
                     id="PartnershipAndContractingYes"
                     name="PartnershipAndContracting"
                     type="radio"
-                    value="sim"
+                    value="Sim"
                     onChange={handlePartnershipAndContractingChange}
                   />
                   <label
@@ -166,6 +167,7 @@ export const FormStep8 = () => {
             type="submit"
             >Próximo
           </button>
+          <RoomCode/>
         </SC.AllButtons>
       </form>
     </Theme>

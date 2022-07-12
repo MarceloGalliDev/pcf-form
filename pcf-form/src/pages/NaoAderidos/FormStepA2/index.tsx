@@ -5,10 +5,19 @@ import { useFormPage, FormActions } from "../../../context/FormContext";
 import { ChangeEvent, useEffect, useState, useCallback, FormEvent } from "react";
 import { push, ref, set } from "firebase/database";
 import { database } from "../../../services/firebase";
+import { RoomCode } from "../../../components/RoomCode";
 
 type RoomParams = {
   id: string;
 };
+
+interface ReasonForGivingUpChange {
+  a_recursoFinanceiroInsuficiente: boolean;
+  b_naoHaInteresseMunicipio: boolean;
+  c_possuiPrograma: boolean;
+  d_naoConhecePrograma: boolean;
+};
+
 
 export const FormStepA2 = () => {
   const params = useParams<RoomParams>()
@@ -16,11 +25,15 @@ export const FormStepA2 = () => {
   const navigate = useNavigate();
   const { state, dispatch } = useFormPage();
 
-  const [questionOne, setQuestionOne] = useState('');
   const [questionTwo, setQuestionTwo] = useState('');
   const [questionThree, setQuestionThree] = useState('');
   const [questionFour, setQuestionFour] = useState('');
-  const [questionFive, setQuestionFive] = useState('');
+  const [questionFive, setQuestionFive] = useState<ReasonForGivingUpChange>({
+    a_recursoFinanceiroInsuficiente: false,
+    b_naoHaInteresseMunicipio: false,
+    c_possuiPrograma: false,
+    d_naoConhecePrograma: false,
+  });
   const [questionSix, setQuestionSix] = useState('');
   const [questionSeven, setQuestionSeven] = useState('');
   
@@ -33,15 +46,14 @@ export const FormStepA2 = () => {
 
     const question = {
       A_Elegiveis_ao_PCF: {
-        questao07: questionOne,
-        questao08:
+        questao07:
         {
           questionTwo,
           questionThree,
           questionFour,
         },
-        questao09: questionFive,
-        questao10:
+        questao08: questionFive,
+        questao09:
         {
           questionSix,
           questionSeven,
@@ -56,10 +68,6 @@ export const FormStepA2 = () => {
    navigate(`/`)
   };
 
-  const handleYouKnowProgramPCFChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setQuestionOne(event.target.value);
-  };
-
   const handleTargetAudiencePCFChange =(event:ChangeEvent<HTMLInputElement>) => {
     setQuestionTwo(event.target.value);
   };
@@ -70,10 +78,6 @@ export const FormStepA2 = () => {
 
   const handleTargetAudiencePCFTextValueChange =(event:ChangeEvent<HTMLInputElement>) => {
     setQuestionFour(event.target.value);
-  };
-
-  const handleReasonNotIncludedChange =(event:ChangeEvent<HTMLInputElement>) => {
-    setQuestionFive(event.target.value);
   };
 
   const handleExplainTheReasonChange =(event:ChangeEvent<HTMLInputElement>) => {
@@ -102,49 +106,6 @@ export const FormStepA2 = () => {
       </SC.Container>
 
       <form onSubmit={handleEligibleMunicipalities}>
-
-        <SC.ButtonTypeRadio>
-          <div className="formQuestion">
-            <p className="textFormRadioButton">
-             O seu município conhece o Programa Criança Feliz?
-            </p>
-            <div id="containerOption">
-              <div id="containerOptionSixOption">
-
-                <div id="containerInputLabelRadioButton">
-                  <input
-                    id="youKnowProgramPCFYes"
-                    name="youKnowProgramPCF"
-                    type="radio"
-                    value="Sim"
-                    onChange={handleYouKnowProgramPCFChange}
-                  />
-                  <label
-                    className="containerTextLabel"
-                    htmlFor="youKnowProgramPCFYes"
-                  >Sim
-                  </label>
-                </div>
-
-                <div id="containerInputLabelRadioButton">
-                  <input
-                    id="youKnowProgramPCFNo"
-                    name="youKnowProgramPCF"
-                    type="radio"
-                    value="Não"
-                    onChange={handleYouKnowProgramPCFChange}
-                  />
-                  <label
-                    className="containerTextLabel"
-                    htmlFor="youKnowProgramPCFNo"
-                  >Não
-                  </label>
-                </div>
-
-              </div>
-            </div>
-          </div>
-        </SC.ButtonTypeRadio>
 
         <SC.ButtonTypeRadioText>
           <div className="formQuestion">
@@ -225,78 +186,90 @@ export const FormStepA2 = () => {
           </div>
         </SC.ButtonTypeRadioText>
 
-        <SC.ButtonTypeRadio>
+        <SC.ButtonTypeCheckbox>
           <div className="formQuestion">
             <p className="textFormRadioButton">
             Qual o motivo do seu município não ter aderido ao Programa Criança Feliz?
             </p>
             <div id="containerOption">
-              <div id="containerOptionSixOption">
+              <div>
 
                 <div id="containerInputLabelRadioButton">
                   <input
-                    id="reasonNotIncludedNotInterest"
-                    name="reasonNotIncluded"
-                    type="radio"
-                    value="nao_houve_interesse_do_municipio"
-                    onChange={handleReasonNotIncludedChange}
+                    id="recursoFinanceiroInsuficiente"
+                    name="a_recursoFinanceiroInsuficiente"
+                    type="checkbox"
+                    checked={questionFive.a_recursoFinanceiroInsuficiente}
+                    onChange={(event) => setQuestionFive({
+                      ...questionFive,
+                      a_recursoFinanceiroInsuficiente: !!event.currentTarget?.checked
+                    })}
                   />
                   <label
                     className="containerTextLabel"
-                    htmlFor="reasonNotIncludedNotInterest"
-                  >Não houve interesse do município 
+                    htmlFor="recursoFinanceiroInsuficiente"
+                  >A transferência de recurso financeiro é insuficiente para o município manter o programa
                   </label>
                 </div>
 
                 <div id="containerInputLabelRadioButton">
                   <input
-                    id="reasonNotIncludedAlreadyHave"
-                    name="reasonNotIncluded"
-                    type="radio"
-                    value="ja_possui_programa_semelhante"
-                    onChange={handleReasonNotIncludedChange}
+                    id="naoHaInteresseMunicipio"
+                    name="b_naoHaInteresseMunicipio"
+                    type="checkbox"
+                    checked={questionFive.b_naoHaInteresseMunicipio}
+                    onChange={(event) => setQuestionFive({
+                      ...questionFive,
+                      b_naoHaInteresseMunicipio: !!event.currentTarget?.checked
+                    })}
                   />
                   <label
                     className="containerTextLabel"
-                    htmlFor="reasonNotIncludedAlreadyHave"
+                    htmlFor="naoHaInteresseMunicipio"
+                  >Não houve interesse do município em manter o programa
+                  </label>
+                </div>
+
+                <div id="containerInputLabelRadioButton">
+                  <input
+                    id="possuiPrograma"
+                    name="c_possuiPrograma"
+                    type="checkbox"
+                    checked={questionFive.c_possuiPrograma}
+                    onChange={(event) => setQuestionFive({
+                      ...questionFive,
+                      c_possuiPrograma: !!event.currentTarget?.checked
+                    })}
+                  />
+                  <label
+                    className="containerTextLabel"
+                    htmlFor="possuiPrograma"
                   >O município possui um programa semelhante ao Criança Feliz
                   </label>
                 </div>
 
                 <div id="containerInputLabelRadioButton">
                   <input
-                    id="reasonNotIncludedDontKnowThePCF"
-                    name="reasonNotIncluded"
-                    type="radio"
-                    value="nao_conhece_o_PCF"
-                    onChange={handleReasonNotIncludedChange}
+                    id="naoConhecePrograma"
+                    name="d_naoConhecePrograma"
+                    type="checkbox"
+                    checked={questionFive.d_naoConhecePrograma}
+                    onChange={(event) => setQuestionFive({
+                      ...questionFive,
+                      d_naoConhecePrograma: !!event.currentTarget?.checked
+                    })}
                   />
                   <label
                     className="containerTextLabel"
-                    htmlFor="reasonNotIncludedDontKnowThePCF"
+                    htmlFor="naoConhecePrograma"
                   >O município não conhece o Programa Criança Feliz
-                  </label>
-                </div>
-
-                <div id="containerInputLabelRadioButton">
-                  <input
-                    id="reasonNotIncludedInsufficientResource"
-                    name="reasonNotIncluded"
-                    type="radio"
-                    value="recurso_financeiro_insuficiente"
-                    onChange={handleReasonNotIncludedChange}
-                  />
-                  <label
-                    className="containerTextLabel"
-                    htmlFor="reasonNotIncludedInsufficientResource"
-                  >A transferência de recurso financeiro é insuficiente para o município manter o programa
                   </label>
                 </div>
 
               </div>
             </div>
           </div>
-        </SC.ButtonTypeRadio>
+        </SC.ButtonTypeCheckbox>
 
         <SC.ButtonTypeRadioText>
           <div className="formQuestion">
@@ -373,6 +346,7 @@ export const FormStepA2 = () => {
             type="submit"
             >Finalizar
           </button>
+          <RoomCode/>
         </SC.AllButtons>
       </form>
     </ThemeA1>

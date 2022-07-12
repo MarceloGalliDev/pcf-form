@@ -5,6 +5,7 @@ import { useFormPage, FormActions } from "../../../context/FormContext";
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { database } from "../../../services/firebase";
 import { ref, push, set } from "firebase/database";
+import { RoomCode } from "../../../components/RoomCode";
 
 type RoomParams = {
   id: string;
@@ -38,10 +39,10 @@ export const FormStep7 = () => {
 
     const question = {
       G_Publico_Atendido_PCF: {
-        questao44: questionOne,
-        questao45: questionTwo,
-        questao46: questionThree,
-        questao47: questionFour,
+        questao43: questionOne,
+        questao44: questionTwo,
+        questao45: questionThree,
+        questao46: questionFour,
       }
     };
 
@@ -89,13 +90,14 @@ export const FormStep7 = () => {
           <div className="formQuestion">
             <p>Indique o número de pessoas atendidas pelo Programa Criança Feliz em seu município no mês de referência mencionado anteriormente:</p>
             <div className="containerBgLabel">
-              <label className="containerTextLabel" htmlFor="gravidaInput">
-                Gestantes:
+              <label
+                className="containerTextLabel"
+                htmlFor="gravidaInput"
+              >Gestantes:
                 <input
                   id="gravidaInput"
                   name="pregnant"
                   type="text"
-                  autoFocus
                   value={questionOne}
                   onChange={handlePregnantChange}
                   placeholder="Quantidade"
@@ -103,8 +105,10 @@ export const FormStep7 = () => {
               </label>
             </div>
             <div className="containerBgLabel">
-              <label className="containerTextLabel" htmlFor="crianca_0_36">
-                Crianças de 0-36 meses:
+              <label
+                className="containerTextLabel"
+                htmlFor="crianca_0_36"
+              >Crianças de 0-36 meses:
                 <input
                   id="crianca_0_36"
                   name="childrenAged_0_36"
@@ -143,14 +147,16 @@ export const FormStep7 = () => {
             </div>
           </div>
         </SC.ButtonTypeTextV2>
+
         <SC.AllButtons>
-            <Link className="buttonAll" to="/:id/formstep8">Voltar</Link>
-            <button
-              className="buttonAll"
-              type="submit"
-              >Próximo
-            </button>
-          </SC.AllButtons>
+          <Link className="buttonAll" to="/:id/formstep8">Voltar</Link>
+          <button
+            className="buttonAll"
+            type="submit"
+            >Próximo
+          </button>
+          <RoomCode/>
+        </SC.AllButtons>
       </form>
     </Theme>
   )

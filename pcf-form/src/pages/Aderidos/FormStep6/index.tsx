@@ -8,6 +8,7 @@ import { ref, push, set } from "firebase/database";
 import { InputArea } from "../../../components/Questions/QuestionOutrosProfissionais/components/InputArea";
 import { TableArea } from "../../../components/Questions/QuestionOutrosProfissionais/components/TableArea";
 import { Item } from "../../../components/Questions/QuestionOutrosProfissionais/types/Item";
+import { RoomCode } from "../../../components/RoomCode";
 
 
 type RoomParams = {
@@ -43,8 +44,8 @@ export const FormStep6 = () => {
 
     const question = {
       F_Outros_Profissionais: {
-        questao42: filteredList,
-        questao43: questionTwo,
+        questao41: filteredList,
+        questao42: questionTwo,
       }
     };
 
@@ -103,8 +104,9 @@ export const FormStep6 = () => {
 
             <SC.ButtonTypeText>
               <div className="formQuestion">
-                <label htmlFor="observacaoText">
-                  Observações:
+                <label
+                  htmlFor="observacaoText"
+                >Observações:
                   <input
                     id="observacaoText"
                     name="observation"
@@ -127,6 +129,7 @@ export const FormStep6 = () => {
             type="submit"
           >Próximo
           </button>
+          <RoomCode/>
         </SC.AllButtons>
       </form>
 

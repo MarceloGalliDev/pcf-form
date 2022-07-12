@@ -14,6 +14,7 @@ import { InputAreaOutrosCustos1 } from "../../../components/Questions/QuestionOu
 import { TableAreaOutrosCustos1 } from "../../../components/Questions/QuestionOutrosCustos1/components/TableArea";
 import { InputAreaOutrosCustos2 } from "../../../components/Questions/QuestionOutrosCustos2/components/InputArea";
 import { TableAreaOutrosCustos2 } from "../../../components/Questions/QuestionOutrosCustos2/components/TableArea";
+import { RoomCode } from "../../../components/RoomCode";
 
 type RoomParams = {
   id: string;
@@ -198,7 +199,7 @@ export const FormStep10 = () => {
                       id="visitorPaysTransportYes"
                       name="visitorPaysTransport"
                       type="radio"
-                      value="sim"
+                      value="Sim"
                       onChange={handleVisitorPaysTransportChange}
                     />
                     <label
@@ -228,7 +229,7 @@ export const FormStep10 = () => {
                       id="visitorPaysTransportSometimes"
                       name="visitorPaysTransport"
                       type="radio"
-                      value="As vezes"
+                      value="As_vezes"
                       onChange={handleVisitorPaysTransportChange}
                     />
                     <label
@@ -515,7 +516,7 @@ export const FormStep10 = () => {
                         id="monthlyRecordYes"
                         name="monthlyRecord"
                         type="radio"
-                        value="sim"
+                        value="Sim"
                         onChange={handleMonthlyRecordChange}
                       />
                       <label
@@ -530,7 +531,7 @@ export const FormStep10 = () => {
                         id="monthlyRecordNo"
                         name="monthlyRecord"
                         type="radio"
-                        value="nao"
+                        value="Não"
                         onChange={handleMonthlyRecordChange}
                       />
                       <label
@@ -549,13 +550,14 @@ export const FormStep10 = () => {
         </SC.SubSection>
 
         <SC.AllButtons>
-            <Link className="buttonAll" to="/:id/formstep9">Voltar</Link>
-            <button
-              className="buttonAll"
-              type="submit"
-              >Finalizar
-            </button>
-          </SC.AllButtons>
+          <Link className="buttonAll" to="/:id/formstep9">Voltar</Link>
+          <button
+            className="buttonAll"
+            type="submit"
+            >Finalizar
+          </button>
+          <RoomCode/>
+        </SC.AllButtons>
       </form>
     </Theme>
   )

@@ -5,6 +5,7 @@ import { useFormPage, FormActions } from "../../../context/FormContext";
 import { ChangeEvent, FormEvent, useCallback, useEffect, useState } from "react";
 import { database } from "../../../services/firebase";
 import { ref, push, set } from "firebase/database";
+import { RoomCode } from "../../../components/RoomCode";
 
 type RoomParams = {
   id: string;
@@ -120,17 +121,17 @@ export const FormStep5 = () => {
 
     const question = {
       E_Visitadores_do_PCF: {
-        questao29: questionOne,
-        questao30: questionTwo,
-        questao31: questionThree,
-        questao32: questionFour,
-        questao33: questionFive,
-        questao34: questionSix,
-        questao35: questionSeven,
-        questao36: questionEight,
-        questao37: questionNine,
-        questao38: questionTen,
-        questao39: questionEleven,
+        questao30: questionOne,
+        questao31: questionTwo,
+        questao32: questionThree,
+        questao33: questionFour,
+        questao34: questionFive,
+        questao35: questionSix,
+        questao36: questionSeven,
+        questao37: questionEight,
+        questao38: questionNine,
+        questao39: questionTen,
+        questao40: questionEleven,
       }
     };
 
@@ -257,8 +258,9 @@ export const FormStep5 = () => {
 
             <SC.ButtonTypeRadio>
               <div className="formQuestion">
-                <p className="textFormRadioButton">
-                  Quantos Visitadores existem na equipe do PCF no seu município?
+                <p
+                  className="textFormRadioButton"
+                >Quantos Visitadores existem na equipe do PCF no seu município?
                 </p>
                 <div id="containerOption">
                   <div id="containerOptionSixOption">
@@ -360,8 +362,9 @@ export const FormStep5 = () => {
 
             <SC.ButtonTypeText>
               <div className="formQuestion">
-                <label htmlFor="avarageRemunerationSupervisors">
-                  Qual a remuneração média em R$ (reais) dos Visitadores?
+                <label
+                  htmlFor="avarageRemunerationSupervisors"
+                >Qual a remuneração média em R$ (reais) dos Visitadores?
                 <input
                   id="avarageRemunerationSupervisors"
                   name="remuneracaoMediaVisitadores"
@@ -376,8 +379,9 @@ export const FormStep5 = () => {
 
             <SC.ButtonTypeCheckbox>
               <div className="formQuestion">
-                <p className="textFormRadioButton">
-                  Qual a carga horária dos Visitadores?
+                <p
+                  className="textFormRadioButton"
+                >Qual a carga horária dos Visitadores?
                 </p>
                 <div id="containerOption">
                   <div id="containerOptionSixOption">
@@ -468,13 +472,16 @@ export const FormStep5 = () => {
 
             <SC.ButtonTypeTextV3>
               <div className="formQuestion">
-                <label htmlFor="containerTextLabelCheckbox">
-                  Quantos Visitadores da equipe do PCF tem em seu município:
+                <label
+                  htmlFor="containerTextLabelCheckbox"
+                >Quantos Visitadores da equipe do PCF tem em seu município:
 
                   <div id="containerTextLabelCheckbox">
                     <label
                       className="labelForContainerTextLabelCheckbox"
-                      htmlFor="highSchoolVisitor">Ensino médio:</label>
+                      htmlFor="highSchoolVisitor"
+                    >Ensino médio:
+                    </label>
                     <input
                       className="inputForContainerTextLabelCheckbox"
                       id="highSchoolVisitor"
@@ -489,7 +496,9 @@ export const FormStep5 = () => {
                   <div id="containerTextLabelCheckbox">
                     <label
                       className="labelForContainerTextLabelCheckbox"
-                      htmlFor="visitadoresSuperiorIncompleto">Superior Incompleto:</label>
+                      htmlFor="visitadoresSuperiorIncompleto"
+                    >Superior Incompleto:
+                    </label>
                     <input
                       className="inputForContainerTextLabelCheckbox"
                       id="visitadoresSuperiorIncompleto"
@@ -504,7 +513,9 @@ export const FormStep5 = () => {
                   <div id="containerTextLabelCheckbox">
                     <label
                       className="labelForContainerTextLabelCheckbox"
-                      htmlFor="visitadoresGraduacaoCompleto">Superior Completo:</label>
+                      htmlFor="visitadoresGraduacaoCompleto"
+                    >Superior Completo:
+                    </label>
                     <input
                       className="inputForContainerTextLabelCheckbox"
                       id="visitadoresGraduacaoCompleto"
@@ -519,7 +530,9 @@ export const FormStep5 = () => {
                   <div id="containerTextLabelCheckbox">
                     <label
                       className="labelForContainerTextLabelCheckbox"
-                      htmlFor="specialistVisitor">Especialização:</label>
+                      htmlFor="specialistVisitor"
+                    >Especialização:
+                    </label>
                     <input
                       className="inputForContainerTextLabelCheckbox"
                       id="specialistVisitor"
@@ -534,7 +547,9 @@ export const FormStep5 = () => {
                   <div id="containerTextLabelCheckbox">
                     <label
                       className="labelForContainerTextLabelCheckbox"
-                      htmlFor="mestradoVisitador">Mestrado:</label>
+                      htmlFor="mestradoVisitador"
+                    >Mestrado:
+                    </label>
                     <input
                       className="inputForContainerTextLabelCheckbox"
                       id="mestradoVisitador"
@@ -569,8 +584,9 @@ export const FormStep5 = () => {
 
             <SC.ButtonTypeTextV3>
               <div className="formQuestion">
-                <label htmlFor="containerLabelCheckboxBorder">
-                  Quantos Visitadores da equipe do PCF são contratados nas seguintes categorias em seu município:
+                <label
+                  htmlFor="containerLabelCheckboxBorder"
+                >Quantos Visitadores da equipe do PCF são contratados nas seguintes categorias em seu município:
 
                   <div id="containerLabelCheckboxBorder">
                     <div id="containerTextLabelCheckbox">
@@ -592,7 +608,9 @@ export const FormStep5 = () => {
                     <div id="containerTextLabelCheckbox">
                       <label
                         className="labelForContainerTextLabelCheckbox"
-                        htmlFor="mediaRemuneracaoEfetivoVisitadores">Média Remuneração:</label>
+                        htmlFor="mediaRemuneracaoEfetivoVisitadores"
+                      >Média Remuneração:
+                      </label>
                       <input
                         className="inputForContainerTextLabelCheckbox"
                         id="mediaRemuneracaoEfetivoVisitadores"
@@ -625,7 +643,9 @@ export const FormStep5 = () => {
                     <div id="containerTextLabelCheckbox">
                       <label
                         className="labelForContainerTextLabelCheckbox"
-                        htmlFor="mediaRemuneracaoComissonadoVisitador">Média Remuneração:</label>
+                        htmlFor="mediaRemuneracaoComissonadoVisitador"
+                      >Média Remuneração:
+                      </label>
                       <input
                         className="inputForContainerTextLabelCheckbox"
                         id="b_mediaRemuneracaoComissonadoVisitador"
@@ -658,7 +678,9 @@ export const FormStep5 = () => {
                     <div id="containerTextLabelCheckbox">
                       <label
                         className="labelForContainerTextLabelCheckbox"
-                        htmlFor="mediaRemuneracaoTemporarioVisitador">Média Remuneração:</label>
+                        htmlFor="mediaRemuneracaoTemporarioVisitador"
+                      >Média Remuneração:
+                      </label>
                       <input
                         className="inputForContainerTextLabelCheckbox"
                         id="mediaRemuneracaoTemporarioVisitador"
@@ -691,7 +713,9 @@ export const FormStep5 = () => {
                     <div id="containerTextLabelCheckbox">
                       <label
                         className="labelForContainerTextLabelCheckbox"
-                        htmlFor="mediaRemuneracaoBolsistaVisitador">Média Remuneração:</label>
+                        htmlFor="mediaRemuneracaoBolsistaVisitador"
+                      >Média Remuneração:
+                      </label>
                       <input
                         className="inputForContainerTextLabelCheckbox"
                         id="mediaRemuneracaoBolsistaVisitador"
@@ -724,7 +748,9 @@ export const FormStep5 = () => {
                     <div id="containerTextLabelCheckbox">
                       <label
                         className="labelForContainerTextLabelCheckbox"
-                        htmlFor="mediaRemuneracaoEstagiarioNivelSuperior">Média Remuneração:</label>
+                        htmlFor="mediaRemuneracaoEstagiarioNivelSuperior"
+                      >Média Remuneração:
+                      </label>
                       <input
                         className="inputForContainerTextLabelCheckbox"
                         id="mediaRemuneracaoEstagiarioNivelSuperior"
@@ -757,7 +783,9 @@ export const FormStep5 = () => {
                     <div id="containerTextLabelCheckbox">
                       <label
                         className="labelForContainerTextLabelCheckbox"
-                        htmlFor="mediaRemuneracaoAutonomoVisitador">Média Remuneração:</label>
+                        htmlFor="mediaRemuneracaoAutonomoVisitador"
+                      >Média Remuneração:
+                      </label>
                       <input
                         className="inputForContainerTextLabelCheckbox"
                         id="mediaRemuneracaoAutonomoVisitador"
@@ -790,7 +818,9 @@ export const FormStep5 = () => {
                     <div id="containerTextLabelCheckbox">
                       <label
                         className="labelForContainerTextLabelCheckbox"
-                        htmlFor="mediaRemuneracaoOutrosCargosVisitador">Média Remuneração:</label>
+                        htmlFor="mediaRemuneracaoOutrosCargosVisitador"
+                      >Média Remuneração:
+                      </label>
                       <input
                         className="inputForContainerTextLabelCheckbox"
                         id="mediaRemuneracaoOutrosCargosVisitador"
@@ -817,6 +847,7 @@ export const FormStep5 = () => {
             type="submit"
             >Próximo
           </button>
+          <RoomCode/>
         </SC.AllButtons>
       </form>
     </Theme>

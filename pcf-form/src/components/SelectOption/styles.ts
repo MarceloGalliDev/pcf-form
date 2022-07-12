@@ -27,5 +27,5 @@ export const Title = styled.div`
 
 export const Description = styled.div`
   font-size: 14px;
-  color: #591C21;
+  color: #2D7DB0;
 `;
