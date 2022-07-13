@@ -14,7 +14,6 @@ import { InputAreaOutrosCustos1 } from "../../../components/Questions/QuestionOu
 import { TableAreaOutrosCustos1 } from "../../../components/Questions/QuestionOutrosCustos1/components/TableArea";
 import { InputAreaOutrosCustos2 } from "../../../components/Questions/QuestionOutrosCustos2/components/InputArea";
 import { TableAreaOutrosCustos2 } from "../../../components/Questions/QuestionOutrosCustos2/components/TableArea";
-import { RoomCode } from "../../../components/RoomCode";
 
 type RoomParams = {
   id: string;
@@ -70,7 +69,8 @@ export const FormStep10 = () => {
     setList(newList)
   };
   function removerDaListaOthersCosts(index: number) {
-    setFilteredList((previous) => previous.filter((item, indexPrevious) => index !== indexPrevious))
+    setList((previous) => previous.filter((item, indexPrevious) => index !== indexPrevious))
+    return setList
   };
 
   function handleAddItemOthersCosts1(item1: Item1) {
@@ -79,7 +79,8 @@ export const FormStep10 = () => {
     setList1(newList1)
   };
   function removerDaListaOthersCosts1(index1: number) {
-    setFilteredList1((previous1) => previous1.filter((item1, indexPrevious1) => index1 !== indexPrevious1))
+    setList1((previous1) => previous1.filter((item1, indexPrevious1) => index1 !== indexPrevious1))
+    return setList1
   };
 
   function handleAddItemOthersCosts2(item2: Item2) {
@@ -88,7 +89,8 @@ export const FormStep10 = () => {
     setList2(newList2)
   };
   function removerDaListaOthersCosts2(index2: number) {
-    setFilteredList2((previous2) => previous2.filter((item2, indexPrevious2) => index2 !== indexPrevious2))
+    setList2((previous2) => previous2.filter((item2, indexPrevious2) => index2 !== indexPrevious2))
+    return setList2
   };
 
   async function handleSendOtherCosts(event: FormEvent) {
@@ -163,315 +165,315 @@ export const FormStep10 = () => {
         <hr />
       </SC.Container>
 
-      <form onSubmit={handleSendOtherCosts}>
-        <SC.SubSection>
-          <div className="bgSubSection">
-            <p>Subseção outros recursos</p>
-          </div>
+      <SC.SubSection>
+        <div className="bgSubSection">
+          <p>Subseção outros recursos</p>
+        </div>
 
-          <div className="formQuestionV2">
-            <div className="formQuestionV3">
-              <SC.ContainerV2>
-                <SC.Body>
+        <div className="formQuestionV2">
+          <SC.ContainerV2>
+            <SC.Body>
 
-                  <InputArea onAdd={handleAddItemOthersCosts} />
+              <InputArea onAdd={handleAddItemOthersCosts} />
 
-                  <TableArea
-                    list={filteredList}
-                    remover={removerDaListaOthersCosts}
-                  />
+              <TableArea
+                list={filteredList}
+                remover={removerDaListaOthersCosts}
+              />
 
-                </SC.Body>
-              </SC.ContainerV2>
-            </div>
-          </div>
+            </SC.Body>
+          </SC.ContainerV2>
+        </div>
+      </SC.SubSection>
+
+      <SC.SubSection>
+        <div className="bgSubSection">
+          <p>Subseção outros custos</p>
+        </div>
+        <div className="formQuestionV2">
 
           <SC.ButtonTypeRadioV2>
-            <div className="formQuestion">
-              <p className="textFormRadioButton">
-                O visitador paga pelo seu próprio transporte?
-              </p>
-              <div id="containerOption">
-                <div id="containerOptionSixOption">
+            <form onSubmit={handleSendOtherCosts}>
+              <div className="formQuestion">
+                <p className="textFormRadioButton">
+                  O visitador paga pelo seu próprio transporte?
+                </p>
+                <div id="containerOption">
+                  <div id="containerOptionSixOption">
 
-                  <div id="containerInputLabelRadioButton">
-                    <input
-                      id="visitorPaysTransportYes"
-                      name="visitorPaysTransport"
-                      type="radio"
-                      value="Sim"
-                      onChange={handleVisitorPaysTransportChange}
-                    />
-                    <label
-                      className="containerTextLabel"
-                      htmlFor="visitorPaysTransportYes"
-                    >Sim
-                    </label>
+                    <div id="containerInputLabelRadioButton">
+                      <input
+                        id="visitorPaysTransportYes"
+                        name="visitorPaysTransport"
+                        type="radio"
+                        value="Sim"
+                        onChange={handleVisitorPaysTransportChange}
+                      />
+                      <label
+                        className="containerTextLabel"
+                        htmlFor="visitorPaysTransportYes"
+                      >Sim
+                      </label>
+                    </div>
+
+                    <div id="containerInputLabelRadioButton">
+                      <input
+                        id="visitorPaysTransportNo"
+                        name="visitorPaysTransport"
+                        type="radio"
+                        value="Não"
+                        onChange={handleVisitorPaysTransportChange}
+                      />
+                      <label
+                        className="containerTextLabel"
+                        htmlFor="visitorPaysTransportNo"
+                      >Não
+                      </label>
+                    </div>
+
+                    <div id="containerInputLabelRadioButton">
+                      <input
+                        id="visitorPaysTransportSometimes"
+                        name="visitorPaysTransport"
+                        type="radio"
+                        value="As_vezes"
+                        onChange={handleVisitorPaysTransportChange}
+                      />
+                      <label
+                        className="containerTextLabel"
+                        htmlFor="visitorPaysTransportSometimes"
+                      >As vezes
+                      </label>
+                    </div>
+
                   </div>
-
-                  <div id="containerInputLabelRadioButton">
-                    <input
-                      id="visitorPaysTransportNo"
-                      name="visitorPaysTransport"
-                      type="radio"
-                      value="Não"
-                      onChange={handleVisitorPaysTransportChange}
-                    />
-                    <label
-                      className="containerTextLabel"
-                      htmlFor="visitorPaysTransportNo"
-                    >Não
-                    </label>
-                  </div>
-
-                  <div id="containerInputLabelRadioButton">
-                    <input
-                      id="visitorPaysTransportSometimes"
-                      name="visitorPaysTransport"
-                      type="radio"
-                      value="As_vezes"
-                      onChange={handleVisitorPaysTransportChange}
-                    />
-                    <label
-                      className="containerTextLabel"
-                      htmlFor="visitorPaysTransportSometimes"
-                    >As vezes
-                    </label>
-                  </div>
-
                 </div>
               </div>
-            </div>
+            </form>
           </SC.ButtonTypeRadioV2>
 
-        </SC.SubSection>
+          <SC.ButtonTypeCheckbox>
+            <form onSubmit={handleSendOtherCosts}>
+              <div className="formQuestion">
+                <p className="textFormRadioButton">
+                  Qual o transporte utilizado para as visitas?
+                </p>
 
-        <SC.ButtonTypeCheckbox>
-          <div className="formQuestion">
-            <p className="textFormRadioButton">
-              Qual o transporte utilizado para as visitas?
-            </p>
+                <div id="containerOption">
+                  <div id="containerOptionSixOption">
 
-            <div id="containerOption">
-              <div id="containerOptionSixOption">
+                    <div id="containerInputLabelRadioButton">
+                      <input
+                        id="a_veiculoProprioSupervisorComAjuda"
+                        name="a_veiculoProprioSupervisorComAjuda"
+                        type="checkbox"
+                        checked={questionThree.a_veiculoProprioSupervisorComAjuda}
+                        onChange={(event) => setQuestionThree({
+                          ...questionThree,
+                          a_veiculoProprioSupervisorComAjuda: !!event.currentTarget?.checked
+                        })}
+                      />
+                      <label
+                        className="containerTextLabel"
+                        htmlFor="a_veiculoProprioSupervisorComAjuda"
+                      >Veículo próprio do Supervisor (com ajuda de custo)
+                      </label>
+                    </div>
 
-                <div id="containerInputLabelRadioButton">
-                  <input
-                    id="a_veiculoProprioSupervisorComAjuda"
-                    name="a_veiculoProprioSupervisorComAjuda"
-                    type="checkbox"
-                    checked={questionThree.a_veiculoProprioSupervisorComAjuda}
-                    onChange={(event) => setQuestionThree({
-                      ...questionThree,
-                      a_veiculoProprioSupervisorComAjuda: !!event.currentTarget?.checked
-                    })}
-                  />
-                  <label
-                    className="containerTextLabel"
-                    htmlFor="a_veiculoProprioSupervisorComAjuda"
-                  >Veículo próprio do Supervisor (com ajuda de custo)
-                  </label>
+                    <div id="containerInputLabelRadioButton">
+                      <input
+                        id="b_veiculoProprioSupervisorSemAjuda"
+                        name="b_veiculoProprioSupervisorSemAjuda"
+                        type="checkbox"
+                        checked={questionThree.b_veiculoProprioSupervisorSemAjuda}
+                        onChange={(event) => setQuestionThree({
+                          ...questionThree,
+                          b_veiculoProprioSupervisorSemAjuda: !!event.currentTarget?.checked
+                        })}
+                      />
+                      <label
+                        className="containerTextLabel"
+                        htmlFor="b_veiculoProprioSupervisorSemAjuda"
+                      >Veículo próprio do Supervisor (sem ajuda de custo)
+                      </label>
+                    </div>
+
+                    <div id="containerInputLabelRadioButton">
+                      <input
+                        id="c_veiculoProprioVisitadorComAjuda"
+                        name="c_veiculoProprioVisitadorComAjuda"
+                        type="checkbox"
+                        checked={questionThree.c_veiculoProprioVisitadorComAjuda}
+                        onChange={(event) => setQuestionThree({
+                          ...questionThree,
+                          c_veiculoProprioVisitadorComAjuda: !!event.currentTarget?.checked
+                        })}
+                      />
+                      <label
+                        className="containerTextLabel"
+                        htmlFor="c_veiculoProprioVisitadorComAjuda"
+                      >Veículo próprio do Visitador (com ajuda de custo)
+                      </label>
+                    </div>
+
+                    <div id="containerInputLabelRadioButton">
+                      <input
+                        id="d_veiculoProprioVisitadorSemAjuda"
+                        name="d_veiculoProprioVisitadorSemAjuda"
+                        type="checkbox"
+                        checked={questionThree.d_veiculoProprioVisitadorSemAjuda}
+                        onChange={(event) => setQuestionThree({
+                          ...questionThree,
+                          d_veiculoProprioVisitadorSemAjuda: !!event.currentTarget?.checked
+                        })}
+                      />
+                      <label
+                        className="containerTextLabel"
+                        htmlFor="d_veiculoProprioVisitadorSemAjuda"
+                      >Veículo próprio do Visitador (sem ajuda de custo)
+                      </label>
+                    </div>
+
+                    <div id="containerInputLabelRadioButton">
+                      <input
+                        id="e_veiculoProprioPCF"
+                        name="e_veiculoProprioPCF"
+                        type="checkbox"
+                        checked={questionThree.e_veiculoProprioPCF}
+                        onChange={(event) => setQuestionThree({
+                          ...questionThree,
+                          e_veiculoProprioPCF: !!event.currentTarget?.checked
+                        })}
+                      />
+                      <label
+                        className="containerTextLabel"
+                        htmlFor="lastMonthSpentJaneiro"
+                      >Veículo próprio do PCF
+                      </label>
+                    </div>
+
+                    <div id="containerInputLabelRadioButton">
+                      <input
+                        id="f_veiculoAlugadoPCF"
+                        name="f_veiculoAlugadoPCF"
+                        type="checkbox"
+                        checked={questionThree.f_veiculoAlugadoPCF}
+                        onChange={(event) => setQuestionThree({
+                          ...questionThree,
+                          f_veiculoAlugadoPCF: !!event.currentTarget?.checked
+                        })}
+                      />
+                      <label
+                        className="containerTextLabel"
+                        htmlFor="f_veiculoAlugadoPCF"
+                      >Veículo alugado para o PCF
+                      </label>
+                    </div>
+
+                    <div id="containerInputLabelRadioButton">
+                      <input
+                        id="g_veiculoMunicipio"
+                        name="g_veiculoMunicipio"
+                        type="checkbox"
+                        checked={questionThree.g_veiculoMunicipio}
+                        onChange={(event) => setQuestionThree({
+                          ...questionThree,
+                          g_veiculoMunicipio: !!event.currentTarget?.checked
+                        })}
+                      />
+                      <label
+                        className="containerTextLabel"
+                        htmlFor="g_veiculoMunicipio"
+                      >Veículo do município
+                      </label>
+                    </div>
+
+                    <div id="containerInputLabelRadioButton">
+                      <input
+                        id="h_veiculoContratado"
+                        name="h_veiculoContratado"
+                        type="checkbox"
+                        checked={questionThree.h_veiculoContratado}
+                        onChange={(event) => setQuestionThree({
+                          ...questionThree,
+                          h_veiculoContratado: !!event.currentTarget?.checked
+                        })}
+                      />
+                      <label
+                        className="containerTextLabel"
+                        htmlFor="h_veiculoContratado"
+                      >Moto contratada/alugada
+                      </label>
+                    </div>
+
+                    <div id="containerInputLabelRadioButton">
+                      <input
+                        id="i_veiculoUberTaxi"
+                        name="i_veiculoUberTaxi"
+                        type="checkbox"
+                        checked={questionThree.i_veiculoUberTaxi}
+                        onChange={(event) => setQuestionThree({
+                          ...questionThree,
+                          i_veiculoUberTaxi: !!event.currentTarget?.checked
+                        })}
+                      />
+                      <label
+                        className="containerTextLabel"
+                        htmlFor="i_veiculoUberTaxi"
+                      >Taxi/Uber contratado pelo município
+                      </label>
+                    </div>
+
+                    <div id="containerInputLabelRadioButton">
+                      <input
+                        id="j_veiculoCaminhandoBicicleta"
+                        name="j_veiculoCaminhandoBicicleta"
+                        type="checkbox"
+                        checked={questionThree.j_veiculoCaminhandoBicicleta}
+                        onChange={(event) => setQuestionThree({
+                          ...questionThree,
+                          j_veiculoCaminhandoBicicleta: !!event.currentTarget?.checked
+                        })}
+                      />
+                      <label
+                        className="containerTextLabel"
+                        htmlFor="j_veiculoCaminhandoBicicleta"
+                      >Caminhando/bicicleta
+                      </label>
+                    </div>
+
+                    <div id="containerInputLabelRadioButton">
+                      <input
+                        id="k_veiculoOutro"
+                        name="k_veiculoOutro"
+                        type="checkbox"
+                        checked={questionThree.k_veiculoOutro}
+                        onChange={(event) => setQuestionThree({
+                          ...questionThree,
+                          k_veiculoOutro: !!event.currentTarget?.checked
+                        })}
+                      />
+                      <label
+                        className="containerTextLabel"
+                        htmlFor="k_veiculoOutro"
+                      >Outros
+                      </label>
+                      <input
+                        id="l_veiculoOutroText"
+                        className="inputPlaceholderOther"
+                        name="l_veiculoOutroText"
+                        type="text"
+                        value={questionThree.l_veiculoOutroText}
+                        onChange={handleUsedTransporteChange}
+                        placeholder="Escreva aqui"
+                      />
+                    </div>
+            
+                  </div>
                 </div>
-
-                <div id="containerInputLabelRadioButton">
-                  <input
-                    id="b_veiculoProprioSupervisorSemAjuda"
-                    name="b_veiculoProprioSupervisorSemAjuda"
-                    type="checkbox"
-                    checked={questionThree.b_veiculoProprioSupervisorSemAjuda}
-                    onChange={(event) => setQuestionThree({
-                      ...questionThree,
-                      b_veiculoProprioSupervisorSemAjuda: !!event.currentTarget?.checked
-                    })}
-                  />
-                  <label
-                    className="containerTextLabel"
-                    htmlFor="b_veiculoProprioSupervisorSemAjuda"
-                  >Veículo próprio do Supervisor (sem ajuda de custo)
-                  </label>
-                </div>
-
-                <div id="containerInputLabelRadioButton">
-                  <input
-                    id="c_veiculoProprioVisitadorComAjuda"
-                    name="c_veiculoProprioVisitadorComAjuda"
-                    type="checkbox"
-                    checked={questionThree.c_veiculoProprioVisitadorComAjuda}
-                    onChange={(event) => setQuestionThree({
-                      ...questionThree,
-                      c_veiculoProprioVisitadorComAjuda: !!event.currentTarget?.checked
-                    })}
-                  />
-                  <label
-                    className="containerTextLabel"
-                    htmlFor="c_veiculoProprioVisitadorComAjuda"
-                  >Veículo próprio do Visitador (com ajuda de custo)
-                  </label>
-                </div>
-
-                <div id="containerInputLabelRadioButton">
-                  <input
-                    id="d_veiculoProprioVisitadorSemAjuda"
-                    name="d_veiculoProprioVisitadorSemAjuda"
-                    type="checkbox"
-                    checked={questionThree.d_veiculoProprioVisitadorSemAjuda}
-                    onChange={(event) => setQuestionThree({
-                      ...questionThree,
-                      d_veiculoProprioVisitadorSemAjuda: !!event.currentTarget?.checked
-                    })}
-                  />
-                  <label
-                    className="containerTextLabel"
-                    htmlFor="d_veiculoProprioVisitadorSemAjuda"
-                  >Veículo próprio do Visitador (sem ajuda de custo)
-                  </label>
-                </div>
-
-                <div id="containerInputLabelRadioButton">
-                  <input
-                    id="e_veiculoProprioPCF"
-                    name="e_veiculoProprioPCF"
-                    type="checkbox"
-                    checked={questionThree.e_veiculoProprioPCF}
-                    onChange={(event) => setQuestionThree({
-                      ...questionThree,
-                      e_veiculoProprioPCF: !!event.currentTarget?.checked
-                    })}
-                  />
-                  <label
-                    className="containerTextLabel"
-                    htmlFor="lastMonthSpentJaneiro"
-                  >Veículo próprio do PCF
-                  </label>
-                </div>
-
-                <div id="containerInputLabelRadioButton">
-                  <input
-                    id="f_veiculoAlugadoPCF"
-                    name="f_veiculoAlugadoPCF"
-                    type="checkbox"
-                    checked={questionThree.f_veiculoAlugadoPCF}
-                    onChange={(event) => setQuestionThree({
-                      ...questionThree,
-                      f_veiculoAlugadoPCF: !!event.currentTarget?.checked
-                    })}
-                  />
-                  <label
-                    className="containerTextLabel"
-                    htmlFor="f_veiculoAlugadoPCF"
-                  >Veículo alugado para o PCF
-                  </label>
-                </div>
-
-                <div id="containerInputLabelRadioButton">
-                  <input
-                    id="g_veiculoMunicipio"
-                    name="g_veiculoMunicipio"
-                    type="checkbox"
-                    checked={questionThree.g_veiculoMunicipio}
-                    onChange={(event) => setQuestionThree({
-                      ...questionThree,
-                      g_veiculoMunicipio: !!event.currentTarget?.checked
-                    })}
-                  />
-                  <label
-                    className="containerTextLabel"
-                    htmlFor="g_veiculoMunicipio"
-                  >Veículo do município
-                  </label>
-                </div>
-
-                <div id="containerInputLabelRadioButton">
-                  <input
-                    id="h_veiculoContratado"
-                    name="h_veiculoContratado"
-                    type="checkbox"
-                    checked={questionThree.h_veiculoContratado}
-                    onChange={(event) => setQuestionThree({
-                      ...questionThree,
-                      h_veiculoContratado: !!event.currentTarget?.checked
-                    })}
-                  />
-                  <label
-                    className="containerTextLabel"
-                    htmlFor="h_veiculoContratado"
-                  >Moto contratada/alugada
-                  </label>
-                </div>
-
-                <div id="containerInputLabelRadioButton">
-                  <input
-                    id="i_veiculoUberTaxi"
-                    name="i_veiculoUberTaxi"
-                    type="checkbox"
-                    checked={questionThree.i_veiculoUberTaxi}
-                    onChange={(event) => setQuestionThree({
-                      ...questionThree,
-                      i_veiculoUberTaxi: !!event.currentTarget?.checked
-                    })}
-                  />
-                  <label
-                    className="containerTextLabel"
-                    htmlFor="i_veiculoUberTaxi"
-                  >Taxi ou Uber contratado pelo município
-                  </label>
-                </div>
-
-                <div id="containerInputLabelRadioButton">
-                  <input
-                    id="j_veiculoCaminhandoBicicleta"
-                    name="j_veiculoCaminhandoBicicleta"
-                    type="checkbox"
-                    checked={questionThree.j_veiculoCaminhandoBicicleta}
-                    onChange={(event) => setQuestionThree({
-                      ...questionThree,
-                      j_veiculoCaminhandoBicicleta: !!event.currentTarget?.checked
-                    })}
-                  />
-                  <label
-                    className="containerTextLabel"
-                    htmlFor="j_veiculoCaminhandoBicicleta"
-                  >Caminhando ou bicicleta
-                  </label>
-                </div>
-
-                <div id="containerInputLabelRadioButton">
-                  <input
-                    id="k_veiculoOutro"
-                    name="k_veiculoOutro"
-                    type="checkbox"
-                    checked={questionThree.k_veiculoOutro}
-                    onChange={(event) => setQuestionThree({
-                      ...questionThree,
-                      k_veiculoOutro: !!event.currentTarget?.checked
-                    })}
-                  />
-                  <label
-                    className="containerTextLabel"
-                    htmlFor="k_veiculoOutro"
-                  >Outros
-                  </label>
-                  <input
-                    id="l_veiculoOutroText"
-                    className="inputPlaceholderOther"
-                    name="l_veiculoOutroText"
-                    type="text"
-                    value={questionThree.l_veiculoOutroText}
-                    onChange={handleUsedTransporteChange}
-                    placeholder="Escreva aqui"
-                  />
-                </div>
-        
               </div>
-            </div>
-          </div>
-        </SC.ButtonTypeCheckbox>
-
-        <SC.SubSection>
-          <div className="bgSubSection">
-            <p>Subseção outros custos</p>
-          </div>
-          <div className="formQuestionV2">
+            </form>
+          </SC.ButtonTypeCheckbox>
 
           <div className="formQuestionV1">
             <p>Há algum outro custo direto pago com recurso do PCF?</p>
@@ -496,8 +498,9 @@ export const FormStep10 = () => {
               />
             </SC.Body>
           </div>
-            
-            <SC.ButtonTypeRadio>
+
+          <SC.ButtonTypeRadio>
+            <form onSubmit={handleSendOtherCosts}>
               <div className="formQuestion">
                 <p className="textFormRadioButton">
                   Há registros mensais destes custos?
@@ -538,11 +541,12 @@ export const FormStep10 = () => {
                   </div>
                 </div>
               </div>
-            </SC.ButtonTypeRadio>
-          </div>
-
-        </SC.SubSection>
-
+            </form>
+          </SC.ButtonTypeRadio>
+        </div>
+      </SC.SubSection>
+    
+      <form onSubmit={handleSendOtherCosts}>
         <SC.AllButtons>
           <Link className="buttonAll" to="/:id/formstep9">Voltar</Link>
           <button

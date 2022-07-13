@@ -18,7 +18,7 @@ export const Home = () => {
     const firebaseRoomsForm = ref(database, 'rooms');
     const firebaseForm = await push(firebaseRoomsForm);
     set(firebaseForm, {
-      municipio: newRoom,
+      idForm: Math.floor(Math.random() * 99999999) + 11111111,
     });
     navigate(`/${firebaseForm.key}/formstep1`)
   };
@@ -29,7 +29,7 @@ export const Home = () => {
     const firebaseRoomsForm = ref(database, 'rooms');
     const firebaseForm = await push(firebaseRoomsForm);
     set(firebaseForm, {
-      municipio: newRoom,
+      idForm: Math.floor(Math.random() * 99999999) + 11111111,
     });
     navigate(`/${firebaseForm.key}/formstepA1`)
   };
@@ -40,7 +40,7 @@ export const Home = () => {
     const firebaseRoomsForm = ref(database, 'rooms');
     const firebaseForm = await push(firebaseRoomsForm);
     set(firebaseForm, {
-      municipio: newRoom,
+      idForm: Math.floor(Math.random() * 99999999) + 11111111,
     });
     navigate(`/${firebaseForm.key}/formstepB1`)
   };

@@ -1,8 +1,8 @@
 import { Resource } from '../types/Resource';
 
 export const resources: Resource = {
-  pcf: { type: 'PCF' },
-  municipio: { type: 'Município' },
-  equipe: { type: 'Equipe PCF' },
-  outros: { type: 'Outros' },
+  PCF: { type: 'PCF' },
+  Município: { type: 'Município' },
+  Equipe_PCF: { type: 'Equipe PCF' },
+  Outros: { type: 'Outros' },
 };

@@ -35,8 +35,8 @@ export const FormStep6 = () => {
   }
 
   const removerDaLista = (index: number) => {
-    setFilteredList((previous) => previous.filter((item, indexPrevious) => index !== indexPrevious))
-    return setFilteredList
+    setList((previous) => previous.filter((item, indexPrevious) => index !== indexPrevious))
+    return setList
   };
 
   async function handleSendQuestionOthersProfessionals(event: FormEvent) {
@@ -80,47 +80,44 @@ export const FormStep6 = () => {
         <hr />
       </SC.Container>
 
+      <SC.SubSection>
+        <div className="bgSubSection">
+          <p>Subseção Outros Profissionais</p>
+        </div>
+        <div className="formQuestionV2">
+          <SC.ContainerV2>
+            <SC.Body>
+
+              <InputArea onAdd={handleAddItemText} />
+
+              <TableArea
+                list={filteredList}
+                remover={removerDaLista}
+              />
+
+            </SC.Body>
+          </SC.ContainerV2>
+        </div>
+      </SC.SubSection>
+
       <form onSubmit={handleSendQuestionOthersProfessionals}>
-        <SC.SubSection>
-          <div className="bgSubSection">
-            <p>Subseção Outros Profissionais</p>
+        <SC.ButtonTypeText>
+          <div className="formQuestion">
+            <label
+              htmlFor="observacaoText"
+            >Observações:
+              <input
+                id="observacaoText"
+                name="observation"
+                type="text"
+                value={questionTwo}
+                onChange={handleObservationChange}
+                placeholder="Sua resposta"
+              />
+            </label>
           </div>
-          <div className="formQuestionV2">
+        </SC.ButtonTypeText>
 
-            <div className="formQuestionV3">
-              <SC.ContainerV2>
-                <SC.Body>
-
-                  <InputArea onAdd={handleAddItemText} />
-
-                  <TableArea
-                    list={filteredList}
-                    remover={removerDaLista}
-                  />
-
-                </SC.Body>
-              </SC.ContainerV2>
-            </div>
-
-            <SC.ButtonTypeText>
-              <div className="formQuestion">
-                <label
-                  htmlFor="observacaoText"
-                >Observações:
-                  <input
-                    id="observacaoText"
-                    name="observation"
-                    type="text"
-                    value={questionTwo}
-                    onChange={handleObservationChange}
-                    placeholder="Sua resposta"
-                  />
-                </label>
-              </div>
-            </SC.ButtonTypeText>
-
-          </div>
-        </SC.SubSection>
 
         <SC.AllButtons>
           <Link className="buttonAll" to="/:id/formstep5">Voltar</Link>

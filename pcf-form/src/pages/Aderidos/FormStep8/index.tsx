@@ -20,12 +20,9 @@ export const FormStep8 = () => {
   const roomId = params.id
   const navigate = useNavigate();
   const { state, dispatch } = useFormPage();
-  
   const [questionOne, setQuestionOne] = useState('')
-  const [questionTwo, setQuestionTwo] = useState('')
   const [questionThree, setQuestionThree] = useState('')
   const [questionFour, setQuestionFour] = useState('');
-
   const [list, setList] = useState<Item[]>([]);
   const [filteredList, setFilteredList] = useState<Item[]>([]);
 
@@ -36,8 +33,8 @@ export const FormStep8 = () => {
   };
 
   const removerDaLista = (index: number) => {
-    setFilteredList((previous) => previous.filter((item, indexPrevious) => index !== indexPrevious))
-    return setFilteredList
+    setList((previous) => previous.filter((item, indexPrevious) => index !== indexPrevious))
+    return setList
   };
 
   async function handleSendPartnerOrganizations(event: FormEvent) {
@@ -84,23 +81,23 @@ export const FormStep8 = () => {
         <hr/>
       </SC.Container>
 
+      <SC.SubSection>
+        <div className="formQuestionV1">
+          <p>Com qual(is) a(s) organização(ões) possui parceria(s)?</p>
+
+          <SC.Body>
+            <InputArea onAdd={handleAddItemPartner} />
+
+            <TableArea
+              list={filteredList}
+              remover={removerDaLista}
+            />
+          </SC.Body>
+
+        </div>
+      </SC.SubSection>
+
       <form onSubmit={handleSendPartnerOrganizations}>
-        <SC.SubSection>
-          <div className="formQuestionV1">
-            <p>Com qual(is) a(s) organização(ões) possui parceria(s)?</p>
-
-            <SC.Body>
-              <InputArea onAdd={handleAddItemPartner} />
-
-              <TableArea
-                list={filteredList}
-                remover={removerDaLista}
-              />
-            </SC.Body>
-
-          </div>
-        </SC.SubSection>
-
         <SC.ButtonTypeRadio>
           <div className="formQuestion">
             <p className="textFormRadioButton">

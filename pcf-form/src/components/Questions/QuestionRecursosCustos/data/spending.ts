@@ -1,8 +1,8 @@
 import { Spent } from '../types/Spent';
 
 export const spending: Spent = {
-  combustivel: { type: 'Combustível' },
-  aluguel: { type: 'Aluguel' },
-  salarioMotorista: { type: 'Salário Motorista' },
-  outros: { type: 'Outros' },
+  Combustível: { type: 'Combustível' },
+  Aluguel: { type: 'Aluguel' },
+  Salário_Motorista: { type: 'Salário Motorista' },
+  Outros: { type: 'Outros' },
 };
