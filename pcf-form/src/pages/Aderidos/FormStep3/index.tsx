@@ -15,9 +15,10 @@ interface HiringVisitorSupervisor {
   a_visitadoresEdital: boolean;
   b_visitadoresEquipePropria: boolean;
   c_visitadoresContratacaoDireta: boolean;
-  d_visitadoresNaoSeAplica: boolean;
-  e_visitadoresOutro: boolean;
-  f_visitadoresOutrosDescricao: string;
+  d_visitadoresContratacaoEstagio: boolean,
+  e_visitadoresNaoSeAplica: boolean;
+  f_visitadoresOutro: boolean;
+  g_visitadoresOutrosDescricao: string;
 }
 
 export const FormStep3 = () => {
@@ -29,16 +30,21 @@ export const FormStep3 = () => {
   const [questionTwo, setQuestionTwo] = useState('');
   const [questionThree, setQuestionThree] = useState('');
   const [questionFour, setQuestionFour] = useState('');
+  const [questionEight, setQuestionEight] = useState('');
   const [questionFive, setQuestionFive] = useState('');
   const [questionSix, setQuestionSix] = useState('');
   const [questionSeven, setQuestionSeven] = useState<HiringVisitorSupervisor>({
     a_visitadoresEdital: false,
     b_visitadoresEquipePropria: false,
     c_visitadoresContratacaoDireta: false,
-    d_visitadoresNaoSeAplica: false,
-    e_visitadoresOutro: false,
-    f_visitadoresOutrosDescricao: '',
+    d_visitadoresContratacaoEstagio: false,
+    e_visitadoresNaoSeAplica: false,
+    f_visitadoresOutro: false,
+    g_visitadoresOutrosDescricao: '',
   });
+
+  const[isCheckCQ02, setIsCheckCQ02] = useState('');
+  const[isCheckCQ04, setIsCheckCQ04] = useState('');
 
   async function handleSendQuestion(event: FormEvent) {
     event.preventDefault();
@@ -49,9 +55,10 @@ export const FormStep3 = () => {
         questao15: questionTwo,
         questao16: questionThree,
         questao17: questionFour,
-        questao18: questionFive,
-        questao19: questionSix,
-        question20: questionSeven,
+        questao18: questionEight,
+        questao19: questionFive,
+        questao20: questionSix,
+        questao21: questionSeven,
       }
     };
 
@@ -76,6 +83,10 @@ export const FormStep3 = () => {
 
   const handleKnowTheMultiplierChange = (event: ChangeEvent<HTMLInputElement>) => {
     setQuestionFour(event.target.value);
+  };
+
+  const handleKnowTheMultiplierContactChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setQuestionEight(event.target.value);
   };
 
   const handleSteeringCommitteeChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -173,188 +184,286 @@ export const FormStep3 = () => {
 
         <SC.ButtonTypeRadio>
           <div className="formQuestion">
-            <p className="textFormRadioButton">
-              Você conhece o Coordenador Estadual do PCF?
-            </p>
-            <div id="containerOption">
-              <div id="containerOptionSixOption">
-        
-                <div id="containerInputLabelRadioButton">
-                  <input
-                    id="meetTheCoordinatorYes"
-                    name="meetTheCoordinator"
-                    type="radio"
-                    value="Sim"
-                    onChange={handleMeetTheCoordinatorChange}
-                  />
-                  <label
-                    className="containerTextLabel"
-                    htmlFor="meetTheCoordinatorYes"
-                  >Sim
-                  </label>
-                </div>
-                <div id="containerInputLabelRadioButton">
-                  <input
-                    id="meetTheCoordinatorNo"
-                    name="meetTheCoordinator"
-                    type="radio"
-                    value="Não"
-                    onChange={handleMeetTheCoordinatorChange}
-                  />
-                  <label
-                    className="containerTextLabel"
-                    htmlFor="meetTheCoordinatorNo"
-                  >Não
-                  </label>
+            <div className="formQuestion">
+              <p className="textFormRadioButton">
+                Você conhece o Coordenador Estadual do PCF?
+              </p>
+              <div id="containerOption">
+                <div id="containerOptionSixOption">
+                  <div id="containerInputLabelRadioButton">
+                    <input
+                      id="meetTheCoordinatorYes"
+                      name="meetTheCoordinator"
+                      type="radio"
+                      value={"sim_CQ02"}
+                      onClick={() => setIsCheckCQ02("sim_CQ02")}
+                      onChange={handleMeetTheCoordinatorChange}
+                    />
+                    <label
+                      className="containerTextLabel"
+                      htmlFor="meetTheCoordinatorYes"
+                    >Sim
+                    </label>
+                  </div>
+                  <div id="containerInputLabelRadioButton">
+                    <input
+                      id="meetTheCoordinatorNo"
+                      name="meetTheCoordinator"
+                      type="radio"
+                      value={"nao_CQ02"}
+                      onClick={() => setIsCheckCQ02("nao_CQ02")}
+                      onChange={handleMeetTheCoordinatorChange}
+                    />
+                    <label
+                      className="containerTextLabel"
+                      htmlFor="meetTheCoordinatorNo"
+                    >Não
+                    </label>
+                  </div>
                 </div>
               </div>
             </div>
+            {isCheckCQ02 === "sim_CQ02" && (
+              <>
+                <SC.ButtonTypeRadio>
+                  <div className="formQuestion">
+                    <p className="textFormRadioButton">
+                      Quantas vezes teve contato com ele(a) nos últimos 12 meses?
+                    </p>
+                    <div id="containerOption">
+                      <div id="containerOptionSixOption">
+                        <div id="containerInputLabelRadioButton">
+                          <input
+                            id="contactCoordinatorZero"
+                            name="contactCoordinator"
+                            type="radio"
+                            value="0"
+                            onChange={handleContactCoordinatorChange}
+                          />
+                          <label
+                            className="containerTextLabel"
+                            htmlFor="contactCoordinatorZero"
+                          >0
+                          </label>
+                        </div>
+                        <div id="containerInputLabelRadioButton">
+                          <input
+                            id="contactCoordinatorOne"
+                            name="contactCoordinator"
+                            type="radio"
+                            value="1"
+                            onChange={handleContactCoordinatorChange}
+                          />
+                          <label
+                            className="containerTextLabel"
+                            htmlFor="contactCoordinatorOne"
+                          >1
+                          </label>
+                        </div>
+                        <div id="containerInputLabelRadioButton">
+                          <input
+                            id="contactCoordinatorTwo"
+                            name="contactCoordinator"
+                            type="radio"
+                            value="2"
+                            onChange={handleContactCoordinatorChange}
+                          />
+                          <label
+                            className="containerTextLabel"
+                            htmlFor="contactCoordinatorTwo"
+                          >2
+                          </label>
+                        </div>
+                        <div id="containerInputLabelRadioButton">
+                          <input
+                            id="contactCoordinatorThree"
+                            name="contactCoordinator"
+                            type="radio"
+                            value="3"
+                            onChange={handleContactCoordinatorChange}
+                          />
+                          <label
+                            className="containerTextLabel"
+                            htmlFor="contactCoordinatorThree"
+                          >3
+                          </label>
+                        </div>
+                        <div id="containerInputLabelRadioButton">
+                          <input
+                            id="contactCoordinatorFour"
+                            name="contactCoordinator"
+                            type="radio"
+                            value="4_ou_mais"
+                            onChange={handleContactCoordinatorChange}
+                          />
+                          <label
+                            className="containerTextLabel"
+                            htmlFor="contactCoordinatorFour"
+                          >4 ou mais
+                          </label>
+                        </div>
+                        <div id="containerInputLabelRadioButton">
+                          <input
+                            id="contactCoordinatorNotapplicable"
+                            name="contactCoordinator"
+                            type="radio"
+                            value="Não_se_aplica"
+                            onChange={handleContactCoordinatorChange}
+                          />
+                          <label
+                            className="containerTextLabel"
+                            htmlFor="contactCoordinatorNotapplicable"
+                          >Não se aplica
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </SC.ButtonTypeRadio>
+              </>
+            )}
           </div>
         </SC.ButtonTypeRadio>
 
         <SC.ButtonTypeRadio>
           <div className="formQuestion">
-            <p className="textFormRadioButton">
-              Quantas vezes teve contato com ele(a) nos últimos 12 meses?
-            </p>
-            <div id="containerOption">
-              <div id="containerOptionSixOption">
-
-                <div id="containerInputLabelRadioButton">
-                  <input
-                    id="contactCoordinatorZero"
-                    name="contactCoordinator"
-                    type="radio"
-                    value="0"
-                    onChange={handleContactCoordinatorChange}
-                  />
-                  <label
-                    className="containerTextLabel"
-                    htmlFor="contactCoordinatorZero"
-                  >0
-                  </label>
+            <div className="formQuestion">
+              <p className="textFormRadioButton">
+                Você conhece o Multiplicador Estadual do PCF?
+              </p>
+              <div id="containerOption">
+                <div id="containerOptionSixOption">
+                  <div id="containerInputLabelRadioButton">
+                    <input
+                      id="knowTheMultiplierYes"
+                      name="knowTheMultiplier"
+                      type="radio"
+                      value={"sim_CQ04"}
+                      onClick={() => setIsCheckCQ04("sim_CQ04")}
+                      onChange={handleKnowTheMultiplierChange}
+                    />
+                    <label
+                      className="containerTextLabel"
+                      htmlFor="knowTheMultiplierYes"
+                    >Sim
+                    </label>
+                  </div>
+                  <div id="containerInputLabelRadioButton">
+                    <input
+                      id="knowTheMultiplierNo"
+                      name="knowTheMultiplier"
+                      type="radio"
+                      value={"nao_CQ04"}
+                      onClick={() => setIsCheckCQ04("nao_CQ04")}
+                    />
+                    <label
+                      className="containerTextLabel"
+                      htmlFor="knowTheMultiplierNo"
+                    >Não
+                    </label>
+                  </div>
                 </div>
-
-                <div id="containerInputLabelRadioButton">
-                  <input
-                    id="contactCoordinatorOne"
-                    name="contactCoordinator"
-                    type="radio"
-                    value="1"
-                    onChange={handleContactCoordinatorChange}
-                  />
-                  <label
-                    className="containerTextLabel"
-                    htmlFor="contactCoordinatorOne"
-                  >1
-                  </label>
-                </div>
-
-                <div id="containerInputLabelRadioButton">
-                  <input
-                    id="contactCoordinatorTwo"
-                    name="contactCoordinator"
-                    type="radio"
-                    value="2"
-                    onChange={handleContactCoordinatorChange}
-                  />
-                  <label
-                    className="containerTextLabel"
-                    htmlFor="contactCoordinatorTwo"
-                  >2
-                  </label>
-                </div>
-
-                <div id="containerInputLabelRadioButton">
-                  <input
-                    id="contactCoordinatorThree"
-                    name="contactCoordinator"
-                    type="radio"
-                    value="3"
-                    onChange={handleContactCoordinatorChange}
-                  />
-                  <label
-                    className="containerTextLabel"
-                    htmlFor="contactCoordinatorThree"
-                  >3
-                  </label>
-                </div>
-
-                <div id="containerInputLabelRadioButton">
-                  <input
-                    id="contactCoordinatorFour"
-                    name="contactCoordinator"
-                    type="radio"
-                    value="4_ou_mais"
-                    onChange={handleContactCoordinatorChange}
-                  />
-                  <label
-                    className="containerTextLabel"
-                    htmlFor="contactCoordinatorFour"
-                  >4 ou mais
-                  </label>
-                </div>
-
-                <div id="containerInputLabelRadioButton">
-                  <input
-                    id="contactCoordinatorNotapplicable"
-                    name="contactCoordinator"
-                    type="radio"
-                    value="Não_se_aplica"
-                    onChange={handleContactCoordinatorChange}
-                  />
-                  <label
-                    className="containerTextLabel"
-                    htmlFor="contactCoordinatorNotapplicable"
-                  >Não se aplica
-                  </label>
-                </div>
-
               </div>
             </div>
-          </div>
-        </SC.ButtonTypeRadio>
-
-        <SC.ButtonTypeRadio>
-          <div className="formQuestion">
-            <p className="textFormRadioButton">
-              Você conhece o Multiplicador Estadual do PCF?
-            </p>
-            <div id="containerOption">
-              <div id="containerOptionSixOption">
-
-                <div id="containerInputLabelRadioButton">
-                  <input
-                    id="knowTheMultiplierYes"
-                    name="knowTheMultiplier"
-                    type="radio"
-                    value="Sim"
-                    onChange={handleKnowTheMultiplierChange}
-                  />
-                  <label
-                    className="containerTextLabel"
-                    htmlFor="knowTheMultiplierYes"
-                  >Sim
-                  </label>
-                </div>
-
-                <div id="containerInputLabelRadioButton">
-                  <input
-                    id="knowTheMultiplierNo"
-                    name="knowTheMultiplier"
-                    type="radio"
-                    value="Não"
-                    onChange={handleKnowTheMultiplierChange}
-                  />
-                  <label
-                    className="containerTextLabel"
-                    htmlFor="knowTheMultiplierNo"
-                  >Não
-                  </label>
-                </div>
-
-              </div>
-            </div>
+            {isCheckCQ04 === "sim_CQ04" && (
+              <>
+                <SC.ButtonTypeRadio>
+                  <div className="formQuestion">
+                    <p className="textFormRadioButton">
+                      Quantas vezes teve contato com ele(a) nos últimos 12 meses?
+                    </p>
+                    <div id="containerOption">
+                      <div id="containerOptionSixOption">
+                        <div id="containerInputLabelRadioButton">
+                          <input
+                            id="contactMultiplierZero"
+                            name="knowTheMultiplierContact"
+                            type="radio"
+                            value="0"
+                            onChange={handleKnowTheMultiplierContactChange}
+                          />
+                          <label
+                            className="containerTextLabel"
+                            htmlFor="contactMultiplierZero"
+                          >0
+                          </label>
+                        </div>
+                        <div id="containerInputLabelRadioButton">
+                          <input
+                            id="contactMultiplierOne"
+                            name="knowTheMultiplierContact"
+                            type="radio"
+                            value="1"
+                            onChange={handleKnowTheMultiplierContactChange}
+                          />
+                          <label
+                            className="containerTextLabel"
+                            htmlFor="contactMultiplierOne"
+                          >1
+                          </label>
+                        </div>
+                        <div id="containerInputLabelRadioButton">
+                          <input
+                            id="contactMultiplierTwo"
+                            name="knowTheMultiplierContact"
+                            type="radio"
+                            value="2"
+                            onChange={handleKnowTheMultiplierContactChange}
+                          />
+                          <label
+                            className="containerTextLabel"
+                            htmlFor="contactMultiplierTwo"
+                          >2
+                          </label>
+                        </div>
+                        <div id="containerInputLabelRadioButton">
+                          <input
+                            id="contactMultiplierThree"
+                            name="knowTheMultiplierContact"
+                            type="radio"
+                            value="3"
+                            onChange={handleKnowTheMultiplierContactChange}
+                          />
+                          <label
+                            className="containerTextLabel"
+                            htmlFor="contactMultiplierThree"
+                          >3
+                          </label>
+                        </div>
+                        <div id="containerInputLabelRadioButton">
+                          <input
+                            id="contactMultiplierFour"
+                            name="knowTheMultiplierContact"
+                            type="radio"
+                            value="4_ou_mais"
+                            onChange={handleKnowTheMultiplierContactChange}
+                          />
+                          <label
+                            className="containerTextLabel"
+                            htmlFor="contactMultiplierFour"
+                          >4 ou mais
+                          </label>
+                        </div>
+                        <div id="containerInputLabelRadioButton">
+                          <input
+                            id="contactCoordinatorNotapplicableContact"
+                            name="knowTheMultiplierContact"
+                            type="radio"
+                            value="Não_se_aplica"
+                            onChange={handleKnowTheMultiplierContactChange}
+                          />
+                          <label
+                            className="containerTextLabel"
+                            htmlFor="contactCoordinatorNotapplicableContact"
+                          >Não se aplica
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </SC.ButtonTypeRadio>
+              </>
+            )}
           </div>
         </SC.ButtonTypeRadio>
 
@@ -535,116 +644,134 @@ export const FormStep3 = () => {
         </SC.ButtonTypeRadio>
 
         <SC.ButtonTypeCheckbox>
-              <div className="formQuestion">
-                <p className="textFormRadioButton">
-                  Como são realizadas as contratações dos profissionais em seu município?
-                </p>
-            
-                <div id="containerOption">
-                  <div id="containerOptionSixOption">
+          <div className="formQuestion">
+            <p className="textFormRadioButton">
+              Como são realizadas as contratações dos profissionais em seu município?
+            </p>
+        
+            <div id="containerOption">
+              <div id="containerOptionSixOption">
 
-                    <div id="containerInputLabelRadioButton">
-                      <input
-                        id="hiringVisitorSupervisorEdital"
-                        name="a_visitadoresEdital"
-                        type="checkbox"
-                        checked={questionSeven.a_visitadoresEdital}
-                        onChange={(event) => setQuestionSeven({
-                          ...questionSeven,
-                          a_visitadoresEdital: !!event.currentTarget?.checked
-                        })}
-                      />
-                      <label
-                        className="containerTextLabel"
-                        htmlFor="hiringVisitorSupervisorEdital"
-                      >Edital
-                      </label>
-                    </div>
-
-                    <div id="containerInputLabelRadioButton">
-                      <input
-                        id="hiringVisitorSupervisorOwnTeam"
-                        name="b_visitadoresEquipePropria"
-                        type="checkbox"
-                        checked={questionSeven.b_visitadoresEquipePropria}
-                        onChange={(event) => setQuestionSeven({
-                          ...questionSeven,
-                          b_visitadoresEquipePropria: !!event.currentTarget?.checked
-                        })}
-                      />
-                      <label
-                        className="containerTextLabel"
-                        htmlFor="hiringVisitorSupervisorOwnTeam"
-                      >Equipe própria
-                      </label>
-                    </div>
-
-                    <div id="containerInputLabelRadioButton">
-                      <input
-                        id="hiringVisitorSupervisorDirectContracting"
-                        name="c_visitadoresContratacaoDireta"
-                        type="checkbox"
-                        checked={questionSeven.c_visitadoresContratacaoDireta}
-                        onChange={(event) => setQuestionSeven({
-                          ...questionSeven,
-                          c_visitadoresContratacaoDireta: !!event.currentTarget?.checked
-                        })}
-                      />
-                      <label
-                        className="containerTextLabel"
-                        htmlFor="hiringVisitorSupervisorDirectContracting"
-                      >Contratação direta
-                      </label>
-                    </div>
-
-                    <div id="containerInputLabelRadioButton">
-                      <input
-                        id="hiringVisitorSupervisorNotApplicable"
-                        name="d_visitadoresNaoSeAplica"
-                        type="checkbox"
-                        checked={questionSeven.d_visitadoresNaoSeAplica}
-                        onChange={(event) => setQuestionSeven({
-                          ...questionSeven,
-                          d_visitadoresNaoSeAplica: !!event.currentTarget?.checked
-                        })}
-                      />
-                      <label
-                        className="containerTextLabel"
-                        htmlFor="hiringVisitorSupervisorNotApplicable"
-                      >Não se aplica
-                      </label>
-                    </div>
-
-                    <div id="containerInputLabelRadioButton">
-                      <input
-                        id="hiringVisitorSupervisorOthers"
-                        name="e_visitadoresOutro"
-                        type="checkbox"
-                        checked={questionSeven.e_visitadoresOutro}
-                        onChange={(event) => setQuestionSeven({
-                          ...questionSeven,
-                          e_visitadoresOutro: !!event.currentTarget?.checked
-                        })}
-                      />
-                      <label
-                        className="containerTextLabel"
-                        htmlFor="hiringVisitorSupervisorOthers"
-                      >Outros:
-                      </label>
-                      <input
-                        className="inputPlaceholderOther"
-                        name="f_visitadoresOutrosDescricao"
-                        type="text"
-                        value={questionSeven.f_visitadoresOutrosDescricao}
-                        onChange={handleHiringVisitorSupervisorChange}
-                        placeholder="Escreva aqui"
-                      />
-                    </div>
-
-                  </div>
+                <div id="containerInputLabelRadioButton">
+                  <input
+                    id="hiringVisitorSupervisorEdital"
+                    name="a_visitadoresEdital"
+                    type="checkbox"
+                    checked={questionSeven.a_visitadoresEdital}
+                    onChange={(event) => setQuestionSeven({
+                      ...questionSeven,
+                      a_visitadoresEdital: !!event.currentTarget?.checked
+                    })}
+                  />
+                  <label
+                    className="containerTextLabel"
+                    htmlFor="hiringVisitorSupervisorEdital"
+                  >Edital
+                  </label>
                 </div>
+
+                <div id="containerInputLabelRadioButton">
+                  <input
+                    id="hiringVisitorSupervisorOwnTeam"
+                    name="b_visitadoresEquipePropria"
+                    type="checkbox"
+                    checked={questionSeven.b_visitadoresEquipePropria}
+                    onChange={(event) => setQuestionSeven({
+                      ...questionSeven,
+                      b_visitadoresEquipePropria: !!event.currentTarget?.checked
+                    })}
+                  />
+                  <label
+                    className="containerTextLabel"
+                    htmlFor="hiringVisitorSupervisorOwnTeam"
+                  >Equipe própria
+                  </label>
+                </div>
+
+                <div id="containerInputLabelRadioButton">
+                  <input
+                    id="hiringVisitorSupervisorDirectContracting"
+                    name="c_visitadoresContratacaoDireta"
+                    type="checkbox"
+                    checked={questionSeven.c_visitadoresContratacaoDireta}
+                    onChange={(event) => setQuestionSeven({
+                      ...questionSeven,
+                      c_visitadoresContratacaoDireta: !!event.currentTarget?.checked
+                    })}
+                  />
+                  <label
+                    className="containerTextLabel"
+                    htmlFor="hiringVisitorSupervisorDirectContracting"
+                  >Contratação direta
+                  </label>
+                </div>
+
+                <div id="containerInputLabelRadioButton">
+                  <input
+                    id="hiringVisitorSupervisorDirectContractingStage"
+                    name="d_visitadoresContratacaoEstagio"
+                    type="checkbox"
+                    checked={questionSeven.d_visitadoresContratacaoEstagio}
+                    onChange={(event) => setQuestionSeven({
+                      ...questionSeven,
+                      d_visitadoresContratacaoEstagio: !!event.currentTarget?.checked
+                    })}
+                  />
+                  <label
+                    className="containerTextLabel"
+                    htmlFor="hiringVisitorSupervisorDirectContractingStage"
+                  >Contratação via estágio
+                  </label>
+                </div>
+
+                <div id="containerInputLabelRadioButton">
+                  <input
+                    id="hiringVisitorSupervisorNotApplicable"
+                    name="e_visitadoresNaoSeAplica"
+                    type="checkbox"
+                    checked={questionSeven.e_visitadoresNaoSeAplica}
+                    onChange={(event) => setQuestionSeven({
+                      ...questionSeven,
+                      e_visitadoresNaoSeAplica: !!event.currentTarget?.checked
+                    })}
+                  />
+                  <label
+                    className="containerTextLabel"
+                    htmlFor="hiringVisitorSupervisorNotApplicable"
+                  >Não se aplica
+                  </label>
+                </div>
+
+                <div id="containerInputLabelRadioButton">
+                  <input
+                    id="hiringVisitorSupervisorOthers"
+                    name="f_visitadoresOutro"
+                    type="checkbox"
+                    checked={questionSeven.f_visitadoresOutro}
+                    onChange={(event) => setQuestionSeven({
+                      ...questionSeven,
+                      f_visitadoresOutro: !!event.currentTarget?.checked
+                    })}
+                  />
+                  <label
+                    className="containerTextLabel"
+                    htmlFor="hiringVisitorSupervisorOthers"
+                  >Outros:
+                  </label>
+                  <input
+                    className="inputPlaceholderOther"
+                    name="g_visitadoresOutrosDescricao"
+                    type="text"
+                    value={questionSeven.g_visitadoresOutrosDescricao}
+                    onChange={handleHiringVisitorSupervisorChange}
+                    placeholder="Escreva aqui"
+                  />
+                </div>
+
               </div>
-            </SC.ButtonTypeCheckbox>
+            </div>
+          </div>
+        </SC.ButtonTypeCheckbox>
 
         <SC.AllButtons>
           <Link className="buttonAll" to="/:id/formstep2">Voltar</Link>
@@ -653,7 +780,6 @@ export const FormStep3 = () => {
             type="submit"
           >Próximo
           </button>
-          <RoomCode/>
         </SC.AllButtons>
       </form>
     </Theme>

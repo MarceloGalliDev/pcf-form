@@ -5,7 +5,6 @@ import { useFormPage, FormActions } from "../../../context/FormContext";
 import { ChangeEvent, useEffect, useState, useCallback, FormEvent } from "react";
 import { push, ref, set } from "firebase/database";
 import { database } from "../../../services/firebase";
-import { RoomCode } from "../../../components/RoomCode";
 
 type RoomParams = {
   id: string;
@@ -36,9 +35,12 @@ export const FormStepA2 = () => {
   });
   const [questionSix, setQuestionSix] = useState('');
   const [questionSeven, setQuestionSeven] = useState('');
+  const [questionEight, setQuestionEight] = useState('');
+  const [questionNine, setQuestionNine] = useState('');
+  const [questionTen, setQuestionTen] = useState('');
   
-  const [isCheckQ08, setIsCheckQ08] = useState('');
-  const [isCheckQ13, setIsCheckQ13] = useState('');
+  const [isCheckA2Q08, setIsCheckA2Q08] = useState('');
+  const [isCheckA2Q13, setIsCheckA2Q13] = useState('');
 
 
   async function handleEligibleMunicipalities(event: FormEvent) {
@@ -52,7 +54,13 @@ export const FormStepA2 = () => {
           questionThree,
           questionFour,
         },
-        questao08: questionFive,
+        questao08:
+        {
+          questionFive,
+          questionEight,
+          questionNine,
+          questionTen,
+        },
         questao09:
         {
           questionSix,
@@ -65,7 +73,9 @@ export const FormStepA2 = () => {
     const firebaseQuestion = await push(firebaseRoomsQuestion);
     set(firebaseQuestion, question)
 
-   navigate(`/`)
+    if (confirm('Tem certeza que deseja finalizar o questionário?')) {
+      navigate(`/`)
+    }
   };
 
   const handleTargetAudiencePCFChange =(event:ChangeEvent<HTMLInputElement>) => {
@@ -86,6 +96,18 @@ export const FormStepA2 = () => {
 
   const handleExplainTheReasonTextChange =(event:ChangeEvent<HTMLInputElement>) => {
     setQuestionSeven(event.target.value);
+  };
+
+  const handleTargetAudiencePCFTextNameCheckedChange =(event:ChangeEvent<HTMLInputElement>) => {
+    setQuestionEight(event.target.value);
+  };
+
+  const handleTargetAudiencePCFTextBeneficiaryCheckedChange =(event:ChangeEvent<HTMLInputElement>) => {
+    setQuestionNine(event.target.value);
+  };
+
+  const handleTargetAudiencePCFTextValueCheckedChange =(event:ChangeEvent<HTMLInputElement>) => {
+    setQuestionTen(event.target.value);
   };
 
 
@@ -121,7 +143,7 @@ export const FormStepA2 = () => {
                       name="targetAudiencePCF"
                       type="radio"
                       value={"sim_Q08"}
-                      onClick={() => setIsCheckQ08("sim_Q08")}
+                      onClick={() => setIsCheckA2Q08("sim_Q08")}
                       onChange={handleTargetAudiencePCFChange}
                     />
                     <label
@@ -137,7 +159,7 @@ export const FormStepA2 = () => {
                       name="targetAudiencePCF"
                       type="radio"
                       value={"nao_Q08"}
-                      onClick={() => setIsCheckQ08("nao_Q08")}
+                      onClick={() => setIsCheckA2Q08("nao_Q08")}
                       onChange={handleTargetAudiencePCFChange}
                     />
                     <label
@@ -150,12 +172,11 @@ export const FormStepA2 = () => {
                 </div>
               </div>
             </div>
-
-            {isCheckQ08 === "sim_Q08" && (
+            {isCheckA2Q08 === "sim_Q08" && (
               <>
                 <div className="containerBgLabel">
                   <label className="containerTextLabel" htmlFor="targetAudiencePCFTextBeneficiary">
-                    Se sim, quantos beneficiários são atendidos por este programa?
+                    Quantos beneficiários são atendidos por este programa?
                     <input
                       id="targetAudiencePCFTextBeneficiary"
                       name="targetAudiencePCFTextBeneficiary"
@@ -169,7 +190,7 @@ export const FormStepA2 = () => {
 
                 <div className="containerBgLabel">
                   <label className="containerTextLabel" htmlFor="targetAudiencePCFTextValue">
-                    Se sim, qual o valor mensal gasto com esse Programa? 
+                    Qual o valor mensal gasto com esse Programa? 
                     <input
                       id="targetAudiencePCFTextValue"
                       name="targetAudiencePCFTextValue"
@@ -186,90 +207,132 @@ export const FormStepA2 = () => {
           </div>
         </SC.ButtonTypeRadioText>
 
-        <SC.ButtonTypeCheckbox>
+        <SC.ButtonTypeCheckboxV1>
           <div className="formQuestion">
-            <p className="textFormRadioButton">
-            Qual o motivo do seu município não ter aderido ao Programa Criança Feliz?
-            </p>
-            <div id="containerOption">
-              <div>
-
-                <div id="containerInputLabelRadioButton">
-                  <input
-                    id="recursoFinanceiroInsuficiente"
-                    name="a_recursoFinanceiroInsuficiente"
-                    type="checkbox"
-                    checked={questionFive.a_recursoFinanceiroInsuficiente}
-                    onChange={(event) => setQuestionFive({
-                      ...questionFive,
-                      a_recursoFinanceiroInsuficiente: !!event.currentTarget?.checked
-                    })}
-                  />
-                  <label
-                    className="containerTextLabel"
-                    htmlFor="recursoFinanceiroInsuficiente"
-                  >A transferência de recurso financeiro é insuficiente para o município manter o programa
-                  </label>
+            <div className="formQuestion">
+              <p className="textFormRadioButton">
+              Qual o motivo do seu município não ter aderido ao Programa Criança Feliz?
+              </p>
+              <div id="containerOption">
+                <div>
+                  <div id="containerInputLabelRadioButton">
+                    <input
+                      id="recursoFinanceiroInsuficiente"
+                      name="a_recursoFinanceiroInsuficiente"
+                      type="checkbox"
+                      checked={questionFive.a_recursoFinanceiroInsuficiente}
+                      onChange={(event) => setQuestionFive({
+                        ...questionFive,
+                        a_recursoFinanceiroInsuficiente: !!event.currentTarget?.checked
+                      })}
+                    />
+                    <label
+                      className="containerTextLabel"
+                      htmlFor="recursoFinanceiroInsuficiente"
+                    >A transferência de recurso financeiro é insuficiente para o município manter o programa
+                    </label>
+                  </div>
+                  <div id="containerInputLabelRadioButton">
+                    <input
+                      id="naoHaInteresseMunicipio"
+                      name="b_naoHaInteresseMunicipio"
+                      type="checkbox"
+                      checked={questionFive.b_naoHaInteresseMunicipio}
+                      onChange={(event) => setQuestionFive({
+                        ...questionFive,
+                        b_naoHaInteresseMunicipio: !!event.currentTarget?.checked
+                      })}
+                    />
+                    <label
+                      className="containerTextLabel"
+                      htmlFor="naoHaInteresseMunicipio"
+                    >Não houve interesse do município em manter o programa
+                    </label>
+                  </div>
+                  <div id="containerInputLabelRadioButton">
+                    <input
+                      id="possuiPrograma"
+                      name="c_possuiPrograma"
+                      type="checkbox"
+                      checked={questionFive.c_possuiPrograma}
+                      onChange={(event) => setQuestionFive({
+                        ...questionFive,
+                        c_possuiPrograma: !!event.currentTarget?.checked
+                      })}
+                    />
+                    <label
+                      className="containerTextLabel"
+                      htmlFor="possuiPrograma"
+                    >O município possui um programa semelhante ao Criança Feliz
+                    </label>
+                  </div>
+                  <div id="containerInputLabelRadioButton">
+                    <input
+                      id="naoConhecePrograma"
+                      name="d_naoConhecePrograma"
+                      type="checkbox"
+                      checked={questionFive.d_naoConhecePrograma}
+                      onChange={(event) => setQuestionFive({
+                        ...questionFive,
+                        d_naoConhecePrograma: !!event.currentTarget?.checked
+                      })}
+                    />
+                    <label
+                      className="containerTextLabel"
+                      htmlFor="naoConhecePrograma"
+                    >O município não conhece o Programa Criança Feliz
+                    </label>
+                  </div>
                 </div>
-
-                <div id="containerInputLabelRadioButton">
-                  <input
-                    id="naoHaInteresseMunicipio"
-                    name="b_naoHaInteresseMunicipio"
-                    type="checkbox"
-                    checked={questionFive.b_naoHaInteresseMunicipio}
-                    onChange={(event) => setQuestionFive({
-                      ...questionFive,
-                      b_naoHaInteresseMunicipio: !!event.currentTarget?.checked
-                    })}
-                  />
-                  <label
-                    className="containerTextLabel"
-                    htmlFor="naoHaInteresseMunicipio"
-                  >Não houve interesse do município em manter o programa
-                  </label>
-                </div>
-
-                <div id="containerInputLabelRadioButton">
-                  <input
-                    id="possuiPrograma"
-                    name="c_possuiPrograma"
-                    type="checkbox"
-                    checked={questionFive.c_possuiPrograma}
-                    onChange={(event) => setQuestionFive({
-                      ...questionFive,
-                      c_possuiPrograma: !!event.currentTarget?.checked
-                    })}
-                  />
-                  <label
-                    className="containerTextLabel"
-                    htmlFor="possuiPrograma"
-                  >O município possui um programa semelhante ao Criança Feliz
-                  </label>
-                </div>
-
-                <div id="containerInputLabelRadioButton">
-                  <input
-                    id="naoConhecePrograma"
-                    name="d_naoConhecePrograma"
-                    type="checkbox"
-                    checked={questionFive.d_naoConhecePrograma}
-                    onChange={(event) => setQuestionFive({
-                      ...questionFive,
-                      d_naoConhecePrograma: !!event.currentTarget?.checked
-                    })}
-                  />
-                  <label
-                    className="containerTextLabel"
-                    htmlFor="naoConhecePrograma"
-                  >O município não conhece o Programa Criança Feliz
-                  </label>
-                </div>
-
               </div>
             </div>
+            {questionFive.c_possuiPrograma === true && (
+              <>
+                <div className="containerBgLabel">
+                  <label className="containerTextLabel" htmlFor="targetAudiencePCFTextBeneficiary">
+                    Qual o nome desse programa?
+                    <input
+                      id="targetAudiencePCFTextBeneficiary"
+                      name="targetAudiencePCFTextBeneficiary"
+                      type="text"
+                      value={questionEight}
+                      onChange={handleTargetAudiencePCFTextNameCheckedChange}
+                      placeholder="Sua resposta"
+                    />
+                  </label>
+                </div>
+
+                <div className="containerBgLabel">
+                  <label className="containerTextLabel" htmlFor="targetAudiencePCFTextBeneficiary">
+                    Quantos beneficiários são atendidos por este programa?
+                    <input
+                      id="targetAudiencePCFTextBeneficiary"
+                      name="targetAudiencePCFTextBeneficiary"
+                      type="text"
+                      value={questionNine}
+                      onChange={handleTargetAudiencePCFTextBeneficiaryCheckedChange}
+                      placeholder="Sua resposta"
+                    />
+                  </label>
+                </div>
+
+                <div className="containerBgLabel">
+                  <label className="containerTextLabel" htmlFor="targetAudiencePCFTextValue">
+                    Qual o valor mensal gasto com esse Programa?
+                    <input
+                      id="targetAudiencePCFTextValue"
+                      name="targetAudiencePCFTextValue"
+                      type="text"
+                      value={questionTen}
+                      onChange={handleTargetAudiencePCFTextValueCheckedChange}
+                      placeholder="Sua resposta"
+                    />
+                  </label>
+                </div>
+              </>
+            )}
           </div>
-        </SC.ButtonTypeCheckbox>
+        </SC.ButtonTypeCheckboxV1>
 
         <SC.ButtonTypeRadioText>
           <div className="formQuestion">
@@ -287,7 +350,7 @@ export const FormStepA2 = () => {
                       name="explainTheReason"
                       type="radio"
                       value={"sim_Q13"}
-                      onClick={() => setIsCheckQ13("sim_Q13")}
+                      onClick={() => setIsCheckA2Q13("sim_Q13")}
                       onChange={handleExplainTheReasonChange}
                     />
                     <label
@@ -303,7 +366,7 @@ export const FormStepA2 = () => {
                       name="explainTheReason"
                       type="radio"
                       value={"nao_Q13"}
-                      onClick={() => setIsCheckQ13("nao_Q13")}
+                      onClick={() => setIsCheckA2Q13("nao_Q13")}
                       onChange={handleExplainTheReasonChange}
                     />
                     <label
@@ -317,12 +380,12 @@ export const FormStepA2 = () => {
               </div>
             </div>
             
-            {isCheckQ13 === "sim_Q13" && (
+            {isCheckA2Q13 === "sim_Q13" && (
               <>
                 <div className="containerBgLabel">
                   <label
                     className="containerTextLabel" htmlFor="explainTheReasonText"
-                  >Se sim, qual?
+                  >Qual?
                     <input
                       id="explainTheReasonText"
                       name="explainTheReasonText"
@@ -338,7 +401,7 @@ export const FormStepA2 = () => {
 
           </div>
         </SC.ButtonTypeRadioText>
-        
+
         <SC.AllButtons>
           <Link className="buttonAll" to="/:id/formstepA1">Voltar</Link>
           <button
@@ -346,7 +409,6 @@ export const FormStepA2 = () => {
             type="submit"
             >Finalizar
           </button>
-          <RoomCode/>
         </SC.AllButtons>
       </form>
     </ThemeA1>

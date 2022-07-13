@@ -64,7 +64,7 @@ export const SubSection = styled.div`
 
     .formQuestionV3 {
       border: 1px solid #3490C9;
-      background-color: #fff;
+      background-color: #;
       border-radius: 10px;
       padding: 10px 10px;
       margin-bottom: 10px;
@@ -272,6 +272,136 @@ export const ButtonTypeCheckbox = styled.div`
           border-bottom: 1px solid #2E7EB0;
           outline: none;
         }
+      }
+    }
+  }
+`;
+
+export const ButtonTypeCheckboxV1 = styled.div`
+  .formQuestion {
+    border: 1px solid #2E7EB0;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 10px 10px;
+    margin-bottom: 10px;
+  
+    .textFormRadioButton {
+      font-size: 15px;
+      font-weight: bold;
+
+      span {
+        font-weight: normal;
+        color: red;
+        margin-left: 10px;
+      }
+    }
+
+    #containerOption {
+      display: flex;
+      margin-left: 10px;
+      gap: 50px;
+
+      #containerInputLabelRadioButton {
+        display: flex;
+        gap: 10px;
+        margin-top: 10px;
+        align-items: center;
+
+        .containerTextLabel {
+          font-size: 15px;
+          font-weight: normal;
+
+        }
+        .inputPlaceholderOther {
+          width: 100%;
+          border-left: none;
+          border-right: none;
+          border-top: none;
+          border-bottom: 1px solid #2E7EB0;
+          outline: none;
+        }
+      }
+    }
+  }
+  .formQuestion {
+    border: 1px solid #2E7EB0;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 10px 10px;
+    margin-bottom: 10px;
+
+    .textFormRadioButton {
+      font-size: 15px;
+      font-weight: bold;
+
+      span {
+        font-weight: normal;
+        color: red;
+        margin-left: 10px;
+      }
+    }
+
+    #containerOption {
+      display: flex;
+      margin-left: 10px;
+      gap: 50px;
+
+      #containerInputLabelRadioButton {
+        display: flex;
+        gap: 10px;
+        margin: 10px 0;
+        align-items: center;
+      }
+
+      .containerTextLabel {
+        font-size: 15px;
+        font-weight: normal;
+      }
+    }
+  }
+
+  .formQuestion {
+    border: 1px solid #2E7EB0;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 10px 10px;
+    margin-bottom: 10px;
+
+    p {
+      font-size: 15px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .containerBgLabel {
+      background-color: #fff;
+      border: 1px solid #2E7EB0;
+      border-radius: 10px;
+      padding: 10px;
+      margin-bottom: 10px;
+
+      .containerTextLabel {
+        font-size: 15px;
+        font-weight: 500;
+      }
+
+      span {
+        font-weight: normal;
+        color: red;
+        margin-left: 10px;
+      }
+
+      input {
+        background-color: #fff;
+        display: block;
+        margin-top: 17px;
+        width: 100%;
+        border: none;
+        border-bottom: 1px solid #2E7EB0;
+        color: #2E7EB0;
+        outline: 0;
+        font-size: 15px;
+        padding: 5px 0;
       }
     }
   }

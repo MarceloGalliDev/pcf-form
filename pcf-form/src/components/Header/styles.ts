@@ -3,6 +3,9 @@ import styled from "styled-components";
 export const Container = styled.div`
   padding: 25px 0;
   border-bottom: 1px solid #2D7DB0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 
   h1 { 
     margin: 0;

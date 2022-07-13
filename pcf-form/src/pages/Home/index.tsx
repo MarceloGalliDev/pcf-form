@@ -8,7 +8,9 @@ import '../../styles/auth.scss';
 export const Home = () => {
   const navigate = useNavigate();
   const [newRoom, setNewRoom] = useState('');
-  const [roomCode, setRoomCode] = useState('');
+  const [roomCodeB1, setRoomCodeB1] = useState('');
+  const [roomCodeB2, setRoomCodeB2] = useState('');
+  const [roomCodeB3, setRoomCodeB3] = useState('');
 
   async function handleCreateRoom1(event: FormEvent) {
     event.preventDefault();
@@ -19,10 +21,6 @@ export const Home = () => {
       municipio: newRoom,
     });
     navigate(`/${firebaseForm.key}/formstep1`)
-    // if (newRoom === '') {
-    //   alert('Preencha o Nome do Município')
-    // } else {
-    // }
   };
 
   async function handleCreateRoom2(event: FormEvent) {
@@ -34,10 +32,6 @@ export const Home = () => {
       municipio: newRoom,
     });
     navigate(`/${firebaseForm.key}/formstepA1`)
-    // if (newRoom === '') {
-    //   alert('Preencha o Nome do Município')
-    // } else {
-    // }
   };
 
   async function handleCreateRoom3(event: FormEvent) {
@@ -49,21 +43,17 @@ export const Home = () => {
       municipio: newRoom,
     });
     navigate(`/${firebaseForm.key}/formstepB1`)
-    // if (newRoom === '') {
-    //   alert('Preencha o Nome do Município')
-    // } else {
-    // }
   };
 
   async function handleJoinRoom1(event: FormEvent) {
     event.preventDefault();
 
-    if (roomCode.trim() === '') {
+    if (roomCodeB1.trim() === '') {
       alert('Insira o código')
       return;
     };
 
-    const roomRef = await get(ref(database, `rooms/${roomCode}`))
+    const roomRef = await get(ref(database, `rooms/${roomCodeB1}`))
 
     if (!roomRef.exists()) {
       alert('Questionário não existe!')
@@ -73,18 +63,18 @@ export const Home = () => {
       alert('Questionário Finalizado.')
       return;
     }
-    navigate(`/${roomCode}/formstep1`)
+    navigate(`/${roomCodeB1}/formstep1`)
   };
 
   async function handleJoinRoom2(event: FormEvent) {
     event.preventDefault();
 
-    if (roomCode.trim() === '') {
+    if (roomCodeB2.trim() === '') {
       alert('Insira o código')
       return;
     };
 
-    const roomRef = await get(ref(database, `rooms/${roomCode}`))
+    const roomRef = await get(ref(database, `rooms/${roomCodeB2}`))
 
     if (!roomRef.exists()) {
       alert('Questionário não existe!')
@@ -94,18 +84,18 @@ export const Home = () => {
       alert('Questionário Finalizado.')
       return;
     }
-    navigate(`/${roomCode}/formstepA1`)
+    navigate(`/${roomCodeB2}/formstepA1`)
   };
 
   async function handleJoinRoom3(event: FormEvent) {
     event.preventDefault();
 
-    if (roomCode.trim() === '') {
+    if (roomCodeB3.trim() === '') {
       alert('Insira o código')
       return;
     };
 
-    const roomRef = await get(ref(database, `rooms/${roomCode}`))
+    const roomRef = await get(ref(database, `rooms/${roomCodeB3}`))
 
     if (!roomRef.exists()) {
       alert('Questionário não existe!')
@@ -115,7 +105,7 @@ export const Home = () => {
       alert('Questionário Finalizado.')
       return;
     }
-    navigate(`/${roomCode}/formstepB1`)
+    navigate(`/${roomCodeB3}/formstepB1`)
   };
 
 
@@ -148,10 +138,11 @@ export const Home = () => {
               <h2>ou digite o <u>código</u> do formulário</h2>
               <form onSubmit={handleJoinRoom1}>
                 <input
+                  name="buttonHomeB1"
                   type="text"
                   placeholder="Código do formulário"
-                  onChange={event => setRoomCode(event.target.value)}
-                  value={roomCode}
+                  value={roomCodeB1}
+                  onChange={event => setRoomCodeB1(event.target.value)}
                 />
                 <button
                   type="submit"
@@ -182,10 +173,11 @@ export const Home = () => {
               <h2>ou digite o <u>código</u> do formulário</h2>
               <form onSubmit={handleJoinRoom2}>
                 <input
+                  name="buttonHomeB2"
                   type="text"
                   placeholder="Código do formulário"
-                  onChange={event => setRoomCode(event.target.value)}
-                  value={roomCode}
+                  value={roomCodeB2}
+                  onChange={event => setRoomCodeB2(event.target.value)}
                 />
                 <button
                   type="submit"
@@ -216,10 +208,11 @@ export const Home = () => {
               <h2>ou digite o <u>código</u> do formulário</h2>
               <form onSubmit={handleJoinRoom3}>
                 <input
+                  name="buttonHomeB3"
                   type="text"
                   placeholder="Código do formulário"
-                  onChange={event => setRoomCode(event.target.value)}
-                  value={roomCode}
+                  value={roomCodeB3}
+                  onChange={event => setRoomCodeB3(event.target.value)}
                 />
                 <button
                   type="submit"

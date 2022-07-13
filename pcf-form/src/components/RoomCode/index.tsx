@@ -11,15 +11,19 @@ type RoomParams = {
 
 export function RoomCode() {
   const params = useParams<RoomParams>();
-  const roomId = JSON.stringify(params.id);
+  const captureId = JSON.stringify(params.id);
+  const roomId = captureId.replace(/[\\"]/g, '')
 
   function copyRoomCodeToClipboard() {
     navigator.clipboard.writeText(roomId)
-    alert('copied')
+    alert(`Código copiado => ${roomId}`)
   }
 
   return (
-    <button className="room-code" onClick={copyRoomCodeToClipboard}>
+    <button
+      className="room-code"
+      onClick={copyRoomCodeToClipboard}
+    >
       <div>
         <CopySvg />
       </div>

@@ -44,8 +44,8 @@ export const FormStep6 = () => {
 
     const question = {
       F_Outros_Profissionais: {
-        questao41: filteredList,
-        questao42: questionTwo,
+        questao43: filteredList,
+        questao44: questionTwo,
       }
     };
 
@@ -129,7 +129,6 @@ export const FormStep6 = () => {
             type="submit"
           >Próximo
           </button>
-          <RoomCode/>
         </SC.AllButtons>
       </form>
 

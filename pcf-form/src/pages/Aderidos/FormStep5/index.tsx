@@ -121,17 +121,17 @@ export const FormStep5 = () => {
 
     const question = {
       E_Visitadores_do_PCF: {
-        questao30: questionOne,
-        questao31: questionTwo,
-        questao32: questionThree,
-        questao33: questionFour,
-        questao34: questionFive,
-        questao35: questionSix,
-        questao36: questionSeven,
-        questao37: questionEight,
-        questao38: questionNine,
-        questao39: questionTen,
-        questao40: questionEleven,
+        questao32: questionOne,
+        questao33: questionTwo,
+        questao34: questionThree,
+        questao35: questionFour,
+        questao36: questionFive,
+        questao37: questionSix,
+        questao38: questionSeven,
+        questao39: questionEight,
+        questao40: questionNine,
+        questao41: questionTen,
+        questao42: questionEleven,
       }
     };
 
@@ -847,7 +847,6 @@ export const FormStep5 = () => {
             type="submit"
             >Próximo
           </button>
-          <RoomCode/>
         </SC.AllButtons>
       </form>
     </Theme>

@@ -30,8 +30,9 @@ interface UsedTransport {
   g_veiculoMunicipio: boolean;
   h_veiculoContratado: boolean;
   i_veiculoUberTaxi: boolean;
-  j_veiculoOutro: boolean;
-  k_veiculoOutroText: string;
+  j_veiculoCaminhandoBicicleta: boolean;
+  k_veiculoOutro: boolean;
+  l_veiculoOutroText: string;
 };
 
 export const FormStep10 = () => {
@@ -53,8 +54,9 @@ export const FormStep10 = () => {
     g_veiculoMunicipio: false,
     h_veiculoContratado: false,
     i_veiculoUberTaxi: false,
-    j_veiculoOutro: false,
-    k_veiculoOutroText: '',
+    j_veiculoCaminhandoBicicleta: false,
+    k_veiculoOutro: false,
+    l_veiculoOutroText: '',
   });
   const [list1, setList1] = useState<Item1[]>([]);
   const [filteredList1, setFilteredList1] = useState<Item1[]>([]);
@@ -94,16 +96,12 @@ export const FormStep10 = () => {
 
     const question = {
       J_Outros_Custos: {
-        questao53: filteredList,
-        questao54:
-        {
-          questionTwo,
-          questionTwoText,
-        },
-        questao55: questionThree,
-        questao56: filteredList1,
-        questao57: filteredList2,
-        questao58: questionSix,
+        questao55: filteredList,
+        questao56: questionTwo,
+        questao57: questionThree,
+        questao58: filteredList1,
+        questao59: filteredList2,
+        questao60: questionSix,
       }
     };
 
@@ -111,7 +109,9 @@ export const FormStep10 = () => {
     const firebaseQuestion = await push(firebaseRoomsQuestion);
     set(firebaseQuestion, question)
 
-    navigate(`/${roomId}/formstep7`)
+    if (confirm('Tem certeza que deseja finalizar o questionário?')) {
+      navigate(`/`)
+    }
   };
 
   const handleVisitorPaysTransportChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -237,30 +237,6 @@ export const FormStep10 = () => {
                       htmlFor="visitorPaysTransportSometimes"
                     >As vezes
                     </label>
-                  </div>
-
-                  <div id="containerInputLabelRadioButton">
-                    <input
-                      id="visitorPaysTransportOtherPays"
-                      name="visitorPaysTransport"
-                      type="radio"
-                      value="Outros"
-                      onChange={handleVisitorPaysTransportChange}
-                    />
-                    <label
-                      className="containerTextLabel"
-                      htmlFor="visitorPaysTransportOtherPays"
-                    >Outros
-                    </label>
-                    <input
-                      className="inputPlaceholderOther"
-                      id="visitorPaysTransportOtherPaysText"
-                      name="visitorPaysTransport"
-                      type="text"
-                      value={questionTwoText}
-                      onChange={handleVisitorPaysTransportTextChange}
-                      placeholder="Escreva aqui"
-                    />
                   </div>
 
                 </div>
@@ -443,26 +419,44 @@ export const FormStep10 = () => {
 
                 <div id="containerInputLabelRadioButton">
                   <input
-                    id="j_veiculoOutro"
-                    name="j_veiculoOutro"
+                    id="j_veiculoCaminhandoBicicleta"
+                    name="j_veiculoCaminhandoBicicleta"
                     type="checkbox"
-                    checked={questionThree.j_veiculoOutro}
+                    checked={questionThree.j_veiculoCaminhandoBicicleta}
                     onChange={(event) => setQuestionThree({
                       ...questionThree,
-                      j_veiculoOutro: !!event.currentTarget?.checked
+                      j_veiculoCaminhandoBicicleta: !!event.currentTarget?.checked
                     })}
                   />
                   <label
                     className="containerTextLabel"
-                    htmlFor="j_veiculoOutro"
+                    htmlFor="j_veiculoCaminhandoBicicleta"
+                  >Caminhando ou bicicleta
+                  </label>
+                </div>
+
+                <div id="containerInputLabelRadioButton">
+                  <input
+                    id="k_veiculoOutro"
+                    name="k_veiculoOutro"
+                    type="checkbox"
+                    checked={questionThree.k_veiculoOutro}
+                    onChange={(event) => setQuestionThree({
+                      ...questionThree,
+                      k_veiculoOutro: !!event.currentTarget?.checked
+                    })}
+                  />
+                  <label
+                    className="containerTextLabel"
+                    htmlFor="k_veiculoOutro"
                   >Outros
                   </label>
                   <input
-                    id="k_veiculoOutroText"
+                    id="l_veiculoOutroText"
                     className="inputPlaceholderOther"
-                    name="k_veiculoOutroText"
+                    name="l_veiculoOutroText"
                     type="text"
-                    value={questionThree.k_veiculoOutroText}
+                    value={questionThree.l_veiculoOutroText}
                     onChange={handleUsedTransporteChange}
                     placeholder="Escreva aqui"
                   />
@@ -556,152 +550,8 @@ export const FormStep10 = () => {
             type="submit"
             >Finalizar
           </button>
-          <RoomCode/>
         </SC.AllButtons>
       </form>
     </Theme>
   )
 };
-
-{/* <SC.ButtonTypeRadioText>
-<div className="formQuestion">
-  <p>Há algum outro custo direto pago com recurso do PCF?</p>
-  <div className="formQuestion">
-    <div id="containerOption">
-      <div id="containerOptionSixOption">
-
-        <div id="containerInputLabelRadioButton">
-          <input
-            
-            id="directCostPCFYes"
-            name="directCostPCF"
-            type="radio"
-            value={"sim_Q57"}
-            onClick={() => setIsCheckQ57("sim_Q57")}
-            onChange={handleDirectCostPCFChange}
-          />
-          <label
-            className="containerTextLabel"
-            htmlFor="directCostPCFYes"
-          >Sim
-          </label>
-        </div>
-
-        <div id="containerInputLabelRadioButton">
-          <input
-            id="directCostPCFNo"
-            name="directCostPCF"
-            type="radio"
-            value={"nao_Q57"}
-            onClick={() => setIsCheckQ57("nao_Q57")}
-            onChange={handleDirectCostPCFChange}
-          />
-          <label
-            className="containerTextLabel"
-            htmlFor="directCostPCFNo"
-          >Não
-          </label>
-        </div>
-
-        <div id="containerInputLabelRadioButton">
-          <input
-            id="directCostPCFDontKnow"
-            name="directCostPCF"
-            type="radio"
-            value={"naoSei_Q57"}
-            onClick={() => setIsCheckQ57("naoSei_Q57")}
-            onChange={handleDirectCostPCFChange}
-          />
-          <label
-            className="containerTextLabel"
-            htmlFor="directCostPCFDontKnow"
-          >Desconheço
-          </label>
-        </div>
-
-      </div>
-    </div>
-  </div>
-
-  {isCheckQ57 === "sim_Q57" && (
-    <>
-      <div className="containerBgLabel">
-        <label className="containerTextLabel" htmlFor="name">
-          Quais?
-          <input
-            name="otherImportantCostsText"
-            type="text"
-            value={questionFive}
-            onChange={handleDirectCostPCFTextChange}
-            placeholder="Sua resposta"
-          />
-        </label>
-      </div>
-    </>
-  )}
-</div>
-</SC.ButtonTypeRadioText> */}
-
-{/* <SC.ButtonTypeRadioText>
-  <div className="formQuestion">
-    <p>
-    Existem outros gastos que são importantes para o funcionamento do programa e que não são cobertos pelos recursos repassados pelo PCF? (exemplo: protetor solar, guarda-chuva etc.)
-    </p>
-    <div className="formQuestion">
-      <div id="containerOption">
-        <div id="containerOptionSixOption">
-
-          <div id="containerInputLabelRadioButton">
-            <input
-              id="otherImportantCostsYes"
-              name="otherImportantCosts"
-              type="radio"
-              value={"sim_Q59"}
-              onClick={() => setIsCheckQ59("sim_Q59")}
-              onChange={handleOtherImportantCostsChange}
-            />
-            <label
-              className="containerTextLabel"
-              htmlFor="otherImportantCostsYes"
-            >Sim
-            </label>
-          </div>
-
-          <div id="containerInputLabelRadioButton">
-            <input
-              id="otherImportantCostsNo"
-              name="otherImportantCosts"
-              type="radio"
-              value={"nao_Q59"}
-              onClick={() => setIsCheckQ59("nao_Q59")}
-              onChange={handleOtherImportantCostsChange}
-            />
-            <label
-              className="containerTextLabel"
-              htmlFor="otherImportantCostsNo"
-            >Não
-            </label>
-          </div>
-
-        </div>
-      </div>
-    </div>
-
-    {isCheckQ59 === "sim_Q59" && (
-      <>
-        <div className="containerBgLabel">
-          <label className="containerTextLabel" htmlFor="name">
-            Quais?
-            <input
-              name="otherImportantCostsText"
-              type="text"
-              value={questionSeven}
-              onChange={handleOtherImportantCostsTextChange}
-              placeholder="Sua resposta"
-            />
-          </label>
-        </div>
-      </>
-    )}
-  </div>
-</SC.ButtonTypeRadioText> */}

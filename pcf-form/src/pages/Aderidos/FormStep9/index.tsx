@@ -5,7 +5,6 @@ import { useFormPage, FormActions } from "../../../context/FormContext";
 import { ChangeEvent, FormEvent, useCallback, useEffect, useState } from "react";
 import { push, ref, set } from "firebase/database";
 import { database } from "../../../services/firebase";
-import { RoomCode } from "../../../components/RoomCode";
 
 type RoomParams = {
   id: string;
@@ -46,8 +45,8 @@ export const FormStep9 = () => {
 
     const question = {
       I_Recursos_E_Custos : {
-        questao51: questionOne,
-        questao52: questionTwo,
+        questao53: questionOne,
+        questao54: questionTwo,
       }
     };
 
@@ -249,7 +248,6 @@ export const FormStep9 = () => {
             type="submit"
             >Próximo
           </button>
-          <RoomCode/>
         </SC.AllButtons>
       </form>
     </Theme>

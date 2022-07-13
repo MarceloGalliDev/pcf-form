@@ -45,10 +45,10 @@ export const FormStep8 = () => {
 
     const question = {
       H_Organizacoes_Parceiras: {
-        questao47: questionOne,
-        questao48: filteredList,
-        questao49: questionThree,
-        questao50: questionFour,
+        questao49: questionOne,
+        questao50: filteredList,
+        questao51: questionThree,
+        questao52: questionFour,
       }
     };
 
@@ -167,7 +167,6 @@ export const FormStep8 = () => {
             type="submit"
             >Próximo
           </button>
-          <RoomCode/>
         </SC.AllButtons>
       </form>
     </Theme>

@@ -57,7 +57,7 @@ export const InputArea = ({ onAdd }: Props) => {
             placeholder="Escreva aqui"
           />
           <span
-            data-tooltip="Por exemplo: motorista, secretário, técnico administrativo ..."
+            data-tooltip="Por exemplo: motorista, secretário, técnico administrativo, faxineira ..."
           >
             <Info
               size={20}

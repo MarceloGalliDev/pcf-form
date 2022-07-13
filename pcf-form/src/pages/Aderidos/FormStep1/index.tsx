@@ -111,7 +111,6 @@ export const FormStep1 = () => {
         <p>Informações do responsável por responder este questionário</p>
         <hr />
       </SC.Container>
-
       <form onSubmit={handleSendQuestion}>
 
         <SC.ButtonTypeText>
@@ -211,7 +210,6 @@ export const FormStep1 = () => {
             type="submit"
           >Próximo
           </button>
-          <RoomCode/>
         </SC.AllButtons>
       </form>
     </Theme>

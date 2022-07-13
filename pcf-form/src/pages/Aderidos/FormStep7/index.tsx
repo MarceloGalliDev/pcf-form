@@ -39,10 +39,10 @@ export const FormStep7 = () => {
 
     const question = {
       G_Publico_Atendido_PCF: {
-        questao43: questionOne,
-        questao44: questionTwo,
-        questao45: questionThree,
-        questao46: questionFour,
+        questao45: questionOne,
+        questao46: questionTwo,
+        questao47: questionThree,
+        questao48: questionFour,
       }
     };
 
@@ -155,7 +155,6 @@ export const FormStep7 = () => {
             type="submit"
             >Próximo
           </button>
-          <RoomCode/>
         </SC.AllButtons>
       </form>
     </Theme>

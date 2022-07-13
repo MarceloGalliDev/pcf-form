@@ -10,7 +10,6 @@ import {
 } from "../../../types/IBGE";
 import { database } from "../../../services/firebase";
 import { ref, push, set } from "firebase/database";
-import { RoomCode } from "../../../components/RoomCode";
 
 type RoomParams = {
   id: string;
@@ -206,7 +205,6 @@ export const FormStepA1 = () => {
             type="submit"
           >Próximo
           </button>
-          <RoomCode/>
         </SC.AllButtons>
       </form>
     </ThemeA1>

@@ -109,16 +109,16 @@ export const FormStep4 = () => {
 
     const question = {
       D_Supervisores_do_PCF: {
-        questao20: questionOne,
-        questao21: questionTwo,
-        questao22: questionThree,
-        questao23: questionFive,
-        questao24: questionSix,
-        questao25: questionSeven,
-        questao26: questionEight,
-        questao27: questionNine,
-        questao28: questionTen,
-        questao29: questionEleven,
+        questao22: questionOne,
+        questao23: questionTwo,
+        questao24: questionThree,
+        questao25: questionFive,
+        questao26: questionSix,
+        questao27: questionSeven,
+        questao28: questionEight,
+        questao29: questionNine,
+        questao30: questionTen,
+        questao31: questionEleven,
       }
     };
 
@@ -764,9 +764,7 @@ export const FormStep4 = () => {
             type="submit"
             >Próximo
           </button>
-          <RoomCode/>
         </SC.AllButtons>
-
       </form>
     </Theme>
   );
