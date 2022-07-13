@@ -11,6 +11,7 @@ import {
 import { database } from "../../../services/firebase";
 import { ref, push, set } from "firebase/database";
 import { RoomCode } from "../../../components/RoomCode";
+import { useRoom } from "../../../hooks/useRoom";
 
 type RoomParams = {
   id: string;
@@ -101,6 +102,12 @@ export const FormStep1 = () => {
       type: FormActions.setCurrentStep,
       payload: 1
     });
+  }, []);
+
+  useEffect(() => { 
+    const firebaseRoomsQuestion = ref(database, `rooms/${roomId}/aderidos/question`);
+
+    
   }, []);
 
   return (

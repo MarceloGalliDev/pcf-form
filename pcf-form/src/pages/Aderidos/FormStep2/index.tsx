@@ -6,6 +6,7 @@ import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { push, ref, set } from "firebase/database";
 import { database } from "../../../services/firebase";
 import { RoomCode } from "../../../components/RoomCode";
+import { useRoom } from "../../../hooks/useRoom";
 
 type RoomParams = {
   id: string;
@@ -23,8 +24,7 @@ export const FormStep2 = () => {
   const [questionFive, setQuestionFive] = useState('');
   const [questionSix, setQuestionSix] = useState('');
   const [questionSeven, setQuestionSeven] = useState('');
-
-
+  
   async function handleSendQuestion(event: FormEvent) {
     event.preventDefault();
     
