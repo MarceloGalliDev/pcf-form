@@ -99,6 +99,8 @@ export const FormStep2 = () => {
             <label htmlFor="dateAcquisition">
               Data de adesão do município ao PCF:
               <input
+                required
+                autoComplete="no"
                 name="dateAcquisition"
                 type="date"
                 value={questionOne}
@@ -113,6 +115,8 @@ export const FormStep2 = () => {
             <label htmlFor="dateVisition">
               Data do início das visitas:
               <input
+                required
+                autoComplete="no"
                 name="dateVisition"
                 type="date"
                 value={questionTwo}
@@ -132,6 +136,7 @@ export const FormStep2 = () => {
               <div>
                 <div id="containerInputLabelRadioButton">
                   <input
+                    required
                     id="lastMonthSpentJaneiro"
                     name="lastMonthSpentData"
                     type="radio"
@@ -300,6 +305,7 @@ export const FormStep2 = () => {
 
                 <div id="containerInputLabelRadioButton">
                   <input
+                    required
                     id="phaseImplatation"
                     name="phasePCFCity"
                     type="radio"
@@ -373,6 +379,7 @@ export const FormStep2 = () => {
 
                 <div id="containerInputLabelRadioButton">
                   <input
+                    required
                     id="expansionGoalsYes"
                     name="expansionGoals"
                     type="radio"
@@ -446,6 +453,7 @@ export const FormStep2 = () => {
 
                 <div id="containerInputLabelRadioButton">
                   <input
+                    required
                     id="referenceCenterYes"
                     name="referenceCenter"
                     type="radio"
@@ -519,6 +527,7 @@ export const FormStep2 = () => {
 
                 <div id="containerInputLabelRadioButton">
                   <input
+                    required
                     id="actionPlanYes"
                     name="actionPlan"
                     type="radio"

@@ -8,7 +8,6 @@ import { ref, push, set } from "firebase/database";
 import { InputArea } from "../../../components/Questions/QuestionOutrosProfissionais/components/InputArea";
 import { TableArea } from "../../../components/Questions/QuestionOutrosProfissionais/components/TableArea";
 import { Item } from "../../../components/Questions/QuestionOutrosProfissionais/types/Item";
-import { RoomCode } from "../../../components/RoomCode";
 
 
 type RoomParams = {

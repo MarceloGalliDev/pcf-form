@@ -33,7 +33,7 @@ export const SubSection = styled.div`
       font-weight: normal;
       color: #FFFFFF;
     }
-  }
+  };
 
   .formQuestionV1 {
     border: 1px solid #3490C9;
@@ -53,7 +53,7 @@ export const SubSection = styled.div`
       display: flex;
       align-items: center;
     }
-  }
+  };
 
   .formQuestionV2 {
     border: 1px solid #3490C9;
@@ -64,7 +64,7 @@ export const SubSection = styled.div`
 
     .formQuestionV3 {
       border: 1px solid #3490C9;
-      background-color: #;
+      background-color: #2e7eb02e;
       border-radius: 10px;
       padding: 10px 10px;
       margin-bottom: 10px;
@@ -79,7 +79,7 @@ export const ButtonTypeRadio = styled.div`
     border-radius: 10px;
     padding: 10px 10px;
     margin-bottom: 10px;
-  
+
     .textFormRadioButton {
       font-size: 15px;
       font-weight: bold;
@@ -91,6 +91,7 @@ export const ButtonTypeRadio = styled.div`
       }
     }
 
+
     #containerOption {
       display: flex;
       margin-left: 10px;
@@ -101,8 +102,17 @@ export const ButtonTypeRadio = styled.div`
         gap: 10px;
         margin-top: 10px;
         align-items: center;
-      }
 
+        input[type="radio"]:invalid {
+          appearance: none;
+          color: red;
+          width: 12px;
+          height: 12px;
+          border: 1px solid red;
+          border-radius: 50%;
+        }
+      }
+      
       .containerTextLabel {
         font-size: 15px;
         font-weight: normal;
@@ -187,6 +197,10 @@ export const ButtonTypeDate = styled.div`
         outline: 0;
         font-size: 15px;
         padding: 5px 0;
+
+        :invalid {
+          border-bottom: 1px solid red;
+        }
       }
     }
   }
@@ -224,6 +238,10 @@ export const ButtonTypeSelectOption = styled.div`
         border-radius: 5px;
         text-decoration: #2D7DB0;
         outline-color: #46687D;
+
+        :invalid {
+          border: 1px solid red;
+        }
       }
     }
   }
@@ -258,6 +276,13 @@ export const ButtonTypeCheckbox = styled.div`
         gap: 10px;
         margin-top: 10px;
         align-items: center;
+
+        input[type="checkbox"] {
+          color: red;
+          width: 12px;
+          height: 12px;
+          border: 1px solid red;
+        }
 
         .containerTextLabel {
           font-size: 15px;
@@ -436,6 +461,10 @@ export const ButtonTypeText = styled.div`
         font-size: 15px;
         padding: 5px 0;
         outline: none;
+
+        :invalid {
+          border-bottom: 1px solid red;
+        }
       }
     }
   }

@@ -10,8 +10,6 @@ import {
 } from "../../../types/IBGE";
 import { database } from "../../../services/firebase";
 import { ref, push, set } from "firebase/database";
-import { RoomCode } from "../../../components/RoomCode";
-import { useRoom } from "../../../hooks/useRoom";
 
 type RoomParams = {
   id: string;
@@ -31,18 +29,19 @@ export const FormStep1 = () => {
   const [questionThree, setQuestionThree] = useState('');
   const [questionFour, setQuestionFour] = useState('');
 
+
   async function handleSendQuestion(event: FormEvent) {
     event.preventDefault();
 
-    if (questionOne.trim() === '') {
-      return;
-    };
-    if (questionTwo.trim() === '') {
-      return;
-    };
-    if (questionTwo.trim() === '') {
-      return;
-    };
+    // if (questionOne.trim() === '') {
+    //   return;
+    // };
+    // if (questionTwo.trim() === '') {
+    //   return;
+    // };
+    // if (questionTwo.trim() === '') {
+    //   return;
+    // };
 
     const question = {
       A_Informacoes_Gerais: {
@@ -58,6 +57,8 @@ export const FormStep1 = () => {
     const firebaseRoomsQuestion = ref(database, `rooms/${roomId}/aderidos/question`);
     const firebaseQuestion = await push(firebaseRoomsQuestion);
     set(firebaseQuestion, question)
+
+    console.log('teste1', question)
 
     navigate(`/${roomId}/formstep2`)
   };
@@ -104,12 +105,6 @@ export const FormStep1 = () => {
     });
   }, []);
 
-  useEffect(() => { 
-    const firebaseRoomsQuestion = ref(database, `rooms/${roomId}/aderidos/question`);
-
-    
-  }, []);
-
   return (
     <Theme>
       <SC.Container>
@@ -124,7 +119,10 @@ export const FormStep1 = () => {
           <div className="formQuestion">
             <label htmlFor="name">
               Nome do entrevistado:
+              {/* <span>{errors.name && " ⚠ *Campo obrigatório "}</span> */}
               <input
+                required
+                autoComplete="no"
                 name="name"
                 type="text"
                 value={questionOne}
@@ -140,6 +138,8 @@ export const FormStep1 = () => {
             <label htmlFor="email">
               E-mail:
               <input
+                required
+                autoComplete="no"
                 name="email"
                 type="email"
                 value={questionTwo}
@@ -155,6 +155,8 @@ export const FormStep1 = () => {
             <label htmlFor="phoneNumber">
               Telefone para contato:
               <input
+                required
+                autoComplete="no"
                 name="phoneNumber"
                 type="tel"
                 value={questionThree}
@@ -170,6 +172,8 @@ export const FormStep1 = () => {
             <label htmlFor="functionPCF">
               Função no PCF:
               <input
+                required
+                autoComplete="no"
                 name="functionPCF"
                 type="text"
                 value={questionFour}
@@ -185,23 +189,25 @@ export const FormStep1 = () => {
             <label htmlFor="uf">
               Local em que atua no PCF
               <select
+                required
                 name="uf"
                 id="uf"
                 value={selectedUf}
                 onChange={handleSelectedUf}
               >
-                <option value="0">Selecione o Estado</option>
+                <option value="">Selecione o Estado</option>
                 {ufs.map(uf => (
                   <option key={uf.id} value={uf.sigla}>{uf.nome}</option>
                 ))}
               </select>
               <select
+                required
                 name="city"
                 id="city"
                 value={selectedCity}
                 onChange={handleSelectedCity}
               >
-                <option value="0">Selecione o Município</option>
+                <option value="">Selecione o Município</option>
                 {cities.map(city => (
                   <option key={city.id} value={city.nome}>{city.nome}</option>
                 ))}
@@ -225,9 +231,24 @@ export const FormStep1 = () => {
 
 {/* <span>{errors.name && " ⚠ *Campo obrigatório "}</span> */}
 
-  // const schema = yup.object({
-  //   name: yup.string().required(),
-  //   email: yup.string().required(),
-  //   phoneNumber: yup.number().required(),
-  //   functionPCF: yup.string().required(),
-  // }).required();
+
+// type FormStep1 = {
+//   A_Informacoes_Gerais: {
+//     questao01: string,
+//     questao02: string,
+//     questao03: string,
+//     questao04: string,
+//     questao05: string,
+//     questao06: string,
+//   }
+// };
+
+// type Props = {
+//   onQuestion: (formStep1: FormStep1) => void
+// }
+
+  // const [newQuestion, setNewQuestion] = useState<FormStep1[]>([]);
+  // const handleStorageQuestion = ({onQuestion}: Props) => {
+  //   let newQuestion = question
+  //   newQuestion.push(question)
+  // }

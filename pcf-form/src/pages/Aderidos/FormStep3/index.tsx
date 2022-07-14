@@ -134,6 +134,7 @@ export const FormStep3 = () => {
 
                 <div id="containerInputLabelRadioButton">
                   <input
+                    required
                     id="teamCoordinatorYes"
                     name="teamCoordinator"
                     type="radio"
@@ -192,6 +193,7 @@ export const FormStep3 = () => {
                 <div id="containerOptionSixOption">
                   <div id="containerInputLabelRadioButton">
                     <input
+                      required
                       id="meetTheCoordinatorYes"
                       name="meetTheCoordinator"
                       type="radio"
@@ -234,6 +236,7 @@ export const FormStep3 = () => {
                       <div id="containerOptionSixOption">
                         <div id="containerInputLabelRadioButton">
                           <input
+                            required
                             id="contactCoordinatorZero"
                             name="contactCoordinator"
                             type="radio"
@@ -335,6 +338,7 @@ export const FormStep3 = () => {
                 <div id="containerOptionSixOption">
                   <div id="containerInputLabelRadioButton">
                     <input
+                      required
                       id="knowTheMultiplierYes"
                       name="knowTheMultiplier"
                       type="radio"
@@ -376,6 +380,7 @@ export const FormStep3 = () => {
                       <div id="containerOptionSixOption">
                         <div id="containerInputLabelRadioButton">
                           <input
+                            required
                             id="contactMultiplierZero"
                             name="knowTheMultiplierContact"
                             type="radio"
@@ -477,6 +482,7 @@ export const FormStep3 = () => {
 
                 <div id="containerInputLabelRadioButton">
                   <input
+                    required
                     id="steeringCommitteeYes"
                     name="steeringCommittee"
                     type="radio"
@@ -550,6 +556,7 @@ export const FormStep3 = () => {
 
                 <div id="containerInputLabelRadioButton">
                   <input
+                    required
                     id="steeringCommitteeMeetingZero"
                     name="steeringCommitteeMeeting"
                     type="radio"
