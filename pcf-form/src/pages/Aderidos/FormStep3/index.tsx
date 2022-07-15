@@ -163,21 +163,6 @@ export const FormStep3 = () => {
                   </label>
                 </div>
 
-                <div id="containerInputLabelRadioButton">
-                  <input
-                    id="teamCoordinatorDontKnow"
-                    name="teamCoordinator"
-                    type="radio"
-                    value="Outros"
-                    onChange={handleTeamCoordinatorChange}
-                  />
-                  <label
-                    className="containerTextLabel"
-                    htmlFor="teamCoordinatorDontKnow"
-                  >Outros
-                  </label>
-                </div>
-
               </div>
             </div>
           </div>
@@ -781,7 +766,7 @@ export const FormStep3 = () => {
         </SC.ButtonTypeCheckbox>
 
         <SC.AllButtons>
-          <Link className="buttonAll" to="/:id/formstep2">Voltar</Link>
+          <Link className="buttonAll" to={`/${roomId}/formstep2`}>Voltar</Link>
           <button
             className="buttonAll"
             type="submit"

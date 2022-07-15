@@ -580,7 +580,7 @@ export const FormStep2 = () => {
         </SC.ButtonTypeRadio>
 
         <SC.AllButtons>
-          <Link className="buttonAll" to="/:id/formstep1">Voltar</Link>
+          <Link className="buttonAll" to={`/${roomId}/formstep1`}>Voltar</Link>
           <button
             className="buttonAll"
             type="submit"

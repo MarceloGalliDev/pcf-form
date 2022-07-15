@@ -884,7 +884,7 @@ export const FormStep5 = () => {
         </SC.SubSection>
 
         <SC.AllButtons>
-          <Link className="buttonAll" to="/:id/formstep4">Voltar</Link>
+          <Link className="buttonAll" to={`/${roomId}/formstep4`}>Voltar</Link>
           <button
             className="buttonAll"
             type="submit"

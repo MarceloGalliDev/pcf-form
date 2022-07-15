@@ -14,6 +14,8 @@ import { InputAreaOutrosCustos1 } from "../../../components/Questions/QuestionOu
 import { TableAreaOutrosCustos1 } from "../../../components/Questions/QuestionOutrosCustos1/components/TableArea";
 import { InputAreaOutrosCustos2 } from "../../../components/Questions/QuestionOutrosCustos2/components/InputArea";
 import { TableAreaOutrosCustos2 } from "../../../components/Questions/QuestionOutrosCustos2/components/TableArea";
+import { CheckCircle } from 'phosphor-react';
+import { Alert } from 'reactstrap';
 
 type RoomParams = {
   id: string;
@@ -62,6 +64,8 @@ export const FormStep10 = () => {
   const [list2, setList2] = useState<Item2[]>([]);
   const [filteredList2, setFilteredList2] = useState<Item2[]>([]);
   const [questionSix, setQuestionSix] = useState('');
+
+  const [isAlert, setIsAlert] = useState(false);
 
   function handleAddItemOthersCosts(item: Item) {
     let newList = [...list]
@@ -545,15 +549,22 @@ export const FormStep10 = () => {
           </SC.ButtonTypeRadio>
         </div>
       </SC.SubSection>
-    
+
       <form onSubmit={handleSendOtherCosts}>
         <SC.AllButtons>
-          <Link className="buttonAll" to="/:id/formstep9">Voltar</Link>
+          <Link className="buttonAll" to={`/${roomId}/formstep9`}>Voltar</Link>
           <button
             className="buttonAll"
             type="submit"
+            onClick={() => setIsAlert(true)}
             >Finalizar
           </button>
+          {isAlert === true && (
+            <Alert className="success">
+              Formulário enviado com sucesso!
+              <CheckCircle size={20} color="#2dd24e" weight="light" />
+            </Alert>
+          )}
         </SC.AllButtons>
       </form>
     </Theme>

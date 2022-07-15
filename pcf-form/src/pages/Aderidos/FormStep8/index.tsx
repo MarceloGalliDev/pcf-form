@@ -137,21 +137,6 @@ export const FormStep8 = () => {
                   </label>
                 </div>
 
-                <div id="containerInputLabelRadioButton">
-                  <input
-                    id="PartnershipAndContractingDontKnow"
-                    name="PartnershipAndContracting"
-                    type="radio"
-                    value="Outros"
-                    onChange={handlePartnershipAndContractingChange}
-                  />
-                  <label
-                    className="containerTextLabel"
-                    htmlFor="PartnershipAndContractingDontKnow"
-                  >Outros
-                  </label>
-                </div>
-
               </div>
             </div>
           </div>
@@ -159,7 +144,7 @@ export const FormStep8 = () => {
 
 
         <SC.AllButtons>
-          <Link className="buttonAll" to="/:id/formstep9">Voltar</Link>
+          <Link className="buttonAll" to={`/${roomId}/formstep7`}>Voltar</Link>
           <button
             className="buttonAll"
             type="submit"

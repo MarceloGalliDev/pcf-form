@@ -152,7 +152,7 @@ export const FormStep7 = () => {
         </SC.ButtonTypeTextV2>
 
         <SC.AllButtons>
-          <Link className="buttonAll" to="/:id/formstep8">Voltar</Link>
+          <Link className="buttonAll" to={`/${roomId}/formstep6`}>Voltar</Link>
           <button
             className="buttonAll"
             type="submit"
