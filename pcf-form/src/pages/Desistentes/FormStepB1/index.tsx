@@ -47,7 +47,7 @@ export const FormStepB1 = () => {
     const firebaseQuestion = await push(firebaseRoomsQuestion);
     set(firebaseQuestion, question)
 
-    navigate(`/${roomId}/formstep2`)
+    navigate(`/${roomId}/formstepB2`)
   };
 
   const handleNameChange = (event: ChangeEvent<HTMLInputElement>) => {
