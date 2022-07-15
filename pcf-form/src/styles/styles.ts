@@ -620,6 +620,18 @@ export const AllButtons = styled.div`
   flex-direction: row;
   gap: 20px;
   background-color: #f2f2f2;
+
+  .success {
+    display: flex;
+    text-align: center;
+    align-items: center;
+    gap: 2px;
+    background-color: #fff;
+    border: 1px solid green;
+    border-radius: 10px;
+    font-weight: bold;
+    padding: 0px 6px;
+  };
   
   .buttonAll {
     width: 170px;

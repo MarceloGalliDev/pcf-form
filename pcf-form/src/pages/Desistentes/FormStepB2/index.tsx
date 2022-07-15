@@ -2,9 +2,11 @@ import * as SC from "../../../styles/styles";
 import { ThemeB1 } from "../../../components/ThemeB1";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useFormPage, FormActions } from "../../../context/FormContext";
-import { ChangeEvent, useEffect, useState, FormEvent, useCallback } from "react";
+import { ChangeEvent, useEffect, useState, FormEvent } from "react";
 import { push, ref, set } from "firebase/database";
 import { database } from "../../../services/firebase";
+import { CheckCircle } from 'phosphor-react';
+import { Alert } from 'reactstrap';
 
 type RoomParams = {
   id: string;
@@ -42,6 +44,7 @@ export const FormStepB2 = () => {
   const [questionTwelve, setQuestionTwelve] = useState('');
   const [isCheckQ02, setIsCheckQ02] = useState('');
   const [isCheckQ05, setIsCheckQ05] = useState('');
+  const [isAlert, setIsAlert] = useState(false);
 
 
   async function handleDropoutMunicipalities(event: FormEvent) {
@@ -78,8 +81,10 @@ export const FormStepB2 = () => {
     set(firebaseQuestion, question)
 
     if (confirm('Tem certeza que deseja finalizar o questionário?')) {
-      navigate(`/`)
-    }
+      setTimeout(() => {
+        navigate('/')
+      }, 2000)
+    };
   };
 
   const handleHaveTargetAudiencePCFChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -125,8 +130,6 @@ export const FormStepB2 = () => {
   const handleReasonGivingUpValueCreatedChange =(event:ChangeEvent<HTMLInputElement>) => {
     setQuestionTwelve(event.target.value);
   };
-
-
 
   useEffect(() => {
     dispatch({
@@ -474,8 +477,15 @@ export const FormStepB2 = () => {
           <button
             className="buttonAll"
             type="submit"
+            onClick={() => setIsAlert(true)}
             >Finalizar
           </button>
+          {isAlert === true && (
+            <Alert className="success">
+              <CheckCircle size={20} color="#2dd24e" weight="light" />
+              Formulário enviado com sucesso!
+            </Alert>
+          )}
         </SC.AllButtons>
       </form>
     </ThemeB1>

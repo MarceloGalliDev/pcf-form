@@ -113,11 +113,13 @@ export const FormStep10 = () => {
 
     const firebaseRoomsQuestion = ref(database, `rooms/${roomId}/aderidos/question`);
     const firebaseQuestion = await push(firebaseRoomsQuestion);
-    set(firebaseQuestion, question)
+    set(firebaseQuestion, question);
 
     if (confirm('Tem certeza que deseja finalizar o questionário?')) {
-      navigate(`/`)
-    }
+      setTimeout(() => {
+        navigate('/')
+      }, 2000)
+    };
   };
 
   const handleVisitorPaysTransportChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -561,8 +563,8 @@ export const FormStep10 = () => {
           </button>
           {isAlert === true && (
             <Alert className="success">
-              Formulário enviado com sucesso!
               <CheckCircle size={20} color="#2dd24e" weight="light" />
+              Formulário enviado com sucesso!
             </Alert>
           )}
         </SC.AllButtons>

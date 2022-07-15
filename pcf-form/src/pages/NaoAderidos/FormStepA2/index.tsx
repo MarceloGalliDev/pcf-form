@@ -2,9 +2,11 @@ import * as SC from "../../../styles/styles";
 import { ThemeA1 } from "../../../components/ThemeA1";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useFormPage, FormActions } from "../../../context/FormContext";
-import { ChangeEvent, useEffect, useState, useCallback, FormEvent } from "react";
+import { ChangeEvent, useEffect, useState, FormEvent } from "react";
 import { push, ref, set } from "firebase/database";
 import { database } from "../../../services/firebase";
+import { CheckCircle } from 'phosphor-react';
+import { Alert } from 'reactstrap';
 
 type RoomParams = {
   id: string;
@@ -38,9 +40,9 @@ export const FormStepA2 = () => {
   const [questionEight, setQuestionEight] = useState('');
   const [questionNine, setQuestionNine] = useState('');
   const [questionTen, setQuestionTen] = useState('');
-  
   const [isCheckA2Q08, setIsCheckA2Q08] = useState('');
   const [isCheckA2Q13, setIsCheckA2Q13] = useState('');
+  const [isAlert, setIsAlert] = useState(false);
 
 
   async function handleEligibleMunicipalities(event: FormEvent) {
@@ -74,8 +76,10 @@ export const FormStepA2 = () => {
     set(firebaseQuestion, question)
 
     if (confirm('Tem certeza que deseja finalizar o questionário?')) {
-      navigate(`/`)
-    }
+      setTimeout(() => {
+        navigate('/')
+      }, 2000)
+    };
   };
 
   const handleTargetAudiencePCFChange =(event:ChangeEvent<HTMLInputElement>) => {
@@ -407,8 +411,15 @@ export const FormStepA2 = () => {
           <button
             className="buttonAll"
             type="submit"
+            onClick={() => setIsAlert(true)}
             >Finalizar
           </button>
+          {isAlert === true && (
+            <Alert className="success">
+              <CheckCircle size={20} color="#2dd24e" weight="light" />
+              Formulário enviado com sucesso!
+            </Alert>
+          )}
         </SC.AllButtons>
       </form>
     </ThemeA1>
