@@ -33,15 +33,18 @@ export const FormStep1 = () => {
   async function handleSendQuestion(event: FormEvent) {
     event.preventDefault();
 
-    // if (questionOne.trim() === '') {
-    //   return;
-    // };
-    // if (questionTwo.trim() === '') {
-    //   return;
-    // };
-    // if (questionTwo.trim() === '') {
-    //   return;
-    // };
+    if (questionOne.trim() === '') {
+      return;
+    };
+    if (questionTwo.trim() === '') {
+      return;
+    };
+    if (questionThree.trim() === '') {
+      return;
+    };
+    if (questionFour.trim() === '') {
+      return;
+    };
 
     const question = {
       A_Informacoes_Gerais: {
@@ -117,9 +120,9 @@ export const FormStep1 = () => {
 
         <SC.ButtonTypeText>
           <div className="formQuestion">
-            <label htmlFor="name">
-              Nome do entrevistado:
-              {/* <span>{errors.name && " ⚠ *Campo obrigatório "}</span> */}
+            <label
+              htmlFor="name"
+            >Nome do entrevistado:
               <input
                 required
                 autoComplete="no"
@@ -135,8 +138,9 @@ export const FormStep1 = () => {
 
         <SC.ButtonTypeText>
           <div className="formQuestion">
-            <label htmlFor="email">
-              E-mail:
+            <label
+              htmlFor="email"
+            >E-mail:
               <input
                 required
                 autoComplete="no"
@@ -152,8 +156,9 @@ export const FormStep1 = () => {
 
         <SC.ButtonTypeText>
           <div className="formQuestion">
-            <label htmlFor="phoneNumber">
-              Telefone para contato:
+            <label
+              htmlFor="phoneNumber"
+            >Telefone para contato:
               <input
                 required
                 autoComplete="no"
@@ -169,8 +174,9 @@ export const FormStep1 = () => {
 
         <SC.ButtonTypeText>
           <div className="formQuestion">
-            <label htmlFor="functionPCF">
-              Função no PCF:
+            <label
+              htmlFor="functionPCF"
+            >Função no PCF:
               <input
                 required
                 autoComplete="no"
@@ -186,8 +192,9 @@ export const FormStep1 = () => {
 
         <SC.ButtonTypeSelectOption>
           <div className="formQuestion">
-            <label htmlFor="uf">
-              Local em que atua no PCF
+            <label
+              htmlFor="uf"
+            >Local em que atua no PCF
               <select
                 required
                 name="uf"
@@ -252,3 +259,19 @@ export const FormStep1 = () => {
   //   let newQuestion = question
   //   newQuestion.push(question)
   // }
+
+  // useEffect(() => {
+  //   if (questionOne === '' ||
+  //     questionTwo === '' ||
+  //     questionThree === '' ||
+  //     questionFour === '' ||
+  //     selectedUf === '' ||
+  //     selectedCity === '') {
+  //     alert('Iniciado Formulário')
+  //   } else {
+  //     dispatch({
+  //       type: FormActions.setCurrentStep,
+  //       payload: 2
+  //     });
+  //   }
+  // }, []);

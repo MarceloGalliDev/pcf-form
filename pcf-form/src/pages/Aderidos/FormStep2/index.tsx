@@ -96,8 +96,9 @@ export const FormStep2 = () => {
 
         <SC.ButtonTypeDate>
           <div className="formQuestion">
-            <label htmlFor="dateAcquisition">
-              Data de adesão do município ao PCF:
+            <label
+              htmlFor="dateAcquisition"
+            >Data de adesão do município ao PCF:
               <input
                 required
                 autoComplete="no"
@@ -112,8 +113,9 @@ export const FormStep2 = () => {
 
         <SC.ButtonTypeDate>
           <div className="formQuestion">
-            <label htmlFor="dateVisition">
-              Data do início das visitas:
+            <label
+              htmlFor="dateVisition"
+            >Data do início das visitas:
               <input
                 required
                 autoComplete="no"
@@ -260,20 +262,6 @@ export const FormStep2 = () => {
               </div>
 
               <div id="containerOptionSixOption">
-                <div id="containerInputLabelRadioButton">
-                  <input
-                    id="lastMonthSpentDontKnow"
-                    name="lastMonthSpentData"
-                    type="radio"
-                    value="Outros"
-                    onChange={handleLastMonthSpentDataChange}
-                  />
-                  <label
-                    className="containerTextLabel"
-                    htmlFor="lastMonthSpentDontKnow"
-                  >Outros
-                  </label>
-                </div>
 
                 <div id="containerInputLabelRadioButton">
                   <input

@@ -227,14 +227,16 @@ export const FormStep9 = () => {
             <div className="formQuestion">
               <label htmlFor="numeroDeVisitas">
                 Qual número médio de visitas que o visitador realiza por dia:
-                <input
-                  id="numeroDeVisitas"
-                  name="numberOfVisits"
-                  type="text"
-                  value={questionTwo}
-                  onChange={handleNumberOfVisitsChange}
-                  placeholder="Sua resposta"
-                />
+                  <input
+                    required
+                    autoComplete="off"
+                    id="numeroDeVisitas"
+                    name="numberOfVisits"
+                    type="number"
+                    value={questionTwo}
+                    onChange={handleNumberOfVisitsChange}
+                    placeholder="Sua resposta"
+                  />
               </label>
             </div>
           </SC.ButtonTypeText>

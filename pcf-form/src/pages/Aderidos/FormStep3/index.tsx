@@ -43,8 +43,8 @@ export const FormStep3 = () => {
     g_visitadoresOutrosDescricao: '',
   });
 
-  const[isCheckCQ02, setIsCheckCQ02] = useState('');
-  const[isCheckCQ04, setIsCheckCQ04] = useState('');
+  const [isCheckCQ02, setIsCheckCQ02] = useState('');
+  const [isCheckCQ04, setIsCheckCQ04] = useState('');
 
   async function handleSendQuestion(event: FormEvent) {
     event.preventDefault();
@@ -811,3 +811,11 @@ export const FormStep3 = () => {
   //     });
   //   }
   // }, []);
+
+  // a_visitadoresEdital == false &&
+  //       b_visitadoresEquipePropria == false &&
+  //       c_visitadoresContratacaoDireta == false &&
+  //       d_visitadoresContratacaoEstagio == false &&
+  //       e_visitadoresNaoSeAplica == false &&
+  //       f_visitadoresOutro == false &&
+  //       g_visitadoresOutrosDescricao == ''

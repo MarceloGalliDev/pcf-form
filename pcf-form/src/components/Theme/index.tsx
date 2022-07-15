@@ -3,13 +3,21 @@ import { ReactNode } from "react";
 import { Header } from "../Header";
 import { SidebarItem } from "../SidebarItem";
 import { useFormPage } from "../../context/FormContext"
+import { useParams } from "react-router";
+
 
 type Props = {
   children: ReactNode
-}
+};
+
+type RoomParams = {
+  id: string;
+};
 
 export const Theme = ({ children }: Props) => {
   const { state } = useFormPage();
+  const params = useParams<RoomParams>();
+  const roomId = params.id;
 
   const routerActivate = {
     routeDefault: 1,

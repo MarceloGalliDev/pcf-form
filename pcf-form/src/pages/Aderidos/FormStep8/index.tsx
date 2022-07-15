@@ -108,6 +108,7 @@ export const FormStep8 = () => {
 
                 <div id="containerInputLabelRadioButton">
                   <input
+                    required
                     id="PartnershipAndContractingYes"
                     name="PartnershipAndContracting"
                     type="radio"

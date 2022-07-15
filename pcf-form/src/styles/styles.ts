@@ -277,13 +277,6 @@ export const ButtonTypeCheckbox = styled.div`
         margin-top: 10px;
         align-items: center;
 
-        input[type="checkbox"] {
-          color: red;
-          width: 12px;
-          height: 12px;
-          border: 1px solid red;
-        }
-
         .containerTextLabel {
           font-size: 15px;
           font-weight: normal;
@@ -465,6 +458,12 @@ export const ButtonTypeText = styled.div`
         :invalid {
           border-bottom: 1px solid red;
         }
+
+        ::-webkit-outer-spin-button,
+        ::-webkit-inner-spin-button {
+          -webkit-appearance: none;
+          margin: 0;
+        }
       }
     }
   }
@@ -511,6 +510,16 @@ export const ButtonTypeTextV2 = styled.div`
         outline: none;
         font-size: 15px;
         padding: 5px 0;
+
+        :invalid {
+          border-bottom: 1px solid red;
+        }
+
+        ::-webkit-outer-spin-button,
+        ::-webkit-inner-spin-button {
+          -webkit-appearance: none;
+          margin: 0;
+        }
       }
     }
   }
@@ -538,16 +547,17 @@ export const ButtonTypeTextV3 = styled.div`
       font-size: 15px;
       font-weight: bold;
 
+      
       #containerTextLabelCheckbox {
         margin-top: 10px;
         display: flex;
         align-items: center;
         text-align: center;
-
+        
         .labelForContainerTextLabelCheckbox {
           font-weight: 500;
         }
-
+        
         .inputForContainerTextLabelCheckbox {
           margin: 0 10px;
           border-left: none;
@@ -555,6 +565,16 @@ export const ButtonTypeTextV3 = styled.div`
           border-top: none;
           border-bottom: 1px solid #2E7EB0;
           outline: none;
+
+          :invalid {
+            border-bottom: 1px solid red;
+          }
+
+          ::-webkit-outer-spin-button,
+          ::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+          }
         }
       }
     }

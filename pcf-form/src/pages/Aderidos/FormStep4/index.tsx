@@ -243,6 +243,7 @@ export const FormStep4 = () => {
 
                     <div id="containerInputLabelRadioButton">
                       <input
+                        required
                         id="numberOfSupervisorsZero"
                         name="numberOfSupervisors"
                         type="radio"
@@ -342,6 +343,8 @@ export const FormStep4 = () => {
                   htmlFor="averagePay"
                 >Qual a remuneração média em R$ (reais) dos Supervisores?
                   <input
+                    required
+                    autoComplete="no"
                     id="averagePay"
                     name="remuneracaoMediaSupervisor"
                     type="text"
@@ -458,6 +461,7 @@ export const FormStep4 = () => {
                     >Superior incompleto:
                     </label>
                     <input
+                      required
                       className="inputForContainerTextLabelCheckbox"
                       id="supervisorGraduationIncomplete"
                       name="a_supervisoresGraduacaoIncompleta"
@@ -475,6 +479,7 @@ export const FormStep4 = () => {
                     >Superior completo:
                     </label>
                     <input
+                      required
                       className="inputForContainerTextLabelCheckbox"
                       id="supervisorGraduationComplete"
                       name="b_supervisoresGraduacaoCompleta"
@@ -492,6 +497,7 @@ export const FormStep4 = () => {
                     >Especialização:
                     </label>
                     <input
+                      required
                       className="inputForContainerTextLabelCheckbox"
                       id="supervisorSpecialization"
                       name="c_especializacaoSupervisor"
@@ -509,6 +515,7 @@ export const FormStep4 = () => {
                     >Mestrado:
                     </label>
                     <input
+                      required
                       id="supervisorMaster"
                       className="inputForContainerTextLabelCheckbox"
                       name="d_mestradoSupervisor"
@@ -526,6 +533,7 @@ export const FormStep4 = () => {
                     >Doutorado:
                     </label>
                     <input
+                      required
                       id="supervisorDoctor"
                       className="inputForContainerTextLabelCheckbox"
                       name="e_doutoradoSupervisor"
@@ -554,6 +562,7 @@ export const FormStep4 = () => {
                       >Servidor(a) efetivo(a):
                       </label>
                       <input
+                        required
                         className="inputForContainerTextLabelCheckbox"
                         id="servidorEfetivoSupervisor"
                         name="supervisoresServidorEfetivo"
@@ -570,6 +579,7 @@ export const FormStep4 = () => {
                         htmlFor="mediaRemuneracaoEfetivoSupervisor"
                       >Média Remuneração:</label>
                       <input
+                        required
                         className="inputForContainerTextLabelCheckbox"
                         id="mediaRemuneracaoEfetivoSupervisor"
                         name="supervisoresMediaRemuneracaoEfetivo"
@@ -589,6 +599,7 @@ export const FormStep4 = () => {
                       >Cargo comissionado:
                       </label>
                       <input
+                        required
                         className="inputForContainerTextLabelCheckbox"
                         id="cargoComissionadoSupervisor"
                         name="supervisoresCargoComissionado"
@@ -604,6 +615,7 @@ export const FormStep4 = () => {
                         htmlFor="mediaRemuneracaoComissonadoSupervisor"
                       >Média Remuneração:</label>
                       <input
+                        required
                         className="inputForContainerTextLabelCheckbox"
                         id="mediaRemuneracaoComissonadoSupervisor"
                         name="supervisoresMediaRemuneracaoComissionado"
@@ -623,6 +635,7 @@ export const FormStep4 = () => {
                       >Servidor temporário:
                       </label>
                       <input
+                        required
                         className="inputForContainerTextLabelCheckbox"
                         id="servidorTemporarioSupervisor"
                         name="supervisoresServidorTemporario"
@@ -638,6 +651,7 @@ export const FormStep4 = () => {
                         htmlFor="mediaRemuneracaoTemporarioSupervisor"
                       >Média Remuneração:</label>
                       <input
+                        required
                         className="inputForContainerTextLabelCheckbox"
                         id="mediaRemuneracaoTemporarioSupervisor"
                         name="supervisoresMediaRemuneracaoTemporario"
@@ -657,6 +671,7 @@ export const FormStep4 = () => {
                       >Bolsista:
                       </label>
                       <input
+                        required
                         className="inputForContainerTextLabelCheckbox"
                         id="bolsistaSupervisor"
                         name="supervisoresBolsista"
@@ -672,6 +687,7 @@ export const FormStep4 = () => {
                         htmlFor="mediaRemuneracaoBolsistaSupervisor"
                       >Média Remuneração:</label>
                       <input
+                        required
                         className="inputForContainerTextLabelCheckbox"
                         id="mediaRemuneracaoBolsistaSupervisor"
                         name="supervisoresMediaRemuneracaoBolsista"
@@ -691,6 +707,7 @@ export const FormStep4 = () => {
                       >Profissional autônomo:
                       </label>
                       <input
+                        required
                         className="inputForContainerTextLabelCheckbox"
                         id="profissionalAutonomoSupervisor"
                         name="supervisoresOutrosCargos"
@@ -706,6 +723,7 @@ export const FormStep4 = () => {
                         htmlFor="mediaRemuneracaoProfissionalAutonomoSupervisor"
                       >Média Remuneração:</label>
                       <input
+                        required
                         className="inputForContainerTextLabelCheckbox"
                         id="mediaRemuneracaoProfissionalAutonomoSupervisor"
                         name="supervisoresMediaRemuneracaoOutrosCargos"
@@ -725,6 +743,7 @@ export const FormStep4 = () => {
                       >Outros:
                       </label>
                       <input
+                        required
                         className="inputForContainerTextLabelCheckbox"
                         id="outrosCargosSupervisor"
                         name="supervisoresOutrosCargos"
@@ -740,6 +759,7 @@ export const FormStep4 = () => {
                         htmlFor="mediaRemuneracaoOutrosCargosSupervisor"
                       >Média Remuneração:</label>
                       <input
+                        required
                         className="inputForContainerTextLabelCheckbox"
                         id="mediaRemuneracaoOutrosCargosSupervisor"
                         name="supervisoresMediaRemuneracaoOutrosCargos"

@@ -29,10 +29,6 @@ export const FormStep6 = () => {
     setList(newList)
   };
 
-  function handleEventPrevent(event: FormEvent) {
-    event.preventDefault();
-  }
-
   const removerDaLista = (index: number) => {
     setList((previous) => previous.filter((item, indexPrevious) => index !== indexPrevious))
     return setList

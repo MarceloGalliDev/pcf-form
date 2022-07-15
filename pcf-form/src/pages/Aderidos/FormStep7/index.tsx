@@ -5,7 +5,6 @@ import { useFormPage, FormActions } from "../../../context/FormContext";
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { database } from "../../../services/firebase";
 import { ref, push, set } from "firebase/database";
-import { RoomCode } from "../../../components/RoomCode";
 
 type RoomParams = {
   id: string;
@@ -95,9 +94,10 @@ export const FormStep7 = () => {
                 htmlFor="gravidaInput"
               >Gestantes:
                 <input
+                  required
                   id="gravidaInput"
                   name="pregnant"
-                  type="text"
+                  type="number"
                   value={questionOne}
                   onChange={handlePregnantChange}
                   placeholder="Quantidade"
@@ -110,9 +110,10 @@ export const FormStep7 = () => {
                 htmlFor="crianca_0_36"
               >Crianças de 0-36 meses:
                 <input
+                  required
                   id="crianca_0_36"
                   name="childrenAged_0_36"
-                  type="text"
+                  type="number"
                   value={questionTwo}
                   onChange={handleChildrenAged_0_36Change}
                   placeholder="Quantidade"
@@ -123,9 +124,10 @@ export const FormStep7 = () => {
               <label className="containerTextLabel" htmlFor="crianca_0_72">
                 Crianças de 36-72 meses:
                 <input
+                  required
                   id="crianca_0_72"
                   name="childrenAged_0_72"
-                  type="text"
+                  type="number"
                   value={questionThree}
                   onChange={handleChildrenAged_0_72Change}
                   placeholder="Quantidade"
@@ -136,9 +138,10 @@ export const FormStep7 = () => {
               <label className="containerTextLabel" htmlFor="quantidadeDeCriancas">
                 Quantos domicílios no seu município possuem mais de uma criança sendo acompanhadas pelo PCF?
                 <input
+                  required
                   id="quantidadeDeCriancas"
                   name="numberOfChildren"
-                  type="text"
+                  type="number"
                   value={questionFour}
                   onChange={handleNumberOfChildrenChange}
                   placeholder="Quantidade"
