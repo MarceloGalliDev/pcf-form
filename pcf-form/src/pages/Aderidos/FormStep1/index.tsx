@@ -111,7 +111,13 @@ export const FormStep1 = () => {
   useEffect(() => {
     if (question?.length > 0) {
       setQuestionOne(question[0].A_Informacoes_Gerais.questao01)
+      setQuestionTwo(question[0].A_Informacoes_Gerais.questao02)
+      setQuestionThree(question[0].A_Informacoes_Gerais.questao03)
+      setQuestionFour(question[0].A_Informacoes_Gerais.questao04)
+      setSelectedUf(question[0].A_Informacoes_Gerais.questao05)
+      setSelectedCity(question[0].A_Informacoes_Gerais.questao06)
     }
+    console.log(question)
   }, [question])
 
   return (

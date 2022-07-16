@@ -2,7 +2,7 @@ import * as SC from "../../../styles/styles";
 import { Theme } from "../../../components/Theme";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useFormPage, FormActions } from "../../../context/FormContext";
-import { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import { ChangeEvent, FormEvent, useCallback, useEffect, useState } from "react";
 import { push, ref, set } from "firebase/database";
 import { database } from "../../../services/firebase";
 import { useRoom } from "../../../hooks/useRoom";
@@ -19,17 +19,7 @@ export const FormStep2 = () => {
   const { state, dispatch } = useFormPage();
   const [questionOne, setQuestionOne] = useState('');
   const [questionTwo, setQuestionTwo] = useState('');
-  const [questionThree, setQuestionThree] = useState<QuestionNine>({
-    a_janeiro: false,
-    b_fevereiro: false,
-    c_marco: false,
-    d_abril: false,
-    e_maio: false,
-    f_junho: false,
-    g_julho: false,
-    h_agosto: false,
-    i_naoSeAplica: false,
-  });
+  const [questionThree, setQuestionThree] = useState('');
   const [questionFour, setQuestionFour] = useState('');
   const [questionFive, setQuestionFive] = useState('');
   const [questionSix, setQuestionSix] = useState('');
