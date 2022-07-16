@@ -16,6 +16,7 @@ import { InputAreaOutrosCustos2 } from "../../../components/Questions/QuestionOu
 import { TableAreaOutrosCustos2 } from "../../../components/Questions/QuestionOutrosCustos2/components/TableArea";
 import { CheckCircle } from 'phosphor-react';
 import { Alert } from 'reactstrap';
+import { useRoom } from "../../../hooks/useRoom";
 
 type RoomParams = {
   id: string;

@@ -1,3 +1,4 @@
+// import CurrencyInput from 'react-currency-masked-input'
 import styled from 'styled-components'
 
 export const Container = styled.div`
@@ -159,6 +160,22 @@ export const InputArea3 = styled.input`
   background-color: transparent;
   outline: none;
 `;
+
+// export const Tested = styled(CurrencyInput)`
+//   width: 100px;
+//   height: 30px;
+//   padding: 0 5px;
+//   background-color: transparent;
+//   outline: none;
+//   border: none;
+
+//   ::-webkit-outer-spin-button,
+//   ::-webkit-inner-spin-button {
+//     -webkit-appearance: none;
+//     margin: 0;
+//   }
+// `;
+
 
 export const InputArea4 = styled.input`
   width: 100px;

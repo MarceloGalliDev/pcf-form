@@ -643,9 +643,16 @@ export const FormStep3 = () => {
         
             <div id="containerOption">
               <div id="containerOptionSixOption">
-
+                <h1>{questionSeven.a_visitadoresEdital}</h1>
                 <div id="containerInputLabelRadioButton">
                   <input
+                    required={
+                      !questionSeven?.a_visitadoresEdital && 
+                      !questionSeven?.b_visitadoresEquipePropria &&
+                      !questionSeven?.c_visitadoresContratacaoDireta &&
+                      !questionSeven?.d_visitadoresContratacaoEstagio &&
+                      !questionSeven?.e_visitadoresNaoSeAplica
+                    }
                     id="hiringVisitorSupervisorEdital"
                     name="a_visitadoresEdital"
                     type="checkbox"
@@ -664,6 +671,13 @@ export const FormStep3 = () => {
 
                 <div id="containerInputLabelRadioButton">
                   <input
+                    required={
+                      !questionSeven?.a_visitadoresEdital && 
+                      !questionSeven?.b_visitadoresEquipePropria &&
+                      !questionSeven?.c_visitadoresContratacaoDireta &&
+                      !questionSeven?.d_visitadoresContratacaoEstagio &&
+                      !questionSeven?.e_visitadoresNaoSeAplica
+                    }
                     id="hiringVisitorSupervisorOwnTeam"
                     name="b_visitadoresEquipePropria"
                     type="checkbox"
@@ -682,6 +696,13 @@ export const FormStep3 = () => {
 
                 <div id="containerInputLabelRadioButton">
                   <input
+                    required={
+                      !questionSeven?.a_visitadoresEdital && 
+                      !questionSeven?.b_visitadoresEquipePropria &&
+                      !questionSeven?.c_visitadoresContratacaoDireta &&
+                      !questionSeven?.d_visitadoresContratacaoEstagio &&
+                      !questionSeven?.e_visitadoresNaoSeAplica
+                    }
                     id="hiringVisitorSupervisorDirectContracting"
                     name="c_visitadoresContratacaoDireta"
                     type="checkbox"
@@ -700,6 +721,13 @@ export const FormStep3 = () => {
 
                 <div id="containerInputLabelRadioButton">
                   <input
+                    required={
+                      !questionSeven?.a_visitadoresEdital && 
+                      !questionSeven?.b_visitadoresEquipePropria &&
+                      !questionSeven?.c_visitadoresContratacaoDireta &&
+                      !questionSeven?.d_visitadoresContratacaoEstagio &&
+                      !questionSeven?.e_visitadoresNaoSeAplica
+                    }
                     id="hiringVisitorSupervisorDirectContractingStage"
                     name="d_visitadoresContratacaoEstagio"
                     type="checkbox"
@@ -718,6 +746,13 @@ export const FormStep3 = () => {
 
                 <div id="containerInputLabelRadioButton">
                   <input
+                    required={
+                      !questionSeven?.a_visitadoresEdital && 
+                      !questionSeven?.b_visitadoresEquipePropria &&
+                      !questionSeven?.c_visitadoresContratacaoDireta &&
+                      !questionSeven?.d_visitadoresContratacaoEstagio &&
+                      !questionSeven?.e_visitadoresNaoSeAplica
+                    }
                     id="hiringVisitorSupervisorNotApplicable"
                     name="e_visitadoresNaoSeAplica"
                     type="checkbox"
@@ -736,6 +771,13 @@ export const FormStep3 = () => {
 
                 <div id="containerInputLabelRadioButton">
                   <input
+                    required={
+                      !questionSeven?.a_visitadoresEdital && 
+                      !questionSeven?.b_visitadoresEquipePropria &&
+                      !questionSeven?.c_visitadoresContratacaoDireta &&
+                      !questionSeven?.d_visitadoresContratacaoEstagio &&
+                      !questionSeven?.e_visitadoresNaoSeAplica
+                    }
                     id="hiringVisitorSupervisorOthers"
                     name="f_visitadoresOutro"
                     type="checkbox"

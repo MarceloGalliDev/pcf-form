@@ -8,7 +8,6 @@ import { transports } from '../../data/transports';
 import { spending } from '../../data/spending';
 import { feedings } from '../../data/feedings';
 
-
 type Props = {
   onAdd: (item: Item) => void;
 };
@@ -32,7 +31,6 @@ export const InputArea = ({ onAdd }: Props) => {
     event.preventDefault();
 
     let errors: string[] = [];
-
 
     if(!inputOneKeys.includes(inputOneField)) {
       errors.push('Tipo de despesa inválido!');
@@ -108,6 +106,8 @@ export const InputArea = ({ onAdd }: Props) => {
         
         <SC.InputLabel>
           <SC.InputTitle>Valor</SC.InputTitle>
+            
+
           <div className='informationIcon'>
             <SC.InputArea4
               type="text"
@@ -115,7 +115,7 @@ export const InputArea = ({ onAdd }: Props) => {
               onChange={event => setInputThreeField(event.target.value)}
               placeholder="R$"
             />
-              <span
+            <span
               data-tooltip="Inserir com casas decimais (Exemplo: 106,38)"
             >
               <Info

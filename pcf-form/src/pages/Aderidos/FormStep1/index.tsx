@@ -10,6 +10,7 @@ import {
 } from "../../../types/IBGE";
 import { database } from "../../../services/firebase";
 import { ref, push, set } from "firebase/database";
+import { useRoom } from "../../../hooks/useRoom";
 
 type RoomParams = {
   id: string;
@@ -29,6 +30,7 @@ export const FormStep1 = () => {
   const [questionThree, setQuestionThree] = useState('');
   const [questionFour, setQuestionFour] = useState('');
 
+  const [ question ] = useRoom();
 
   async function handleSendQuestion(event: FormEvent) {
     event.preventDefault();
@@ -60,8 +62,6 @@ export const FormStep1 = () => {
     const firebaseRoomsQuestion = ref(database, `rooms/${roomId}/aderidos/question`);
     const firebaseQuestion = await push(firebaseRoomsQuestion);
     set(firebaseQuestion, question)
-
-    console.log('teste1', question)
 
     navigate(`/${roomId}/formstep2`)
   };
@@ -107,6 +107,12 @@ export const FormStep1 = () => {
       payload: 1
     });
   }, []);
+
+  useEffect(() => {
+    if (question?.length > 0) {
+      setQuestionOne(question[0].A_Informacoes_Gerais.questao01)
+    }
+  }, [question])
 
   return (
     <Theme>

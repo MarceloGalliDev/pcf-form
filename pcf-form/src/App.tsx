@@ -1,12 +1,15 @@
+import React from 'react';
 import { FormProvider } from './context/FormContext';
 import { Router } from "./router";
 
 
 const App = () => {
   return (
-    <FormProvider>
-      <Router/>
-    </FormProvider>
+    <React.StrictMode>
+      <FormProvider>
+        <Router/>
+      </FormProvider>
+    </React.StrictMode>
   )
 }
 
