@@ -73,9 +73,10 @@ export const FormStepA2 = () => {
 
     const firebaseRoomsQuestion = ref(database, `rooms/${roomId}/nao_aderidos/question`);
     const firebaseQuestion = await push(firebaseRoomsQuestion);
-    set(firebaseQuestion, question)
+    set(firebaseQuestion, question);
 
     if (confirm('Tem certeza que deseja finalizar o questionário?')) {
+      setIsAlert(true);
       setTimeout(() => {
         navigate('/')
       }, 2000)
@@ -447,7 +448,7 @@ export const FormStepA2 = () => {
           <button
             className="buttonAll"
             type="submit"
-            onClick={() => setIsAlert(true)}
+            onClick={() => setIsAlert}
             >Finalizar
           </button>
           {isAlert === true && (

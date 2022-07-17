@@ -78,7 +78,7 @@ export const FormStepB2 = () => {
 
     const firebaseRoomsQuestion = ref(database, `rooms/${roomId}/desistentes/question`);
     const firebaseQuestion = await push(firebaseRoomsQuestion);
-    set(firebaseQuestion, question)
+    set(firebaseQuestion, question);
 
     if (confirm('Tem certeza que deseja finalizar o questionário?')) {
       setIsAlert(true);
@@ -526,7 +526,6 @@ export const FormStepB2 = () => {
             onChange={() => setIsAlert}
             >Finalizar
           </button>
-
           {isAlert === true && (
             <Alert className="success">
               <CheckCircle size={20} color="#2dd24e" weight="light" />

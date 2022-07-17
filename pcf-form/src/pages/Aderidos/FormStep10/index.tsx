@@ -117,6 +117,7 @@ export const FormStep10 = () => {
     set(firebaseQuestion, question);
 
     if (confirm('Tem certeza que deseja finalizar o questionário?')) {
+      setIsAlert(true);
       setTimeout(() => {
         navigate('/')
       }, 2000)
@@ -727,7 +728,7 @@ export const FormStep10 = () => {
           <button
             className="buttonAll"
             type="submit"
-            onClick={() => setIsAlert(true)}
+            onClick={() => setIsAlert}
             >Finalizar
           </button>
           {isAlert === true && (
