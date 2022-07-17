@@ -16,7 +16,7 @@ import { InputAreaOutrosCustos2 } from "../../../components/Questions/QuestionOu
 import { TableAreaOutrosCustos2 } from "../../../components/Questions/QuestionOutrosCustos2/components/TableArea";
 import { CheckCircle } from 'phosphor-react';
 import { Alert } from 'reactstrap';
-import { useRoom } from "../../../hooks/useRoom";
+
 
 type RoomParams = {
   id: string;
@@ -210,6 +210,7 @@ export const FormStep10 = () => {
 
                     <div id="containerInputLabelRadioButton">
                       <input
+                        required
                         id="visitorPaysTransportYes"
                         name="visitorPaysTransport"
                         type="radio"
@@ -271,6 +272,20 @@ export const FormStep10 = () => {
 
                     <div id="containerInputLabelRadioButton">
                       <input
+                        required={
+                          !questionThree?.a_veiculoProprioSupervisorComAjuda && 
+                          !questionThree.b_veiculoProprioSupervisorSemAjuda &&
+                          !questionThree.c_veiculoProprioVisitadorComAjuda &&
+                          !questionThree.d_veiculoProprioVisitadorSemAjuda &&
+                          !questionThree.e_veiculoProprioPCF &&
+                          !questionThree.f_veiculoAlugadoPCF &&
+                          !questionThree.g_veiculoMunicipio &&
+                          !questionThree.h_veiculoContratado &&
+                          !questionThree.i_veiculoUberTaxi &&
+                          !questionThree.j_veiculoCaminhandoBicicleta &&
+                          !questionThree.k_veiculoOutro &&
+                          !questionThree.l_veiculoOutroText
+                        }
                         id="a_veiculoProprioSupervisorComAjuda"
                         name="a_veiculoProprioSupervisorComAjuda"
                         type="checkbox"
@@ -289,6 +304,20 @@ export const FormStep10 = () => {
 
                     <div id="containerInputLabelRadioButton">
                       <input
+                        required={
+                          !questionThree?.a_veiculoProprioSupervisorComAjuda && 
+                          !questionThree.b_veiculoProprioSupervisorSemAjuda &&
+                          !questionThree.c_veiculoProprioVisitadorComAjuda &&
+                          !questionThree.d_veiculoProprioVisitadorSemAjuda &&
+                          !questionThree.e_veiculoProprioPCF &&
+                          !questionThree.f_veiculoAlugadoPCF &&
+                          !questionThree.g_veiculoMunicipio &&
+                          !questionThree.h_veiculoContratado &&
+                          !questionThree.i_veiculoUberTaxi &&
+                          !questionThree.j_veiculoCaminhandoBicicleta &&
+                          !questionThree.k_veiculoOutro &&
+                          !questionThree.l_veiculoOutroText
+                        }
                         id="b_veiculoProprioSupervisorSemAjuda"
                         name="b_veiculoProprioSupervisorSemAjuda"
                         type="checkbox"
@@ -307,6 +336,20 @@ export const FormStep10 = () => {
 
                     <div id="containerInputLabelRadioButton">
                       <input
+                        required={
+                          !questionThree?.a_veiculoProprioSupervisorComAjuda && 
+                          !questionThree.b_veiculoProprioSupervisorSemAjuda &&
+                          !questionThree.c_veiculoProprioVisitadorComAjuda &&
+                          !questionThree.d_veiculoProprioVisitadorSemAjuda &&
+                          !questionThree.e_veiculoProprioPCF &&
+                          !questionThree.f_veiculoAlugadoPCF &&
+                          !questionThree.g_veiculoMunicipio &&
+                          !questionThree.h_veiculoContratado &&
+                          !questionThree.i_veiculoUberTaxi &&
+                          !questionThree.j_veiculoCaminhandoBicicleta &&
+                          !questionThree.k_veiculoOutro &&
+                          !questionThree.l_veiculoOutroText
+                        }
                         id="c_veiculoProprioVisitadorComAjuda"
                         name="c_veiculoProprioVisitadorComAjuda"
                         type="checkbox"
@@ -325,6 +368,20 @@ export const FormStep10 = () => {
 
                     <div id="containerInputLabelRadioButton">
                       <input
+                        required={
+                          !questionThree?.a_veiculoProprioSupervisorComAjuda && 
+                          !questionThree.b_veiculoProprioSupervisorSemAjuda &&
+                          !questionThree.c_veiculoProprioVisitadorComAjuda &&
+                          !questionThree.d_veiculoProprioVisitadorSemAjuda &&
+                          !questionThree.e_veiculoProprioPCF &&
+                          !questionThree.f_veiculoAlugadoPCF &&
+                          !questionThree.g_veiculoMunicipio &&
+                          !questionThree.h_veiculoContratado &&
+                          !questionThree.i_veiculoUberTaxi &&
+                          !questionThree.j_veiculoCaminhandoBicicleta &&
+                          !questionThree.k_veiculoOutro &&
+                          !questionThree.l_veiculoOutroText
+                        }
                         id="d_veiculoProprioVisitadorSemAjuda"
                         name="d_veiculoProprioVisitadorSemAjuda"
                         type="checkbox"
@@ -343,6 +400,20 @@ export const FormStep10 = () => {
 
                     <div id="containerInputLabelRadioButton">
                       <input
+                        required={
+                          !questionThree?.a_veiculoProprioSupervisorComAjuda && 
+                          !questionThree.b_veiculoProprioSupervisorSemAjuda &&
+                          !questionThree.c_veiculoProprioVisitadorComAjuda &&
+                          !questionThree.d_veiculoProprioVisitadorSemAjuda &&
+                          !questionThree.e_veiculoProprioPCF &&
+                          !questionThree.f_veiculoAlugadoPCF &&
+                          !questionThree.g_veiculoMunicipio &&
+                          !questionThree.h_veiculoContratado &&
+                          !questionThree.i_veiculoUberTaxi &&
+                          !questionThree.j_veiculoCaminhandoBicicleta &&
+                          !questionThree.k_veiculoOutro &&
+                          !questionThree.l_veiculoOutroText
+                        }
                         id="e_veiculoProprioPCF"
                         name="e_veiculoProprioPCF"
                         type="checkbox"
@@ -361,6 +432,20 @@ export const FormStep10 = () => {
 
                     <div id="containerInputLabelRadioButton">
                       <input
+                        required={
+                          !questionThree?.a_veiculoProprioSupervisorComAjuda && 
+                          !questionThree.b_veiculoProprioSupervisorSemAjuda &&
+                          !questionThree.c_veiculoProprioVisitadorComAjuda &&
+                          !questionThree.d_veiculoProprioVisitadorSemAjuda &&
+                          !questionThree.e_veiculoProprioPCF &&
+                          !questionThree.f_veiculoAlugadoPCF &&
+                          !questionThree.g_veiculoMunicipio &&
+                          !questionThree.h_veiculoContratado &&
+                          !questionThree.i_veiculoUberTaxi &&
+                          !questionThree.j_veiculoCaminhandoBicicleta &&
+                          !questionThree.k_veiculoOutro &&
+                          !questionThree.l_veiculoOutroText
+                        }
                         id="f_veiculoAlugadoPCF"
                         name="f_veiculoAlugadoPCF"
                         type="checkbox"
@@ -379,6 +464,20 @@ export const FormStep10 = () => {
 
                     <div id="containerInputLabelRadioButton">
                       <input
+                        required={
+                          !questionThree?.a_veiculoProprioSupervisorComAjuda && 
+                          !questionThree.b_veiculoProprioSupervisorSemAjuda &&
+                          !questionThree.c_veiculoProprioVisitadorComAjuda &&
+                          !questionThree.d_veiculoProprioVisitadorSemAjuda &&
+                          !questionThree.e_veiculoProprioPCF &&
+                          !questionThree.f_veiculoAlugadoPCF &&
+                          !questionThree.g_veiculoMunicipio &&
+                          !questionThree.h_veiculoContratado &&
+                          !questionThree.i_veiculoUberTaxi &&
+                          !questionThree.j_veiculoCaminhandoBicicleta &&
+                          !questionThree.k_veiculoOutro &&
+                          !questionThree.l_veiculoOutroText
+                        }
                         id="g_veiculoMunicipio"
                         name="g_veiculoMunicipio"
                         type="checkbox"
@@ -397,6 +496,20 @@ export const FormStep10 = () => {
 
                     <div id="containerInputLabelRadioButton">
                       <input
+                        required={
+                          !questionThree?.a_veiculoProprioSupervisorComAjuda && 
+                          !questionThree.b_veiculoProprioSupervisorSemAjuda &&
+                          !questionThree.c_veiculoProprioVisitadorComAjuda &&
+                          !questionThree.d_veiculoProprioVisitadorSemAjuda &&
+                          !questionThree.e_veiculoProprioPCF &&
+                          !questionThree.f_veiculoAlugadoPCF &&
+                          !questionThree.g_veiculoMunicipio &&
+                          !questionThree.h_veiculoContratado &&
+                          !questionThree.i_veiculoUberTaxi &&
+                          !questionThree.j_veiculoCaminhandoBicicleta &&
+                          !questionThree.k_veiculoOutro &&
+                          !questionThree.l_veiculoOutroText
+                        }
                         id="h_veiculoContratado"
                         name="h_veiculoContratado"
                         type="checkbox"
@@ -415,6 +528,20 @@ export const FormStep10 = () => {
 
                     <div id="containerInputLabelRadioButton">
                       <input
+                        required={
+                          !questionThree?.a_veiculoProprioSupervisorComAjuda && 
+                          !questionThree.b_veiculoProprioSupervisorSemAjuda &&
+                          !questionThree.c_veiculoProprioVisitadorComAjuda &&
+                          !questionThree.d_veiculoProprioVisitadorSemAjuda &&
+                          !questionThree.e_veiculoProprioPCF &&
+                          !questionThree.f_veiculoAlugadoPCF &&
+                          !questionThree.g_veiculoMunicipio &&
+                          !questionThree.h_veiculoContratado &&
+                          !questionThree.i_veiculoUberTaxi &&
+                          !questionThree.j_veiculoCaminhandoBicicleta &&
+                          !questionThree.k_veiculoOutro &&
+                          !questionThree.l_veiculoOutroText
+                        }
                         id="i_veiculoUberTaxi"
                         name="i_veiculoUberTaxi"
                         type="checkbox"
@@ -433,6 +560,20 @@ export const FormStep10 = () => {
 
                     <div id="containerInputLabelRadioButton">
                       <input
+                        required={
+                          !questionThree?.a_veiculoProprioSupervisorComAjuda && 
+                          !questionThree.b_veiculoProprioSupervisorSemAjuda &&
+                          !questionThree.c_veiculoProprioVisitadorComAjuda &&
+                          !questionThree.d_veiculoProprioVisitadorSemAjuda &&
+                          !questionThree.e_veiculoProprioPCF &&
+                          !questionThree.f_veiculoAlugadoPCF &&
+                          !questionThree.g_veiculoMunicipio &&
+                          !questionThree.h_veiculoContratado &&
+                          !questionThree.i_veiculoUberTaxi &&
+                          !questionThree.j_veiculoCaminhandoBicicleta &&
+                          !questionThree.k_veiculoOutro &&
+                          !questionThree.l_veiculoOutroText
+                        }
                         id="j_veiculoCaminhandoBicicleta"
                         name="j_veiculoCaminhandoBicicleta"
                         type="checkbox"
@@ -451,6 +592,19 @@ export const FormStep10 = () => {
 
                     <div id="containerInputLabelRadioButton">
                       <input
+                        required={
+                          !questionThree?.a_veiculoProprioSupervisorComAjuda && 
+                          !questionThree.b_veiculoProprioSupervisorSemAjuda &&
+                          !questionThree.c_veiculoProprioVisitadorComAjuda &&
+                          !questionThree.d_veiculoProprioVisitadorSemAjuda &&
+                          !questionThree.e_veiculoProprioPCF &&
+                          !questionThree.f_veiculoAlugadoPCF &&
+                          !questionThree.g_veiculoMunicipio &&
+                          !questionThree.h_veiculoContratado &&
+                          !questionThree.i_veiculoUberTaxi &&
+                          !questionThree.j_veiculoCaminhandoBicicleta &&
+                          !questionThree.k_veiculoOutro
+                        }
                         id="k_veiculoOutro"
                         name="k_veiculoOutro"
                         type="checkbox"
@@ -466,6 +620,19 @@ export const FormStep10 = () => {
                       >Outros
                       </label>
                       <input
+                        required={
+                          !questionThree?.a_veiculoProprioSupervisorComAjuda && 
+                          !questionThree.b_veiculoProprioSupervisorSemAjuda &&
+                          !questionThree.c_veiculoProprioVisitadorComAjuda &&
+                          !questionThree.d_veiculoProprioVisitadorSemAjuda &&
+                          !questionThree.e_veiculoProprioPCF &&
+                          !questionThree.f_veiculoAlugadoPCF &&
+                          !questionThree.g_veiculoMunicipio &&
+                          !questionThree.h_veiculoContratado &&
+                          !questionThree.i_veiculoUberTaxi &&
+                          !questionThree.j_veiculoCaminhandoBicicleta &&
+                          !questionThree.l_veiculoOutroText
+                        }
                         id="l_veiculoOutroText"
                         className="inputPlaceholderOther"
                         name="l_veiculoOutroText"
@@ -517,6 +684,7 @@ export const FormStep10 = () => {
 
                     <div id="containerInputLabelRadioButton">
                       <input
+                        required
                         id="monthlyRecordYes"
                         name="monthlyRecord"
                         type="radio"

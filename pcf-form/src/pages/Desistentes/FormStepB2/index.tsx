@@ -81,11 +81,13 @@ export const FormStepB2 = () => {
     set(firebaseQuestion, question)
 
     if (confirm('Tem certeza que deseja finalizar o questionário?')) {
+      setIsAlert(true);
       setTimeout(() => {
         navigate('/')
       }, 2000)
     };
   };
+
 
   const handleHaveTargetAudiencePCFChange = (event: ChangeEvent<HTMLInputElement>) => {
     setQuestionTwo(event.target.value);
@@ -158,6 +160,7 @@ export const FormStepB2 = () => {
                   
                   <div id="containerInputLabelRadioButton">
                     <input
+                      required
                       id="haveTargetAudiencePCFYes"
                       name="haveTargetAudiencePCF"
                       type="radio"
@@ -198,6 +201,8 @@ export const FormStepB2 = () => {
                     htmlFor="haveTargetAudiencePCFBeneficiary"
                   >Se sim, quantos beneficiários são atendidos por este programa?
                     <input
+                      required
+                      autoComplete="no"
                       id="haveTargetAudiencePCFBeneficiary"
                       name="haveTargetAudiencePCFBeneficiary"
                       type="text"
@@ -214,6 +219,8 @@ export const FormStepB2 = () => {
                     htmlFor="haveTargetAudiencePCFValue"
                   >Se sim, qual o valor mensal gasto com esse Programa? 
                     <input
+                      required
+                      autoComplete="no"
                       id="haveTargetAudiencePCFValue"
                       name="haveTargetAudiencePCFValue"
                       type="text"
@@ -239,6 +246,12 @@ export const FormStepB2 = () => {
                 <div>
                   <div id="containerInputLabelRadioButton">
                     <input
+                      required={
+                        !questionOne?.a_recursoFinanceiroInsuficiente && 
+                        !questionOne.b_naoHaInteresseMunicipio &&
+                        !questionOne.c_possuiPrograma &&
+                        !questionOne.d_criouPrograma
+                      }
                       id="recursoFinanceiroInsuficiente"
                       name="a_recursoFinanceiroInsuficiente"
                       type="checkbox"
@@ -256,6 +269,12 @@ export const FormStepB2 = () => {
                   </div>
                   <div id="containerInputLabelRadioButton">
                     <input
+                      required={
+                        !questionOne?.a_recursoFinanceiroInsuficiente && 
+                        !questionOne.b_naoHaInteresseMunicipio &&
+                        !questionOne.c_possuiPrograma &&
+                        !questionOne.d_criouPrograma
+                      }
                       id="naoHaInteresseMunicipio"
                       name="b_naoHaInteresseMunicipio"
                       type="checkbox"
@@ -273,6 +292,12 @@ export const FormStepB2 = () => {
                   </div>
                   <div id="containerInputLabelRadioButton">
                     <input
+                      required={
+                        !questionOne?.a_recursoFinanceiroInsuficiente && 
+                        !questionOne.b_naoHaInteresseMunicipio &&
+                        !questionOne.c_possuiPrograma &&
+                        !questionOne.d_criouPrograma
+                      }
                       id="possuiPrograma"
                       name="c_possuiPrograma"
                       type="checkbox"
@@ -290,6 +315,12 @@ export const FormStepB2 = () => {
                   </div>
                   <div id="containerInputLabelRadioButton">
                     <input
+                      required={
+                        !questionOne?.a_recursoFinanceiroInsuficiente && 
+                        !questionOne.b_naoHaInteresseMunicipio &&
+                        !questionOne.c_possuiPrograma &&
+                        !questionOne.d_criouPrograma
+                      }
                       id="criouPrograma"
                       name="d_criouPrograma"
                       type="checkbox"
@@ -315,6 +346,8 @@ export const FormStepB2 = () => {
                     className="containerTextLabel" htmlFor="handleReasonGivingUpNameChange"
                   >Qual o nome desse programa que o município <u>possui</u>? 
                     <input
+                      required
+                      autoComplete="no"
                       id="handleReasonGivingUpNameChange"
                       name="handleReasonGivingUpNameChange"
                       type="text"
@@ -329,6 +362,8 @@ export const FormStepB2 = () => {
                     className="containerTextLabel" htmlFor="handleReasonGivingUpBeneficiaryChange"
                   >Quantos beneficiários são atendidos por este programa que o município <u>possui</u>?
                     <input
+                      required
+                      autoComplete="no"
                       id="handleReasonGivingUpBeneficiaryChange"
                       name="handleReasonGivingUpBeneficiaryChange"
                       type="text"
@@ -343,6 +378,8 @@ export const FormStepB2 = () => {
                     className="containerTextLabel" htmlFor="handleReasonGivingUpValueChange"
                   >Qual o valor mensal gasto com esse programa que o município <u>possui</u>?
                     <input
+                      required
+                      autoComplete="no"
                       id="handleReasonGivingUpValueChange"
                       name="handleReasonGivingUpValueChange"
                       type="text"
@@ -361,6 +398,8 @@ export const FormStepB2 = () => {
                     className="containerTextLabel" htmlFor="handleReasonGivingUpNameCreatedChange"
                   >Qual o nome desse programa que o município <u>criou</u>? 
                     <input
+                      required
+                      autoComplete="no"
                       id="handleReasonGivingUpNameCreatedChange"
                       name="handleReasonGivingUpNameCreatedChange"
                       type="text"
@@ -376,6 +415,8 @@ export const FormStepB2 = () => {
                     className="containerTextLabel" htmlFor="handleReasonGivingUpBeneficiaryCreatedChange"
                   >Quantos beneficiários são atendidos por este programa que o município <u>criou</u>?
                     <input
+                      required
+                      autoComplete="no"
                       id="handleReasonGivingUpBeneficiaryCreatedChange"
                       name="handleReasonGivingUpBeneficiaryCreatedChange"
                       type="text"
@@ -392,6 +433,8 @@ export const FormStepB2 = () => {
                   >
                     Qual o valor mensal gasto com esse programa que o município <u>criou</u>?
                     <input
+                      required
+                      autoComplete="no"
                       id="handleReasonGivingUpValueCreatedChange"
                       name="handleReasonGivingUpValueCreatedChange"
                       type="text"
@@ -417,6 +460,7 @@ export const FormStepB2 = () => {
                   
                   <div id="containerInputLabelRadioButton">
                     <input
+                      required
                       id="reasonForDroppingOutYes"
                       name="reasonForDroppingOut"
                       type="radio"
@@ -457,6 +501,8 @@ export const FormStepB2 = () => {
                     className="containerTextLabel" htmlFor="reasonForDroppingOutWhich"
                   >Se sim, qual?
                     <input
+                      required
+                      autoComplete="no"
                       id="reasonForDroppingOutWhich"
                       name="reasonForDroppingOutWhich"
                       type="text"
@@ -477,9 +523,10 @@ export const FormStepB2 = () => {
           <button
             className="buttonAll"
             type="submit"
-            onClick={() => setIsAlert(true)}
+            onChange={() => setIsAlert}
             >Finalizar
           </button>
+
           {isAlert === true && (
             <Alert className="success">
               <CheckCircle size={20} color="#2dd24e" weight="light" />

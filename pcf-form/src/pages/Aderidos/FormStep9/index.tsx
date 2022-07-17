@@ -104,6 +104,15 @@ export const FormStep9 = () => {
 
                     <div id="containerInputLabelRadioButton">
                       <input
+                        required={
+                          !questionOne.a_proximidadeDomicilioFamilia && 
+                          !questionOne.b_proximidadeDomicilioVisitadores &&
+                          !questionOne.c_caracteristicasCrianca &&
+                          !questionOne.d_atribuicaoPorVaga &&
+                          !questionOne.e_sorteio &&
+                          !questionOne.f_outroDistribuicao &&
+                          !questionOne.g_outroDistribuicaoText
+                        }
                         id="a_proximidadeDomicilioFamilia"
                         name="a_proximidadeDomicilioFamilia"
                         type="checkbox"
@@ -122,6 +131,15 @@ export const FormStep9 = () => {
 
                     <div id="containerInputLabelRadioButton">
                       <input
+                        required={
+                          !questionOne.a_proximidadeDomicilioFamilia && 
+                          !questionOne.b_proximidadeDomicilioVisitadores &&
+                          !questionOne.c_caracteristicasCrianca &&
+                          !questionOne.d_atribuicaoPorVaga &&
+                          !questionOne.e_sorteio &&
+                          !questionOne.f_outroDistribuicao &&
+                          !questionOne.g_outroDistribuicaoText
+                        }
                         id="b_proximidadeDomicilioVisitadores"
                         name="b_proximidadeDomicilioVisitadores"
                         type="checkbox"
@@ -140,6 +158,15 @@ export const FormStep9 = () => {
 
                     <div id="containerInputLabelRadioButton">
                       <input
+                        required={
+                          !questionOne.a_proximidadeDomicilioFamilia && 
+                          !questionOne.b_proximidadeDomicilioVisitadores &&
+                          !questionOne.c_caracteristicasCrianca &&
+                          !questionOne.d_atribuicaoPorVaga &&
+                          !questionOne.e_sorteio &&
+                          !questionOne.f_outroDistribuicao &&
+                          !questionOne.g_outroDistribuicaoText
+                        }
                         id="c_caracteristicasCrianca"
                         name="c_caracteristicasCrianca"
                         type="checkbox"
@@ -158,6 +185,15 @@ export const FormStep9 = () => {
 
                     <div id="containerInputLabelRadioButton">
                       <input
+                        required={
+                          !questionOne.a_proximidadeDomicilioFamilia && 
+                          !questionOne.b_proximidadeDomicilioVisitadores &&
+                          !questionOne.c_caracteristicasCrianca &&
+                          !questionOne.d_atribuicaoPorVaga &&
+                          !questionOne.e_sorteio &&
+                          !questionOne.f_outroDistribuicao &&
+                          !questionOne.g_outroDistribuicaoText
+                        }
                         id="d_atribuicaoPorVaga"
                         name="d_atribuicaoPorVaga"
                         type="checkbox"
@@ -176,6 +212,15 @@ export const FormStep9 = () => {
 
                     <div id="containerInputLabelRadioButton">
                       <input
+                        required={
+                          !questionOne.a_proximidadeDomicilioFamilia && 
+                          !questionOne.b_proximidadeDomicilioVisitadores &&
+                          !questionOne.c_caracteristicasCrianca &&
+                          !questionOne.d_atribuicaoPorVaga &&
+                          !questionOne.e_sorteio &&
+                          !questionOne.f_outroDistribuicao &&
+                          !questionOne.g_outroDistribuicaoText
+                        }
                         id="e_sorteio"
                         name="e_sorteio"
                         type="checkbox"
@@ -194,6 +239,14 @@ export const FormStep9 = () => {
 
                     <div id="containerInputLabelRadioButton">
                       <input
+                        required={
+                          !questionOne.a_proximidadeDomicilioFamilia && 
+                          !questionOne.b_proximidadeDomicilioVisitadores &&
+                          !questionOne.c_caracteristicasCrianca &&
+                          !questionOne.d_atribuicaoPorVaga &&
+                          !questionOne.e_sorteio &&
+                          !questionOne.f_outroDistribuicao
+                        }
                         id="f_outroDistribuicao"
                         name="f_outroDistribuicao"
                         type="checkbox"
@@ -208,7 +261,15 @@ export const FormStep9 = () => {
                         htmlFor="f_outroDistribuicao"
                       >Outro:
                       </label>
-                        <input
+                      <input
+                        required={
+                          !questionOne.a_proximidadeDomicilioFamilia && 
+                          !questionOne.b_proximidadeDomicilioVisitadores &&
+                          !questionOne.c_caracteristicasCrianca &&
+                          !questionOne.d_atribuicaoPorVaga &&
+                          !questionOne.e_sorteio &&
+                          !questionOne.g_outroDistribuicaoText
+                        }
                           className="inputPlaceholderOther"
                           id="g_outroDistribuicaoText"
                           name="g_outroDistribuicaoText"

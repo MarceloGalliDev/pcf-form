@@ -150,6 +150,15 @@ export const ButtonTypeRadioV2 = styled.div`
         gap: 10px;
         margin-top: 10px;
         align-items: center;
+
+        input[type="radio"]:invalid {
+          appearance: none;
+          color: red;
+          width: 12px;
+          height: 12px;
+          border: 1px solid red;
+          border-radius: 50%;
+        }
       }
 
       .containerTextLabel {
@@ -277,6 +286,15 @@ export const ButtonTypeCheckbox = styled.div`
         margin-top: 10px;
         align-items: center;
 
+        input[type="checkbox"]:invalid {
+          appearance: none;
+          color: red;
+          width: 12px;
+          height: 12px;
+          border: 1px solid red;
+          padding: 5px;
+        }
+
         .containerTextLabel {
           font-size: 15px;
           font-weight: normal;
@@ -289,6 +307,10 @@ export const ButtonTypeCheckbox = styled.div`
           border-top: none;
           border-bottom: 1px solid #2E7EB0;
           outline: none;
+
+          :invalid {
+            border-bottom: 1px solid red;
+          }
         }
       }
     }
@@ -325,6 +347,15 @@ export const ButtonTypeCheckboxV1 = styled.div`
         margin-top: 10px;
         align-items: center;
 
+        input[type="checkbox"]:invalid {
+          appearance: none;
+          color: red;
+          width: 12px;
+          height: 12px;
+          border: 1px solid red;
+          padding: 5px;
+        }
+
         .containerTextLabel {
           font-size: 15px;
           font-weight: normal;
@@ -337,6 +368,10 @@ export const ButtonTypeCheckboxV1 = styled.div`
           border-top: none;
           border-bottom: 1px solid #2E7EB0;
           outline: none;
+
+          :invalid {
+            border-bottom: 1px solid red;
+          }
         }
       }
     }
@@ -420,6 +455,10 @@ export const ButtonTypeCheckboxV1 = styled.div`
         outline: 0;
         font-size: 15px;
         padding: 5px 0;
+
+        :invalid {
+            border-bottom: 1px solid red;
+          }
       }
     }
   }
@@ -704,6 +743,15 @@ export const ButtonTypeRadioText = styled.div`
         gap: 10px;
         margin: 10px 0;
         align-items: center;
+
+        input[type="radio"]:invalid {
+          appearance: none;
+          color: red;
+          width: 12px;
+          height: 12px;
+          border: 1px solid red;
+          border-radius: 50%;
+        }
       }
 
       .containerTextLabel {
@@ -755,6 +803,10 @@ export const ButtonTypeRadioText = styled.div`
         outline: 0;
         font-size: 15px;
         padding: 5px 0;
+
+        :invalid {
+          border-bottom: 1px solid red;
+        }
       }
     }
   }

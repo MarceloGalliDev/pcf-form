@@ -365,6 +365,13 @@ export const FormStep4 = () => {
 
                     <div id="containerInputLabelRadioButton">
                       <input
+                        required={
+                          !questionThree?.a_supervisoresHorasSemanais40 && 
+                          !questionThree.b_supervisoresHorasSemanais30 &&
+                          !questionThree.c_supervisoresHorasSemanais20 &&
+                          !questionThree.d_supervisoresHorasSemanaisOutros &&
+                          !questionThree.e_supervisoresHorasSemanaisOutrosDescricao
+                        }
                         id="workloadForty"
                         name="a_supervisoresHorasSemanais40"
                         type="checkbox"
@@ -383,6 +390,13 @@ export const FormStep4 = () => {
 
                     <div id="containerInputLabelRadioButton">
                       <input
+                        required={
+                          !questionThree?.a_supervisoresHorasSemanais40 && 
+                          !questionThree.b_supervisoresHorasSemanais30 &&
+                          !questionThree.c_supervisoresHorasSemanais20 &&
+                          !questionThree.d_supervisoresHorasSemanaisOutros &&
+                          !questionThree.e_supervisoresHorasSemanaisOutrosDescricao
+                        }
                         id="workloadThirty"
                         name="b_supervisoresHorasSemanais30"
                         type="checkbox"
@@ -401,6 +415,13 @@ export const FormStep4 = () => {
 
                     <div id="containerInputLabelRadioButton">
                       <input
+                        required={
+                          !questionThree?.a_supervisoresHorasSemanais40 && 
+                          !questionThree.b_supervisoresHorasSemanais30 &&
+                          !questionThree.c_supervisoresHorasSemanais20 &&
+                          !questionThree.d_supervisoresHorasSemanaisOutros &&
+                          !questionThree.e_supervisoresHorasSemanaisOutrosDescricao
+                        }
                         id="workloadTwenty"
                         name="c_supervisoresHorasSemanais20"
                         type="checkbox"
@@ -419,6 +440,12 @@ export const FormStep4 = () => {
 
                     <div id="containerInputLabelRadioButton">
                       <input
+                        required={
+                          !questionThree?.a_supervisoresHorasSemanais40 && 
+                          !questionThree.b_supervisoresHorasSemanais30 &&
+                          !questionThree.c_supervisoresHorasSemanais20 &&
+                          !questionThree.d_supervisoresHorasSemanaisOutros
+                        }
                         id="workloadOthers"
                         name="d_supervisoresHorasSemanaisOutros"
                         type="checkbox"
@@ -434,6 +461,12 @@ export const FormStep4 = () => {
                       >Outros:
                       </label>
                       <input
+                        required={
+                          !questionThree?.a_supervisoresHorasSemanais40 && 
+                          !questionThree.b_supervisoresHorasSemanais30 &&
+                          !questionThree.c_supervisoresHorasSemanais20 &&
+                          !questionThree.e_supervisoresHorasSemanaisOutrosDescricao
+                        }
                         className="inputPlaceholderOther"
                         name="e_supervisoresHorasSemanaisOutrosDescricao"
                         type="text"

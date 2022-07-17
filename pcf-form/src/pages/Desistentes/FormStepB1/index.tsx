@@ -108,6 +108,8 @@ export const FormStepB1 = () => {
             <label htmlFor="name">
               Nome do entrevistado:
               <input
+                required
+                autoComplete="no"
                 name="name"
                 type="text"
                 value={questionOne}
@@ -123,6 +125,8 @@ export const FormStepB1 = () => {
             <label htmlFor="email">
               E-mail:
               <input
+                required
+                autoComplete="no"
                 name="email"
                 type="email"
                 value={questionTwo}
@@ -138,6 +142,8 @@ export const FormStepB1 = () => {
             <label htmlFor="phoneNumber">
               Telefone para contato:
               <input
+                required
+                autoComplete="no"
                 name="phoneNumber"
                 type="tel"
                 value={questionThree}
@@ -153,6 +159,8 @@ export const FormStepB1 = () => {
             <label htmlFor="functionPCF">
               Função no PCF:
               <input
+                required
+                autoComplete="no"
                 name="functionPCF"
                 type="text"
                 value={questionFour}
@@ -168,23 +176,25 @@ export const FormStepB1 = () => {
             <label htmlFor="uf">
               Local em que atua no PCF
               <select
+                required
                 name="uf"
                 id="uf"
                 value={selectedUf}
                 onChange={handleSelectedUf}
               >
-                <option value="0">Selecione o Estado</option>
+                <option value="">Selecione o Estado</option>
                 {ufs.map(uf => (
                   <option key={uf.id} value={uf.sigla}>{uf.nome}</option>
                 ))}
               </select>
               <select
+                required
                 name="city"
                 id="city"
                 value={selectedCity}
                 onChange={handleSelectedCity}
               >
-                <option value="0">Selecione o Município</option>
+                <option value="">Selecione o Município</option>
                 {cities.map(city => (
                   <option key={city.id} value={city.nome}>{city.nome}</option>
                 ))}

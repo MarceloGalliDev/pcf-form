@@ -143,6 +143,7 @@ export const FormStepA2 = () => {
                   
                   <div id="containerInputLabelRadioButton">
                     <input
+                      required
                       id="targetAudiencePCFYes"
                       name="targetAudiencePCF"
                       type="radio"
@@ -182,6 +183,7 @@ export const FormStepA2 = () => {
                   <label className="containerTextLabel" htmlFor="targetAudiencePCFTextBeneficiary">
                     Quantos beneficiários são atendidos por este programa?
                     <input
+                      required
                       id="targetAudiencePCFTextBeneficiary"
                       name="targetAudiencePCFTextBeneficiary"
                       type="text"
@@ -196,6 +198,7 @@ export const FormStepA2 = () => {
                   <label className="containerTextLabel" htmlFor="targetAudiencePCFTextValue">
                     Qual o valor mensal gasto com esse Programa? 
                     <input
+                      required
                       id="targetAudiencePCFTextValue"
                       name="targetAudiencePCFTextValue"
                       type="text"
@@ -221,6 +224,12 @@ export const FormStepA2 = () => {
                 <div>
                   <div id="containerInputLabelRadioButton">
                     <input
+                      required={
+                        !questionFive?.a_recursoFinanceiroInsuficiente && 
+                        !questionFive.b_naoHaInteresseMunicipio &&
+                        !questionFive.c_possuiPrograma &&
+                        !questionFive.d_naoConhecePrograma
+                      }
                       id="recursoFinanceiroInsuficiente"
                       name="a_recursoFinanceiroInsuficiente"
                       type="checkbox"
@@ -238,6 +247,12 @@ export const FormStepA2 = () => {
                   </div>
                   <div id="containerInputLabelRadioButton">
                     <input
+                      required={
+                        !questionFive?.a_recursoFinanceiroInsuficiente && 
+                        !questionFive.b_naoHaInteresseMunicipio &&
+                        !questionFive.c_possuiPrograma &&
+                        !questionFive.d_naoConhecePrograma
+                      }
                       id="naoHaInteresseMunicipio"
                       name="b_naoHaInteresseMunicipio"
                       type="checkbox"
@@ -255,6 +270,12 @@ export const FormStepA2 = () => {
                   </div>
                   <div id="containerInputLabelRadioButton">
                     <input
+                      required={
+                        !questionFive?.a_recursoFinanceiroInsuficiente && 
+                        !questionFive.b_naoHaInteresseMunicipio &&
+                        !questionFive.c_possuiPrograma &&
+                        !questionFive.d_naoConhecePrograma
+                      }
                       id="possuiPrograma"
                       name="c_possuiPrograma"
                       type="checkbox"
@@ -272,6 +293,12 @@ export const FormStepA2 = () => {
                   </div>
                   <div id="containerInputLabelRadioButton">
                     <input
+                      required={
+                        !questionFive?.a_recursoFinanceiroInsuficiente && 
+                        !questionFive.b_naoHaInteresseMunicipio &&
+                        !questionFive.c_possuiPrograma &&
+                        !questionFive.d_naoConhecePrograma
+                      }
                       id="naoConhecePrograma"
                       name="d_naoConhecePrograma"
                       type="checkbox"
@@ -296,6 +323,8 @@ export const FormStepA2 = () => {
                   <label className="containerTextLabel" htmlFor="targetAudiencePCFTextBeneficiary">
                     Qual o nome desse programa?
                     <input
+                      required
+                      autoComplete="no"
                       id="targetAudiencePCFTextBeneficiary"
                       name="targetAudiencePCFTextBeneficiary"
                       type="text"
@@ -310,6 +339,8 @@ export const FormStepA2 = () => {
                   <label className="containerTextLabel" htmlFor="targetAudiencePCFTextBeneficiary">
                     Quantos beneficiários são atendidos por este programa?
                     <input
+                      required
+                      autoComplete="no"
                       id="targetAudiencePCFTextBeneficiary"
                       name="targetAudiencePCFTextBeneficiary"
                       type="text"
@@ -324,6 +355,8 @@ export const FormStepA2 = () => {
                   <label className="containerTextLabel" htmlFor="targetAudiencePCFTextValue">
                     Qual o valor mensal gasto com esse Programa?
                     <input
+                      required
+                      autoComplete="no"
                       id="targetAudiencePCFTextValue"
                       name="targetAudiencePCFTextValue"
                       type="text"
@@ -350,6 +383,7 @@ export const FormStepA2 = () => {
                   
                   <div id="containerInputLabelRadioButton">
                     <input
+                      required
                       id="explainTheReasonYes"
                       name="explainTheReason"
                       type="radio"
@@ -391,6 +425,8 @@ export const FormStepA2 = () => {
                     className="containerTextLabel" htmlFor="explainTheReasonText"
                   >Qual?
                     <input
+                      required
+                      autoComplete="no"
                       id="explainTheReasonText"
                       name="explainTheReasonText"
                       type="text"
