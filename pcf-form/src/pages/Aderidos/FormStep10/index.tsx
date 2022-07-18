@@ -4,7 +4,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { useFormPage, FormActions } from "../../../context/FormContext";
 import { ChangeEvent, FormEvent, useCallback, useEffect, useState } from "react";
 import { database } from "../../../services/firebase";
-import { ref, push, set } from "firebase/database";
+import { ref, push, set, update } from "firebase/database";
 import { Item } from "../../../components/Questions/QuestionRecursosCustos/types/Item";
 import { Item1 } from "../../../components/Questions/QuestionOutrosCustos1/types/Item1";
 import { Item2 } from "../../../components/Questions/QuestionOutrosCustos2/types/Item2";
@@ -17,6 +17,7 @@ import { TableAreaOutrosCustos2 } from "../../../components/Questions/QuestionOu
 import { CheckCircle } from 'phosphor-react';
 import { Alert } from 'reactstrap';
 import { useRoom } from "../../../hooks/useRoom";
+import { Button } from "../../../components/ButtonFinished";
 
 
 type RoomParams = {
@@ -96,6 +97,7 @@ export const FormStep10 = () => {
     newList2.push(item2)
     setList2(newList2)
   };
+
   function removerDaListaOthersCosts2(index2: number) {
     setList2((previous2) => previous2.filter((item2, indexPrevious2) => index2 !== indexPrevious2))
     return setList2
@@ -104,7 +106,7 @@ export const FormStep10 = () => {
   async function handleSendOtherCosts(event: FormEvent) {
     event.preventDefault();
 
-    const question = {
+    const questionReq = {
       J_Outros_Custos: {
         questao53: filteredList,
         questao54: questionTwo,
@@ -115,11 +117,17 @@ export const FormStep10 = () => {
       }
     };
 
-    const firebaseRoomsQuestion = ref(database, `rooms/${roomId}/aderidos/question`);
-    const firebaseQuestion = await push(firebaseRoomsQuestion);
-    set(firebaseQuestion, question);
+    if (question.length === 0) {
+      const firebaseRoomsQuestion = ref(database, `rooms/${roomId}/aderidos/`);
+      const firebaseQuestion = await push(firebaseRoomsQuestion, {endedAt: new Date()}) ;
+      set(firebaseQuestion, questionReq);
+    } else {
+      const firebaseRoomsQuestion = ref(database, `rooms/${roomId}/aderidos/${question[0].idForm}`);
+      await update(firebaseRoomsQuestion, questionReq)
+    };
 
     if (confirm('Tem certeza que deseja finalizar o questionário?')) {
+      await update(ref(database, `rooms/${roomId}/aderidos/`), { endedAt: new Date() })
       setIsAlert(true);
       setTimeout(() => {
         navigate('/')
@@ -129,10 +137,6 @@ export const FormStep10 = () => {
 
   const handleVisitorPaysTransportChange = (event: ChangeEvent<HTMLInputElement>) => {
     setQuestionTwo(event.target.value);
-  };
-
-  const handleVisitorPaysTransportTextChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setquestionTwoText(event.target.value);
   };
   
   const handleUsedTransporteChange = useCallback((event: React.FormEvent<HTMLInputElement>) => {
@@ -219,6 +223,7 @@ export const FormStep10 = () => {
                         name="visitorPaysTransport"
                         type="radio"
                         value="Sim"
+                        checked={questionTwo === "Sim"}
                         onChange={handleVisitorPaysTransportChange}
                       />
                       <label
@@ -234,6 +239,7 @@ export const FormStep10 = () => {
                         name="visitorPaysTransport"
                         type="radio"
                         value="Não"
+                        checked={questionTwo === "Não"}
                         onChange={handleVisitorPaysTransportChange}
                       />
                       <label
@@ -693,6 +699,7 @@ export const FormStep10 = () => {
                         name="monthlyRecord"
                         type="radio"
                         value="Sim"
+                        checked={questionSix === "Sim"}
                         onChange={handleMonthlyRecordChange}
                       />
                       <label
@@ -708,6 +715,7 @@ export const FormStep10 = () => {
                         name="monthlyRecord"
                         type="radio"
                         value="Não"
+                        checked={questionSix === "Não"}
                         onChange={handleMonthlyRecordChange}
                       />
                       <label
@@ -728,13 +736,14 @@ export const FormStep10 = () => {
       <form onSubmit={handleSendOtherCosts}>
         <SC.AllButtons>
           <Link className="buttonAll" to={`/${roomId}/formstep9`}>Voltar</Link>
-          <button
-            className="buttonAll"
+          <Button
+            isOutlined
+            id="buttonAll"
             type="submit"
             onClick={() => setIsAlert}
             >Finalizar
-          </button>
-          {isAlert === true && (
+          </Button>
+          {isAlert && (
             <Alert className="success">
               <CheckCircle size={20} color="#2dd24e" weight="light" />
               Formulário enviado com sucesso!

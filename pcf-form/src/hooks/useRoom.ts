@@ -29,19 +29,19 @@ type Aderidos = {
   C_Gestao_do_PCF: {
     questao14: string,
     questao15: string,
-    questao16: string,
+    questao16?: string,
     questao17: string,
-    questao18: string,
+    questao18?: string,
     questao19: string,
     questao20: string,
-    questao21: {
-      a_visitadoresEdital: boolean,
-      b_visitadoresEquipePropria: boolean,
-      c_visitadoresContratacaoDireta: boolean,
-      d_visitadoresContratacaoEstagio: boolean,
-      e_visitadoresNaoSeAplica: boolean,
-      f_visitadoresOutro: boolean,
-      g_visitadoresOutrosDescricao: string,
+    questao21?: {
+      a_visitadoresEdital?: boolean,
+      b_visitadoresEquipePropria?: boolean,
+      c_visitadoresContratacaoDireta?: boolean,
+      d_visitadoresContratacaoEstagio?: boolean,
+      e_visitadoresNaoSeAplica?: boolean,
+      f_visitadoresOutro?: boolean,
+      g_visitadoresOutrosDescricao?: string,
     },
   },
   D_Supervisores_do_PCF: {
@@ -217,19 +217,19 @@ type FirebaseQuestions = Record<string, {
   C_Gestao_do_PCF: {
     questao14: string,
     questao15: string,
-    questao16: string,
+    questao16?: string,
     questao17: string,
-    questao18: string,
+    questao18?: string,
     questao19: string,
     questao20: string,
-    questao21: {
-      a_visitadoresEdital: boolean,
-      b_visitadoresEquipePropria: boolean,
-      c_visitadoresContratacaoDireta: boolean,
-      d_visitadoresContratacaoEstagio: boolean,
-      e_visitadoresNaoSeAplica: boolean,
-      f_visitadoresOutro: boolean,
-      g_visitadoresOutrosDescricao: string,
+    questao21?: {
+      a_visitadoresEdital?: boolean,
+      b_visitadoresEquipePropria?: boolean,
+      c_visitadoresContratacaoDireta?: boolean,
+      d_visitadoresContratacaoEstagio?: boolean,
+      e_visitadoresNaoSeAplica?: boolean,
+      f_visitadoresOutro?: boolean,
+      g_visitadoresOutrosDescricao?: string,
     },
   },
   D_Supervisores_do_PCF: {
@@ -423,7 +423,8 @@ export function useRoom() {
               questao18: value?.C_Gestao_do_PCF?.questao18,
               questao19: value?.C_Gestao_do_PCF?.questao19,
               questao20: value?.C_Gestao_do_PCF?.questao20,
-              questao21: {
+              questao21:
+              {
                 a_visitadoresEdital: value?.C_Gestao_do_PCF?.questao21?.a_visitadoresEdital,
 
                 b_visitadoresEquipePropria: value?.C_Gestao_do_PCF?.questao21?.b_visitadoresEquipePropria,

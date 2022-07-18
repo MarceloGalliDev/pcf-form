@@ -4,7 +4,6 @@ import { FormEvent, useEffect, useState } from "react";
 import { push, ref, set, get } from "firebase/database";
 import { database } from "../../services/firebase";
 import '../../styles/auth.scss';
-import { userJoin } from "../../context/joinContext";
 
 export const Home = () => {
   const navigate = useNavigate();
@@ -13,7 +12,6 @@ export const Home = () => {
   const [roomCodeB2, setRoomCodeB2] = useState('');
   const [roomCodeB3, setRoomCodeB3] = useState('');
 
-  const {setStatus} = userJoin();
 
   async function handleCreateRoom1(event: FormEvent) {
     event.preventDefault();
@@ -49,7 +47,6 @@ export const Home = () => {
   };
 
   async function handleJoinRoom1(event: FormEvent) {
-    
     event.preventDefault();
 
     if (roomCodeB1.trim() === '') {
@@ -57,7 +54,7 @@ export const Home = () => {
       return;
     };
 
-    const roomRef = await get(ref(database, `rooms/${roomCodeB1}`))
+    const roomRef = await get(ref(database, `rooms/${roomCodeB1}/aderidos`))
 
     if (!roomRef.exists()) {
       alert('Questionário não existe!')
@@ -67,8 +64,6 @@ export const Home = () => {
       alert('Questionário Finalizado.')
       return;
     }
-
-    setStatus(true)
 
     navigate(`/${roomCodeB1}/formstep1`)
   };
@@ -81,7 +76,7 @@ export const Home = () => {
       return;
     };
 
-    const roomRef = await get(ref(database, `rooms/${roomCodeB2}`))
+    const roomRef = await get(ref(database, `rooms/${roomCodeB2}/desistentes`))
 
     if (!roomRef.exists()) {
       alert('Questionário não existe!')
@@ -91,8 +86,6 @@ export const Home = () => {
       alert('Questionário Finalizado.')
       return;
     }
-
-    setStatus(true)
 
     navigate(`/${roomCodeB2}/formstepA1`)
   };
@@ -116,14 +109,8 @@ export const Home = () => {
       return;
     }
 
-    setStatus(true)
-
     navigate(`/${roomCodeB3}/formstepB1`)
   };
-
-  useEffect(() => {
-    setStatus(false)
-  }, [])
 
   return (
     <div id="page-auth">

@@ -11,7 +11,6 @@ import {
 import { database } from "../../../services/firebase";
 import { ref, push, set, update } from "firebase/database";
 import { useRoom } from "../../../hooks/useRoom";
-import { userJoin } from "../../../context/joinContext";
 
 type RoomParams = {
   id: string;
@@ -116,7 +115,6 @@ export const FormStep1 = () => {
 
   useEffect(() => {
     if (question?.length > 0) {
-      debugger
       setQuestionOne(question[0].A_Informacoes_Gerais.questao01)
       setQuestionTwo(question[0].A_Informacoes_Gerais.questao02)
       setQuestionThree(question[0].A_Informacoes_Gerais.questao03)

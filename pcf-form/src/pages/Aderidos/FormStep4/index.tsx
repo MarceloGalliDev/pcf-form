@@ -373,7 +373,7 @@ export const FormStep4 = () => {
                 >Qual a remuneração média em R$ (reais) dos Supervisores?
                   <input
                     required
-                    autoComplete="no"
+                    autoComplete="off"
                     id="averagePay"
                     name="remuneracaoMediaSupervisor"
                     type="number"

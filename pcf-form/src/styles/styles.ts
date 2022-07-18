@@ -690,6 +690,25 @@ export const AllButtons = styled.div`
       filter: brightness(0.8);
     }
   }
+  
+  #buttonAll {
+    width: 170px;
+    background-color: #2D7DB0;
+    color: #F2F2F2;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 10px 46.9px;
+    border: 0;
+    border-radius: 10px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: filter 0.2s;
+    text-align: center;
+
+    &:hover {
+      filter: brightness(0.8);
+    }
+  }
 `;
 
 export const Header = styled.div`

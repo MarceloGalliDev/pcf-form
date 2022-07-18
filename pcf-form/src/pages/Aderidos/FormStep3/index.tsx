@@ -5,7 +5,6 @@ import { useFormPage, FormActions } from "../../../context/FormContext";
 import { ChangeEvent, FormEvent, useCallback, useEffect, useState }from "react";
 import { push, ref, set, update } from "firebase/database";
 import { database } from "../../../services/firebase";
-import { RoomCode } from "../../../components/RoomCode";
 import { useRoom } from "../../../hooks/useRoom";
 
 type RoomParams = {
@@ -125,14 +124,14 @@ export const FormStep3 = () => {
 
   useEffect(() => {
     if (question?.length > 0) {
-      setQuestionOne(question[0].C_Gestao_do_PCF.questao14)
-      setQuestionTwo(question[0].C_Gestao_do_PCF.questao15)
-      setQuestionThree(question[0].C_Gestao_do_PCF.questao16)
-      setQuestionFour(question[0].C_Gestao_do_PCF.questao17)
-      setQuestionFive(question[0].C_Gestao_do_PCF.questao18)
-      setQuestionSix(question[0].C_Gestao_do_PCF.questao19)
-      setQuestionSeven(question[0].C_Gestao_do_PCF.questao20)
-      setQuestionEight(question[0].C_Gestao_do_PCF.questao21)
+      setQuestionOne(question[0].C_Gestao_do_PCF?.questao14)
+      setQuestionTwo(question[0].C_Gestao_do_PCF?.questao15)
+      setQuestionThree(question[0].C_Gestao_do_PCF?.questao16)
+      setQuestionFour(question[0].C_Gestao_do_PCF?.questao17)
+      setQuestionFive(question[0].C_Gestao_do_PCF?.questao18)
+      setQuestionSix(question[0].C_Gestao_do_PCF?.questao19)
+      setQuestionSeven(question[0].C_Gestao_do_PCF?.questao20)
+      setQuestionEight(question[0].C_Gestao_do_PCF?.questao21)
     }
     console.log(question)
   }, [question]);
