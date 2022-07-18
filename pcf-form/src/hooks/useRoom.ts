@@ -1,4 +1,4 @@
-import { ref, onValue, off } from "firebase/database";
+import { ref, onValue, off, update } from "firebase/database";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { database } from "../services/firebase";
@@ -200,7 +200,7 @@ type FirebaseQuestions = Record<string, {
   A_Informacoes_Gerais: {
     questao01: string,
     questao02: string,
-    questao03: string,
+    questao03: number,
     questao04: string,
     questao05: string,
     questao06: string,
@@ -217,12 +217,12 @@ type FirebaseQuestions = Record<string, {
   C_Gestao_do_PCF: {
     questao14: string,
     questao15: string,
-    questao16?: string,
+    questao16: string,
     questao17: string,
-    questao18?: string,
+    questao18: string,
     questao19: string,
     questao20: string,
-    questao21?: {
+    questao21: {
       a_visitadoresEdital?: boolean,
       b_visitadoresEquipePropria?: boolean,
       c_visitadoresContratacaoDireta?: boolean,
@@ -418,115 +418,142 @@ export function useRoom() {
             C_Gestao_do_PCF: {
               questao14: value?.C_Gestao_do_PCF?.questao14,
               questao15: value?.C_Gestao_do_PCF?.questao15,
-              questao16: value?.C_Gestao_do_PCF?.questao16,
+              questao16: value?.C_Gestao_do_PCF?.questao16 || null,
               questao17: value?.C_Gestao_do_PCF?.questao17,
-              questao18: value?.C_Gestao_do_PCF?.questao18,
+              questao18: value?.C_Gestao_do_PCF?.questao18 || null,
               questao19: value?.C_Gestao_do_PCF?.questao19,
               questao20: value?.C_Gestao_do_PCF?.questao20,
               questao21:
               {
-                a_visitadoresEdital: value?.C_Gestao_do_PCF?.questao21?.a_visitadoresEdital,
+                a_visitadoresEdital: value?.C_Gestao_do_PCF?.questao21?.a_visitadoresEdital || null,
 
-                b_visitadoresEquipePropria: value?.C_Gestao_do_PCF?.questao21?.b_visitadoresEquipePropria,
+                b_visitadoresEquipePropria: value?.C_Gestao_do_PCF?.questao21?.b_visitadoresEquipePropria || null,
 
-                c_visitadoresContratacaoDireta: value?.C_Gestao_do_PCF?.questao21?.c_visitadoresContratacaoDireta,
+                c_visitadoresContratacaoDireta: value?.C_Gestao_do_PCF?.questao21?.c_visitadoresContratacaoDireta || null,
 
-                d_visitadoresContratacaoEstagio: value?.C_Gestao_do_PCF?.questao21?.d_visitadoresContratacaoEstagio,
+                d_visitadoresContratacaoEstagio: value?.C_Gestao_do_PCF?.questao21?.d_visitadoresContratacaoEstagio || null,
 
-                e_visitadoresNaoSeAplica: value?.C_Gestao_do_PCF?.questao21?.e_visitadoresNaoSeAplica,
+                e_visitadoresNaoSeAplica: value?.C_Gestao_do_PCF?.questao21?.e_visitadoresNaoSeAplica || null,
 
-                f_visitadoresOutro: value?.C_Gestao_do_PCF?.questao21?.f_visitadoresOutro,
+                f_visitadoresOutro: value?.C_Gestao_do_PCF?.questao21?.f_visitadoresOutro || null,
                 
-                g_visitadoresOutrosDescricao: value?.C_Gestao_do_PCF?.questao21?.g_visitadoresOutrosDescricao,
+                g_visitadoresOutrosDescricao: value?.C_Gestao_do_PCF?.questao21?.g_visitadoresOutrosDescricao || null,
               },
             },
             D_Supervisores_do_PCF: {
-              questao22: value?.D_Supervisores_do_PCF?.questao22,
-              questao23: value?.D_Supervisores_do_PCF?.questao23,
+              questao22: value?.D_Supervisores_do_PCF?.questao22 || null,
+              questao23: value?.D_Supervisores_do_PCF?.questao23 || null,
               questao24: {
-                a_supervisoresHorasSemanais40: value?.D_Supervisores_do_PCF?.questao24?.a_supervisoresHorasSemanais40,
-                b_supervisoresHorasSemanais30: value?.D_Supervisores_do_PCF?.questao24?.b_supervisoresHorasSemanais30,
-                c_supervisoresHorasSemanais20: value?.D_Supervisores_do_PCF?.questao24?.c_supervisoresHorasSemanais20,
-                d_supervisoresHorasSemanaisOutros: value?.D_Supervisores_do_PCF?.questao24?.d_supervisoresHorasSemanaisOutros,
-                e_supervisoresHorasSemanaisOutrosDescricao: value?.D_Supervisores_do_PCF?.questao24?.e_supervisoresHorasSemanaisOutrosDescricao,
+                a_supervisoresHorasSemanais40: value?.D_Supervisores_do_PCF?.questao24?.a_supervisoresHorasSemanais40 || null, 
+
+                b_supervisoresHorasSemanais30: value?.D_Supervisores_do_PCF?.questao24?.b_supervisoresHorasSemanais30 || null,
+
+                c_supervisoresHorasSemanais20: value?.D_Supervisores_do_PCF?.questao24?.c_supervisoresHorasSemanais20 || null,
+
+                d_supervisoresHorasSemanaisOutros: value?.D_Supervisores_do_PCF?.questao24?.d_supervisoresHorasSemanaisOutros || null,
+
+                e_supervisoresHorasSemanaisOutrosDescricao: value?.D_Supervisores_do_PCF?.questao24?.e_supervisoresHorasSemanaisOutrosDescricao || null,
               },
               questao25: {
-                a_supervisoresGraduacaoIncompleta: value?.D_Supervisores_do_PCF?.questao25?.a_supervisoresGraduacaoIncompleta,
-                b_supervisoresGraduacaoCompleta: value?.D_Supervisores_do_PCF?.questao25?.b_supervisoresGraduacaoCompleta,
-                c_supervisoresEspecializacao: value?.D_Supervisores_do_PCF?.questao25?.c_supervisoresEspecializacao,
-                d_supervisoresMestrado: value?.D_Supervisores_do_PCF?.questao25?.d_supervisoresMestrado,
-                e_supervisoresDoutorado: value?.D_Supervisores_do_PCF?.questao25?.e_supervisoresDoutorado,
+                a_supervisoresGraduacaoIncompleta: value?.D_Supervisores_do_PCF?.questao25?.a_supervisoresGraduacaoIncompleta || null,
+
+                b_supervisoresGraduacaoCompleta: value?.D_Supervisores_do_PCF?.questao25?.b_supervisoresGraduacaoCompleta || null,
+
+                c_supervisoresEspecializacao: value?.D_Supervisores_do_PCF?.questao25?.c_supervisoresEspecializacao || null,
+
+                d_supervisoresMestrado: value?.D_Supervisores_do_PCF?.questao25?.d_supervisoresMestrado || null,
+
+                e_supervisoresDoutorado: value?.D_Supervisores_do_PCF?.questao25?.e_supervisoresDoutorado || null
               },
               questao26: {
-                a_supervisoresServidorEfetivo: value?.D_Supervisores_do_PCF?.questao26?.a_supervisoresServidorEfetivo,
-                b_supervisoresMediaRemuneracaoEfetivo: value?.D_Supervisores_do_PCF?.questao26?.b_supervisoresMediaRemuneracaoEfetivo,
+                a_supervisoresServidorEfetivo: value?.D_Supervisores_do_PCF?.questao26?.a_supervisoresServidorEfetivo || null,
+
+                b_supervisoresMediaRemuneracaoEfetivo: value?.D_Supervisores_do_PCF?.questao26?.b_supervisoresMediaRemuneracaoEfetivo || null,
               },
               questao27: {
-                a_supervisoresCargoComissionado: value?.D_Supervisores_do_PCF?.questao27?.a_supervisoresCargoComissionado,
-                b_supervisoresMediaRemuneracaoComissionado: value?.D_Supervisores_do_PCF?.questao27?.b_supervisoresMediaRemuneracaoComissionado,
+                a_supervisoresCargoComissionado: value?.D_Supervisores_do_PCF?.questao27?.a_supervisoresCargoComissionado || null,
+
+                b_supervisoresMediaRemuneracaoComissionado: value?.D_Supervisores_do_PCF?.questao27?.b_supervisoresMediaRemuneracaoComissionado || null,
               },
               questao28: {
-                a_supervisoresServidorTemporario: value?.D_Supervisores_do_PCF?.questao28?.a_supervisoresServidorTemporario,
-                b_supervisoresMediaRemuneracaoTemporario: value?.D_Supervisores_do_PCF?.questao28?.b_supervisoresMediaRemuneracaoTemporario,
+                a_supervisoresServidorTemporario: value?.D_Supervisores_do_PCF?.questao28?.a_supervisoresServidorTemporario || null,
+
+                b_supervisoresMediaRemuneracaoTemporario: value?.D_Supervisores_do_PCF?.questao28?.b_supervisoresMediaRemuneracaoTemporario || null,
               },
               questao29: {
-                a_supervisoresBolsista: value?.D_Supervisores_do_PCF?.questao29?.a_supervisoresBolsista,
-                b_supervisoresMediaRemuneracaoBolsista: value?.D_Supervisores_do_PCF?.questao29?.b_supervisoresMediaRemuneracaoBolsista,
+                a_supervisoresBolsista: value?.D_Supervisores_do_PCF?.questao29?.a_supervisoresBolsista || null,
+                b_supervisoresMediaRemuneracaoBolsista: value?.D_Supervisores_do_PCF?.questao29?.b_supervisoresMediaRemuneracaoBolsista || null,
               },
               questao30: {
-                a_supervisoresProfissionalAutonomo: value?.D_Supervisores_do_PCF?.questao30?.a_supervisoresProfissionalAutonomo,
-                b_supervisoresMediaRemuneracaoProfissionalAutonomo: value?.D_Supervisores_do_PCF?.questao30?.b_supervisoresMediaRemuneracaoProfissionalAutonomo,
+                a_supervisoresProfissionalAutonomo: value?.D_Supervisores_do_PCF?.questao30?.a_supervisoresProfissionalAutonomo || null,
+                b_supervisoresMediaRemuneracaoProfissionalAutonomo: value?.D_Supervisores_do_PCF?.questao30?.b_supervisoresMediaRemuneracaoProfissionalAutonomo || null,
               },
               questao31: {
-                a_supervisoresOutrosCargos: value?.D_Supervisores_do_PCF?.questao31?.a_supervisoresOutrosCargos,
-                b_supervisoresMediaRemuneracaoOutrosCargos: value?.D_Supervisores_do_PCF?.questao31?.b_supervisoresMediaRemuneracaoOutrosCargos,
+                a_supervisoresOutrosCargos: value?.D_Supervisores_do_PCF?.questao31?.a_supervisoresOutrosCargos || null,
+                b_supervisoresMediaRemuneracaoOutrosCargos: value?.D_Supervisores_do_PCF?.questao31?.b_supervisoresMediaRemuneracaoOutrosCargos || null,
               },
             },
             E_Visitadores_do_PCF: {
-              questao32: value?.E_Visitadores_do_PCF?.questao32,
-              questao33: value?.E_Visitadores_do_PCF?.questao33,
+              questao32: value?.E_Visitadores_do_PCF?.questao32 || null,
+              questao33: value?.E_Visitadores_do_PCF?.questao33 || null,
               questao34: {
-                a_visitadoresHorasSemanais40: value?.E_Visitadores_do_PCF?.questao34?.a_visitadoresHorasSemanais40,
-                b_visitadoresHorasSemanais30: value?.E_Visitadores_do_PCF?.questao34?.b_visitadoresHorasSemanais30,
-                c_visitadoresHorasSemanais20: value?.E_Visitadores_do_PCF?.questao34?.c_visitadoresHorasSemanais20,
-                d_visitadoresHorasSemanaisOutros: value?.E_Visitadores_do_PCF?.questao34?.d_visitadoresHorasSemanaisOutros,
-                e_visitadoresHorasSemanaisOutrosDescricao: value?.E_Visitadores_do_PCF?.questao34?.e_visitadoresHorasSemanaisOutrosDescricao,
+                a_visitadoresHorasSemanais40: value?.E_Visitadores_do_PCF?.questao34?.a_visitadoresHorasSemanais40 || null,
+
+                b_visitadoresHorasSemanais30: value?.E_Visitadores_do_PCF?.questao34?.b_visitadoresHorasSemanais30 || null,
+
+                c_visitadoresHorasSemanais20: value?.E_Visitadores_do_PCF?.questao34?.c_visitadoresHorasSemanais20 || null,
+
+                d_visitadoresHorasSemanaisOutros: value?.E_Visitadores_do_PCF?.questao34?.d_visitadoresHorasSemanaisOutros || null,
+
+                e_visitadoresHorasSemanaisOutrosDescricao: value?.E_Visitadores_do_PCF?.questao34?.e_visitadoresHorasSemanaisOutrosDescricao || null,
               },
               questao35: {
-                a_visitadoresEnsinoMedio: value?.E_Visitadores_do_PCF?.questao35?.a_visitadoresEnsinoMedio,
-                b_visitadoresGraduacaoIncompleto: value?.E_Visitadores_do_PCF?.questao35?.b_visitadoresGraduacaoIncompleto,
-                c_visitadoresGraduacaoCompleto: value?.E_Visitadores_do_PCF?.questao35?.c_visitadoresGraduacaoCompleto,
-                d_visitadoresEspecializacao: value?.E_Visitadores_do_PCF?.questao35?.d_visitadoresEspecializacao,
-                e_visitadoresMestrado: value?.E_Visitadores_do_PCF?.questao35?.e_visitadoresMestrado,
-                f_visitadoresDoutorado: value?.E_Visitadores_do_PCF?.questao35?.f_visitadoresDoutorado,
+                a_visitadoresEnsinoMedio: value?.E_Visitadores_do_PCF?.questao35?.a_visitadoresEnsinoMedio || null,
+
+                b_visitadoresGraduacaoIncompleto: value?.E_Visitadores_do_PCF?.questao35?.b_visitadoresGraduacaoIncompleto || null,
+
+                c_visitadoresGraduacaoCompleto: value?.E_Visitadores_do_PCF?.questao35?.c_visitadoresGraduacaoCompleto || null,
+
+                d_visitadoresEspecializacao: value?.E_Visitadores_do_PCF?.questao35?.d_visitadoresEspecializacao || null,
+
+                e_visitadoresMestrado: value?.E_Visitadores_do_PCF?.questao35?.e_visitadoresMestrado || null,
+
+                f_visitadoresDoutorado: value?.E_Visitadores_do_PCF?.questao35?.f_visitadoresDoutorado || null,
               },
               questao36: {
-                a_visitadoresServidorEfetivo: value?.E_Visitadores_do_PCF?.questao36?.a_visitadoresServidorEfetivo,
-                b_visitadoresMediaRemuneracaoEfetivo: value?.E_Visitadores_do_PCF?.questao36?.b_visitadoresMediaRemuneracaoEfetivo,
+                a_visitadoresServidorEfetivo: value?.E_Visitadores_do_PCF?.questao36?.a_visitadoresServidorEfetivo || null,
+
+                b_visitadoresMediaRemuneracaoEfetivo: value?.E_Visitadores_do_PCF?.questao36?.b_visitadoresMediaRemuneracaoEfetivo || null,
               },
               questao37: {
-                a_visitadoresCargoComissionado: value?.E_Visitadores_do_PCF?.questao37?.a_visitadoresCargoComissionado,
-                b_visitadoresMediaRemuneracaoComissionado: value?.E_Visitadores_do_PCF?.questao37?.b_visitadoresMediaRemuneracaoComissionado,
+                a_visitadoresCargoComissionado: value?.E_Visitadores_do_PCF?.questao37?.a_visitadoresCargoComissionado || null,
+
+                b_visitadoresMediaRemuneracaoComissionado: value?.E_Visitadores_do_PCF?.questao37?.b_visitadoresMediaRemuneracaoComissionado || null,
               },
               questao38: {
-                a_visitadoresServidorTemporario: value?.E_Visitadores_do_PCF?.questao38?.a_visitadoresServidorTemporario,
-                b_visitadoresMediaRemuneracaoTemporario: value?.E_Visitadores_do_PCF?.questao38?.b_visitadoresMediaRemuneracaoTemporario,
+                a_visitadoresServidorTemporario: value?.E_Visitadores_do_PCF?.questao38?.a_visitadoresServidorTemporario || null,
+
+                b_visitadoresMediaRemuneracaoTemporario: value?.E_Visitadores_do_PCF?.questao38?.b_visitadoresMediaRemuneracaoTemporario || null,
               },
               questao39: {
-                a_visitadoresBolsista: value?.E_Visitadores_do_PCF?.questao39?.a_visitadoresBolsista,
-                b_visitadoresMediaRemuneracaoBolsista: value?.E_Visitadores_do_PCF?.questao39?.b_visitadoresMediaRemuneracaoBolsista,
+                a_visitadoresBolsista: value?.E_Visitadores_do_PCF?.questao39?.a_visitadoresBolsista || null,
+
+                b_visitadoresMediaRemuneracaoBolsista: value?.E_Visitadores_do_PCF?.questao39?.b_visitadoresMediaRemuneracaoBolsista || null,
               },
               questao40: {
-                a_visitadoresEstagiarioNivelSuperior: value?.E_Visitadores_do_PCF?.questao40?.a_visitadoresEstagiarioNivelSuperior,
-                b_visitadoresMediaRemuneracaoEstagiarioNivelSuperior: value?.E_Visitadores_do_PCF?.questao40?.b_visitadoresMediaRemuneracaoEstagiarioNivelSuperior,
+                a_visitadoresEstagiarioNivelSuperior: value?.E_Visitadores_do_PCF?.questao40?.a_visitadoresEstagiarioNivelSuperior || null,
+
+                b_visitadoresMediaRemuneracaoEstagiarioNivelSuperior: value?.E_Visitadores_do_PCF?.questao40?.b_visitadoresMediaRemuneracaoEstagiarioNivelSuperior || null,
               },
               questao41: {
-                a_visitadoresAutonomos: value?.E_Visitadores_do_PCF?.questao41?.a_visitadoresAutonomos,
-                b_visitadoresMediaRemuneracaoAutonomos: value?.E_Visitadores_do_PCF?.questao41?.b_visitadoresMediaRemuneracaoAutonomos,
+                a_visitadoresAutonomos: value?.E_Visitadores_do_PCF?.questao41?.a_visitadoresAutonomos || null,
+
+                b_visitadoresMediaRemuneracaoAutonomos: value?.E_Visitadores_do_PCF?.questao41?.b_visitadoresMediaRemuneracaoAutonomos || null,
               },
               questao42: {
-                a_visitadoresOutrosCargos: value?.E_Visitadores_do_PCF?.questao42?.a_visitadoresOutrosCargos,
-                b_visitadoresMediaRemuneracaoOutrosCargos: value?.E_Visitadores_do_PCF?.questao42?.b_visitadoresMediaRemuneracaoOutrosCargos,
+                a_visitadoresOutrosCargos: value?.E_Visitadores_do_PCF?.questao42?.a_visitadoresOutrosCargos || null,
+
+                b_visitadoresMediaRemuneracaoOutrosCargos: value?.E_Visitadores_do_PCF?.questao42?.b_visitadoresMediaRemuneracaoOutrosCargos || null,
               },
             },
             F_Outros_Profissionais: {
@@ -536,7 +563,7 @@ export function useRoom() {
                 c_inputTwo: value?.F_Outros_Profissionais?.questao43?.c_inputTwo,
                 d_inputThree: value?.F_Outros_Profissionais?.questao43?.d_inputThree,
               },
-              questao44: value?.F_Outros_Profissionais?.questao44,
+              questao44: value?.F_Outros_Profissionais?.questao44  || null,
             },
             G_Publico_Atendido_PCF: {
               questao45: value?.G_Publico_Atendido_PCF?.questao45,
@@ -555,13 +582,19 @@ export function useRoom() {
             },
             I_Recursos_E_Custos: {
               questao51: {
-                a_proximidadeDomicilioFamilia: value?.I_Recursos_E_Custos?.questao51?.a_proximidadeDomicilioFamilia,
-                b_proximidadeDomicilioVisitadores: value?.I_Recursos_E_Custos?.questao51?.b_proximidadeDomicilioVisitadores,
-                c_caracteristicasCrianca: value?.I_Recursos_E_Custos?.questao51?.c_caracteristicasCrianca,
-                d_atribuicaoPorVaga: value?.I_Recursos_E_Custos?.questao51?.d_atribuicaoPorVaga,
-                e_sorteio: value?.I_Recursos_E_Custos?.questao51?.e_sorteio,
-                f_outroDistribuicao: value?.I_Recursos_E_Custos?.questao51?.f_outroDistribuicao,
-                g_outroDistribuicaoText: value?.I_Recursos_E_Custos?.questao51?.g_outroDistribuicaoText,
+                a_proximidadeDomicilioFamilia: value?.I_Recursos_E_Custos?.questao51?.a_proximidadeDomicilioFamilia || null,
+
+                b_proximidadeDomicilioVisitadores: value?.I_Recursos_E_Custos?.questao51?.b_proximidadeDomicilioVisitadores || null,
+                
+                c_caracteristicasCrianca: value?.I_Recursos_E_Custos?.questao51?.c_caracteristicasCrianca || null,
+
+                d_atribuicaoPorVaga: value?.I_Recursos_E_Custos?.questao51?.d_atribuicaoPorVaga || null,
+
+                e_sorteio: value?.I_Recursos_E_Custos?.questao51?.e_sorteio || null,
+
+                f_outroDistribuicao: value?.I_Recursos_E_Custos?.questao51?.f_outroDistribuicao || null,
+
+                g_outroDistribuicaoText: value?.I_Recursos_E_Custos?.questao51?.g_outroDistribuicaoText || null,
               },
               questao52: value?.I_Recursos_E_Custos?.questao52,
             },
@@ -575,8 +608,8 @@ export function useRoom() {
                 f_inputFive: value?.J_Outros_Custos?.questao53?.f_inputFive,
                 g_inputSix: value?.J_Outros_Custos?.questao53?.g_inputSix,
               },
-              questao54: value?.J_Outros_Custos?.questao54,
-              questao55: value?.J_Outros_Custos?.questao55,
+              questao54: value?.J_Outros_Custos?.questao54  || null,
+              questao55: value?.J_Outros_Custos?.questao55  || null,
               questao56: {
                 a_id: value?.J_Outros_Custos?.questao56?.a_id,
                 b_inputOne: value?.J_Outros_Custos?.questao56?.b_inputOne,
@@ -592,6 +625,7 @@ export function useRoom() {
           };
         });
         setQuestion(parsedQuestions)
+        console.log(parsedQuestions);
       });
       return () => {
         off(roomRef)

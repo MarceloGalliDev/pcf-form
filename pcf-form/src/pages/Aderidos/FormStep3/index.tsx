@@ -74,6 +74,8 @@ export const FormStep3 = () => {
       await update(firebaseRoomsQuestion, questionReq)
     };
 
+    console.log(questionReq)
+
     navigate(`/${roomId}/formstep4`)
   };
 
@@ -490,6 +492,7 @@ export const FormStep3 = () => {
                           >Não se aplica
                           </label>
                         </div>
+                        
                       </div>
                     </div>
                   </div>

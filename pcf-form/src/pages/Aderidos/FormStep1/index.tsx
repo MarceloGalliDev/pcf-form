@@ -122,8 +122,8 @@ export const FormStep1 = () => {
       setSelectedUf(question[0].A_Informacoes_Gerais.questao05)
       setSelectedCity(question[0].A_Informacoes_Gerais.questao06)
     }
-    console.log(question)
   }, [question])
+
 
   return (
     <Theme>

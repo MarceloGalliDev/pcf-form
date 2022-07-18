@@ -9,7 +9,8 @@ import {
   IBGECITYResponse,
 } from "../../../types/IBGE";
 import { database } from "../../../services/firebase";
-import { ref, push, set } from "firebase/database";
+import { ref, push, set, update } from "firebase/database";
+import { useRoomB } from "../../../hooks/useRoomB";
 
 type RoomParams = {
   id: string;
@@ -29,10 +30,12 @@ export const FormStepB1 = () => {
   const [questionThree, setQuestionThree] = useState('');
   const [questionFour, setQuestionFour] = useState('');
 
+  const [question] = useRoomB();
+
   async function handleSendQuestion(event: FormEvent) {
     event.preventDefault();
 
-    const question = {
+    const questionReq = {
       A_Informacoes_Gerais_Desistentes: {
         questao01: questionOne,
         questao02: questionTwo,
@@ -43,9 +46,14 @@ export const FormStepB1 = () => {
       }
     };
 
-    const firebaseRoomsQuestion = ref(database, `rooms/${roomId}/desistentes/`);
-    const firebaseQuestion = await push(firebaseRoomsQuestion);
-    set(firebaseQuestion, question)
+    if (question.length === 0) {
+      const firebaseRoomsQuestion = ref(database, `rooms/${roomId}/desistentes/`);
+      const firebaseQuestion = await push(firebaseRoomsQuestion);
+      set(firebaseQuestion, questionReq);
+    } else {
+      const firebaseRoomsQuestion = ref(database, `rooms/${roomId}/desistentes/${question[0].idForm}`);
+      await update(firebaseRoomsQuestion, questionReq)
+    };
 
     navigate(`/${roomId}/formstepB2`)
   };
@@ -91,6 +99,17 @@ export const FormStepB1 = () => {
       payload: 1
     });
   }, []);
+
+  useEffect(() => {
+    if (question?.length > 0) {
+      setQuestionOne(question[0].A_Informacoes_Gerais_Desistentes.questao01)
+      setQuestionTwo(question[0].A_Informacoes_Gerais_Desistentes.questao02)
+      setQuestionThree(question[0].A_Informacoes_Gerais_Desistentes.questao03)
+      setQuestionFour(question[0].A_Informacoes_Gerais_Desistentes.questao04)
+      setSelectedUf(question[0].A_Informacoes_Gerais_Desistentes.questao05)
+      setSelectedCity(question[0].A_Informacoes_Gerais_Desistentes.questao06)
+    }
+  }, [question])
 
   return (
     <ThemeB1>

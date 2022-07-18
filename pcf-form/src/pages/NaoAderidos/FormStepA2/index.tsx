@@ -3,10 +3,12 @@ import { ThemeA1 } from "../../../components/ThemeA1";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useFormPage, FormActions } from "../../../context/FormContext";
 import { ChangeEvent, useEffect, useState, FormEvent } from "react";
-import { push, ref, set } from "firebase/database";
+import { push, ref, set, update } from "firebase/database";
 import { database } from "../../../services/firebase";
 import { CheckCircle } from 'phosphor-react';
 import { Alert } from 'reactstrap';
+import { useRoomA } from "../../../hooks/useRoomA";
+import { Button } from "../../../components/ButtonFinished";
 
 type RoomParams = {
   id: string;
@@ -26,56 +28,63 @@ export const FormStepA2 = () => {
   const navigate = useNavigate();
   const { state, dispatch } = useFormPage();
 
-  const [questionTwo, setQuestionTwo] = useState('');
-  const [questionThree, setQuestionThree] = useState('');
-  const [questionFour, setQuestionFour] = useState('');
-  const [questionFive, setQuestionFive] = useState<ReasonForGivingUpChange>({
+  const [aQuestionTwo, setAQuestionTwo] = useState('');
+  const [bQuestionThree, setBQuestionThree] = useState('');
+  const [cQuestionFour, setCQuestionFour] = useState('');
+  const [aQuestionFive, setAQuestionFive] = useState<ReasonForGivingUpChange>({
     a_recursoFinanceiroInsuficiente: false,
     b_naoHaInteresseMunicipio: false,
     c_possuiPrograma: false,
     d_naoConhecePrograma: false,
   });
-  const [questionSix, setQuestionSix] = useState('');
-  const [questionSeven, setQuestionSeven] = useState('');
-  const [questionEight, setQuestionEight] = useState('');
-  const [questionNine, setQuestionNine] = useState('');
-  const [questionTen, setQuestionTen] = useState('');
+  const [aQuestionSix, setAQuestionSix] = useState('');
+  const [bQuestionSeven, setBQuestionSeven] = useState('');
+  const [bQuestionEight, setBQuestionEight] = useState('');
+  const [cQuestionNine, setCQuestionNine] = useState('');
+  const [dQuestionTen, setDQuestionTen] = useState('');
   const [isCheckA2Q08, setIsCheckA2Q08] = useState('');
   const [isCheckA2Q13, setIsCheckA2Q13] = useState('');
   const [isAlert, setIsAlert] = useState(false);
 
+  const [question] = useRoomA();
 
   async function handleEligibleMunicipalities(event: FormEvent) {
     event.preventDefault();
 
-    const question = {
-      A_Elegiveis_ao_PCF: {
+    const questionReq = {
+      B_Elegiveis_ao_PCF: {
         questao07:
         {
-          questionTwo,
-          questionThree,
-          questionFour,
+          aQuestionTwo,
+          bQuestionThree,
+          cQuestionFour,
         },
         questao08:
         {
-          questionFive,
-          questionEight,
-          questionNine,
-          questionTen,
+          aQuestionFive,
+          bQuestionEight,
+          cQuestionNine,
+          dQuestionTen,
         },
         questao09:
         {
-          questionSix,
-          questionSeven,
+          aQuestionSix,
+          bQuestionSeven,
         },
       }
     };
 
-    const firebaseRoomsQuestion = ref(database, `rooms/${roomId}/nao_aderidos/question`);
-    const firebaseQuestion = await push(firebaseRoomsQuestion);
-    set(firebaseQuestion, question);
+    if (question.length === 0) {
+      const firebaseRoomsQuestion = ref(database, `rooms/${roomId}/nao_aderidos/`);
+      const firebaseQuestion = await push(firebaseRoomsQuestion);
+      set(firebaseQuestion, questionReq);
+    } else {
+      const firebaseRoomsQuestion = ref(database, `rooms/${roomId}/nao_aderidos/${question[0].idForm}`);
+      await update(firebaseRoomsQuestion, questionReq)
+    };
 
     if (confirm('Tem certeza que deseja finalizar o questionário?')) {
+      await update(ref(database, `rooms/${roomId}/nao_aderidos/`), { endedAt: new Date() })
       setIsAlert(true);
       setTimeout(() => {
         navigate('/')
@@ -84,37 +93,36 @@ export const FormStepA2 = () => {
   };
 
   const handleTargetAudiencePCFChange =(event:ChangeEvent<HTMLInputElement>) => {
-    setQuestionTwo(event.target.value);
+    setAQuestionTwo(event.target.value);
   };
 
   const handleTargetAudiencePCFTextBeneficiaryChange =(event:ChangeEvent<HTMLInputElement>) => {
-    setQuestionThree(event.target.value);
+    setBQuestionThree(event.target.value);
   };
 
   const handleTargetAudiencePCFTextValueChange =(event:ChangeEvent<HTMLInputElement>) => {
-    setQuestionFour(event.target.value);
+    setCQuestionFour(event.target.value);
   };
 
   const handleExplainTheReasonChange =(event:ChangeEvent<HTMLInputElement>) => {
-    setQuestionSix(event.target.value);
+    setAQuestionSix(event.target.value);
   };
 
   const handleExplainTheReasonTextChange =(event:ChangeEvent<HTMLInputElement>) => {
-    setQuestionSeven(event.target.value);
+    setBQuestionSeven(event.target.value);
   };
 
   const handleTargetAudiencePCFTextNameCheckedChange =(event:ChangeEvent<HTMLInputElement>) => {
-    setQuestionEight(event.target.value);
+    setBQuestionEight(event.target.value);
   };
 
   const handleTargetAudiencePCFTextBeneficiaryCheckedChange =(event:ChangeEvent<HTMLInputElement>) => {
-    setQuestionNine(event.target.value);
+    setCQuestionNine(event.target.value);
   };
 
   const handleTargetAudiencePCFTextValueCheckedChange =(event:ChangeEvent<HTMLInputElement>) => {
-    setQuestionTen(event.target.value);
+    setDQuestionTen(event.target.value);
   };
-
 
   useEffect(() => {
     dispatch({
@@ -187,8 +195,8 @@ export const FormStepA2 = () => {
                       required
                       id="targetAudiencePCFTextBeneficiary"
                       name="targetAudiencePCFTextBeneficiary"
-                      type="text"
-                      value={questionThree}
+                      type="number"
+                      value={bQuestionThree}
                       onChange={handleTargetAudiencePCFTextBeneficiaryChange}
                       placeholder="Sua resposta"
                     />
@@ -202,8 +210,8 @@ export const FormStepA2 = () => {
                       required
                       id="targetAudiencePCFTextValue"
                       name="targetAudiencePCFTextValue"
-                      type="text"
-                      value={questionFour}
+                      type=" number"
+                      value={cQuestionFour}
                       onChange={handleTargetAudiencePCFTextValueChange}
                       placeholder="Sua resposta"
                     />
@@ -226,17 +234,17 @@ export const FormStepA2 = () => {
                   <div id="containerInputLabelRadioButton">
                     <input
                       required={
-                        !questionFive?.a_recursoFinanceiroInsuficiente && 
-                        !questionFive.b_naoHaInteresseMunicipio &&
-                        !questionFive.c_possuiPrograma &&
-                        !questionFive.d_naoConhecePrograma
+                        !aQuestionFive?.a_recursoFinanceiroInsuficiente && 
+                        !aQuestionFive.b_naoHaInteresseMunicipio &&
+                        !aQuestionFive.c_possuiPrograma &&
+                        !aQuestionFive.d_naoConhecePrograma
                       }
                       id="recursoFinanceiroInsuficiente"
                       name="a_recursoFinanceiroInsuficiente"
                       type="checkbox"
-                      checked={questionFive.a_recursoFinanceiroInsuficiente}
-                      onChange={(event) => setQuestionFive({
-                        ...questionFive,
+                      checked={aQuestionFive.a_recursoFinanceiroInsuficiente}
+                      onChange={(event) => setAQuestionFive({
+                        ...aQuestionFive,
                         a_recursoFinanceiroInsuficiente: !!event.currentTarget?.checked
                       })}
                     />
@@ -249,17 +257,17 @@ export const FormStepA2 = () => {
                   <div id="containerInputLabelRadioButton">
                     <input
                       required={
-                        !questionFive?.a_recursoFinanceiroInsuficiente && 
-                        !questionFive.b_naoHaInteresseMunicipio &&
-                        !questionFive.c_possuiPrograma &&
-                        !questionFive.d_naoConhecePrograma
+                        !aQuestionFive?.a_recursoFinanceiroInsuficiente && 
+                        !aQuestionFive.b_naoHaInteresseMunicipio &&
+                        !aQuestionFive.c_possuiPrograma &&
+                        !aQuestionFive.d_naoConhecePrograma
                       }
                       id="naoHaInteresseMunicipio"
                       name="b_naoHaInteresseMunicipio"
                       type="checkbox"
-                      checked={questionFive.b_naoHaInteresseMunicipio}
-                      onChange={(event) => setQuestionFive({
-                        ...questionFive,
+                      checked={aQuestionFive.b_naoHaInteresseMunicipio}
+                      onChange={(event) => setAQuestionFive({
+                        ...aQuestionFive,
                         b_naoHaInteresseMunicipio: !!event.currentTarget?.checked
                       })}
                     />
@@ -272,17 +280,17 @@ export const FormStepA2 = () => {
                   <div id="containerInputLabelRadioButton">
                     <input
                       required={
-                        !questionFive?.a_recursoFinanceiroInsuficiente && 
-                        !questionFive.b_naoHaInteresseMunicipio &&
-                        !questionFive.c_possuiPrograma &&
-                        !questionFive.d_naoConhecePrograma
+                        !aQuestionFive?.a_recursoFinanceiroInsuficiente && 
+                        !aQuestionFive.b_naoHaInteresseMunicipio &&
+                        !aQuestionFive.c_possuiPrograma &&
+                        !aQuestionFive.d_naoConhecePrograma
                       }
                       id="possuiPrograma"
                       name="c_possuiPrograma"
                       type="checkbox"
-                      checked={questionFive.c_possuiPrograma}
-                      onChange={(event) => setQuestionFive({
-                        ...questionFive,
+                      checked={aQuestionFive.c_possuiPrograma}
+                      onChange={(event) => setAQuestionFive({
+                        ...aQuestionFive,
                         c_possuiPrograma: !!event.currentTarget?.checked
                       })}
                     />
@@ -295,17 +303,17 @@ export const FormStepA2 = () => {
                   <div id="containerInputLabelRadioButton">
                     <input
                       required={
-                        !questionFive?.a_recursoFinanceiroInsuficiente && 
-                        !questionFive.b_naoHaInteresseMunicipio &&
-                        !questionFive.c_possuiPrograma &&
-                        !questionFive.d_naoConhecePrograma
+                        !aQuestionFive?.a_recursoFinanceiroInsuficiente && 
+                        !aQuestionFive.b_naoHaInteresseMunicipio &&
+                        !aQuestionFive.c_possuiPrograma &&
+                        !aQuestionFive.d_naoConhecePrograma
                       }
                       id="naoConhecePrograma"
                       name="d_naoConhecePrograma"
                       type="checkbox"
-                      checked={questionFive.d_naoConhecePrograma}
-                      onChange={(event) => setQuestionFive({
-                        ...questionFive,
+                      checked={aQuestionFive.d_naoConhecePrograma}
+                      onChange={(event) => setAQuestionFive({
+                        ...aQuestionFive,
                         d_naoConhecePrograma: !!event.currentTarget?.checked
                       })}
                     />
@@ -318,7 +326,7 @@ export const FormStepA2 = () => {
                 </div>
               </div>
             </div>
-            {questionFive.c_possuiPrograma === true && (
+            {aQuestionFive.c_possuiPrograma === true && (
               <>
                 <div className="containerBgLabel">
                   <label className="containerTextLabel" htmlFor="targetAudiencePCFTextBeneficiary">
@@ -329,7 +337,7 @@ export const FormStepA2 = () => {
                       id="targetAudiencePCFTextBeneficiary"
                       name="targetAudiencePCFTextBeneficiary"
                       type="text"
-                      value={questionEight}
+                      value={bQuestionEight}
                       onChange={handleTargetAudiencePCFTextNameCheckedChange}
                       placeholder="Sua resposta"
                     />
@@ -344,8 +352,8 @@ export const FormStepA2 = () => {
                       autoComplete="no"
                       id="targetAudiencePCFTextBeneficiary"
                       name="targetAudiencePCFTextBeneficiary"
-                      type="text"
-                      value={questionNine}
+                      type="number"
+                      value={cQuestionNine}
                       onChange={handleTargetAudiencePCFTextBeneficiaryCheckedChange}
                       placeholder="Sua resposta"
                     />
@@ -360,8 +368,8 @@ export const FormStepA2 = () => {
                       autoComplete="no"
                       id="targetAudiencePCFTextValue"
                       name="targetAudiencePCFTextValue"
-                      type="text"
-                      value={questionTen}
+                      type="number"
+                      value={dQuestionTen}
                       onChange={handleTargetAudiencePCFTextValueCheckedChange}
                       placeholder="Sua resposta"
                     />
@@ -431,7 +439,7 @@ export const FormStepA2 = () => {
                       id="explainTheReasonText"
                       name="explainTheReasonText"
                       type="text"
-                      value={questionSeven}
+                      value={bQuestionSeven}
                       onChange={handleExplainTheReasonTextChange}
                       placeholder="Sua resposta"
                     />
@@ -445,12 +453,13 @@ export const FormStepA2 = () => {
 
         <SC.AllButtons>
           <Link className="buttonAll" to={`/${roomId}/formstepA1`}>Voltar</Link>
-          <button
+          <Button
+            isOutlined
             className="buttonAll"
             type="submit"
             onClick={() => setIsAlert}
             >Finalizar
-          </button>
+          </Button>
           {isAlert === true && (
             <Alert className="success">
               <CheckCircle size={20} color="#2dd24e" weight="light" />
@@ -462,31 +471,3 @@ export const FormStepA2 = () => {
     </ThemeA1>
   );
 };
-
-
-  //verificando se foi respondida, não passa para próxima etapa
-  // useEffect(() => {
-  //   if (state.name === '' ||
-  //     state.phoneNumber === '' ||
-  //     state.email === '' ||
-  //     state.functionPCF === '' ||
-  //     state.uf === '' ||
-  //     state.city === '') {
-  //     navigate('/')
-  //   } else {
-  //     dispatch({
-  //       type: FormActions.setCurrentStep,
-  //       payload: 2
-  //     });
-  //   }
-  // }, []);
-
-  // const schema = yup.object({
-  //   numberOfSupervisors: yup.string().required(),
-  //   averagePay: yup.string().required(),
-  //   workload: yup.string().required(),
-  //   supervisorQualification: yup.string().required(),
-  // }).required();
-
-  // const { register, handleSubmit, formState: { errors } } = useForm<FormStep4Input>({ resolver: yupResolver(schema) })
-  // const onSubmit = handleSubmit(data => navigate('/formstep3'))

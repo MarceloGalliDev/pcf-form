@@ -372,6 +372,12 @@ export const ButtonTypeCheckboxV1 = styled.div`
           :invalid {
             border-bottom: 1px solid red;
           }
+
+          ::-webkit-outer-spin-button,
+          ::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+          }
         }
       }
     }
@@ -457,8 +463,14 @@ export const ButtonTypeCheckboxV1 = styled.div`
         padding: 5px 0;
 
         :invalid {
-            border-bottom: 1px solid red;
-          }
+          border-bottom: 1px solid red;
+        }
+
+        ::-webkit-outer-spin-button,
+        ::-webkit-inner-spin-button {
+          -webkit-appearance: none;
+          margin: 0;
+        }
       }
     }
   }
@@ -825,6 +837,12 @@ export const ButtonTypeRadioText = styled.div`
 
         :invalid {
           border-bottom: 1px solid red;
+        }
+
+        ::-webkit-outer-spin-button,
+        ::-webkit-inner-spin-button {
+          -webkit-appearance: none;
+          margin: 0;
         }
       }
     }
