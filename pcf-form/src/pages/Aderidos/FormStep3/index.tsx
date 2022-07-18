@@ -135,7 +135,7 @@ export const FormStep3 = () => {
       setQuestionEight(question[0].C_Gestao_do_PCF.questao21)
     }
     console.log(question)
-  }, [question])
+  }, [question]);
 
   return (
     <Theme>

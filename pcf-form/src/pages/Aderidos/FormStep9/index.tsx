@@ -3,8 +3,9 @@ import { Theme } from "../../../components/Theme";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useFormPage, FormActions } from "../../../context/FormContext";
 import { ChangeEvent, FormEvent, useCallback, useEffect, useState } from "react";
-import { push, ref, set } from "firebase/database";
+import { push, ref, set, update } from "firebase/database";
 import { database } from "../../../services/firebase";
+import { useRoom } from "../../../hooks/useRoom";
 
 type RoomParams = {
   id: string;
@@ -36,6 +37,8 @@ export const FormStep9 = () => {
   })
   const [questionTwo, setQuestionTwo] = useState('')
 
+  const [question] = useRoom();
+
   async function handleSendOtherCostsAndResources(event: FormEvent) {
     event.preventDefault();
 
@@ -43,16 +46,21 @@ export const FormStep9 = () => {
       return;
     };
 
-    const question = {
+    const questionReq = {
       I_Recursos_E_Custos : {
-        questao53: questionOne,
-        questao54: questionTwo,
+        questao51: questionOne,
+        questao52: questionTwo,
       }
     };
 
-    const firebaseRoomsQuestion = ref(database, `rooms/${roomId}/aderidos/question`);
-    const firebaseQuestion = await push(firebaseRoomsQuestion);
-    set(firebaseQuestion, question)
+    if (question.length === 0) {
+      const firebaseRoomsQuestion = ref(database, `rooms/${roomId}/aderidos/`);
+      const firebaseQuestion = await push(firebaseRoomsQuestion);
+      set(firebaseQuestion, questionReq);
+    } else {
+      const firebaseRoomsQuestion = ref(database, `rooms/${roomId}/aderidos/${question[0].idForm}`);
+      await update(firebaseRoomsQuestion, questionReq)
+    };
 
     navigate(`/${roomId}/formstep10`)
   };
@@ -76,6 +84,14 @@ export const FormStep9 = () => {
       payload: 9
     });
   }, []);
+
+  useEffect(() => {
+    if (question?.length > 0) {
+      setQuestionOne(question[0].I_Recursos_E_Custos.questao51)
+      setQuestionTwo(question[0].I_Recursos_E_Custos.questao52)
+    }
+    console.log(question)
+  }, [question]);
 
   return (
     <Theme>

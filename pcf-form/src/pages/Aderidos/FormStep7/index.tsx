@@ -4,7 +4,8 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { useFormPage, FormActions } from "../../../context/FormContext";
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { database } from "../../../services/firebase";
-import { ref, push, set } from "firebase/database";
+import { ref, push, set, update } from "firebase/database";
+import { useRoom } from "../../../hooks/useRoom";
 
 type RoomParams = {
   id: string;
@@ -19,6 +20,8 @@ export const FormStep7 = () => {
   const [questionTwo, setQuestionTwo] = useState('');
   const [questionThree, setQuestionThree] = useState('');
   const [questionFour, setQuestionFour] = useState('');
+
+  const [question] = useRoom();
 
   async function handleSendPublicServed(event: FormEvent) {
     event.preventDefault();
@@ -36,7 +39,7 @@ export const FormStep7 = () => {
       return;
     };
 
-    const question = {
+    const questionReq = {
       G_Publico_Atendido_PCF: {
         questao45: questionOne,
         questao46: questionTwo,
@@ -45,9 +48,14 @@ export const FormStep7 = () => {
       }
     };
 
-    const firebaseRoomsQuestion = ref(database, `rooms/${roomId}/aderidos/question`);
-    const firebaseQuestion = await push(firebaseRoomsQuestion);
-    set(firebaseQuestion, question)
+    if (question.length === 0) {
+      const firebaseRoomsQuestion = ref(database, `rooms/${roomId}/aderidos/`);
+      const firebaseQuestion = await push(firebaseRoomsQuestion);
+      set(firebaseQuestion, questionReq);
+    } else {
+      const firebaseRoomsQuestion = ref(database, `rooms/${roomId}/aderidos/${question[0].idForm}`);
+      await update(firebaseRoomsQuestion, questionReq)
+    };
 
     navigate(`/${roomId}/formstep8`)
   };
@@ -74,6 +82,16 @@ export const FormStep7 = () => {
       payload: 7
     });
   }, []);
+
+  useEffect(() => {
+    if (question?.length > 0) {
+      setQuestionOne(question[0].G_Publico_Atendido_PCF.questao45)
+      setQuestionTwo(question[0].G_Publico_Atendido_PCF.questao46)
+      setQuestionThree(question[0].G_Publico_Atendido_PCF.questao47)
+      setQuestionFour(question[0].G_Publico_Atendido_PCF.questao48)
+    }
+    console.log(question)
+  }, [question]);
 
   return (
     <Theme>

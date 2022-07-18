@@ -4,11 +4,11 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { useFormPage, FormActions } from "../../../context/FormContext";
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { database } from "../../../services/firebase";
-import { ref, push, set } from "firebase/database";
+import { ref, push, set, update } from "firebase/database";
 import { Item } from "../../../components/Questions/QuestionOrganizacoesParceiras/types/Item";
 import { InputArea } from "../../../components/Questions/QuestionOrganizacoesParceiras/components/InputArea";
 import { TableArea } from "../../../components/Questions/QuestionOrganizacoesParceiras/components/TableArea";
-import { RoomCode } from "../../../components/RoomCode";
+import { useRoom } from "../../../hooks/useRoom";
 
 
 type RoomParams = {
@@ -20,11 +20,11 @@ export const FormStep8 = () => {
   const roomId = params.id
   const navigate = useNavigate();
   const { state, dispatch } = useFormPage();
-  const [questionOne, setQuestionOne] = useState('')
-  const [questionThree, setQuestionThree] = useState('')
-  const [questionFour, setQuestionFour] = useState('');
   const [list, setList] = useState<Item[]>([]);
   const [filteredList, setFilteredList] = useState<Item[]>([]);
+  const [questionTwo, setQuestionTwo] = useState('');
+
+  const [question] = useRoom();
 
   function handleAddItemPartner(item: Item) {
     let newList = [...list]
@@ -40,24 +40,27 @@ export const FormStep8 = () => {
   async function handleSendPartnerOrganizations(event: FormEvent) {
     event.preventDefault();
 
-    const question = {
+    const questionReq = {
       H_Organizacoes_Parceiras: {
-        questao49: questionOne,
-        questao50: filteredList,
-        questao51: questionThree,
-        questao52: questionFour,
+        questao49: filteredList,
+        questao50: questionTwo,
       }
     };
 
-    const firebaseRoomsQuestion = ref(database, `rooms/${roomId}/aderidos/question`);
-    const firebaseQuestion = await push(firebaseRoomsQuestion);
-    set(firebaseQuestion, question)
+    if (question.length === 0) {
+      const firebaseRoomsQuestion = ref(database, `rooms/${roomId}/aderidos/`);
+      const firebaseQuestion = await push(firebaseRoomsQuestion);
+      set(firebaseQuestion, questionReq);
+    } else {
+      const firebaseRoomsQuestion = ref(database, `rooms/${roomId}/aderidos/${question[0].idForm}`);
+      await update(firebaseRoomsQuestion, questionReq)
+    };
 
     navigate(`/${roomId}/formstep9`)
   };
 
   const handlePartnershipAndContractingChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setQuestionFour(event.target.value);
+    setQuestionTwo(event.target.value);
   };
 
   useEffect(() => {
@@ -70,6 +73,14 @@ export const FormStep8 = () => {
   useEffect(() => {
     setFilteredList(list)
   }, [list]);
+
+  useEffect(() => {
+    if (question?.length > 0) {
+      // setFilteredList(question[0].F_Outros_ProfissionaisF.questao43)
+      setQuestionTwo(question[0].H_Organizacoes_Parceiras.questao50)
+    }
+    console.log(question)
+  }, [question]);
 
   return (
     <Theme>
@@ -113,6 +124,7 @@ export const FormStep8 = () => {
                     name="PartnershipAndContracting"
                     type="radio"
                     value="Sim"
+                    checked={questionTwo === "Sim"}
                     onChange={handlePartnershipAndContractingChange}
                   />
                   <label
@@ -128,6 +140,7 @@ export const FormStep8 = () => {
                     name="PartnershipAndContracting"
                     type="radio"
                     value="Não"
+                    checked={questionTwo === "Não"}
                     onChange={handlePartnershipAndContractingChange}
                   />
                   <label

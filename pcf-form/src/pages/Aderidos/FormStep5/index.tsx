@@ -4,8 +4,9 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { useFormPage, FormActions } from "../../../context/FormContext";
 import { ChangeEvent, FormEvent, useCallback, useEffect, useState } from "react";
 import { database } from "../../../services/firebase";
-import { ref, push, set } from "firebase/database";
+import { ref, push, set, update } from "firebase/database";
 import { RoomCode } from "../../../components/RoomCode";
+import { useRoom } from "../../../hooks/useRoom";
 
 type RoomParams = {
   id: string;
@@ -114,12 +115,13 @@ export const FormStep5 = () => {
     a_visitadoresOutrosCargos: '',
     b_visitadoresMediaRemuneracaoOutrosCargos: '',
   });
- 
+
+  const [question] = useRoom();
 
   async function handleSendQuestionVisitor(event: FormEvent) {
     event.preventDefault();
 
-    const question = {
+    const questionReq = {
       E_Visitadores_do_PCF: {
         questao32: questionOne,
         questao33: questionTwo,
@@ -135,9 +137,14 @@ export const FormStep5 = () => {
       }
     };
 
-    const firebaseRoomsQuestion = ref(database, `rooms/${roomId}/aderidos/question`);
-    const firebaseQuestion = await push(firebaseRoomsQuestion);
-    set(firebaseQuestion, question);
+    if (question.length === 0) {
+      const firebaseRoomsQuestion = ref(database, `rooms/${roomId}/aderidos/`);
+      const firebaseQuestion = await push(firebaseRoomsQuestion);
+      set(firebaseQuestion, questionReq);
+    } else {
+      const firebaseRoomsQuestion = ref(database, `rooms/${roomId}/aderidos/${question[0].idForm}`);
+      await update(firebaseRoomsQuestion, questionReq)
+    };
 
     navigate(`/${roomId}/formstep6`);
   };
@@ -239,6 +246,23 @@ export const FormStep5 = () => {
     });
   }, []);
 
+  useEffect(() => {
+    if (question?.length > 0) {
+      setQuestionOne(question[0].E_Visitadores_do_PCF.questao32)
+      setQuestionTwo(question[0].E_Visitadores_do_PCF.questao33)
+      setQuestionThree(question[0].E_Visitadores_do_PCF.questao34)
+      setQuestionFour(question[0].E_Visitadores_do_PCF.questao35)
+      setQuestionFive(question[0].E_Visitadores_do_PCF.questao36)
+      setQuestionSix(question[0].E_Visitadores_do_PCF.questao37)
+      setQuestionSeven(question[0].E_Visitadores_do_PCF.questao38)
+      setQuestionEight(question[0].E_Visitadores_do_PCF.questao39)
+      setQuestionNine(question[0].E_Visitadores_do_PCF.questao40)
+      setQuestionTen(question[0].E_Visitadores_do_PCF.questao41)
+      setQuestionEleven(question[0].E_Visitadores_do_PCF.questao42)
+    }
+    console.log(question)
+  }, [question]);
+
   return (
     <Theme>
       <SC.Container>
@@ -272,6 +296,7 @@ export const FormStep5 = () => {
                         name="NumberOfVisitors"
                         type="radio"
                         value="0"
+                        checked={questionOne === "0"}
                         onChange={handleNumberOfVisitorsChange}
                       />
                       <label
@@ -287,6 +312,7 @@ export const FormStep5 = () => {
                         name="NumberOfVisitors"
                         type="radio"
                         value="1"
+                        checked={questionOne === "1"}
                         onChange={handleNumberOfVisitorsChange}
                       />
                       <label
@@ -302,6 +328,7 @@ export const FormStep5 = () => {
                         name="NumberOfVisitors"
                         type="radio"
                         value="2"
+                        checked={questionOne === "2"}
                         onChange={handleNumberOfVisitorsChange}
                       />
                       <label
@@ -317,6 +344,7 @@ export const FormStep5 = () => {
                         name="NumberOfVisitors"
                         type="radio"
                         value="3"
+                        checked={questionOne === "3"}
                         onChange={handleNumberOfVisitorsChange}
                       />
                       <label
@@ -332,6 +360,7 @@ export const FormStep5 = () => {
                         name="NumberOfVisitors"
                         type="radio"
                         value="4_ou_mais"
+                        checked={questionOne === "4_ou_mais"}
                         onChange={handleNumberOfVisitorsChange}
                       />
                       <label
@@ -347,6 +376,7 @@ export const FormStep5 = () => {
                         name="NumberOfVisitors"
                         type="radio"
                         value="Não_se_aplica"
+                        checked={questionOne === "Não_se_aplica"}
                         onChange={handleNumberOfVisitorsChange}
                       />
                       <label
@@ -515,14 +545,14 @@ export const FormStep5 = () => {
                   <div id="containerTextLabelCheckbox">
                     <label
                       className="labelForContainerTextLabelCheckbox"
-                      htmlFor="highSchoolVisitor"
+                      htmlFor="a_visitadoresEnsinoMedio"
                     >Ensino médio:
                     </label>
                     <input
                       required
                       autoComplete="off"
                       className="inputForContainerTextLabelCheckbox"
-                      id="highSchoolVisitor"
+                      id="a_visitadoresEnsinoMedio"
                       name="a_visitadoresEnsinoMedio"
                       type="number"
                       value={questionFour.a_visitadoresEnsinoMedio}
@@ -534,14 +564,14 @@ export const FormStep5 = () => {
                   <div id="containerTextLabelCheckbox">
                     <label
                       className="labelForContainerTextLabelCheckbox"
-                      htmlFor="visitadoresSuperiorIncompleto"
+                      htmlFor="b_visitadoresGraduacaoIncompleto"
                     >Superior Incompleto:
                     </label>
                     <input
                       required
                       autoComplete="off"
                       className="inputForContainerTextLabelCheckbox"
-                      id="visitadoresSuperiorIncompleto"
+                      id="b_visitadoresGraduacaoIncompleto"
                       name="b_visitadoresGraduacaoIncompleto"
                       type="number"
                       value={questionFour.b_visitadoresGraduacaoIncompleto}
@@ -553,14 +583,14 @@ export const FormStep5 = () => {
                   <div id="containerTextLabelCheckbox">
                     <label
                       className="labelForContainerTextLabelCheckbox"
-                      htmlFor="visitadoresGraduacaoCompleto"
+                      htmlFor="c_visitadoresGraduacaoCompleto"
                     >Superior Completo:
                     </label>
                     <input
                       required
                       autoComplete="off"
                       className="inputForContainerTextLabelCheckbox"
-                      id="visitadoresGraduacaoCompleto"
+                      id="c_visitadoresGraduacaoCompleto"
                       name="c_visitadoresGraduacaoCompleto"
                       type="number"
                       value={questionFour.c_visitadoresGraduacaoCompleto}
@@ -572,14 +602,14 @@ export const FormStep5 = () => {
                   <div id="containerTextLabelCheckbox">
                     <label
                       className="labelForContainerTextLabelCheckbox"
-                      htmlFor="specialistVisitor"
+                      htmlFor="d_visitadoresEspecializacao"
                     >Especialização:
                     </label>
                     <input
                       required
                       autoComplete="off"
                       className="inputForContainerTextLabelCheckbox"
-                      id="specialistVisitor"
+                      id="d_visitadoresEspecializacao"
                       name="d_visitadoresEspecializacao"
                       type="number"
                       value={questionFour.d_visitadoresEspecializacao}
@@ -591,14 +621,14 @@ export const FormStep5 = () => {
                   <div id="containerTextLabelCheckbox">
                     <label
                       className="labelForContainerTextLabelCheckbox"
-                      htmlFor="mestradoVisitador"
+                      htmlFor="e_visitadoresMestrado"
                     >Mestrado:
                     </label>
                     <input
                       required
                       autoComplete="off"
                       className="inputForContainerTextLabelCheckbox"
-                      id="mestradoVisitador"
+                      id="e_visitadoresMestrado"
                       name="e_visitadoresMestrado"
                       type="number"
                       value={questionFour.e_visitadoresMestrado}
@@ -610,14 +640,14 @@ export const FormStep5 = () => {
                   <div id="containerTextLabelCheckbox">
                     <label
                       className="labelForContainerTextLabelCheckbox"
-                      htmlFor="doutoradoVisitador"
+                      htmlFor="f_visitadoresDoutorado"
                     >Doutorado:
                     </label>
                     <input
                       required
                       autoComplete="off"
                       className="inputForContainerTextLabelCheckbox"
-                      id="doutoradoVisitador"
+                      id="f_visitadoresDoutorado"
                       name="f_visitadoresDoutorado"
                       type="number"
                       value={questionFour.f_visitadoresDoutorado}
@@ -640,14 +670,14 @@ export const FormStep5 = () => {
                     <div id="containerTextLabelCheckbox">
                       <label
                         className="labelForContainerTextLabelCheckbox"
-                        htmlFor="servidorefetivoVisitadores"
+                        htmlFor="a_visitadoresServidorEfetivo"
                       >Servidor(a) efetivo(a):
                       </label>
                       <input
                         required
                         autoComplete="off"
                         className="inputForContainerTextLabelCheckbox"
-                        id="servidorEfetivoVisitadores"
+                        id="a_visitadoresServidorEfetivo"
                         name="a_visitadoresServidorEfetivo"
                         type="number"
                         value={questionFive.a_visitadoresServidorEfetivo}
@@ -658,14 +688,14 @@ export const FormStep5 = () => {
                     <div id="containerTextLabelCheckbox">
                       <label
                         className="labelForContainerTextLabelCheckbox"
-                        htmlFor="mediaRemuneracaoEfetivoVisitadores"
+                        htmlFor="b_visitadoresMediaRemuneracaoEfetivo"
                       >Média Remuneração:
                       </label>
                       <input
                         required
                         autoComplete="off"
                         className="inputForContainerTextLabelCheckbox"
-                        id="mediaRemuneracaoEfetivoVisitadores"
+                        id="b_visitadoresMediaRemuneracaoEfetivo"
                         name="b_visitadoresMediaRemuneracaoEfetivo"
                         type="number"
                         value={questionFive.b_visitadoresMediaRemuneracaoEfetivo}
@@ -679,14 +709,14 @@ export const FormStep5 = () => {
                     <div id="containerTextLabelCheckbox">
                       <label
                         className="labelForContainerTextLabelCheckbox"
-                        htmlFor="cargoComissionadoVisitadores"
+                        htmlFor="a_visitadoresCargoComissionado"
                       >Cargo comissionado:
                       </label>
                       <input
                         required
                         autoComplete="off"
                         className="inputForContainerTextLabelCheckbox"
-                        id="cargoComissionadoVisitadores"
+                        id="a_visitadoresCargoComissionado"
                         name="a_visitadoresCargoComissionado"
                         type="number"
                         value={questionSix.a_visitadoresCargoComissionado}
@@ -697,14 +727,14 @@ export const FormStep5 = () => {
                     <div id="containerTextLabelCheckbox">
                       <label
                         className="labelForContainerTextLabelCheckbox"
-                        htmlFor="mediaRemuneracaoComissonadoVisitador"
+                        htmlFor="b_visitadoresMediaRemuneracaoComissionado"
                       >Média Remuneração:
                       </label>
                       <input
                         required
                         autoComplete="off"
                         className="inputForContainerTextLabelCheckbox"
-                        id="b_mediaRemuneracaoComissonadoVisitador"
+                        id="b_visitadoresMediaRemuneracaoComissionado"
                         name="b_visitadoresMediaRemuneracaoComissionado"
                         type="number"
                         value={questionSix.b_visitadoresMediaRemuneracaoComissionado}
@@ -718,14 +748,14 @@ export const FormStep5 = () => {
                     <div id="containerTextLabelCheckbox">
                       <label
                         className="labelForContainerTextLabelCheckbox"
-                        htmlFor="servidorTemporarioVisitador"
+                        htmlFor="a_visitadoresServidorTemporario"
                       >Servidor temporário:
                       </label>
                       <input
                         required
                         autoComplete="off"
                         className="inputForContainerTextLabelCheckbox"
-                        id="servidorTemporarioSupervisor"
+                        id="a_visitadoresServidorTemporario"
                         name="a_visitadoresServidorTemporario"
                         type="number"
                         value={questionSeven.a_visitadoresServidorTemporario}
@@ -736,14 +766,14 @@ export const FormStep5 = () => {
                     <div id="containerTextLabelCheckbox">
                       <label
                         className="labelForContainerTextLabelCheckbox"
-                        htmlFor="mediaRemuneracaoTemporarioVisitador"
+                        htmlFor="b_visitadoresMediaRemuneracaoTemporario"
                       >Média Remuneração:
                       </label>
                       <input
                         required
                         autoComplete="off"
                         className="inputForContainerTextLabelCheckbox"
-                        id="mediaRemuneracaoTemporarioVisitador"
+                        id="b_visitadoresMediaRemuneracaoTemporario"
                         name="b_visitadoresMediaRemuneracaoTemporario"
                         type="number"
                         value={questionSeven.b_visitadoresMediaRemuneracaoTemporario}
@@ -757,14 +787,14 @@ export const FormStep5 = () => {
                     <div id="containerTextLabelCheckbox">
                       <label
                         className="labelForContainerTextLabelCheckbox"
-                        htmlFor="bolsistaVisitador"
+                        htmlFor="a_visitadoresBolsista"
                       >Bolsista:
                       </label>
                       <input
                         required
                         autoComplete="off"
                         className="inputForContainerTextLabelCheckbox"
-                        id="bolsistaVisitador"
+                        id="a_visitadoresBolsista"
                         name="a_visitadoresBolsista"
                         type="number"
                         value={questionEight.a_visitadoresBolsista}
@@ -775,14 +805,14 @@ export const FormStep5 = () => {
                     <div id="containerTextLabelCheckbox">
                       <label
                         className="labelForContainerTextLabelCheckbox"
-                        htmlFor="mediaRemuneracaoBolsistaVisitador"
+                        htmlFor="b_visitadoresMediaRemuneracaoBolsista"
                       >Média Remuneração:
                       </label>
                       <input
                         required
                         autoComplete="off"
                         className="inputForContainerTextLabelCheckbox"
-                        id="mediaRemuneracaoBolsistaVisitador"
+                        id="b_visitadoresMediaRemuneracaoBolsista"
                         name="b_visitadoresMediaRemuneracaoBolsista"
                         type="number"
                         value={questionEight.b_visitadoresMediaRemuneracaoBolsista}
@@ -796,14 +826,14 @@ export const FormStep5 = () => {
                     <div id="containerTextLabelCheckbox">
                       <label
                         className="labelForContainerTextLabelCheckbox"
-                        htmlFor="estagiarioNivelSuperiorVisitador"
+                        htmlFor="a_visitadoresEstagiarioNivelSuperior"
                       >Estagiário graduado/graduando:
                       </label>
                       <input
                         required
                         autoComplete="off"
                         className="inputForContainerTextLabelCheckbox"
-                        id="estagiarioNivelSuperiorVisitador"
+                        id="a_visitadoresEstagiarioNivelSuperior"
                         name="a_visitadoresEstagiarioNivelSuperior"
                         type="number"
                         value={questionNine.a_visitadoresEstagiarioNivelSuperior}
@@ -814,14 +844,14 @@ export const FormStep5 = () => {
                     <div id="containerTextLabelCheckbox">
                       <label
                         className="labelForContainerTextLabelCheckbox"
-                        htmlFor="mediaRemuneracaoEstagiarioNivelSuperior"
+                        htmlFor="b_visitadoresMediaRemuneracaoEstagiarioNivelSuperior"
                       >Média Remuneração:
                       </label>
                       <input
                         required
                         autoComplete="off"
                         className="inputForContainerTextLabelCheckbox"
-                        id="mediaRemuneracaoEstagiarioNivelSuperior"
+                        id="b_visitadoresMediaRemuneracaoEstagiarioNivelSuperior"
                         name="b_visitadoresMediaRemuneracaoEstagiarioNivelSuperior"
                         type="number"
                         value={questionNine.b_visitadoresMediaRemuneracaoEstagiarioNivelSuperior}
@@ -835,14 +865,14 @@ export const FormStep5 = () => {
                     <div id="containerTextLabelCheckbox">
                       <label
                         className="labelForContainerTextLabelCheckbox"
-                        htmlFor="autonomoVisitador"
+                        htmlFor="a_visitadoresAutonomos"
                       >Profissional autônomo:
                       </label>
                       <input
                         required
                         autoComplete="off"
                         className="inputForContainerTextLabelCheckbox"
-                        id="autonomoVisitador"
+                        id="a_visitadoresAutonomos"
                         name="a_visitadoresAutonomos"
                         type="number"
                         value={questionTen.a_visitadoresAutonomos}
@@ -853,14 +883,14 @@ export const FormStep5 = () => {
                     <div id="containerTextLabelCheckbox">
                       <label
                         className="labelForContainerTextLabelCheckbox"
-                        htmlFor="mediaRemuneracaoAutonomoVisitador"
+                        htmlFor="b_visitadoresMediaRemuneracaoAutonomos"
                       >Média Remuneração:
                       </label>
                       <input
                         required
                         autoComplete="off"
                         className="inputForContainerTextLabelCheckbox"
-                        id="mediaRemuneracaoAutonomoVisitador"
+                        id="b_visitadoresMediaRemuneracaoAutonomos"
                         name="b_visitadoresMediaRemuneracaoAutonomos"
                         type="number"
                         value={questionTen.b_visitadoresMediaRemuneracaoAutonomos}
@@ -874,14 +904,14 @@ export const FormStep5 = () => {
                     <div id="containerTextLabelCheckbox">
                       <label
                         className="labelForContainerTextLabelCheckbox"
-                        htmlFor="outrosCargosVisitador"
+                        htmlFor="a_visitadoresOutrosCargos"
                       >Outros:
                       </label>
                       <input
                         required
                         autoComplete="off"
                         className="inputForContainerTextLabelCheckbox"
-                        id="outrosCargosVisitador"
+                        id="outrosCargosa_visitadoresOutrosCargosVisitador"
                         name="a_visitadoresOutrosCargos"
                         type="number"
                         value={questionEleven.a_visitadoresOutrosCargos}
@@ -892,14 +922,14 @@ export const FormStep5 = () => {
                     <div id="containerTextLabelCheckbox">
                       <label
                         className="labelForContainerTextLabelCheckbox"
-                        htmlFor="mediaRemuneracaoOutrosCargosVisitador"
+                        htmlFor="b_visitadoresMediaRemuneracaoOutrosCargos"
                       >Média Remuneração:
                       </label>
                       <input
                         required
                         autoComplete="off"
                         className="inputForContainerTextLabelCheckbox"
-                        id="mediaRemuneracaoOutrosCargosVisitador"
+                        id="b_visitadoresMediaRemuneracaoOutrosCargos"
                         name="b_visitadoresMediaRemuneracaoOutrosCargos"
                         type="number"
                         value={questionEleven.b_visitadoresMediaRemuneracaoOutrosCargos}

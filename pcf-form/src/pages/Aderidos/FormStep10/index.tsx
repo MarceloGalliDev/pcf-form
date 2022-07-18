@@ -16,6 +16,7 @@ import { InputAreaOutrosCustos2 } from "../../../components/Questions/QuestionOu
 import { TableAreaOutrosCustos2 } from "../../../components/Questions/QuestionOutrosCustos2/components/TableArea";
 import { CheckCircle } from 'phosphor-react';
 import { Alert } from 'reactstrap';
+import { useRoom } from "../../../hooks/useRoom";
 
 
 type RoomParams = {
@@ -68,6 +69,8 @@ export const FormStep10 = () => {
 
   const [isAlert, setIsAlert] = useState(false);
 
+  const [question] = useRoom();
+
   function handleAddItemOthersCosts(item: Item) {
     let newList = [...list]
     newList.push(item)
@@ -103,12 +106,12 @@ export const FormStep10 = () => {
 
     const question = {
       J_Outros_Custos: {
-        questao55: filteredList,
-        questao56: questionTwo,
-        questao57: questionThree,
-        questao58: filteredList1,
-        questao59: filteredList2,
-        questao60: questionSix,
+        questao53: filteredList,
+        questao54: questionTwo,
+        questao55: questionThree,
+        questao56: filteredList1,
+        questao57: filteredList2,
+        questao58: questionSix,
       }
     };
 

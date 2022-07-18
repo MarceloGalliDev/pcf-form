@@ -4,10 +4,11 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { useFormPage, FormActions } from "../../../context/FormContext";
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { database } from "../../../services/firebase";
-import { ref, push, set } from "firebase/database";
+import { ref, push, set, update } from "firebase/database";
 import { InputArea } from "../../../components/Questions/QuestionOutrosProfissionais/components/InputArea";
 import { TableArea } from "../../../components/Questions/QuestionOutrosProfissionais/components/TableArea";
 import { Item } from "../../../components/Questions/QuestionOutrosProfissionais/types/Item";
+import { useRoom } from "../../../hooks/useRoom";
 
 
 type RoomParams = {
@@ -23,6 +24,8 @@ export const FormStep6 = () => {
   const [filteredList, setFilteredList] = useState<Item[]>([]);
   const [questionTwo, setQuestionTwo] = useState('');
 
+  const [question] = useRoom();
+
   function handleAddItemText(item: Item) {
     let newList = [...list]
     newList.push(item)
@@ -37,18 +40,25 @@ export const FormStep6 = () => {
   async function handleSendQuestionOthersProfessionals(event: FormEvent) {
     event.preventDefault();
 
-    const question = {
+    const questionReq = {
       F_Outros_Profissionais: {
         questao43: filteredList,
         questao44: questionTwo,
       }
     };
 
-    const firebaseRoomsQuestion = ref(database, `rooms/${roomId}/aderidos/question`);
-    const firebaseQuestion = await push(firebaseRoomsQuestion);
-    set(firebaseQuestion, question)
+    if (question.length === 0) {
+      const firebaseRoomsQuestion = ref(database, `rooms/${roomId}/aderidos/`);
+      const firebaseQuestion = await push(firebaseRoomsQuestion);
+      set(firebaseQuestion, questionReq);
+    } else {
+      const firebaseRoomsQuestion = ref(database, `rooms/${roomId}/aderidos/${question[0].idForm}`);
+      await update(firebaseRoomsQuestion, questionReq)
+    };
 
     navigate(`/${roomId}/formstep7`)
+
+    console.log(questionReq)
   };
 
   const handleObservationChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -65,6 +75,14 @@ export const FormStep6 = () => {
   useEffect(() => {
     setFilteredList(list)
   }, [list]);
+
+  useEffect(() => {
+    if (question?.length > 0) {
+      // setFilteredList(question[0].F_Outros_ProfissionaisF.questao43)
+      setQuestionTwo(question[0].F_Outros_Profissionais.questao44)
+    }
+    console.log(question)
+  }, [question]);
 
   return (
     <Theme>
