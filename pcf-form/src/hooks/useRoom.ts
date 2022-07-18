@@ -398,7 +398,7 @@ export function useRoom() {
 
       onValue(roomRef, (room) => {
         const databaseRoom = room.val();
-        const firebaseQuestions: FirebaseQuestions = databaseRoom.aderidos.question ?? {};
+        const firebaseQuestions: FirebaseQuestions = databaseRoom.aderidos ?? {};
         const parsedQuestions = Object.entries(firebaseQuestions).map(([key, value]) => {
           return {
             idForm: key,
@@ -419,24 +419,30 @@ export function useRoom() {
               questao12: value?.B_Caracteristicas_do_PCF?.questao12,
               questao13: value?.B_Caracteristicas_do_PCF?.questao13,
             },
-            // C_Gestao_do_PCF: {
-            //   questao14: value?.C_Gestao_do_PCF?.questao14,
-            //   questao15: value?.C_Gestao_do_PCF?.questao15,
-            //   questao16: value?.C_Gestao_do_PCF?.questao16,
-            //   questao17: value?.C_Gestao_do_PCF?.questao17,
-            //   questao18: value?.C_Gestao_do_PCF?.questao18,
-            //   questao19: value?.C_Gestao_do_PCF?.questao19,
-            //   questao20: value?.C_Gestao_do_PCF?.questao20,
-            //   questao21: {
-            //     a_visitadoresEdital: value?.C_Gestao_do_PCF?.questao21?.a_visitadoresEdital,
-            //     b_visitadoresEquipePropria: value?.C_Gestao_do_PCF?.questao21?.b_visitadoresEquipePropria,
-            //     c_visitadoresContratacaoDireta: value?.C_Gestao_do_PCF?.questao21?.c_visitadoresContratacaoDireta,
-            //     d_visitadoresContratacaoEstagio: value?.C_Gestao_do_PCF?.questao21?.d_visitadoresContratacaoEstagio,
-            //     e_visitadoresNaoSeAplica: value?.C_Gestao_do_PCF?.questao21?.e_visitadoresNaoSeAplica,
-            //     f_visitadoresOutro: value?.C_Gestao_do_PCF?.questao21?.f_visitadoresOutro,
-            //     g_visitadoresOutrosDescricao: value?.C_Gestao_do_PCF?.questao21?.g_visitadoresOutrosDescricao,
-            //   },
-            // },
+            C_Gestao_do_PCF: {
+              questao14: value?.C_Gestao_do_PCF?.questao14,
+              questao15: value?.C_Gestao_do_PCF?.questao15,
+              questao16: value?.C_Gestao_do_PCF?.questao16,
+              questao17: value?.C_Gestao_do_PCF?.questao17,
+              questao18: value?.C_Gestao_do_PCF?.questao18,
+              questao19: value?.C_Gestao_do_PCF?.questao19,
+              questao20: value?.C_Gestao_do_PCF?.questao20,
+              questao21: {
+                a_visitadoresEdital: value?.C_Gestao_do_PCF?.questao21?.a_visitadoresEdital,
+
+                b_visitadoresEquipePropria: value?.C_Gestao_do_PCF?.questao21?.b_visitadoresEquipePropria,
+
+                c_visitadoresContratacaoDireta: value?.C_Gestao_do_PCF?.questao21?.c_visitadoresContratacaoDireta,
+
+                d_visitadoresContratacaoEstagio: value?.C_Gestao_do_PCF?.questao21?.d_visitadoresContratacaoEstagio,
+
+                e_visitadoresNaoSeAplica: value?.C_Gestao_do_PCF?.questao21?.e_visitadoresNaoSeAplica,
+
+                f_visitadoresOutro: value?.C_Gestao_do_PCF?.questao21?.f_visitadoresOutro,
+                
+                g_visitadoresOutrosDescricao: value?.C_Gestao_do_PCF?.questao21?.g_visitadoresOutrosDescricao,
+              },
+            },
             // D_Supervisores_do_PCF: {
             //   questao22: value?.D_Supervisores_do_PCF?.questao22,
             //   questao23: value?.D_Supervisores_do_PCF?.questao23,

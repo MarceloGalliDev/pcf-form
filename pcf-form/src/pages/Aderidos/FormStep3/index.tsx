@@ -3,9 +3,10 @@ import { Theme } from "../../../components/Theme";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useFormPage, FormActions } from "../../../context/FormContext";
 import { ChangeEvent, FormEvent, useCallback, useEffect, useState }from "react";
-import { push, ref, set } from "firebase/database";
+import { push, ref, set, update } from "firebase/database";
 import { database } from "../../../services/firebase";
 import { RoomCode } from "../../../components/RoomCode";
+import { useRoom } from "../../../hooks/useRoom";
 
 type RoomParams = {
   id: string;
@@ -26,14 +27,15 @@ export const FormStep3 = () => {
   const roomId = params.id
   const navigate = useNavigate();
   const { state, dispatch } = useFormPage();
+
   const [questionOne, setQuestionOne] = useState('');
   const [questionTwo, setQuestionTwo] = useState('');
   const [questionThree, setQuestionThree] = useState('');
   const [questionFour, setQuestionFour] = useState('');
-  const [questionEight, setQuestionEight] = useState('');
   const [questionFive, setQuestionFive] = useState('');
   const [questionSix, setQuestionSix] = useState('');
-  const [questionSeven, setQuestionSeven] = useState<HiringVisitorSupervisor>({
+  const [questionSeven, setQuestionSeven] = useState('');
+  const [questionEight, setQuestionEight] = useState<HiringVisitorSupervisor>({
     a_visitadoresEdital: false,
     b_visitadoresEquipePropria: false,
     c_visitadoresContratacaoDireta: false,
@@ -43,28 +45,35 @@ export const FormStep3 = () => {
     g_visitadoresOutrosDescricao: '',
   });
 
-  const [isCheckCQ02, setIsCheckCQ02] = useState('');
-  const [isCheckCQ04, setIsCheckCQ04] = useState('');
+  const [isCheckTwo, setIsCheckTwo] = useState('');
+  const [isCheckFour, setIsCheckFour] = useState('');
+
+  const [ question ] = useRoom();
 
   async function handleSendQuestion(event: FormEvent) {
     event.preventDefault();
 
-    const question = {
+    const questionReq = {
       C_Gestao_do_PCF: {
         questao14: questionOne,
         questao15: questionTwo,
         questao16: questionThree,
         questao17: questionFour,
-        questao18: questionEight,
-        questao19: questionFive,
-        questao20: questionSix,
-        questao21: questionSeven,
+        questao18: questionFive,
+        questao19: questionSix,
+        questao20: questionSeven,
+        questao21: questionEight,
       }
     };
 
-    const firebaseRoomsQuestion = ref(database, `rooms/${roomId}/aderidos/question`);
-    const firebaseQuestion = await push(firebaseRoomsQuestion);
-    set(firebaseQuestion, question)
+    if (question.length === 0) {
+      const firebaseRoomsQuestion = ref(database, `rooms/${roomId}/aderidos/`);
+      const firebaseQuestion = await push(firebaseRoomsQuestion);
+      set(firebaseQuestion, questionReq);
+    } else {
+      const firebaseRoomsQuestion = ref(database, `rooms/${roomId}/aderidos/${question[0].idForm}`);
+      await update(firebaseRoomsQuestion, questionReq)
+    };
 
     navigate(`/${roomId}/formstep4`)
   };
@@ -86,25 +95,26 @@ export const FormStep3 = () => {
   };
 
   const handleKnowTheMultiplierContactChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setQuestionEight(event.target.value);
+    setQuestionFive(event.target.value);
   };
 
   const handleSteeringCommitteeChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setQuestionFive(event.target.value);
+    setQuestionSix(event.target.value);
   };
   
   const handleSteeringCommitteeMeetingChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setQuestionSix(event.target.value);
+    setQuestionSeven(event.target.value);
   };
 
   const handleHiringVisitorSupervisorChange = useCallback((event: React.FormEvent<HTMLInputElement>) => {
     const targetInput = event.currentTarget;
     const { value, name } = targetInput;
-    setQuestionSeven({
-      ...questionSeven,
+    setQuestionEight({
+      ...questionEight,
       [name]: value,
     })
-  }, [questionSeven]);
+  }, [questionEight]);
+
 
   useEffect(() => {
     dispatch({
@@ -112,6 +122,20 @@ export const FormStep3 = () => {
       payload: 3
     });
   }, []);
+
+  useEffect(() => {
+    if (question?.length > 0) {
+      setQuestionOne(question[0].C_Gestao_do_PCF.questao14)
+      setQuestionTwo(question[0].C_Gestao_do_PCF.questao15)
+      setQuestionThree(question[0].C_Gestao_do_PCF.questao16)
+      setQuestionFour(question[0].C_Gestao_do_PCF.questao17)
+      setQuestionFive(question[0].C_Gestao_do_PCF.questao18)
+      setQuestionSix(question[0].C_Gestao_do_PCF.questao19)
+      setQuestionSeven(question[0].C_Gestao_do_PCF.questao20)
+      setQuestionEight(question[0].C_Gestao_do_PCF.questao21)
+    }
+    console.log(question)
+  }, [question])
 
   return (
     <Theme>
@@ -139,6 +163,7 @@ export const FormStep3 = () => {
                     name="teamCoordinator"
                     type="radio"
                     value="Sim"
+                    checked={questionOne === "Sim"}
                     onChange={handleTeamCoordinatorChange}
                   />
                   <label
@@ -154,6 +179,7 @@ export const FormStep3 = () => {
                     name="teamCoordinator"
                     type="radio"
                     value="Não"
+                    checked={questionOne === "Não"}
                     onChange={handleTeamCoordinatorChange}
                   />
                   <label
@@ -182,8 +208,9 @@ export const FormStep3 = () => {
                       id="meetTheCoordinatorYes"
                       name="meetTheCoordinator"
                       type="radio"
-                      value={"sim_CQ02"}
-                      onClick={() => setIsCheckCQ02("sim_CQ02")}
+                      value={"sim_Two"}
+                      checked={questionTwo === "sim_Two"}
+                      onClick={() => setIsCheckTwo("sim_Two")}
                       onChange={handleMeetTheCoordinatorChange}
                     />
                     <label
@@ -197,8 +224,9 @@ export const FormStep3 = () => {
                       id="meetTheCoordinatorNo"
                       name="meetTheCoordinator"
                       type="radio"
-                      value={"nao_CQ02"}
-                      onClick={() => setIsCheckCQ02("nao_CQ02")}
+                      value={"nao_Two"}
+                      checked={questionTwo === "nao_Two"}
+                      onClick={() => setIsCheckTwo("nao_Two")}
                       onChange={handleMeetTheCoordinatorChange}
                     />
                     <label
@@ -210,7 +238,7 @@ export const FormStep3 = () => {
                 </div>
               </div>
             </div>
-            {isCheckCQ02 === "sim_CQ02" && (
+            {isCheckTwo === "sim_Two" && (
               <>
                 <SC.ButtonTypeRadio>
                   <div className="formQuestion">
@@ -226,6 +254,7 @@ export const FormStep3 = () => {
                             name="contactCoordinator"
                             type="radio"
                             value="0"
+                            checked={questionThree === "0"}
                             onChange={handleContactCoordinatorChange}
                           />
                           <label
@@ -240,6 +269,7 @@ export const FormStep3 = () => {
                             name="contactCoordinator"
                             type="radio"
                             value="1"
+                            checked={questionThree === "1"}
                             onChange={handleContactCoordinatorChange}
                           />
                           <label
@@ -254,6 +284,7 @@ export const FormStep3 = () => {
                             name="contactCoordinator"
                             type="radio"
                             value="2"
+                            checked={questionThree === "2"}
                             onChange={handleContactCoordinatorChange}
                           />
                           <label
@@ -268,6 +299,7 @@ export const FormStep3 = () => {
                             name="contactCoordinator"
                             type="radio"
                             value="3"
+                            checked={questionThree === "3"}
                             onChange={handleContactCoordinatorChange}
                           />
                           <label
@@ -282,6 +314,7 @@ export const FormStep3 = () => {
                             name="contactCoordinator"
                             type="radio"
                             value="4_ou_mais"
+                            checked={questionThree === "4_ou_mais"}
                             onChange={handleContactCoordinatorChange}
                           />
                           <label
@@ -296,6 +329,7 @@ export const FormStep3 = () => {
                             name="contactCoordinator"
                             type="radio"
                             value="Não_se_aplica"
+                            checked={questionThree === "Não_se_aplica"}
                             onChange={handleContactCoordinatorChange}
                           />
                           <label
@@ -327,8 +361,9 @@ export const FormStep3 = () => {
                       id="knowTheMultiplierYes"
                       name="knowTheMultiplier"
                       type="radio"
-                      value={"sim_CQ04"}
-                      onClick={() => setIsCheckCQ04("sim_CQ04")}
+                      value={"sim_Four"}
+                      checked={questionFour === "sim_Four"}
+                      onClick={() => setIsCheckFour("sim_Four")}
                       onChange={handleKnowTheMultiplierChange}
                     />
                     <label
@@ -342,8 +377,10 @@ export const FormStep3 = () => {
                       id="knowTheMultiplierNo"
                       name="knowTheMultiplier"
                       type="radio"
-                      value={"nao_CQ04"}
-                      onClick={() => setIsCheckCQ04("nao_CQ04")}
+                      value={"nao_Four"}
+                      checked={questionFour === "nao_Four"}
+                      onClick={() => setIsCheckFour("nao_Four")}
+                      onChange={handleKnowTheMultiplierChange}
                     />
                     <label
                       className="containerTextLabel"
@@ -354,7 +391,7 @@ export const FormStep3 = () => {
                 </div>
               </div>
             </div>
-            {isCheckCQ04 === "sim_CQ04" && (
+            {isCheckFour === "sim_Four" && (
               <>
                 <SC.ButtonTypeRadio>
                   <div className="formQuestion">
@@ -370,6 +407,7 @@ export const FormStep3 = () => {
                             name="knowTheMultiplierContact"
                             type="radio"
                             value="0"
+                            checked={questionFive === "0"}
                             onChange={handleKnowTheMultiplierContactChange}
                           />
                           <label
@@ -384,6 +422,7 @@ export const FormStep3 = () => {
                             name="knowTheMultiplierContact"
                             type="radio"
                             value="1"
+                            checked={questionFive === "1"}
                             onChange={handleKnowTheMultiplierContactChange}
                           />
                           <label
@@ -398,6 +437,7 @@ export const FormStep3 = () => {
                             name="knowTheMultiplierContact"
                             type="radio"
                             value="2"
+                            checked={questionFive === "2"}
                             onChange={handleKnowTheMultiplierContactChange}
                           />
                           <label
@@ -412,6 +452,7 @@ export const FormStep3 = () => {
                             name="knowTheMultiplierContact"
                             type="radio"
                             value="3"
+                            checked={questionFive === "3"}
                             onChange={handleKnowTheMultiplierContactChange}
                           />
                           <label
@@ -426,6 +467,7 @@ export const FormStep3 = () => {
                             name="knowTheMultiplierContact"
                             type="radio"
                             value="4_ou_mais"
+                            checked={questionFive === "4_ou_mais"}
                             onChange={handleKnowTheMultiplierContactChange}
                           />
                           <label
@@ -440,6 +482,7 @@ export const FormStep3 = () => {
                             name="knowTheMultiplierContact"
                             type="radio"
                             value="Não_se_aplica"
+                            checked={questionFive === "Não_se_aplica"}
                             onChange={handleKnowTheMultiplierContactChange}
                           />
                           <label
@@ -472,6 +515,7 @@ export const FormStep3 = () => {
                     name="steeringCommittee"
                     type="radio"
                     value="Sim"
+                    checked={questionSix === "Sim"}
                     onChange={handleSteeringCommitteeChange}
                   />
                   <label
@@ -487,6 +531,7 @@ export const FormStep3 = () => {
                     name="steeringCommittee"
                     type="radio"
                     value="Não"
+                    checked={questionSix === "Não"}
                     onChange={handleSteeringCommitteeChange}
                   />
                   <label
@@ -502,6 +547,7 @@ export const FormStep3 = () => {
                     name="steeringCommittee"
                     type="radio"
                     value="Outros"
+                    checked={questionSix === "Outros"}
                     onChange={handleSteeringCommitteeChange}
                   />
                   <label
@@ -517,6 +563,7 @@ export const FormStep3 = () => {
                     name="steeringCommittee"
                     type="radio"
                     value="Não_se_aplica"
+                    checked={questionSix === "Não_se_aplica"}
                     onChange={handleSteeringCommitteeChange}
                   />
                   <label
@@ -546,6 +593,7 @@ export const FormStep3 = () => {
                     name="steeringCommitteeMeeting"
                     type="radio"
                     value="0"
+                    checked={questionSeven === "0"}
                     onChange={handleSteeringCommitteeMeetingChange}
                   />
                   <label
@@ -561,6 +609,7 @@ export const FormStep3 = () => {
                     name="steeringCommitteeMeeting"
                     type="radio"
                     value="1"
+                    checked={questionSeven === "1"}
                     onChange={handleSteeringCommitteeMeetingChange}
                   />
                   <label
@@ -576,6 +625,7 @@ export const FormStep3 = () => {
                     name="steeringCommitteeMeeting"
                     type="radio"
                     value="2"
+                    checked={questionSeven === "2"}
                     onChange={handleSteeringCommitteeMeetingChange}
                   />
                   <label
@@ -591,6 +641,7 @@ export const FormStep3 = () => {
                     name="steeringCommitteeMeeting"
                     type="radio"
                     value="3"
+                    checked={questionSeven === "3"}
                     onChange={handleSteeringCommitteeMeetingChange}
                   />
                   <label
@@ -606,6 +657,7 @@ export const FormStep3 = () => {
                     name="steeringCommitteeMeeting"
                     type="radio"
                     value="4_ou_mais"
+                    checked={questionSeven === "4_ou_mais"}
                     onChange={handleSteeringCommitteeMeetingChange}
                   />
                   <label
@@ -621,6 +673,7 @@ export const FormStep3 = () => {
                     name="steeringCommitteeMeeting"
                     type="radio"
                     value="Não_se_aplica"
+                    checked={questionSeven === "Não_se_aplica"}
                     onChange={handleSteeringCommitteeMeetingChange}
                   />
                   <label
@@ -643,22 +696,21 @@ export const FormStep3 = () => {
         
             <div id="containerOption">
               <div id="containerOptionSixOption">
-                <h1>{questionSeven.a_visitadoresEdital}</h1>
                 <div id="containerInputLabelRadioButton">
                   <input
                     required={
-                      !questionSeven?.a_visitadoresEdital && 
-                      !questionSeven?.b_visitadoresEquipePropria &&
-                      !questionSeven?.c_visitadoresContratacaoDireta &&
-                      !questionSeven?.d_visitadoresContratacaoEstagio &&
-                      !questionSeven?.e_visitadoresNaoSeAplica
+                      !questionEight?.a_visitadoresEdital && 
+                      !questionEight?.b_visitadoresEquipePropria &&
+                      !questionEight?.c_visitadoresContratacaoDireta &&
+                      !questionEight?.d_visitadoresContratacaoEstagio &&
+                      !questionEight?.e_visitadoresNaoSeAplica
                     }
                     id="hiringVisitorSupervisorEdital"
                     name="a_visitadoresEdital"
                     type="checkbox"
-                    checked={questionSeven.a_visitadoresEdital}
-                    onChange={(event) => setQuestionSeven({
-                      ...questionSeven,
+                    checked={questionEight.a_visitadoresEdital}
+                    onChange={(event) => setQuestionEight({
+                      ...questionEight,
                       a_visitadoresEdital: !!event.currentTarget?.checked
                     })}
                   />
@@ -672,18 +724,18 @@ export const FormStep3 = () => {
                 <div id="containerInputLabelRadioButton">
                   <input
                     required={
-                      !questionSeven?.a_visitadoresEdital && 
-                      !questionSeven?.b_visitadoresEquipePropria &&
-                      !questionSeven?.c_visitadoresContratacaoDireta &&
-                      !questionSeven?.d_visitadoresContratacaoEstagio &&
-                      !questionSeven?.e_visitadoresNaoSeAplica
+                      !questionEight?.a_visitadoresEdital && 
+                      !questionEight?.b_visitadoresEquipePropria &&
+                      !questionEight?.c_visitadoresContratacaoDireta &&
+                      !questionEight?.d_visitadoresContratacaoEstagio &&
+                      !questionEight?.e_visitadoresNaoSeAplica
                     }
                     id="hiringVisitorSupervisorOwnTeam"
                     name="b_visitadoresEquipePropria"
                     type="checkbox"
-                    checked={questionSeven.b_visitadoresEquipePropria}
-                    onChange={(event) => setQuestionSeven({
-                      ...questionSeven,
+                    checked={questionEight.b_visitadoresEquipePropria}
+                    onChange={(event) => setQuestionEight({
+                      ...questionEight,
                       b_visitadoresEquipePropria: !!event.currentTarget?.checked
                     })}
                   />
@@ -697,18 +749,18 @@ export const FormStep3 = () => {
                 <div id="containerInputLabelRadioButton">
                   <input
                     required={
-                      !questionSeven?.a_visitadoresEdital && 
-                      !questionSeven?.b_visitadoresEquipePropria &&
-                      !questionSeven?.c_visitadoresContratacaoDireta &&
-                      !questionSeven?.d_visitadoresContratacaoEstagio &&
-                      !questionSeven?.e_visitadoresNaoSeAplica
+                      !questionEight?.a_visitadoresEdital && 
+                      !questionEight?.b_visitadoresEquipePropria &&
+                      !questionEight?.c_visitadoresContratacaoDireta &&
+                      !questionEight?.d_visitadoresContratacaoEstagio &&
+                      !questionEight?.e_visitadoresNaoSeAplica
                     }
                     id="hiringVisitorSupervisorDirectContracting"
                     name="c_visitadoresContratacaoDireta"
                     type="checkbox"
-                    checked={questionSeven.c_visitadoresContratacaoDireta}
-                    onChange={(event) => setQuestionSeven({
-                      ...questionSeven,
+                    checked={questionEight.c_visitadoresContratacaoDireta}
+                    onChange={(event) => setQuestionEight({
+                      ...questionEight,
                       c_visitadoresContratacaoDireta: !!event.currentTarget?.checked
                     })}
                   />
@@ -722,18 +774,18 @@ export const FormStep3 = () => {
                 <div id="containerInputLabelRadioButton">
                   <input
                     required={
-                      !questionSeven?.a_visitadoresEdital && 
-                      !questionSeven?.b_visitadoresEquipePropria &&
-                      !questionSeven?.c_visitadoresContratacaoDireta &&
-                      !questionSeven?.d_visitadoresContratacaoEstagio &&
-                      !questionSeven?.e_visitadoresNaoSeAplica
+                      !questionEight?.a_visitadoresEdital && 
+                      !questionEight?.b_visitadoresEquipePropria &&
+                      !questionEight?.c_visitadoresContratacaoDireta &&
+                      !questionEight?.d_visitadoresContratacaoEstagio &&
+                      !questionEight?.e_visitadoresNaoSeAplica
                     }
                     id="hiringVisitorSupervisorDirectContractingStage"
                     name="d_visitadoresContratacaoEstagio"
                     type="checkbox"
-                    checked={questionSeven.d_visitadoresContratacaoEstagio}
-                    onChange={(event) => setQuestionSeven({
-                      ...questionSeven,
+                    checked={questionEight.d_visitadoresContratacaoEstagio}
+                    onChange={(event) => setQuestionEight({
+                      ...questionEight,
                       d_visitadoresContratacaoEstagio: !!event.currentTarget?.checked
                     })}
                   />
@@ -747,18 +799,18 @@ export const FormStep3 = () => {
                 <div id="containerInputLabelRadioButton">
                   <input
                     required={
-                      !questionSeven?.a_visitadoresEdital && 
-                      !questionSeven?.b_visitadoresEquipePropria &&
-                      !questionSeven?.c_visitadoresContratacaoDireta &&
-                      !questionSeven?.d_visitadoresContratacaoEstagio &&
-                      !questionSeven?.e_visitadoresNaoSeAplica
+                      !questionEight?.a_visitadoresEdital && 
+                      !questionEight?.b_visitadoresEquipePropria &&
+                      !questionEight?.c_visitadoresContratacaoDireta &&
+                      !questionEight?.d_visitadoresContratacaoEstagio &&
+                      !questionEight?.e_visitadoresNaoSeAplica
                     }
                     id="hiringVisitorSupervisorNotApplicable"
                     name="e_visitadoresNaoSeAplica"
                     type="checkbox"
-                    checked={questionSeven.e_visitadoresNaoSeAplica}
-                    onChange={(event) => setQuestionSeven({
-                      ...questionSeven,
+                    checked={questionEight.e_visitadoresNaoSeAplica}
+                    onChange={(event) => setQuestionEight({
+                      ...questionEight,
                       e_visitadoresNaoSeAplica: !!event.currentTarget?.checked
                     })}
                   />
@@ -772,18 +824,18 @@ export const FormStep3 = () => {
                 <div id="containerInputLabelRadioButton">
                   <input
                     required={
-                      !questionSeven?.a_visitadoresEdital && 
-                      !questionSeven?.b_visitadoresEquipePropria &&
-                      !questionSeven?.c_visitadoresContratacaoDireta &&
-                      !questionSeven?.d_visitadoresContratacaoEstagio &&
-                      !questionSeven?.e_visitadoresNaoSeAplica
+                      !questionEight?.a_visitadoresEdital && 
+                      !questionEight?.b_visitadoresEquipePropria &&
+                      !questionEight?.c_visitadoresContratacaoDireta &&
+                      !questionEight?.d_visitadoresContratacaoEstagio &&
+                      !questionEight?.e_visitadoresNaoSeAplica
                     }
                     id="hiringVisitorSupervisorOthers"
                     name="f_visitadoresOutro"
                     type="checkbox"
-                    checked={questionSeven.f_visitadoresOutro}
-                    onChange={(event) => setQuestionSeven({
-                      ...questionSeven,
+                    checked={questionEight.f_visitadoresOutro}
+                    onChange={(event) => setQuestionEight({
+                      ...questionEight,
                       f_visitadoresOutro: !!event.currentTarget?.checked
                     })}
                   />
@@ -796,7 +848,7 @@ export const FormStep3 = () => {
                     className="inputPlaceholderOther"
                     name="g_visitadoresOutrosDescricao"
                     type="text"
-                    value={questionSeven.g_visitadoresOutrosDescricao}
+                    value={questionEight.g_visitadoresOutrosDescricao}
                     onChange={handleHiringVisitorSupervisorChange}
                     placeholder="Escreva aqui"
                   />

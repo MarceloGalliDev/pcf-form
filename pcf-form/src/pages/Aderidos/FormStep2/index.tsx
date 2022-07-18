@@ -3,7 +3,7 @@ import { Theme } from "../../../components/Theme";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useFormPage, FormActions } from "../../../context/FormContext";
 import { ChangeEvent, FormEvent, useCallback, useEffect, useState } from "react";
-import { push, ref, set } from "firebase/database";
+import { push, ref, set, update } from "firebase/database";
 import { database } from "../../../services/firebase";
 import { useRoom } from "../../../hooks/useRoom";
 
@@ -29,7 +29,7 @@ export const FormStep2 = () => {
   async function handleSendQuestion(event: FormEvent) {
     event.preventDefault();
     
-    const question = {
+    const questionReq = {
       B_Caracteristicas_do_PCF: {
         questao07: questionOne,
         questao08: questionTwo,
@@ -41,9 +41,14 @@ export const FormStep2 = () => {
       }
     };
 
-    const firebaseRoomsQuestion = ref(database, `rooms/${roomId}/aderidos/question`);
-    const firebaseQuestion = await push(firebaseRoomsQuestion);
-    set(firebaseQuestion, question)
+    if (question.length === 0) {
+      const firebaseRoomsQuestion = ref(database, `rooms/${roomId}/aderidos/`);
+      const firebaseQuestion = await push(firebaseRoomsQuestion);
+      set(firebaseQuestion, questionReq);
+    } else {
+      const firebaseRoomsQuestion = ref(database, `rooms/${roomId}/aderidos/${question[0].idForm}`);
+      await update(firebaseRoomsQuestion, questionReq)
+    };
 
     navigate(`/${roomId}/formstep3`)
   };
@@ -85,14 +90,14 @@ export const FormStep2 = () => {
   }, []);
 
   useEffect(() => {
-    if (question?.length > 1) {
-      setQuestionOne(question[1].B_Caracteristicas_do_PCF.questao07)
-      setQuestionTwo(question[1].B_Caracteristicas_do_PCF.questao08)
-      setQuestionThree(question[1].B_Caracteristicas_do_PCF.questao09)
-      setQuestionFour(question[1].B_Caracteristicas_do_PCF.questao10)
-      setQuestionFive(question[1].B_Caracteristicas_do_PCF.questao11)
-      setQuestionSix(question[1].B_Caracteristicas_do_PCF.questao12)
-      setQuestionSeven(question[1].B_Caracteristicas_do_PCF.questao13)
+    if (question?.length > 0) {
+      setQuestionOne(question[0].B_Caracteristicas_do_PCF.questao07)
+      setQuestionTwo(question[0].B_Caracteristicas_do_PCF.questao08)
+      setQuestionThree(question[0].B_Caracteristicas_do_PCF.questao09)
+      setQuestionFour(question[0].B_Caracteristicas_do_PCF.questao10)
+      setQuestionFive(question[0].B_Caracteristicas_do_PCF.questao11)
+      setQuestionSix(question[0].B_Caracteristicas_do_PCF.questao12)
+      setQuestionSeven(question[0].B_Caracteristicas_do_PCF.questao13)
     }
     console.log(question)
   }, [question])
@@ -157,6 +162,7 @@ export const FormStep2 = () => {
                     name="lastMonthSpentData"
                     type="radio"
                     value="Janeiro"
+                    checked={questionThree === "Janeiro"}
                     onChange={handleLastMonthSpentDataChange}
                   />
                   <label
@@ -172,6 +178,7 @@ export const FormStep2 = () => {
                     name="lastMonthSpentData"
                     type="radio"
                     value="Fevereiro"
+                    checked={questionThree === "Fevereiro"}
                     onChange={handleLastMonthSpentDataChange}
                   />
                   <label
@@ -187,6 +194,7 @@ export const FormStep2 = () => {
                     name="lastMonthSpentData"
                     type="radio"
                     value="Março"
+                    checked={questionThree === "Março"}
                     onChange={handleLastMonthSpentDataChange}
                   />
                   <label
@@ -202,6 +210,7 @@ export const FormStep2 = () => {
                     name="lastMonthSpentData"
                     type="radio"
                     value="Abril"
+                    checked={questionThree === "Abril"}
                     onChange={handleLastMonthSpentDataChange}
                   />
                   <label
@@ -220,6 +229,7 @@ export const FormStep2 = () => {
                     name="lastMonthSpentData"
                     type="radio"
                     value="Maio"
+                    checked={questionThree === "Maio"}
                     onChange={handleLastMonthSpentDataChange}
                   />
                   <label
@@ -235,6 +245,7 @@ export const FormStep2 = () => {
                     name="lastMonthSpentData"
                     type="radio"
                     value="Junho"
+                    checked={questionThree === "Junho"}
                     onChange={handleLastMonthSpentDataChange}
                   />
                   <label
@@ -250,6 +261,7 @@ export const FormStep2 = () => {
                     name="lastMonthSpentData"
                     type="radio"
                     value="Julho"
+                    checked={questionThree === "Julho"}
                     onChange={handleLastMonthSpentDataChange}
                   />
                   <label
@@ -265,6 +277,7 @@ export const FormStep2 = () => {
                     name="lastMonthSpentData"
                     type="radio"
                     value="Agosto"
+                    checked={questionThree === "Agosto"}
                     onChange={handleLastMonthSpentDataChange}
                   />
                   <label
@@ -283,6 +296,7 @@ export const FormStep2 = () => {
                     name="lastMonthSpentData"
                     type="radio"
                     value="Não_se_aplica"
+                    checked={questionThree === "Não_se_aplica"}
                     onChange={handleLastMonthSpentDataChange}
                   />
                   <label
@@ -312,6 +326,7 @@ export const FormStep2 = () => {
                     name="phasePCFCity"
                     type="radio"
                     value="Implantação_(até_4_meses)"
+                    checked={questionFour === "Implantação_(até_4_meses)"}
                     onChange={handlePhasePCFCityChange}
                   />
                   <label
@@ -327,6 +342,7 @@ export const FormStep2 = () => {
                     name="phasePCFCity"
                     type="radio"
                     value="Execução_Fase_I_(entre_o_5º_e_7º_mês_do_início_da_implantação"
+                    checked={questionFour === "Execução_Fase_I_(entre_o_5º_e_7º_mês_do_início_da_implantação"}
                     onChange={handlePhasePCFCityChange}
                   />
                   <label
@@ -342,6 +358,7 @@ export const FormStep2 = () => {
                     name="phasePCFCity"
                     type="radio"
                     value="Execução_Fase_II_(a_partir_do_8º_mês_da_implantação"
+                    checked={questionFour === "Execução_Fase_II_(a_partir_do_8º_mês_da_implantação"}
                     onChange={handlePhasePCFCityChange}
                   />
                   <label
@@ -357,6 +374,7 @@ export const FormStep2 = () => {
                     name="phasePCFCity"
                     type="radio"
                     value="Não_se_Aplica"
+                    checked={questionFour === "Não_se_Aplica"}
                     onChange={handlePhasePCFCityChange}
                   />
                   <label
@@ -386,6 +404,7 @@ export const FormStep2 = () => {
                     name="expansionGoals"
                     type="radio"
                     value="Sim"
+                    checked={questionFive === "Sim"}
                     onChange={handleExpansionGoalsChange}
                   />
                   <label
@@ -401,6 +420,7 @@ export const FormStep2 = () => {
                     name="expansionGoals"
                     type="radio"
                     value="Não"
+                    checked={questionFive === "Não"}
                     onChange={handleExpansionGoalsChange}
                   />
                   <label
@@ -416,6 +436,7 @@ export const FormStep2 = () => {
                     name="expansionGoals"
                     type="radio"
                     value="Não_se_aplica"
+                    checked={questionFive === "Não_se_aplica"}
                     onChange={handleExpansionGoalsChange}
                   />
                   <label
@@ -445,6 +466,7 @@ export const FormStep2 = () => {
                     name="referenceCenter"
                     type="radio"
                     value="Sim"
+                    checked={questionSix === "Sim"}
                     onChange={handleReferenceCenterChange}
                   />
                   <label
@@ -460,6 +482,7 @@ export const FormStep2 = () => {
                     name="referenceCenter"
                     type="radio"
                     value="Não"
+                    checked={questionSix === "Não"}
                     onChange={handleReferenceCenterChange}
                   />
                   <label
@@ -475,6 +498,7 @@ export const FormStep2 = () => {
                     name="referenceCenter"
                     type="radio"
                     value="Não_se_aplica"
+                    checked={questionSix === "Não_se_aplica"}
                     onChange={handleReferenceCenterChange}
                   />
                   <label
@@ -504,6 +528,7 @@ export const FormStep2 = () => {
                     name="actionPlan"
                     type="radio"
                     value="Sim"
+                    checked={questionSeven === "Sim"}
                     onChange={handleActionPlanChange}
                   />
                   <label
@@ -519,6 +544,7 @@ export const FormStep2 = () => {
                     name="actionPlan"
                     type="radio"
                     value="Não"
+                    checked={questionSeven === "Não"}
                     onChange={handleActionPlanChange}
                   />
                   <label
@@ -534,6 +560,7 @@ export const FormStep2 = () => {
                     name="actionPlan"
                     type="radio"
                     value="Não_se_aplica"
+                    checked={questionSeven === "Não_se_aplica"}
                     onChange={handleActionPlanChange}
                   />
                   <label

@@ -1,5 +1,6 @@
 import React from 'react';
 import { FormProvider } from './context/FormContext';
+import { JoinProvider } from './context/joinContext';
 import { Router } from "./router";
 
 
@@ -7,7 +8,9 @@ const App = () => {
   return (
     <React.StrictMode>
       <FormProvider>
-        <Router/>
+        <JoinProvider>
+          <Router/>
+        </JoinProvider>
       </FormProvider>
     </React.StrictMode>
   )

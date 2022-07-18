@@ -9,8 +9,9 @@ import {
   IBGECITYResponse,
 } from "../../../types/IBGE";
 import { database } from "../../../services/firebase";
-import { ref, push, set } from "firebase/database";
+import { ref, push, set, update } from "firebase/database";
 import { useRoom } from "../../../hooks/useRoom";
+import { userJoin } from "../../../context/joinContext";
 
 type RoomParams = {
   id: string;
@@ -30,8 +31,8 @@ export const FormStep1 = () => {
   const [questionThree, setQuestionThree] = useState('');
   const [questionFour, setQuestionFour] = useState('');
 
-  const [ question ] = useRoom();
-
+  const [question] = useRoom();
+  
   async function handleSendQuestion(event: FormEvent) {
     event.preventDefault();
 
@@ -48,7 +49,7 @@ export const FormStep1 = () => {
       return;
     };
 
-    const question = {
+    const questionReq = {
       A_Informacoes_Gerais: {
         questao01: questionOne,
         questao02: questionTwo,
@@ -59,9 +60,14 @@ export const FormStep1 = () => {
       }
     };
 
-    const firebaseRoomsQuestion = ref(database, `rooms/${roomId}/aderidos/question`);
-    const firebaseQuestion = await push(firebaseRoomsQuestion);
-    set(firebaseQuestion, question)
+    if (question.length === 0) {
+      const firebaseRoomsQuestion = ref(database, `rooms/${roomId}/aderidos/`);
+      const firebaseQuestion = await push(firebaseRoomsQuestion);
+      set(firebaseQuestion, questionReq);
+    } else {
+      const firebaseRoomsQuestion = ref(database, `rooms/${roomId}/aderidos/${question[0].idForm}`);
+      await update(firebaseRoomsQuestion, questionReq)
+    };
 
     navigate(`/${roomId}/formstep2`)
   };
@@ -110,6 +116,7 @@ export const FormStep1 = () => {
 
   useEffect(() => {
     if (question?.length > 0) {
+      debugger
       setQuestionOne(question[0].A_Informacoes_Gerais.questao01)
       setQuestionTwo(question[0].A_Informacoes_Gerais.questao02)
       setQuestionThree(question[0].A_Informacoes_Gerais.questao03)
