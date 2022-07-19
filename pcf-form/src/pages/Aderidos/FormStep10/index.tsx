@@ -73,9 +73,9 @@ export const FormStep10 = () => {
   const [question] = useRoom();
 
   function handleAddItemOthersCosts(item: Item) {
-    let newList = [...list]
-    newList.push(item)
-    setList(newList)
+    setList((previous) => {
+      return [...previous, item]
+    })
   };
   function removerDaListaOthersCosts(index: number) {
     setList((previous) => previous.filter((item, indexPrevious) => index !== indexPrevious))
@@ -83,9 +83,7 @@ export const FormStep10 = () => {
   };
 
   function handleAddItemOthersCosts1(item1: Item1) {
-    let newList1 = [...list1]
-    newList1.push(item1)
-    setList1(newList1)
+    setList1((previous) => [...previous, item1])
   };
   function removerDaListaOthersCosts1(index1: number) {
     setList1((previous1) => previous1.filter((item1, indexPrevious1) => index1 !== indexPrevious1))

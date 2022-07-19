@@ -23,13 +23,15 @@ export const FormStep6 = () => {
   const [list, setList] = useState<Item[]>([]);
   const [filteredList, setFilteredList] = useState<Item[]>([]);
   const [questionTwo, setQuestionTwo] = useState('');
-
   const [question] = useRoom();
 
-  function handleAddItemText(item: Item) {
-    let newList = [...list]
-    newList.push(item)
-    setList(newList)
+  // function handleAddItemText(item: Item) {
+  //   setList((previous) => [...previous, item])
+  // };
+
+  const handleAddItemText = (item: Item) => {
+    setList((previous) => [...previous, item])
+    return setList
   };
 
   const removerDaLista = (index: number) => {
@@ -76,7 +78,9 @@ export const FormStep6 = () => {
 
   useEffect(() => {
     if (question?.length > 0) {
-      setFilteredList(question[0].F_Outros_ProfissionaisF.questao43)
+      question[0].F_Outros_Profissionais.questao43.forEach((item: Item) => {
+        handleAddItemText(item)
+      })
       setQuestionTwo(question[0].F_Outros_Profissionais.questao44)
     }
     console.log(question)

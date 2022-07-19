@@ -23,13 +23,11 @@ export const FormStep8 = () => {
   const [list, setList] = useState<Item[]>([]);
   const [filteredList, setFilteredList] = useState<Item[]>([]);
   const [questionTwo, setQuestionTwo] = useState('');
-
   const [question] = useRoom();
 
-  function handleAddItemPartner(item: Item) {
-    let newList = [...list]
-    newList.push(item)
-    setList(newList)
+  const handleAddItemPartner = (item: Item) => {
+    setList((previous) => [...previous, item])
+    return setList
   };
 
   const removerDaLista = (index: number) => {
@@ -76,10 +74,11 @@ export const FormStep8 = () => {
 
   useEffect(() => {
     if (question?.length > 0) {
-      // setFilteredList(question[0].F_Outros_ProfissionaisF.questao43)
+      question[0].H_Organizacoes_Parceiras.questao49.forEach((item: Item) => {
+        handleAddItemPartner(item)
+      })
       setQuestionTwo(question[0].H_Organizacoes_Parceiras.questao50)
     }
-    console.log(question)
   }, [question]);
 
   return (

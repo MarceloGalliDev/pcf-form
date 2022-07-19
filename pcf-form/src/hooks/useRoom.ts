@@ -339,10 +339,11 @@ type FirebaseQuestions = Record<string, {
   },
   H_Organizacoes_Parceiras: {
     questao49: {
-      a_id: number;
-      b_inputOne: string;
-      c_inputTwo: string;
-      d_inputThree: string;
+      a_id: {
+        b_inputOne: string;
+        c_inputTwo: string;
+        d_inputThree: string;
+      },
     },
     questao50: string,
   },
@@ -558,8 +559,8 @@ export function useRoom() {
               },
             },
             F_Outros_Profissionais: {
-              questao43: value?.F_Outros_Profissionais?.questao43,
-              questao44: value?.F_Outros_Profissionais?.questao44  || null,
+              questao43: value?.F_Outros_Profissionais?.questao43 || [],
+              questao44: value?.F_Outros_Profissionais?.questao44 || null,
             },
             G_Publico_Atendido_PCF: {
               questao45: value?.G_Publico_Atendido_PCF?.questao45,
@@ -568,12 +569,7 @@ export function useRoom() {
               questao48: value?.G_Publico_Atendido_PCF?.questao48,
             },
             H_Organizacoes_Parceiras: {
-              questao49: {
-                a_id: value?.H_Organizacoes_Parceiras?.questao49?.a_id,
-                b_inputOne: value?.H_Organizacoes_Parceiras?.questao49?.b_inputOne,
-                c_inputTwo: value?.H_Organizacoes_Parceiras?.questao49?.c_inputTwo,
-                d_inputThree: value?.H_Organizacoes_Parceiras?.questao49?.d_inputThree,
-              },
+              questao49: value?.H_Organizacoes_Parceiras?.questao49 || [],
               questao50: value?.H_Organizacoes_Parceiras?.questao50,
             },
             I_Recursos_E_Custos: {
