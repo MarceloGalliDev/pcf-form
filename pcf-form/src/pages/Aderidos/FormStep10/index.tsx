@@ -83,7 +83,9 @@ export const FormStep10 = () => {
   };
 
   function handleAddItemOthersCosts1(item1: Item1) {
-    setList1((previous) => [...previous, item1])
+    setList1((previous1) => { 
+      return [...previous1, item1]
+    })
   };
   function removerDaListaOthersCosts1(index1: number) {
     setList1((previous1) => previous1.filter((item1, indexPrevious1) => index1 !== indexPrevious1))
@@ -91,11 +93,10 @@ export const FormStep10 = () => {
   };
 
   function handleAddItemOthersCosts2(item2: Item2) {
-    let newList2 = [...list2]
-    newList2.push(item2)
-    setList2(newList2)
+    setList2((previous2) => { 
+      return [...previous2, item2]
+    })
   };
-
   function removerDaListaOthersCosts2(index2: number) {
     setList2((previous2) => previous2.filter((item2, indexPrevious2) => index2 !== indexPrevious2))
     return setList2

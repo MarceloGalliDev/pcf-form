@@ -591,27 +591,11 @@ export function useRoom() {
               questao52: value?.I_Recursos_E_Custos?.questao52,
             },
             J_Outros_Custos: {
-              questao53: {
-                a_id: value?.J_Outros_Custos?.questao53?.a_id,
-                b_inputOne: value?.J_Outros_Custos?.questao53?.b_inputOne,
-                c_inputTwo: value?.J_Outros_Custos?.questao53?.c_inputTwo,
-                d_inputThree: value?.J_Outros_Custos?.questao53?.d_inputThree,
-                e_inputFour: value?.J_Outros_Custos?.questao53?.e_inputFour,
-                f_inputFive: value?.J_Outros_Custos?.questao53?.f_inputFive,
-                g_inputSix: value?.J_Outros_Custos?.questao53?.g_inputSix,
-              },
+              questao53: value?.J_Outros_Custos?.questao53 || [],
               questao54: value?.J_Outros_Custos?.questao54  || null,
               questao55: value?.J_Outros_Custos?.questao55  || null,
-              questao56: {
-                a_id: value?.J_Outros_Custos?.questao56?.a_id,
-                b_inputOne: value?.J_Outros_Custos?.questao56?.b_inputOne,
-                c_inputTwo: value?.J_Outros_Custos?.questao56?.c_inputTwo,
-              },
-              questao57: {
-                a_id: value?.J_Outros_Custos?.questao57?.a_id,
-                b_inputOne: value?.J_Outros_Custos?.questao57?.b_inputOne,
-                c_inputTwo: value?.J_Outros_Custos?.questao57?.c_inputTwo,
-              },
+              questao56: value?.J_Outros_Custos?.questao56 || [],
+              questao57: value?.J_Outros_Custos?.questao57 || [],
               questao58: value?.J_Outros_Custos?.questao58,
             },
           };
