@@ -57,8 +57,6 @@ export const FormStep6 = () => {
     };
 
     navigate(`/${roomId}/formstep7`)
-
-    console.log(questionReq)
   };
 
   const handleObservationChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -78,7 +76,7 @@ export const FormStep6 = () => {
 
   useEffect(() => {
     if (question?.length > 0) {
-      // setFilteredList(question[0].F_Outros_ProfissionaisF.questao43)
+      setFilteredList(question[0].F_Outros_ProfissionaisF.questao43)
       setQuestionTwo(question[0].F_Outros_Profissionais.questao44)
     }
     console.log(question)

@@ -323,10 +323,11 @@ type FirebaseQuestions = Record<string, {
   },
   F_Outros_Profissionais: {
     questao43: {
-      a_id: number;
-      b_inputOne: string;
-      c_inputTwo: string;
-      d_inputThree: string;
+      a_id: {
+        b_inputOne: string;
+        c_inputTwo: string;
+        d_inputThree: string;
+      },
     },
     questao44: string,
   },
@@ -557,12 +558,7 @@ export function useRoom() {
               },
             },
             F_Outros_Profissionais: {
-              questao43: {
-                a_id: value?.F_Outros_Profissionais?.questao43?.a_id,
-                b_inputOne: value?.F_Outros_Profissionais?.questao43?.b_inputOne,
-                c_inputTwo: value?.F_Outros_Profissionais?.questao43?.c_inputTwo,
-                d_inputThree: value?.F_Outros_Profissionais?.questao43?.d_inputThree,
-              },
+              questao43: value?.F_Outros_Profissionais?.questao43,
               questao44: value?.F_Outros_Profissionais?.questao44  || null,
             },
             G_Publico_Atendido_PCF: {
@@ -625,7 +621,6 @@ export function useRoom() {
           };
         });
         setQuestion(parsedQuestions)
-        console.log(parsedQuestions);
       });
       return () => {
         off(roomRef)
