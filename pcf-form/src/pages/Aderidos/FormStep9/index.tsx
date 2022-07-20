@@ -141,7 +141,7 @@ export const FormStep9 = () => {
                       <label
                         className="containerTextLabel"
                         htmlFor="a_proximidadeDomicilioFamilia"
-                      >Proximidade entre os domicílios das famílias atendendias pelo PCF
+                      >Proximidade entre os domicílios das famílias atendidas pelo PCF
                       </label>
                     </div>
 
