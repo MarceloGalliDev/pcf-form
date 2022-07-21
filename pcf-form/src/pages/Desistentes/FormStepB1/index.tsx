@@ -2,7 +2,7 @@ import * as SC from "../../../styles/styles";
 import { ThemeB1 } from "../../../components/ThemeB1";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useFormPage, FormActions } from "../../../context/FormContext";
-import { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useState, useRef } from "react";
 import axios from "axios";
 import {
   IBGEUFResponse,
@@ -11,6 +11,9 @@ import {
 import { database } from "../../../services/firebase";
 import { ref, push, set, update } from "firebase/database";
 import { useRoomB } from "../../../hooks/useRoomB";
+import emailjs from '@emailjs/browser';
+import { Button } from "../../../components/ButtonFinished";
+import { Alert } from 'reactstrap';
 
 type RoomParams = {
   id: string;
@@ -31,6 +34,12 @@ export const FormStepB1 = () => {
   const [questionFour, setQuestionFour] = useState('');
 
   const [question] = useRoomB();
+
+  const form = useRef<any>();
+  const [isAlert, setIsAlert] = useState(false);
+
+  const captureId = JSON.stringify(params.id);
+  const messageId = captureId.replace(/[\\"]/g, '')
 
   async function handleSendQuestion(event: FormEvent) {
     event.preventDefault();
@@ -55,7 +64,11 @@ export const FormStepB1 = () => {
       await update(firebaseRoomsQuestion, questionReq)
     };
 
-    navigate(`/${roomId}/formstepB2`)
+    emailjs.sendForm('gmailMessage', 'template_mv87tmr', form.current, 'd0kjbweO1r6yfXT48')
+    setIsAlert(true);
+    setTimeout(() => {
+      navigate(`/${roomId}/formstepB2`)
+    }, 1500)
   };
 
   const handleNameChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -120,7 +133,10 @@ export const FormStepB1 = () => {
         <hr />
       </SC.Container>
 
-      <form onSubmit={handleSendQuestion}>
+      <form
+        ref={form}
+        onSubmit={handleSendQuestion}
+      >
 
         <SC.ButtonTypeText>
           <div className="formQuestion">
@@ -224,22 +240,26 @@ export const FormStepB1 = () => {
 
         <SC.AllButtons>
           <Link className="buttonAll" to="/">Voltar</Link>
-          <button
+          <Button
             className="buttonAll"
             type="submit"
-          >Próximo
-          </button>
+            onClick={() => setIsAlert}
+            >Próximo
+          </Button>
+        </SC.AllButtons>
+        <SC.AllButtons>
+          <Alert className="success1">
+            Código será enviado para {questionTwo}
+          <textarea
+            className="textareaSendEmail"
+            value={messageId}
+            name="messageId"
+          >{messageId}
+          </textarea>
+          </Alert>
         </SC.AllButtons>
       </form>
     </ThemeB1>
   );
 };
 
-{/* <span>{errors.name && " ⚠ *Campo obrigatório "}</span> */}
-
-  // const schema = yup.object({
-  //   name: yup.string().required(),
-  //   email: yup.string().required(),
-  //   phoneNumber: yup.number().required(),
-  //   functionPCF: yup.string().required(),
-  // }).required();

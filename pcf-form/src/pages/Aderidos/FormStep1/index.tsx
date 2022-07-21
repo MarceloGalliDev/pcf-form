@@ -13,7 +13,6 @@ import { ref, push, set, update } from "firebase/database";
 import { useRoom } from "../../../hooks/useRoom";
 import emailjs from '@emailjs/browser';
 import { Button } from "../../../components/ButtonFinished";
-import { CheckCircle } from 'phosphor-react';
 import { Alert } from 'reactstrap';
 
 type RoomParams = {
@@ -283,15 +282,7 @@ export const FormStep1 = () => {
   );
 };
 
-// type Props = {
-//   onQuestion: (formStep1: FormStep1) => void
-// }
-
-  // const [newQuestion, setNewQuestion] = useState<FormStep1[]>([]);
-  // const handleStorageQuestion = ({onQuestion}: Props) => {
-  //   let newQuestion = question
-  //   newQuestion.push(question)
-  // }
+{/* <span>{errors.name && " ⚠ *Campo obrigatório "}</span> */}
 
   // useEffect(() => {
   //   if (questionOne === '' ||
