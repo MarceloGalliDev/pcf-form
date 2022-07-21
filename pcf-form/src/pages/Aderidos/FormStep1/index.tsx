@@ -2,7 +2,7 @@ import * as SC from "../../../styles/styles";
 import { Theme } from "../../../components/Theme";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useFormPage, FormActions } from "../../../context/FormContext";
-import { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useRef, useState } from "react";
 import axios from "axios";
 import {
   IBGEUFResponse,
@@ -11,6 +11,10 @@ import {
 import { database } from "../../../services/firebase";
 import { ref, push, set, update } from "firebase/database";
 import { useRoom } from "../../../hooks/useRoom";
+import emailjs from '@emailjs/browser';
+import { Button } from "../../../components/ButtonFinished";
+import { CheckCircle } from 'phosphor-react';
+import { Alert } from 'reactstrap';
 
 type RoomParams = {
   id: string;
@@ -29,8 +33,14 @@ export const FormStep1 = () => {
   const [questionTwo, setQuestionTwo] = useState('');
   const [questionThree, setQuestionThree] = useState('');
   const [questionFour, setQuestionFour] = useState('');
-
+  
   const [question] = useRoom();
+  
+  const form = useRef<any>();
+  const [isAlert, setIsAlert] = useState(false);
+
+  const captureId = JSON.stringify(params.id);
+  const messageId = captureId.replace(/[\\"]/g, '')
   
   async function handleSendQuestion(event: FormEvent) {
     event.preventDefault();
@@ -68,7 +78,12 @@ export const FormStep1 = () => {
       await update(firebaseRoomsQuestion, questionReq)
     };
 
-    navigate(`/${roomId}/formstep2`)
+    emailjs.sendForm('gmailMessage', 'template_mv87tmr', form.current, 'd0kjbweO1r6yfXT48')
+    setIsAlert(true);
+    setTimeout(() => {
+      navigate(`/${roomId}/formstep2`)
+    }, 1500)
+
   };
 
   const handleNameChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -133,7 +148,10 @@ export const FormStep1 = () => {
         <p>Informações do responsável por responder este questionário</p>
         <hr />
       </SC.Container>
-      <form onSubmit={handleSendQuestion}>
+      <form
+        ref={form}
+        onSubmit={handleSendQuestion}
+      >
 
         <SC.ButtonTypeText>
           <div className="formQuestion">
@@ -242,30 +260,28 @@ export const FormStep1 = () => {
 
         <SC.AllButtons>
           <Link className="buttonAll" to="/">Voltar</Link>
-          <button
+          <Button
             className="buttonAll"
             type="submit"
+            onClick={() => setIsAlert}
           >Próximo
-          </button>
+          </Button>
+        </SC.AllButtons>
+        <SC.AllButtons>
+          <Alert className="success1">
+            Código será enviado para {questionTwo}
+          <textarea
+            className="textareaSendEmail"
+            value={messageId}
+            name="messageId"
+          >{messageId}
+          </textarea>
+          </Alert>
         </SC.AllButtons>
       </form>
     </Theme>
   );
 };
-
-{/* <span>{errors.name && " ⚠ *Campo obrigatório "}</span> */}
-
-
-// type FormStep1 = {
-//   A_Informacoes_Gerais: {
-//     questao01: string,
-//     questao02: string,
-//     questao03: string,
-//     questao04: string,
-//     questao05: string,
-//     questao06: string,
-//   }
-// };
 
 // type Props = {
 //   onQuestion: (formStep1: FormStep1) => void

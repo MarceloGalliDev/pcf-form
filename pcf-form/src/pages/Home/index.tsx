@@ -1,6 +1,6 @@
 import * as SC from "../../styles/styles"
 import { Link, useNavigate } from "react-router-dom";
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent, useEffect, useState, useRef } from "react";
 import { push, ref, set, get } from "firebase/database";
 import { database } from "../../services/firebase";
 import '../../styles/auth.scss';
@@ -21,7 +21,8 @@ export const Home = () => {
     set(firebaseForm, {
       idForm: Math.floor(Math.random() * 99999999) + 11111111,
     });
-    navigate(`/${firebaseForm.key}/formstep1`)
+
+      navigate(`/${firebaseForm.key}/formstep1`)
   };
 
   async function handleCreateRoom2(event: FormEvent) {
@@ -123,10 +124,13 @@ export const Home = () => {
 
             <div className="buttonHomeA1">
               <h2>Municípios <u>aderidos</u> ao PCF</h2>
-              <form onSubmit={handleCreateRoom1}>
+              <form
+                onSubmit={handleCreateRoom1}
+              >
                 {/* <input
-                  type="text"
-                  placeholder="Qual o seu município"
+                  name="sendEmail"
+                  type="email"
+                  placeholder="Digite seu e-mail"
                   onChange={event => setNewRoom(event.target.value)}
                   value={newRoom}
                 /> */}

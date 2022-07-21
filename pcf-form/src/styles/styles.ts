@@ -683,6 +683,22 @@ export const AllButtons = styled.div`
     font-weight: bold;
     padding: 0px 6px;
   };
+  .success1 {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    gap: 2px;
+    background-color: #fff;
+    border: 1px solid green;
+    border-radius: 10px;
+    font-weight: bold;
+    padding: 6px;
+
+    .textareaSendEmail {
+      display: none;
+    }
+  };
   
   .buttonAll {
     width: 170px;
