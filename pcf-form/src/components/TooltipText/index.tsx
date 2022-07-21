@@ -8,9 +8,10 @@ export const TooltipText = () => {
       <SC.TooltipText>
         <Info
           size={30}
-          color="#2d56d2"
+          color="#097c16"
           weight="light"
         />
+        <p>Ajuda aqui</p>
       </SC.TooltipText>
       <SC.TooltipBox>
         <img src={Explicacao} />

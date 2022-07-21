@@ -617,6 +617,7 @@ export const FormStep4 = () => {
 
             <SC.ButtonTypeTextV3>
               <div className="formQuestion">
+                <div className="testeV1"><TooltipText/></div>
                 <label htmlFor="containerLabelCheckboxBorder">
                 Informe quantos Supervisores da equipe do PCF são contratados nas seguintes categorias em seu município e sua remuneração média:
 

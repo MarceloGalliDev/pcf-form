@@ -7,6 +7,7 @@ import { database } from "../../../services/firebase";
 import { ref, push, set, update } from "firebase/database";
 import { RoomCode } from "../../../components/RoomCode";
 import { useRoom } from "../../../hooks/useRoom";
+import { TooltipText } from "../../../components/TooltipText";
 
 type RoomParams = {
   id: string;
@@ -391,24 +392,27 @@ export const FormStep5 = () => {
               </div>
             </SC.ButtonTypeRadio>
 
-            <SC.ButtonTypeText>
+            <SC.ButtonTypeTextV4>
               <div className="formQuestion">
                 <label
                   htmlFor="avarageRemunerationSupervisors"
                 >Qual a remuneração média em R$ (reais) dos Visitadores?
-                  <input
-                    autoComplete="off"
-                    required
-                    id="avarageRemunerationSupervisors"
-                    name="remuneracaoMediaVisitadores"
-                    type="number"
-                    value={questionTwo}
-                    onChange={handleAvarageRemunerationSupervisorsChange}
-                    placeholder="Valor em R$"
-                  />
+                  <div className="textInfo">
+                    <input
+                      autoComplete="off"
+                      required
+                      id="avarageRemunerationSupervisors"
+                      name="remuneracaoMediaVisitadores"
+                      type="number"
+                      value={questionTwo}
+                      onChange={handleAvarageRemunerationSupervisorsChange}
+                      placeholder="Valor em R$"
+                    />
+                    <TooltipText/>
+                  </div>
                 </label>
               </div>
-            </SC.ButtonTypeText>
+            </SC.ButtonTypeTextV4>
 
             <SC.ButtonTypeCheckbox>
               <div className="formQuestion">
@@ -662,6 +666,7 @@ export const FormStep5 = () => {
 
             <SC.ButtonTypeTextV3>
               <div className="formQuestion">
+                <div className="testeV1"><TooltipText/></div>
                 <label
                   htmlFor="containerLabelCheckboxBorder"
                 >Quantos Visitadores da equipe do PCF são contratados nas seguintes categorias em seu município:

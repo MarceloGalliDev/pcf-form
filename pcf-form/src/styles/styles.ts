@@ -577,6 +577,10 @@ export const ButtonTypeTextV3 = styled.div`
     border-radius: 10px;
     padding: 10px 10px;
     margin-bottom: 10px;
+
+    .testeV1 {
+      display: flex;
+    }
     
     #containerLabelCheckboxBorder {
       display: 1;
@@ -592,7 +596,6 @@ export const ButtonTypeTextV3 = styled.div`
       font-size: 15px;
       font-weight: bold;
 
-      
       #containerTextLabelCheckbox {
         margin-top: 10px;
         display: flex;
