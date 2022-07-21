@@ -6,6 +6,8 @@ import { ChangeEvent, useEffect, useState, useCallback, FormEvent } from "react"
 import { push, ref, set, update } from "firebase/database";
 import { database } from "../../../services/firebase";
 import { useRoom } from "../../../hooks/useRoom";
+import { TooltipText } from "../../../components/TooltipText";
+
 
 interface Workload {
   a_supervisoresHorasSemanais40: boolean;
@@ -366,24 +368,27 @@ export const FormStep4 = () => {
               </div>
             </SC.ButtonTypeRadio>
 
-            <SC.ButtonTypeText>
+            <SC.ButtonTypeTextV4>
               <div className="formQuestion">
                 <label
                   htmlFor="averagePay"
                 >Qual a remuneração média em R$ (reais) dos Supervisores?
-                  <input
-                    required
-                    autoComplete="off"
-                    id="averagePay"
-                    name="remuneracaoMediaSupervisor"
-                    type="number"
-                    value={questionTwo}
-                    onChange={handleAveragePayChange}
-                    placeholder="Valor em R$"
-                  />
+                  <div className="textInfo">
+                    <input
+                      required
+                      autoComplete="off"
+                      id="averagePay"
+                      name="remuneracaoMediaSupervisor"
+                      type="number"
+                      value={questionTwo}
+                      onChange={handleAveragePayChange}
+                      placeholder="Valor em R$"
+                    />
+                    <TooltipText/>
+                  </div>
                 </label>
               </div>
-            </SC.ButtonTypeText>
+            </SC.ButtonTypeTextV4>
 
             <SC.ButtonTypeCheckbox>
               <div className="formQuestion">

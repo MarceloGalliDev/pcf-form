@@ -489,12 +489,6 @@ export const ButtonTypeText = styled.div`
       font-weight: bold;
       color: #2D7DB0;
 
-      span {
-        font-weight: normal;
-        color: red;
-        margin-left: 10px;
-      }
-
       input {
         display: block;
         margin-top: 17px;
@@ -621,6 +615,49 @@ export const ButtonTypeTextV3 = styled.div`
             border-bottom: 1px solid red;
           }
 
+          ::-webkit-outer-spin-button,
+          ::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+          }
+        }
+      }
+    }
+  }
+`;
+
+export const ButtonTypeTextV4 = styled.div`
+  .formQuestion {
+    border: 1px solid #2D7DB0;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 10px 10px;
+    margin-bottom: 10px;
+
+    label {
+      font-size: 15px;
+      font-weight: bold;
+      color: #2D7DB0;
+
+      .textInfo {
+        display: flex;
+        align-items: flex-end;
+
+        input {
+          display: block;
+          margin-top: 17px;
+          width: 100%;
+          border: none;
+          border-bottom: 1px solid #2D7DB0;
+          color: #2D7DB0;
+          font-size: 15px;
+          padding: 5px 0;
+          outline: none;
+  
+          :invalid {
+            border-bottom: 1px solid red;
+          }
+  
           ::-webkit-outer-spin-button,
           ::-webkit-inner-spin-button {
             -webkit-appearance: none;

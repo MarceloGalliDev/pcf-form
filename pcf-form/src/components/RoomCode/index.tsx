@@ -1,9 +1,6 @@
-import { FormEvent, useState } from "react";
-import CopyToClipboard from "react-copy-to-clipboard";
 import { useParams } from "react-router-dom";
 import { CopySvg } from "../../assets/CopySvg";
 import './styles.scss';
-
 
 type RoomParams = {
   id: string;

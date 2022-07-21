@@ -60,7 +60,7 @@ export const InputArea = ({ onAdd }: Props) => {
             placeholder="Escreva aqui"
           />
           <span
-            data-tooltip="Por exemplo: CIEE, Ong's, igreja, empresas(terceiras) ..."
+            data-tooltip="Por exemplo: CIEE, Ong's, igreja, empresas(terceirizadas) ..."
           >
             <Info
               size={20}
