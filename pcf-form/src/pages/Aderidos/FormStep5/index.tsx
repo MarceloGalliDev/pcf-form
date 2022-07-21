@@ -404,6 +404,9 @@ export const FormStep5 = () => {
                       id="avarageRemunerationSupervisors"
                       name="remuneracaoMediaVisitadores"
                       type="number"
+                      min={0}
+                      max={999999}
+                      step={.001}
                       value={questionTwo}
                       onChange={handleAvarageRemunerationSupervisorsChange}
                       placeholder="Valor em R$"
@@ -559,9 +562,11 @@ export const FormStep5 = () => {
                       id="a_visitadoresEnsinoMedio"
                       name="a_visitadoresEnsinoMedio"
                       type="number"
+                      min={0}
+                      max={9999}
                       value={questionFour.a_visitadoresEnsinoMedio}
                       onChange={handleVisitorsQualificationChange}
-                      placeholder="Sua resposta"
+                      placeholder="Quantidade"
                     />
                   </div>
 
@@ -578,9 +583,11 @@ export const FormStep5 = () => {
                       id="b_visitadoresGraduacaoIncompleto"
                       name="b_visitadoresGraduacaoIncompleto"
                       type="number"
+                      min={0}
+                      max={9999}
                       value={questionFour.b_visitadoresGraduacaoIncompleto}
                       onChange={handleVisitorsQualificationChange}
-                      placeholder="Sua resposta"
+                      placeholder="Quantidade"
                     />
                   </div>
 
@@ -597,9 +604,11 @@ export const FormStep5 = () => {
                       id="c_visitadoresGraduacaoCompleto"
                       name="c_visitadoresGraduacaoCompleto"
                       type="number"
+                      min={0}
+                      max={9999}
                       value={questionFour.c_visitadoresGraduacaoCompleto}
                       onChange={handleVisitorsQualificationChange}
-                      placeholder="Sua resposta"
+                      placeholder="Quantidade"
                     />
                   </div>
 
@@ -616,9 +625,11 @@ export const FormStep5 = () => {
                       id="d_visitadoresEspecializacao"
                       name="d_visitadoresEspecializacao"
                       type="number"
+                      min={0}
+                      max={9999}
                       value={questionFour.d_visitadoresEspecializacao}
                       onChange={handleVisitorsQualificationChange}
-                      placeholder="Sua resposta"
+                      placeholder="Quantidade"
                     />
                   </div>
 
@@ -635,9 +646,11 @@ export const FormStep5 = () => {
                       id="e_visitadoresMestrado"
                       name="e_visitadoresMestrado"
                       type="number"
+                      min={0}
+                      max={9999}
                       value={questionFour.e_visitadoresMestrado}
                       onChange={handleVisitorsQualificationChange}
-                      placeholder="Sua resposta"
+                      placeholder="Quantidade"
                     />
                   </div>
 
@@ -654,9 +667,11 @@ export const FormStep5 = () => {
                       id="f_visitadoresDoutorado"
                       name="f_visitadoresDoutorado"
                       type="number"
+                      min={0}
+                      max={9999}
                       value={questionFour.f_visitadoresDoutorado}
                       onChange={handleVisitorsQualificationChange}
-                      placeholder="Sua resposta"
+                      placeholder="Quantidade"
                     />
                   </div>
 
@@ -685,9 +700,11 @@ export const FormStep5 = () => {
                         id="a_visitadoresServidorEfetivo"
                         name="a_visitadoresServidorEfetivo"
                         type="number"
+                        min={0}
+                        max={9999}
                         value={questionFive.a_visitadoresServidorEfetivo}
                         onChange={handleEffectiveRemunerationChange}
-                        placeholder="Sua resposta"
+                        placeholder="Quantidade"
                       />
                     </div>
                     <div id="containerTextLabelCheckbox">
@@ -703,9 +720,11 @@ export const FormStep5 = () => {
                         id="b_visitadoresMediaRemuneracaoEfetivo"
                         name="b_visitadoresMediaRemuneracaoEfetivo"
                         type="number"
+                        min={0}
+                        max={9999}
                         value={questionFive.b_visitadoresMediaRemuneracaoEfetivo}
                         onChange={handleEffectiveRemunerationChange}
-                        placeholder="Sua resposta"
+                        placeholder="Quantidade"
                       />
                     </div>
                   </div>
@@ -724,9 +743,11 @@ export const FormStep5 = () => {
                         id="a_visitadoresCargoComissionado"
                         name="a_visitadoresCargoComissionado"
                         type="number"
+                        min={0}
+                        max={9999}
                         value={questionSix.a_visitadoresCargoComissionado}
                         onChange={handleCommissionedRemunerationChange}
-                        placeholder="Sua resposta"
+                        placeholder="Quantidade"
                       />
                     </div>
                     <div id="containerTextLabelCheckbox">
@@ -742,9 +763,11 @@ export const FormStep5 = () => {
                         id="b_visitadoresMediaRemuneracaoComissionado"
                         name="b_visitadoresMediaRemuneracaoComissionado"
                         type="number"
+                        min={0}
+                        max={9999}
                         value={questionSix.b_visitadoresMediaRemuneracaoComissionado}
                         onChange={handleCommissionedRemunerationChange}
-                        placeholder="Sua resposta"
+                        placeholder="Quantidade"
                       />
                     </div>
                   </div>
@@ -763,9 +786,11 @@ export const FormStep5 = () => {
                         id="a_visitadoresServidorTemporario"
                         name="a_visitadoresServidorTemporario"
                         type="number"
+                        min={0}
+                        max={9999}
                         value={questionSeven.a_visitadoresServidorTemporario}
                         onChange={handleTemporaryRemunerationChange}
-                        placeholder="Sua resposta"
+                        placeholder="Quantidade"
                       />
                     </div>
                     <div id="containerTextLabelCheckbox">
@@ -781,9 +806,11 @@ export const FormStep5 = () => {
                         id="b_visitadoresMediaRemuneracaoTemporario"
                         name="b_visitadoresMediaRemuneracaoTemporario"
                         type="number"
+                        min={0}
+                        max={9999}
                         value={questionSeven.b_visitadoresMediaRemuneracaoTemporario}
                         onChange={handleTemporaryRemunerationChange}
-                        placeholder="Sua resposta"
+                        placeholder="Quantidade"
                       />
                     </div>
                   </div>
@@ -802,9 +829,11 @@ export const FormStep5 = () => {
                         id="a_visitadoresBolsista"
                         name="a_visitadoresBolsista"
                         type="number"
+                        min={0}
+                        max={9999}
                         value={questionEight.a_visitadoresBolsista}
                         onChange={handleScholarshipRemunerationChange}
-                        placeholder="Sua resposta"
+                        placeholder="Quantidade"
                       />
                     </div>
                     <div id="containerTextLabelCheckbox">
@@ -820,9 +849,11 @@ export const FormStep5 = () => {
                         id="b_visitadoresMediaRemuneracaoBolsista"
                         name="b_visitadoresMediaRemuneracaoBolsista"
                         type="number"
+                        min={0}
+                        max={9999}
                         value={questionEight.b_visitadoresMediaRemuneracaoBolsista}
                         onChange={handleScholarshipRemunerationChange}
-                        placeholder="Sua resposta"
+                        placeholder="Quantidade"
                       />
                     </div>
                   </div>
@@ -841,9 +872,11 @@ export const FormStep5 = () => {
                         id="a_visitadoresEstagiarioNivelSuperior"
                         name="a_visitadoresEstagiarioNivelSuperior"
                         type="number"
+                        min={0}
+                        max={9999}
                         value={questionNine.a_visitadoresEstagiarioNivelSuperior}
                         onChange={handleTopLevelInternChange}
-                        placeholder="Sua resposta"
+                        placeholder="Quantidade"
                       />
                     </div>
                     <div id="containerTextLabelCheckbox">
@@ -859,9 +892,11 @@ export const FormStep5 = () => {
                         id="b_visitadoresMediaRemuneracaoEstagiarioNivelSuperior"
                         name="b_visitadoresMediaRemuneracaoEstagiarioNivelSuperior"
                         type="number"
+                        min={0}
+                        max={9999}
                         value={questionNine.b_visitadoresMediaRemuneracaoEstagiarioNivelSuperior}
                         onChange={handleTopLevelInternChange}
-                        placeholder="Sua resposta"
+                        placeholder="Quantidade"
                       />
                     </div>
                   </div>
@@ -880,9 +915,11 @@ export const FormStep5 = () => {
                         id="a_visitadoresAutonomos"
                         name="a_visitadoresAutonomos"
                         type="number"
+                        min={0}
+                        max={9999}
                         value={questionTen.a_visitadoresAutonomos}
                         onChange={handleAutonomousRemunerationChange}
-                        placeholder="Sua resposta"
+                        placeholder="Quantidade"
                       />
                     </div>
                     <div id="containerTextLabelCheckbox">
@@ -898,9 +935,11 @@ export const FormStep5 = () => {
                         id="b_visitadoresMediaRemuneracaoAutonomos"
                         name="b_visitadoresMediaRemuneracaoAutonomos"
                         type="number"
+                        min={0}
+                        max={9999}
                         value={questionTen.b_visitadoresMediaRemuneracaoAutonomos}
                         onChange={handleAutonomousRemunerationChange}
-                        placeholder="Sua resposta"
+                        placeholder="Quantidade"
                       />
                     </div>
                   </div>
@@ -919,9 +958,11 @@ export const FormStep5 = () => {
                         id="outrosCargosa_visitadoresOutrosCargosVisitador"
                         name="a_visitadoresOutrosCargos"
                         type="number"
+                        min={0}
+                        max={9999}
                         value={questionEleven.a_visitadoresOutrosCargos}
                         onChange={handleOthersRemunerationChange}
-                        placeholder="Sua resposta"
+                        placeholder="Quantidade"
                       />
                     </div>
                     <div id="containerTextLabelCheckbox">
@@ -937,9 +978,11 @@ export const FormStep5 = () => {
                         id="b_visitadoresMediaRemuneracaoOutrosCargos"
                         name="b_visitadoresMediaRemuneracaoOutrosCargos"
                         type="number"
+                        min={0}
+                        max={9999}
                         value={questionEleven.b_visitadoresMediaRemuneracaoOutrosCargos}
                         onChange={handleOthersRemunerationChange}
-                        placeholder="Sua resposta"
+                        placeholder="Quantidade"
                       />
                     </div>
                   </div>

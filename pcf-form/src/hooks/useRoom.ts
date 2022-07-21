@@ -424,7 +424,7 @@ export function useRoom() {
               questao17: value?.C_Gestao_do_PCF?.questao17,
               questao18: value?.C_Gestao_do_PCF?.questao18 || null,
               questao19: value?.C_Gestao_do_PCF?.questao19,
-              questao20: value?.C_Gestao_do_PCF?.questao20,
+              questao20: value?.C_Gestao_do_PCF?.questao20 || null,
               questao21:
               {
                 a_visitadoresEdital: value?.C_Gestao_do_PCF?.questao21?.a_visitadoresEdital || null,

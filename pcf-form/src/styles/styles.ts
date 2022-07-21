@@ -613,6 +613,7 @@ export const ButtonTypeTextV3 = styled.div`
           border-top: none;
           border-bottom: 1px solid #2E7EB0;
           outline: none;
+          width: 100px;
 
           :invalid {
             border-bottom: 1px solid red;

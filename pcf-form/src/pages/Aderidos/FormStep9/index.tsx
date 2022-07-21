@@ -6,6 +6,7 @@ import { ChangeEvent, FormEvent, useCallback, useEffect, useState } from "react"
 import { push, ref, set, update } from "firebase/database";
 import { database } from "../../../services/firebase";
 import { useRoom } from "../../../hooks/useRoom";
+import { TooltipText } from "../../../components/TooltipText";
 
 type RoomParams = {
   id: string;
@@ -300,10 +301,12 @@ export const FormStep9 = () => {
             </div>
           </SC.ButtonTypeCheckbox>
             
-          <SC.ButtonTypeText>
+          <SC.ButtonTypeTextV4>
             <div className="formQuestion">
-              <label htmlFor="numeroDeVisitas">
-                Qual número médio de visitas que o visitador realiza por dia:
+              <label
+                htmlFor="numeroDeVisitas"
+              >Qual número médio de visitas que o visitador realiza por dia:
+                <div className="textInfo">
                   <input
                     required
                     autoComplete="off"
@@ -312,11 +315,13 @@ export const FormStep9 = () => {
                     type="number"
                     value={questionTwo}
                     onChange={handleNumberOfVisitsChange}
-                    placeholder="Sua resposta"
+                    placeholder="Quantidade"
                   />
+                  <TooltipText/>
+                </div>
               </label>
             </div>
-          </SC.ButtonTypeText>
+          </SC.ButtonTypeTextV4>
           </div>
         </SC.SubSection>
 

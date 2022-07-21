@@ -46,6 +46,7 @@ export const FormStep3 = () => {
 
   const [isCheckTwo, setIsCheckTwo] = useState('');
   const [isCheckFour, setIsCheckFour] = useState('');
+  const [isCheckSix, setIsCheckSix] = useState('');
 
   const [ question ] = useRoom();
 
@@ -73,8 +74,6 @@ export const FormStep3 = () => {
       const firebaseRoomsQuestion = ref(database, `rooms/${roomId}/aderidos/${question[0].idForm}`);
       await update(firebaseRoomsQuestion, questionReq)
     };
-
-    console.log(questionReq)
 
     navigate(`/${roomId}/formstep4`)
   };
@@ -504,191 +503,189 @@ export const FormStep3 = () => {
 
         <SC.ButtonTypeRadio>
           <div className="formQuestion">
-            <p className="textFormRadioButton">
-              O município possui Comitê Gestor Municipal do PCF?
-            </p>
-            <div id="containerOption">
-              <div id="containerOptionSixOption">
-
-                <div id="containerInputLabelRadioButton">
-                  <input
-                    required
-                    id="steeringCommitteeYes"
-                    name="steeringCommittee"
-                    type="radio"
-                    value="Sim"
-                    checked={questionSix === "Sim"}
-                    onChange={handleSteeringCommitteeChange}
-                  />
-                  <label
-                    className="containerTextLabel"
-                    htmlFor="steeringCommitteeYes"
-                  >Sim
-                  </label>
+            <div className="formQuestion">
+              <p className="textFormRadioButton">
+                O município possui Comitê Gestor Municipal do PCF?
+              </p>
+              <div id="containerOption">
+                <div id="containerOptionSixOption">
+                  <div id="containerInputLabelRadioButton">
+                    <input
+                      required
+                      id="steeringCommitteeYes"
+                      name="steeringCommittee"
+                      type="radio"
+                      value="sim_Six"
+                      checked={questionSix === "sim_Six"}
+                      onClick={() => setIsCheckSix("sim_Six")}
+                      onChange={handleSteeringCommitteeChange}
+                    />
+                    <label
+                      className="containerTextLabel"
+                      htmlFor="steeringCommitteeYes"
+                    >Sim
+                    </label>
+                  </div>
+                  <div id="containerInputLabelRadioButton">
+                    <input
+                      id="steeringCommitteeNo"
+                      name="steeringCommittee"
+                      type="radio"
+                      value="nao_Six"
+                      checked={questionSix === "nao_Six"}
+                      onClick={() => setIsCheckSix("nao_Six")}
+                      onChange={handleSteeringCommitteeChange}
+                    />
+                    <label
+                      className="containerTextLabel"
+                      htmlFor="steeringCommitteeNo"
+                    >Não
+                    </label>
+                  </div>
+                  <div id="containerInputLabelRadioButton">
+                    <input
+                      id="steeringCommitteeDontKnow"
+                      name="steeringCommittee"
+                      type="radio"
+                      value="outros"
+                      checked={questionSix === "outros"}
+                      onClick={() => setIsCheckSix("outros")}
+                      onChange={handleSteeringCommitteeChange}
+                    />
+                    <label
+                      className="containerTextLabel"
+                      htmlFor="steeringCommitteeDontKnow"
+                    >Outros
+                    </label>
+                  </div>
+                  <div id="containerInputLabelRadioButton">
+                    <input
+                      id="steeringCommitteeNotAplicable"
+                      name="steeringCommittee"
+                      type="radio"
+                      value="nao_se_aplica"
+                      checked={questionSix === "nao_se_aplica"}
+                      onClick={() => setIsCheckSix("nao_se_aplica")}
+                      onChange={handleSteeringCommitteeChange}
+                    />
+                    <label
+                      className="containerTextLabel"
+                      htmlFor="steeringCommitteeNotAplicable"
+                    >Não se aplica
+                    </label>
+                  </div>
                 </div>
-
-                <div id="containerInputLabelRadioButton">
-                  <input
-                    id="steeringCommitteeNo"
-                    name="steeringCommittee"
-                    type="radio"
-                    value="Não"
-                    checked={questionSix === "Não"}
-                    onChange={handleSteeringCommitteeChange}
-                  />
-                  <label
-                    className="containerTextLabel"
-                    htmlFor="steeringCommitteeNo"
-                  >Não
-                  </label>
-                </div>
-
-                <div id="containerInputLabelRadioButton">
-                  <input
-                    id="steeringCommitteeDontKnow"
-                    name="steeringCommittee"
-                    type="radio"
-                    value="Outros"
-                    checked={questionSix === "Outros"}
-                    onChange={handleSteeringCommitteeChange}
-                  />
-                  <label
-                    className="containerTextLabel"
-                    htmlFor="steeringCommitteeDontKnow"
-                  >Outros
-                  </label>
-                </div>
-
-                <div id="containerInputLabelRadioButton">
-                  <input
-                    id="steeringCommitteeNotAplicable"
-                    name="steeringCommittee"
-                    type="radio"
-                    value="Não_se_aplica"
-                    checked={questionSix === "Não_se_aplica"}
-                    onChange={handleSteeringCommitteeChange}
-                  />
-                  <label
-                    className="containerTextLabel"
-                    htmlFor="steeringCommitteeNotAplicable"
-                  >Não se aplica
-                  </label>
-                </div>
-
               </div>
             </div>
+            {isCheckSix === "sim_Six" && (
+              <>
+                <SC.ButtonTypeRadio>
+                  <div className="formQuestion">
+                    <p className="textFormRadioButton">
+                      Quantas vezes o Comitê Gestor Municipal se reuniu nos últimos 12 meses?
+                    </p>
+                    <div id="containerOption">
+                      <div id="containerOptionSixOption">
+                        <div id="containerInputLabelRadioButton">
+                          <input
+                            required
+                            id="steeringCommitteeMeetingZero"
+                            name="steeringCommitteeMeeting"
+                            type="radio"
+                            value="0"
+                            checked={questionSeven === "0"}
+                            onChange={handleSteeringCommitteeMeetingChange}
+                          />
+                          <label
+                            className="containerTextLabel"
+                            htmlFor="steeringCommitteeMeetingZero"
+                          >0
+                          </label>
+                        </div>
+                        <div id="containerInputLabelRadioButton">
+                          <input
+                            id="steeringCommitteeMeetingOne"
+                            name="steeringCommitteeMeeting"
+                            type="radio"
+                            value="1"
+                            checked={questionSeven === "1"}
+                            onChange={handleSteeringCommitteeMeetingChange}
+                          />
+                          <label
+                            className="containerTextLabel"
+                            htmlFor="steeringCommitteeMeetingOne"
+                          >1
+                          </label>
+                        </div>
+                        <div id="containerInputLabelRadioButton">
+                          <input
+                            id="steeringCommitteeMeetingTwo"
+                            name="steeringCommitteeMeeting"
+                            type="radio"
+                            value="2"
+                            checked={questionSeven === "2"}
+                            onChange={handleSteeringCommitteeMeetingChange}
+                          />
+                          <label
+                            className="containerTextLabel"
+                            htmlFor="steeringCommitteeMeetingTwo"
+                          >2
+                          </label>
+                        </div>
+                        <div id="containerInputLabelRadioButton">
+                          <input
+                            id="steeringCommitteeMeetingThree"
+                            name="steeringCommitteeMeeting"
+                            type="radio"
+                            value="3"
+                            checked={questionSeven === "3"}
+                            onChange={handleSteeringCommitteeMeetingChange}
+                          />
+                          <label
+                            className="containerTextLabel"
+                            htmlFor="steeringCommitteeMeetingThree"
+                          >3
+                          </label>
+                        </div>
+                        <div id="containerInputLabelRadioButton">
+                          <input
+                            id="steeringCommitteeMeetingFour"
+                            name="steeringCommitteeMeeting"
+                            type="radio"
+                            value="4_ou_mais"
+                            checked={questionSeven === "4_ou_mais"}
+                            onChange={handleSteeringCommitteeMeetingChange}
+                          />
+                          <label
+                            className="containerTextLabel"
+                            htmlFor="steeringCommitteeMeetingFour"
+                          >4 ou mais
+                          </label>
+                        </div>
+                        <div id="containerInputLabelRadioButton">
+                          <input
+                            id="steeringCommitteeMeetingNotApplicable"
+                            name="steeringCommitteeMeeting"
+                            type="radio"
+                            value="Não_se_aplica"
+                            checked={questionSeven === "Não_se_aplica"}
+                            onChange={handleSteeringCommitteeMeetingChange}
+                          />
+                          <label
+                            className="containerTextLabel"
+                            htmlFor="steeringCommitteeMeetingNotApplicable"
+                          >Não se aplica
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </SC.ButtonTypeRadio>
+              </>
+            )}
           </div>
         </SC.ButtonTypeRadio>
 
-        <SC.ButtonTypeRadio>
-          <div className="formQuestion">
-            <p className="textFormRadioButton">
-              Quantas vezes o Comitê Gestor Municipal se reuniu nos últimos 12 meses?
-            </p>
-            <div id="containerOption">
-              <div id="containerOptionSixOption">
-
-                <div id="containerInputLabelRadioButton">
-                  <input
-                    required
-                    id="steeringCommitteeMeetingZero"
-                    name="steeringCommitteeMeeting"
-                    type="radio"
-                    value="0"
-                    checked={questionSeven === "0"}
-                    onChange={handleSteeringCommitteeMeetingChange}
-                  />
-                  <label
-                    className="containerTextLabel"
-                    htmlFor="steeringCommitteeMeetingZero"
-                  >0
-                  </label>
-                </div>
-
-                <div id="containerInputLabelRadioButton">
-                  <input
-                    id="steeringCommitteeMeetingOne"
-                    name="steeringCommitteeMeeting"
-                    type="radio"
-                    value="1"
-                    checked={questionSeven === "1"}
-                    onChange={handleSteeringCommitteeMeetingChange}
-                  />
-                  <label
-                    className="containerTextLabel"
-                    htmlFor="steeringCommitteeMeetingOne"
-                  >1
-                  </label>
-                </div>
-
-                <div id="containerInputLabelRadioButton">
-                  <input
-                    id="steeringCommitteeMeetingTwo"
-                    name="steeringCommitteeMeeting"
-                    type="radio"
-                    value="2"
-                    checked={questionSeven === "2"}
-                    onChange={handleSteeringCommitteeMeetingChange}
-                  />
-                  <label
-                    className="containerTextLabel"
-                    htmlFor="steeringCommitteeMeetingTwo"
-                  >2
-                  </label>
-                </div>
-
-                <div id="containerInputLabelRadioButton">
-                  <input
-                    id="steeringCommitteeMeetingThree"
-                    name="steeringCommitteeMeeting"
-                    type="radio"
-                    value="3"
-                    checked={questionSeven === "3"}
-                    onChange={handleSteeringCommitteeMeetingChange}
-                  />
-                  <label
-                    className="containerTextLabel"
-                    htmlFor="steeringCommitteeMeetingThree"
-                  >3
-                  </label>
-                </div>
-
-                <div id="containerInputLabelRadioButton">
-                  <input
-                    id="steeringCommitteeMeetingFour"
-                    name="steeringCommitteeMeeting"
-                    type="radio"
-                    value="4_ou_mais"
-                    checked={questionSeven === "4_ou_mais"}
-                    onChange={handleSteeringCommitteeMeetingChange}
-                  />
-                  <label
-                    className="containerTextLabel"
-                    htmlFor="steeringCommitteeMeetingFour"
-                  >4 ou mais
-                  </label>
-                </div>
-
-                <div id="containerInputLabelRadioButton">
-                  <input
-                    id="steeringCommitteeMeetingNotApplicable"
-                    name="steeringCommitteeMeeting"
-                    type="radio"
-                    value="Não_se_aplica"
-                    checked={questionSeven === "Não_se_aplica"}
-                    onChange={handleSteeringCommitteeMeetingChange}
-                  />
-                  <label
-                    className="containerTextLabel"
-                    htmlFor="steeringCommitteeMeetingNotApplicable"
-                  >Não se aplica
-                  </label>
-                </div>
-
-              </div>
-            </div>
-          </div>
-        </SC.ButtonTypeRadio>
 
         <SC.ButtonTypeCheckbox>
           <div className="formQuestion">
