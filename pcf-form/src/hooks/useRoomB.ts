@@ -1,31 +1,10 @@
-import { ref, onValue, off, update } from "firebase/database";
+import { ref, onValue, off } from "firebase/database";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { database } from "../services/firebase";
 
 type RoomParams = {
   id: string;
-};
-
-type Desistentes = {
-  idForm: string;
-  A_Informacoes_Gerais_Desistentes: {
-    questao01: string,
-    questao02: string,
-    questao03: string,
-    questao04: string,
-    questao05: string,
-    questao06: string,
-  },
-  B_Caracteristicas_do_PCF: {
-    questao07: string,
-    questao08: string,
-    questao09: string,
-    questao10: string,
-    questao11: string,
-    questao12: string,
-    questao13: string,
-  },
 };
 
 type FirebaseQuestions = Record<string, {
@@ -39,29 +18,22 @@ type FirebaseQuestions = Record<string, {
     questao06: string,
   },
   B_Desistentes: {
-    questao07: {
-      questionTwo: string,
-      questionThree: number,
-      questionFour: number,
-    },
-    questao08: {
-      questionOne: {
+    questao07a: { aQuestionOne: string },
+    questao07b: { bQuestionTwo: string },
+    questao07c: { cQuestionThree: number },
+    questao07d: { dQuestionFour: number },
+    questao08a: {
+      aQuestionFive: {
         a_recursoFinanceiroInsuficiente: boolean,
         b_naoHaInteresseMunicipio: boolean,
-        c_possuiPrograma: boolean,
-        d_criouPrograma: boolean,
+        c_criouPrograma: boolean,
       },
-      questionSeven: string,
-      questionEight: number,
-      questionNine: number,
-      questionTen: string,
-      questionEleven: number,
-      questionTwelve: number,
-    },
-    questao09: {
-      questionFive: string,
-      questionSix: string,
-    },
+    }
+    questao08b: { bQuestionSix: string },
+    questao08c: { cQuestionSeven: number },
+    questao08d: { dQuestionEight: number },
+    questao09a: { questionNine: boolean },
+    questao09b: { questionTen: string },
   },
 }>;
 
@@ -90,30 +62,26 @@ export function useRoomB() {
             },
             B_Desistentes: {
               questao07: {
-                questionTwo: value?.B_Desistentes?.questao07 || null,
-                questionThree: value?.B_Desistentes?.questao07 || null,
-                questionFour: value?.B_Desistentes?.questao07 || null,
+                aQuestionOne: value?.B_Desistentes?.questao07a || null,
+                bQuestionTwo: value?.B_Desistentes?.questao07b || null,
+                cQuestionThree: value?.B_Desistentes?.questao07c || null,
+                dQuestionFour: value?.B_Desistentes?.questao07d || null,
               },
-              questao08: {
-                questionOne: {
-                  a_recursoFinanceiroInsuficiente: value?.B_Desistentes?.questao08 || null,
+              questao08a: {
+                aQuestionFive: {
+                  a_recursoFinanceiroInsuficiente: value?.B_Desistentes?.questao08a || null,
 
-                  b_naoHaInteresseMunicipio: value?.B_Desistentes?.questao08 || null,
+                  b_naoHaInteresseMunicipio: value?.B_Desistentes?.questao08a || null,
 
-                  c_possuiPrograma: value?.B_Desistentes?.questao08 || null,
-
-                  d_criouPrograma: value?.B_Desistentes?.questao08 || null,
+                  c_criouPrograma: value?.B_Desistentes?.questao08a || null,
                 },
-                questionSeven: value?.B_Desistentes?.questao08 || null,
-                questionEight: value?.B_Desistentes?.questao08 || null,
-                questionNine: value?.B_Desistentes?.questao08 || null,
-                questionTen: value?.B_Desistentes?.questao08 || null,
-                questionEleven: value?.B_Desistentes?.questao08 || null,
-                questionTwelve: value?.B_Desistentes?.questao08 || null,
+                bQuestionSix: value?.B_Desistentes?.questao08b || null,
+                cQuestionSeven: value?.B_Desistentes?.questao08c || null,
+                duestionEight: value?.B_Desistentes?.questao08d || null,
               },
               questao09: {
-                questionFive: value?.B_Desistentes?.questao09 || null,
-                questionSix: value?.B_Desistentes?.questao09 || null,
+                aQuestionNine: value?.B_Desistentes?.questao09a || null,
+                bQuestionTen: value?.B_Desistentes?.questao09b || null,
               },
             },
           };

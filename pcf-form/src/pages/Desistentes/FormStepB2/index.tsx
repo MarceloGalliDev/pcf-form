@@ -55,22 +55,22 @@ export const FormStepB2 = () => {
       B_Desistentes: {
         questao07:
         {
-          aQuestionOne,
-          bQuestionTwo,
-          cQuestionThree,
-          dQuestionFour,
+          questao07a: aQuestionOne,
+          questao07b: bQuestionTwo,
+          questao07c: cQuestionThree,
+          questao07d: dQuestionFour,
         },
         questao08:
         {
-          aQuestionFive,
-          bQuestionSix,
-          cQuestionSeven,
-          dQuestionEight,
+          questao08a: aQuestionFive,
+          questao08b: bQuestionSix,
+          questao08c: cQuestionSeven,
+          questao08d: dQuestionEight,
         }, 
         questao09:
         { 
-          aQuestionNine,
-          bQuestionTen,
+          questao09a: aQuestionNine,
+          questao09b: bQuestionTen,
         },
       }
     };
@@ -135,6 +135,21 @@ export const FormStepB2 = () => {
       payload: 2
     });
   }, []);
+
+  useEffect(() => {
+    if (question?.length > 0) {
+      setAQuestionOne(question[0].B_Desistentes.questao07a)
+      setBQuestionTwo(question[0].B_Desistentes.questao07b)
+      setCQuestionThree(question[0].B_Desistentes.questao07c)
+      setDQuestionFour(question[0].B_Desistentes.questao07d)
+      setAQuestionFive(question[0].B_Desistentes.questao08a)
+      setBQuestionSix(question[0].B_Desistentes.questao08b)
+      setCQuestionSeven(question[0].B_Desistentes.questao08c)
+      setDQuestionEight(question[0].B_Desistentes.questao08d)
+      setAQuestionNine(question[0].B_Desistentes.questao09a)
+      setBQuestionTen(question[0].B_Desistentes.questao09b)
+    }
+  }, [question]);
 
   return (
     <ThemeB1>

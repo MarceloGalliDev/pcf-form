@@ -41,7 +41,7 @@ export const FormStepA2 = () => {
 
   const [isCheckA2Q08, setIsCheckA2Q08] = useState('');
   const [isCheckA2Q13, setIsCheckA2Q13] = useState('');
-  
+
   const [isAlert, setIsAlert] = useState(false);
 
   const [question] = useRoomA();
@@ -53,16 +53,16 @@ export const FormStepA2 = () => {
       B_Elegiveis_ao_PCF: {
         questao07:
         {
-          aQuestionOne,
-          bQuestionTwo,
-          cQuestionThree,
-          dQuestionFour,
+          questao07a: aQuestionOne,
+          questao07b: bQuestionTwo,
+          questao07c: cQuestionThree,
+          questao07d: dQuestionFour,
         },
         questao08: aQuestionFive,
         questao09:
         {
-          aQuestionSix,
-          bQuestionSeven,
+          questao09a: aQuestionSix,
+          questao09b: bQuestionSeven,
         },
       }
     };
@@ -116,6 +116,18 @@ export const FormStepA2 = () => {
     });
   }, []);
 
+  useEffect(() => {
+    if (question?.length > 0) {
+      setAQuestionOne(question[0].B_Elegiveis_ao_PCF.questao07a)
+      setBQuestionTwo(question[0].B_Elegiveis_ao_PCF.questao07b)
+      setCQuestionThree(question[0].B_Elegiveis_ao_PCF.questao07c)
+      setDQuestionFour(question[0].B_Elegiveis_ao_PCF.questao07d)
+      setAQuestionFive(question[0].B_Elegiveis_ao_PCF.questao08)
+      setAQuestionSix(question[0].B_Elegiveis_ao_PCF.questao09a)
+      setBQuestionSeven(question[0].B_Elegiveis_ao_PCF.questao09b)
+    }
+  }, [question]);
+
   return (
     <ThemeA1>
       <SC.Container>
@@ -142,6 +154,7 @@ export const FormStepA2 = () => {
                       name="targetAudiencePCF"
                       type="radio"
                       value={"sim_Q08"}
+                      checked={aQuestionOne === "sim_Q08"}
                       onClick={() => setIsCheckA2Q08("sim_Q08")}
                       onChange={handleTargetAudiencePCFChange}
                     />
@@ -158,6 +171,7 @@ export const FormStepA2 = () => {
                       name="targetAudiencePCF"
                       type="radio"
                       value={"nao_Q08"}
+                      checked={aQuestionOne === "nao_Q08"}
                       onClick={() => setIsCheckA2Q08("nao_Q08")}
                       onChange={handleTargetAudiencePCFChange}
                     />
@@ -174,13 +188,13 @@ export const FormStepA2 = () => {
             {isCheckA2Q08 === "sim_Q08" && (
               <>
                 <div className="containerBgLabel">
-                  <label className="containerTextLabel" htmlFor="targetAudiencePCFTextBeneficiary">
+                  <label className="containerTextLabel" htmlFor="TargetAudiencePCFTextNameChecked">
                     Qual o nome desse programa?
                     <input
                       required
                       autoComplete="off"
-                      id="targetAudiencePCFTextBeneficiary"
-                      name="targetAudiencePCFTextBeneficiary"
+                      id="TargetAudiencePCFTextNameChecked"
+                      name="TargetAudiencePCFTextNameChecked"
                       type="text"
                       value={bQuestionTwo}
                       onChange={handleTargetAudiencePCFTextNameCheckedChange}
@@ -208,15 +222,15 @@ export const FormStepA2 = () => {
                 </div>
 
                 <div className="containerBgLabel">
-                  <label className="containerTextLabel" htmlFor="targetAudiencePCFTextValue">
+                  <label className="containerTextLabel" htmlFor="TargetAudiencePCFTextValue">
                     Qual o valor mensal gasto com esse Programa? 
                     <input
                       required
                       autoComplete="off"
                       min={0}
                       max={9999999}
-                      id="targetAudiencePCFTextValue"
-                      name="targetAudiencePCFTextValue"
+                      id="TargetAudiencePCFTextValue"
+                      name="TargetAudiencePCFTextValue"
                       type=" number"
                       value={dQuestionFour}
                       onChange={handleTargetAudiencePCFTextValueChange}

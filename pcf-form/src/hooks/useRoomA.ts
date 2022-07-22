@@ -18,23 +18,19 @@ type FirebaseQuestions = Record<string, {
     questao06: string,
   },
   B_Elegiveis_ao_PCF: {
-    questao07: {
-      questionOne: string,
-      questionTwo: string,
-      questionThree: number,
-      questionFour: number,
-    },
+    questao07a: { aQuestionOne: string },
+    questao07b: { bQuestionTwo: string },
+    questao07c: { cQuestionThree: number },
+    questao07d: { dQuestionFour: number },
     questao08: {
-      questionFive: {
+      aQuestionFive: {
         a_recursoFinanceiroInsuficiente: boolean,
         b_naoHaInteresseMunicipio: boolean,
         c_naoConhecePrograma: boolean,
       },
     },
-    questao09: {
-      questionSix: boolean,
-      questionSeven: string,
-    },
+    questao09a: { aQuestionSix: boolean },
+    questao09b: { bQuestionSeven: string },
   },
 }>;
 
@@ -63,16 +59,16 @@ export function useRoomA() {
             },
             B_Elegiveis_ao_PCF: {
               questao07: {
-                questionOne: value?.B_Elegiveis_ao_PCF?.questao07 || null,
+                aQuestionOne: value?.B_Elegiveis_ao_PCF?.questao07a || null,
 
-                questionTwo: value?.B_Elegiveis_ao_PCF?.questao07 || null,
+                bQuestionTwo: value?.B_Elegiveis_ao_PCF?.questao07b || null,
 
-                questionThree: value?.B_Elegiveis_ao_PCF?.questao07 || null,
+                cQuestionThree: value?.B_Elegiveis_ao_PCF?.questao07c || null,
 
-                questionFour: value?.B_Elegiveis_ao_PCF?.questao07 || null,
+                dQuestionFour: value?.B_Elegiveis_ao_PCF?.questao07d || null,
               },
               questao08: {
-                questionFive: {
+                aQuestionFive: {
                   a_recursoFinanceiroInsuficiente: value?.B_Elegiveis_ao_PCF?.questao08 || null,
 
                   b_naoHaInteresseMunicipio: value?.B_Elegiveis_ao_PCF?.questao08 || null,
@@ -81,8 +77,8 @@ export function useRoomA() {
                 },
               },
               questao09: {
-                questionSix: value?.B_Elegiveis_ao_PCF?.questao09 || null,
-                questionSeven: value?.B_Elegiveis_ao_PCF?.questao09 || null,
+                aQuestionSix: value?.B_Elegiveis_ao_PCF?.questao09a || null,
+                bQuestionSeven: value?.B_Elegiveis_ao_PCF?.questao09b || null,
               },
             },
           };
