@@ -614,10 +614,10 @@ export const FormStep4 = () => {
 
             <SC.ButtonTypeTextV3>
               <div className="formQuestion">
-                <div className="testeV1"><TooltipText/></div>
                 <label htmlFor="containerLabelCheckboxBorder">
                 Informe quantos Supervisores da equipe do PCF são contratados nas seguintes categorias em seu município e sua remuneração média:
 
+                <div className="testeV1"><TooltipText/></div>
                   <div id="containerLabelCheckboxBorder">
                     <div id="containerTextLabelCheckbox">
                       <label
@@ -632,7 +632,7 @@ export const FormStep4 = () => {
                         name="a_supervisoresServidorEfetivo"
                         type="number"
                         min={0}
-                        max={999}
+                        max={9999}
                         value={questionFive.a_supervisoresServidorEfetivo}
                         onChange={handleEffectiveRemunerationChange}
                         placeholder="Quantidade"
@@ -651,10 +651,11 @@ export const FormStep4 = () => {
                         name="b_supervisoresMediaRemuneracaoEfetivo"
                         type="number"
                         min={0}
-                        max={999}
+                        max={9999}
+                        step={.001}
                         value={questionFive.b_supervisoresMediaRemuneracaoEfetivo}
                         onChange={handleEffectiveRemunerationChange}
-                        placeholder="Quantidade"
+                        placeholder="Valor"
                       />
                     </div>
                   </div>
@@ -673,7 +674,7 @@ export const FormStep4 = () => {
                         name="a_supervisoresCargoComissionado"
                         type="number"
                         min={0}
-                        max={999}
+                        max={9999}
                         value={questionSix.a_supervisoresCargoComissionado}
                         onChange={handleCommissionedRemunerationChange}
                         placeholder="Quantidade"
@@ -692,10 +693,11 @@ export const FormStep4 = () => {
                         name="b_supervisoresMediaRemuneracaoComissionado"
                         type="number"
                         min={0}
-                        max={999}
+                        max={9999}
+                        step={.001}
                         value={questionSix.b_supervisoresMediaRemuneracaoComissionado}
                         onChange={handleCommissionedRemunerationChange}
-                        placeholder="Quantidade"
+                        placeholder="Valor"
                       />
                     </div>
                   </div>
@@ -714,7 +716,7 @@ export const FormStep4 = () => {
                         name="a_supervisoresServidorTemporario"
                         type="number"
                         min={0}
-                        max={999}
+                        max={9999}
                         value={questionSeven.a_supervisoresServidorTemporario}
                         onChange={handleTemporaryRemunerationChange}
                         placeholder="Quantidade"
@@ -732,10 +734,11 @@ export const FormStep4 = () => {
                         name="b_supervisoresMediaRemuneracaoTemporario"
                         type="number"
                         min={0}
-                        max={999}
+                        max={9999}
+                        step={.001}
                         value={questionSeven.b_supervisoresMediaRemuneracaoTemporario}
                         onChange={handleTemporaryRemunerationChange}
-                        placeholder="Quantidade"
+                        placeholder="Valor"
                       />
                     </div>
                   </div>
@@ -754,7 +757,7 @@ export const FormStep4 = () => {
                         name="a_supervisoresBolsista"
                         type="number"
                         min={0}
-                        max={999}
+                        max={9999}
                         value={questionEight.a_supervisoresBolsista}
                         onChange={handleScholarshipRemunerationChange}
                         placeholder="Quantidade"
@@ -772,10 +775,11 @@ export const FormStep4 = () => {
                         name="b_supervisoresMediaRemuneracaoBolsista"
                         type="number"
                         min={0}
-                        max={999}
+                        max={9999}
+                        step={.001}
                         value={questionEight.b_supervisoresMediaRemuneracaoBolsista}
                         onChange={handleScholarshipRemunerationChange}
-                        placeholder="Quantidade"
+                        placeholder="Valor"
                       />
                     </div>
                   </div>
@@ -794,7 +798,7 @@ export const FormStep4 = () => {
                         name="a_supervisoresProfissionalAutonomo"
                         type="number"
                         min={0}
-                        max={999}
+                        max={9999}
                         value={questionNine.a_supervisoresProfissionalAutonomo}
                         onChange={handleAutonomousSupervisorChange}
                         placeholder="Quantidade"
@@ -812,10 +816,11 @@ export const FormStep4 = () => {
                         name="b_supervisoresMediaRemuneracaoProfissionalAutonomo"
                         type="number"
                         min={0}
-                        max={999}
+                        max={9999}
+                        step={.001}
                         value={questionNine.b_supervisoresMediaRemuneracaoProfissionalAutonomo}
                         onChange={handleAutonomousSupervisorChange}
-                        placeholder="Quantidade"
+                        placeholder="Valor"
                       />
                     </div>
                   </div>
@@ -834,7 +839,7 @@ export const FormStep4 = () => {
                         name="a_supervisoresOutrosCargos"
                         type="number"
                         min={0}
-                        max={999}
+                        max={9999}
                         value={questionTen.a_supervisoresOutrosCargos}
                         onChange={handleOthersRemunerationChange}
                         placeholder="Quantidade"
@@ -852,10 +857,11 @@ export const FormStep4 = () => {
                         name="b_supervisoresMediaRemuneracaoOutrosCargos"
                         type="number"
                         min={0}
-                        max={999}
+                        max={9999}
+                        step={.001}
                         value={questionTen.b_supervisoresMediaRemuneracaoOutrosCargos}
                         onChange={handleOthersRemunerationChange}
-                        placeholder="Quantidade"
+                        placeholder="Valor"
                       />
                     </div>
                   </div>

@@ -681,11 +681,11 @@ export const FormStep5 = () => {
 
             <SC.ButtonTypeTextV3>
               <div className="formQuestion">
-                <div className="testeV1"><TooltipText/></div>
                 <label
                   htmlFor="containerLabelCheckboxBorder"
                 >Quantos Visitadores da equipe do PCF são contratados nas seguintes categorias em seu município:
 
+                <div className="testeV1"><TooltipText/></div>
                   <div id="containerLabelCheckboxBorder">
                     <div id="containerTextLabelCheckbox">
                       <label
@@ -722,9 +722,10 @@ export const FormStep5 = () => {
                         type="number"
                         min={0}
                         max={9999}
+                        step={.001}
                         value={questionFive.b_visitadoresMediaRemuneracaoEfetivo}
                         onChange={handleEffectiveRemunerationChange}
-                        placeholder="Quantidade"
+                        placeholder="Valor"
                       />
                     </div>
                   </div>
@@ -765,9 +766,10 @@ export const FormStep5 = () => {
                         type="number"
                         min={0}
                         max={9999}
+                        step={.001}
                         value={questionSix.b_visitadoresMediaRemuneracaoComissionado}
                         onChange={handleCommissionedRemunerationChange}
-                        placeholder="Quantidade"
+                        placeholder="Valor"
                       />
                     </div>
                   </div>
@@ -808,9 +810,10 @@ export const FormStep5 = () => {
                         type="number"
                         min={0}
                         max={9999}
+                        step={.001}
                         value={questionSeven.b_visitadoresMediaRemuneracaoTemporario}
                         onChange={handleTemporaryRemunerationChange}
-                        placeholder="Quantidade"
+                        placeholder="Valor"
                       />
                     </div>
                   </div>
@@ -851,9 +854,10 @@ export const FormStep5 = () => {
                         type="number"
                         min={0}
                         max={9999}
+                        step={.001}
                         value={questionEight.b_visitadoresMediaRemuneracaoBolsista}
                         onChange={handleScholarshipRemunerationChange}
-                        placeholder="Quantidade"
+                        placeholder="Valor"
                       />
                     </div>
                   </div>
@@ -894,9 +898,10 @@ export const FormStep5 = () => {
                         type="number"
                         min={0}
                         max={9999}
+                        step={.001}
                         value={questionNine.b_visitadoresMediaRemuneracaoEstagiarioNivelSuperior}
                         onChange={handleTopLevelInternChange}
-                        placeholder="Quantidade"
+                        placeholder="Valor"
                       />
                     </div>
                   </div>
@@ -937,13 +942,14 @@ export const FormStep5 = () => {
                         type="number"
                         min={0}
                         max={9999}
+                        step={.001}
                         value={questionTen.b_visitadoresMediaRemuneracaoAutonomos}
                         onChange={handleAutonomousRemunerationChange}
-                        placeholder="Quantidade"
+                        placeholder="Valor"
                       />
                     </div>
                   </div>
-                
+
                   <div id="containerLabelCheckboxBorder">
                     <div id="containerTextLabelCheckbox">
                       <label
@@ -980,9 +986,10 @@ export const FormStep5 = () => {
                         type="number"
                         min={0}
                         max={9999}
+                        step={.001}
                         value={questionEleven.b_visitadoresMediaRemuneracaoOutrosCargos}
                         onChange={handleOthersRemunerationChange}
-                        placeholder="Quantidade"
+                        placeholder="Valor"
                       />
                     </div>
                   </div>
