@@ -93,7 +93,7 @@ export const InputArea = ({ onAdd }: Props) => {
             placeholder="R$"
           />
             <span
-            data-tooltip="Inserir com casas decimais (Exemplo: 106,38)"
+            data-tooltip="Inserir valores aproximados, sem casas decimais. Ex.: 2485 (que representa 2.485,20)"
           >
             <Info
               size={20}

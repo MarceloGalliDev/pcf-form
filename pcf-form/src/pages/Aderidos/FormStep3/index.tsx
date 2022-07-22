@@ -323,21 +323,6 @@ export const FormStep3 = () => {
                           >4 ou mais
                           </label>
                         </div>
-                        <div id="containerInputLabelRadioButton">
-                          <input
-                            id="contactCoordinatorNotapplicable"
-                            name="contactCoordinator"
-                            type="radio"
-                            value="Não_se_aplica"
-                            checked={questionThree === "Não_se_aplica"}
-                            onChange={handleContactCoordinatorChange}
-                          />
-                          <label
-                            className="containerTextLabel"
-                            htmlFor="contactCoordinatorNotapplicable"
-                          >Não se aplica
-                          </label>
-                        </div>
                       </div>
                     </div>
                   </div>
@@ -476,22 +461,6 @@ export const FormStep3 = () => {
                           >4 ou mais
                           </label>
                         </div>
-                        <div id="containerInputLabelRadioButton">
-                          <input
-                            id="contactCoordinatorNotapplicableContact"
-                            name="knowTheMultiplierContact"
-                            type="radio"
-                            value="Não_se_aplica"
-                            checked={questionFive === "Não_se_aplica"}
-                            onChange={handleKnowTheMultiplierContactChange}
-                          />
-                          <label
-                            className="containerTextLabel"
-                            htmlFor="contactCoordinatorNotapplicableContact"
-                          >Não se aplica
-                          </label>
-                        </div>
-                        
                       </div>
                     </div>
                   </div>
@@ -660,21 +629,6 @@ export const FormStep3 = () => {
                             className="containerTextLabel"
                             htmlFor="steeringCommitteeMeetingFour"
                           >4 ou mais
-                          </label>
-                        </div>
-                        <div id="containerInputLabelRadioButton">
-                          <input
-                            id="steeringCommitteeMeetingNotApplicable"
-                            name="steeringCommitteeMeeting"
-                            type="radio"
-                            value="Não_se_aplica"
-                            checked={questionSeven === "Não_se_aplica"}
-                            onChange={handleSteeringCommitteeMeetingChange}
-                          />
-                          <label
-                            className="containerTextLabel"
-                            htmlFor="steeringCommitteeMeetingNotApplicable"
-                          >Não se aplica
                           </label>
                         </div>
                       </div>

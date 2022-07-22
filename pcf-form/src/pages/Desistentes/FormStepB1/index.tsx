@@ -192,7 +192,7 @@ export const FormStepB1 = () => {
         <SC.ButtonTypeText>
           <div className="formQuestion">
             <label htmlFor="functionPCF">
-              Função no PCF:
+              Função no Município:
               <input
                 required
                 autoComplete="no"

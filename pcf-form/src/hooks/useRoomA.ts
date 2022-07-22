@@ -7,27 +7,6 @@ type RoomParams = {
   id: string;
 };
 
-type Desistentes = {
-  idForm: string;
-  A_Informacoes_Gerais_Nao_Aderidos: {
-    questao01: string,
-    questao02: string,
-    questao03: string,
-    questao04: string,
-    questao05: string,
-    questao06: string,
-  },
-  A_Elegiveis_ao_PCF: {
-    questao07: string,
-    questao08: string,
-    questao09: string,
-    questao10: string,
-    questao11: string,
-    questao12: string,
-    questao13: string,
-  },
-};
-
 type FirebaseQuestions = Record<string, {
   idForm: string;
   A_Informacoes_Gerais_Nao_Aderidos: {
@@ -40,6 +19,7 @@ type FirebaseQuestions = Record<string, {
   },
   B_Elegiveis_ao_PCF: {
     questao07: {
+      questionOne: string,
       questionTwo: string,
       questionThree: number,
       questionFour: number,
@@ -48,15 +28,11 @@ type FirebaseQuestions = Record<string, {
       questionFive: {
         a_recursoFinanceiroInsuficiente: boolean,
         b_naoHaInteresseMunicipio: boolean,
-        c_possuiPrograma: boolean,
-        d_naoConhecePrograma: boolean,
+        c_naoConhecePrograma: boolean,
       },
-      questionEight: string,
-      questionNine: number,
-      questionTen: number,
     },
     questao09: {
-      questionSix: string,
+      questionSix: boolean,
       questionSeven: string,
     },
   },
@@ -85,11 +61,30 @@ export function useRoomA() {
               questao05: value?.A_Informacoes_Gerais_Nao_Aderidos?.questao05,
               questao06: value?.A_Informacoes_Gerais_Nao_Aderidos?.questao06,
             },
-            B_Desistentes: {
+            B_Elegiveis_ao_PCF: {
+              questao07: {
+                questionOne: value?.B_Elegiveis_ao_PCF?.questao07 || null,
 
+                questionTwo: value?.B_Elegiveis_ao_PCF?.questao07 || null,
 
+                questionThree: value?.B_Elegiveis_ao_PCF?.questao07 || null,
+
+                questionFour: value?.B_Elegiveis_ao_PCF?.questao07 || null,
+              },
+              questao08: {
+                questionFive: {
+                  a_recursoFinanceiroInsuficiente: value?.B_Elegiveis_ao_PCF?.questao08 || null,
+
+                  b_naoHaInteresseMunicipio: value?.B_Elegiveis_ao_PCF?.questao08 || null,
+
+                  c_naoConhecePrograma: value?.B_Elegiveis_ao_PCF?.questao08 || null,
+                },
+              },
+              questao09: {
+                questionSix: value?.B_Elegiveis_ao_PCF?.questao09 || null,
+                questionSeven: value?.B_Elegiveis_ao_PCF?.questao09 || null,
+              },
             },
-            
           };
         });
         setQuestion(parsedQuestions)

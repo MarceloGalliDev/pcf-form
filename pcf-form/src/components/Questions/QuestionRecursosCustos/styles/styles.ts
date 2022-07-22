@@ -114,14 +114,15 @@ export const InputLabel = styled.label`
     display: none;
     position: absolute;
     top: 35px;
-    left: calc(100% + -180px);
+    left: calc(100% + -250px);
     padding: 5px;
     border-radius: 3px;
     content: attr(data-tooltip);
     background-color: #cbe9fc;
     color: #073f98;
     border: 1px solid #2E7EB0;
-    white-space: nowrap;
+    width: 400px;
+
   }
 
   [data-tooltip]:hover:after {
@@ -196,7 +197,7 @@ export const InputArea5 = styled.input`
 `;
 
 export const SelectArea = styled.select`
-  width: 150px;
+  width: 130px;
   height: 30px;
   padding: 0 5px;
   border: 1px solid #2E7EB0;

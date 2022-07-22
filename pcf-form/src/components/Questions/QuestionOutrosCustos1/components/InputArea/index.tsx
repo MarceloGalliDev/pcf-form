@@ -42,7 +42,7 @@ export const InputAreaOutrosCustos1 = ({ onAdd1 }: Props) => {
     <SC.ContainerInputArea>
 
       <SC.InputLabel>
-        <SC.InputTitle>Tipo de Outros Custos</SC.InputTitle>
+        <SC.InputTitle>Outros custos</SC.InputTitle>
         <div className='informationIcon'>
           <SC.InputArea5
             type="text"
@@ -63,7 +63,7 @@ export const InputAreaOutrosCustos1 = ({ onAdd1 }: Props) => {
             placeholder="R$"
           />
             <span
-            data-tooltip="Inserir com casas decimais (Exemplo: 106,38)"
+            data-tooltip="Inserir valores aproximados, sem casas decimais. Ex.: 2485 (que representa 2.485,20)"
           >
             <Info
               size={20}

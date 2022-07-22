@@ -115,9 +115,7 @@ export function useRoomB() {
                 questionFive: value?.B_Desistentes?.questao09 || null,
                 questionSix: value?.B_Desistentes?.questao09 || null,
               },
-
             },
-            
           };
         });
         setQuestion(parsedQuestions)

@@ -17,8 +17,7 @@ type RoomParams = {
 interface ReasonForGivingUpChange {
   a_recursoFinanceiroInsuficiente: boolean;
   b_naoHaInteresseMunicipio: boolean;
-  c_possuiPrograma: boolean;
-  d_criouPrograma: boolean;
+  c_criouPrograma: boolean;
 };
 
 export const FormStepB2 = () => {
@@ -27,25 +26,24 @@ export const FormStepB2 = () => {
   const navigate = useNavigate();
   const { state, dispatch } = useFormPage();
 
-  const [aQuestionOne, setAQuestionOne] = useState<ReasonForGivingUpChange>({
+  const [aQuestionOne, setAQuestionOne] = useState('');
+  const [bQuestionTwo, setBQuestionTwo] = useState('');
+  const [cQuestionThree, setCQuestionThree] = useState('');
+  const [dQuestionFour, setDQuestionFour] = useState('');
+  const [aQuestionFive, setAQuestionFive] = useState<ReasonForGivingUpChange>({
     a_recursoFinanceiroInsuficiente: false,
     b_naoHaInteresseMunicipio: false,
-    c_possuiPrograma: false,
-    d_criouPrograma: false,
+    c_criouPrograma: false,
   });
-  const [aQuestionTwo, setAQuestionTwo] = useState('');
-  const [bQuestionThree, setBQuestionThree] = useState('');
-  const [cQuestionFour, setCQuestionFour] = useState('');
-  const [aQuestionFive, setAQuestionFive] = useState('');
   const [bQuestionSix, setBQuestionSix] = useState('');
-  const [bQuestionSeven_C, setBQuestionSeven_C] = useState('');
-  const [cQuestionEight_C, setCQuestionEight_C] = useState('');
-  const [dQuestionNine_C, setDQuestionNine_C] = useState('');
-  const [eQuestionTen_D, setEQuestionTen_D] = useState('');
-  const [fQuestionEleven_D, setFQuestionEleven_D] = useState('');
-  const [gQuestionTwelve_D, setGQuestionTwelve_D] = useState('');
+  const [cQuestionSeven, setCQuestionSeven] = useState('');
+  const [dQuestionEight, setDQuestionEight] = useState('');
+  const [aQuestionNine, setAQuestionNine] = useState('');
+  const [bQuestionTen, setBQuestionTen] = useState('');
+
   const [isCheckQ02, setIsCheckQ02] = useState('');
   const [isCheckQ05, setIsCheckQ05] = useState('');
+
   const [isAlert, setIsAlert] = useState(false);
 
   const [question] = useRoomB();
@@ -57,24 +55,22 @@ export const FormStepB2 = () => {
       B_Desistentes: {
         questao07:
         {
-          aQuestionTwo,
-          bQuestionThree,
-          cQuestionFour,
+          aQuestionOne,
+          bQuestionTwo,
+          cQuestionThree,
+          dQuestionFour,
         },
         questao08:
         {
-          aQuestionOne,
-          bQuestionSeven_C,
-          cQuestionEight_C,
-          dQuestionNine_C,
-          eQuestionTen_D,
-          fQuestionEleven_D,
-          gQuestionTwelve_D,
+          aQuestionFive,
+          bQuestionSix,
+          cQuestionSeven,
+          dQuestionEight,
         }, 
         questao09:
         { 
-          aQuestionFive,
-          bQuestionSix,
+          aQuestionNine,
+          bQuestionTen,
         },
       }
     };
@@ -98,47 +94,39 @@ export const FormStepB2 = () => {
   };
 
   const handleHaveTargetAudiencePCFChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setAQuestionTwo(event.target.value);
-  };
-
-  const handleHaveTargetAudiencePCFBeneficiaryChange =(event:ChangeEvent<HTMLInputElement>) => {
-    setBQuestionThree(event.target.value);
-  };
-
-  const handleHaveTargetAudiencePCFValueChange =(event:ChangeEvent<HTMLInputElement>) => {
-    setCQuestionFour(event.target.value);
-  };
-
-  const handleReasonForDroppingOutChange =(event:ChangeEvent<HTMLInputElement>) => {
-    setAQuestionFive(event.target.value);
-  };
-
-  const handleReasonForDroppingOutWhichChange =(event:ChangeEvent<HTMLInputElement>) => {
-    setBQuestionSix(event.target.value);
+    setAQuestionOne(event.target.value);
   };
 
   const handleReasonGivingUpNameChange =(event:ChangeEvent<HTMLInputElement>) => {
-    setBQuestionSeven_C(event.target.value);
+    setBQuestionTwo(event.target.value);
   };
 
-  const handleReasonGivingUpBeneficiaryChange =(event:ChangeEvent<HTMLInputElement>) => {
-    setCQuestionEight_C(event.target.value);
+  const handleHaveTargetAudiencePCFBeneficiaryChange =(event:ChangeEvent<HTMLInputElement>) => {
+    setCQuestionThree(event.target.value);
   };
 
-  const handleReasonGivingUpValueChange =(event:ChangeEvent<HTMLInputElement>) => {
-    setDQuestionNine_C(event.target.value);
+  const handleHaveTargetAudiencePCFValueChange =(event:ChangeEvent<HTMLInputElement>) => {
+    setDQuestionFour(event.target.value);
   };
 
   const handleReasonGivingUpNameCreatedChange =(event:ChangeEvent<HTMLInputElement>) => {
-    setEQuestionTen_D(event.target.value);
+    setBQuestionSix(event.target.value);
   };
 
   const handleReasonGivingUpBeneficiaryCreatedChange =(event:ChangeEvent<HTMLInputElement>) => {
-    setFQuestionEleven_D(event.target.value);
+    setCQuestionSeven(event.target.value);
   };
 
   const handleReasonGivingUpValueCreatedChange =(event:ChangeEvent<HTMLInputElement>) => {
-    setGQuestionTwelve_D(event.target.value);
+    setDQuestionEight(event.target.value);
+  };
+
+  const handleReasonForDroppingOutChange =(event:ChangeEvent<HTMLInputElement>) => {
+    setAQuestionNine(event.target.value);
+  };
+
+  const handleReasonForDroppingOutWhichChange =(event:ChangeEvent<HTMLInputElement>) => {
+    setBQuestionTen(event.target.value);
   };
 
   useEffect(() => {
@@ -207,42 +195,58 @@ export const FormStepB2 = () => {
               <>
                 <div className="containerBgLabel">
                   <label
+                    className="containerTextLabel" htmlFor="handleReasonGivingUpNameChange"
+                  >Qual o nome desse programa que o município <u>possui</u>? 
+                    <input
+                      required
+                      autoComplete="off"
+                      id="handleReasonGivingUpNameChange"
+                      name="handleReasonGivingUpNameChange"
+                      type="text"
+                      value={bQuestionTwo}
+                      onChange={handleReasonGivingUpNameChange}
+                      placeholder="Sua resposta"
+                    />
+                  </label>
+                </div>
+
+                <div className="containerBgLabel">
+                  <label
                     className="containerTextLabel"
                     htmlFor="haveTargetAudiencePCFBeneficiary"
-                  >Se sim, quantos beneficiários são atendidos por este programa?
+                  >Quantos beneficiários são atendidos por este programa?
                     <input
                       required
                       autoComplete="no"
                       id="haveTargetAudiencePCFBeneficiary"
                       name="haveTargetAudiencePCFBeneficiary"
                       type="number"
-                      value={bQuestionThree}
+                      value={cQuestionThree}
                       onChange={handleHaveTargetAudiencePCFBeneficiaryChange}
-                      placeholder="Sua resposta"
+                      placeholder="Quantidade"
                     />
                   </label>
                 </div>
-                  
+
                 <div className="containerBgLabel">
                   <label
                     className="containerTextLabel"
                     htmlFor="haveTargetAudiencePCFValue"
-                  >Se sim, qual o valor mensal gasto com esse Programa? 
+                  >Qual o valor mensal gasto com esse Programa? 
                     <input
                       required
                       autoComplete="no"
                       id="haveTargetAudiencePCFValue"
                       name="haveTargetAudiencePCFValue"
                       type="number"
-                      value={cQuestionFour}
+                      value={dQuestionFour}
                       onChange={handleHaveTargetAudiencePCFValueChange}
-                      placeholder="Sua resposta"
+                      placeholder="Valor"
                     />
                   </label>
                 </div>
               </>
             )}
-
           </div>
         </SC.ButtonTypeRadioText>
 
@@ -254,154 +258,80 @@ export const FormStepB2 = () => {
               </p>
               <div id="containerOption">
                 <div>
+
                   <div id="containerInputLabelRadioButton">
                     <input
                       required={
-                        !aQuestionOne?.a_recursoFinanceiroInsuficiente && 
-                        !aQuestionOne.b_naoHaInteresseMunicipio &&
-                        !aQuestionOne.c_possuiPrograma &&
-                        !aQuestionOne.d_criouPrograma
+                        !aQuestionFive?.a_recursoFinanceiroInsuficiente && 
+                        !aQuestionFive.b_naoHaInteresseMunicipio &&
+                        !aQuestionFive.c_criouPrograma
                       }
-                      id="recursoFinanceiroInsuficiente"
+                      id="a_recursoFinanceiroInsuficiente"
                       name="a_recursoFinanceiroInsuficiente"
                       type="checkbox"
-                      checked={aQuestionOne.a_recursoFinanceiroInsuficiente}
-                      onChange={(event) => setAQuestionOne({
-                        ...aQuestionOne,
+                      checked={aQuestionFive.a_recursoFinanceiroInsuficiente}
+                      onChange={(event) => setAQuestionFive({
+                        ...aQuestionFive,
                         a_recursoFinanceiroInsuficiente: !!event.currentTarget?.checked
                       })}
                     />
                     <label
                       className="containerTextLabel"
-                      htmlFor="recursoFinanceiroInsuficiente"
+                      htmlFor="a_recursoFinanceiroInsuficiente"
                     >A transferência de recurso financeiro é insuficiente para o município manter o programa
                     </label>
                   </div>
+
                   <div id="containerInputLabelRadioButton">
                     <input
                       required={
-                        !aQuestionOne?.a_recursoFinanceiroInsuficiente && 
-                        !aQuestionOne.b_naoHaInteresseMunicipio &&
-                        !aQuestionOne.c_possuiPrograma &&
-                        !aQuestionOne.d_criouPrograma
+                        !aQuestionFive?.a_recursoFinanceiroInsuficiente && 
+                        !aQuestionFive.b_naoHaInteresseMunicipio &&
+                        !aQuestionFive.c_criouPrograma
                       }
-                      id="naoHaInteresseMunicipio"
+                      id="b_naoHaInteresseMunicipio"
                       name="b_naoHaInteresseMunicipio"
                       type="checkbox"
-                      checked={aQuestionOne.b_naoHaInteresseMunicipio}
-                      onChange={(event) => setAQuestionOne({
-                        ...aQuestionOne,
+                      checked={aQuestionFive.b_naoHaInteresseMunicipio}
+                      onChange={(event) => setAQuestionFive({
+                        ...aQuestionFive,
                         b_naoHaInteresseMunicipio: !!event.currentTarget?.checked
                       })}
                     />
                     <label
                       className="containerTextLabel"
-                      htmlFor="naoHaInteresseMunicipio"
+                      htmlFor="b_naoHaInteresseMunicipio"
                     >Não há mais interesse do município em manter o programa
                     </label>
                   </div>
+
                   <div id="containerInputLabelRadioButton">
                     <input
                       required={
-                        !aQuestionOne?.a_recursoFinanceiroInsuficiente && 
-                        !aQuestionOne.b_naoHaInteresseMunicipio &&
-                        !aQuestionOne.c_possuiPrograma &&
-                        !aQuestionOne.d_criouPrograma
+                        !aQuestionFive?.a_recursoFinanceiroInsuficiente && 
+                        !aQuestionFive.b_naoHaInteresseMunicipio &&
+                        !aQuestionFive.c_criouPrograma
                       }
-                      id="possuiPrograma"
-                      name="c_possuiPrograma"
+                      id="c_criouPrograma"
+                      name="c_criouPrograma"
                       type="checkbox"
-                      checked={aQuestionOne.c_possuiPrograma}
-                      onChange={(event) => setAQuestionOne({
-                        ...aQuestionOne,
-                        c_possuiPrograma: !!event.currentTarget?.checked
+                      checked={aQuestionFive.c_criouPrograma}
+                      onChange={(event) => setAQuestionFive({
+                        ...aQuestionFive,
+                        c_criouPrograma: !!event.currentTarget?.checked
                       })}
                     />
                     <label
                       className="containerTextLabel"
-                      htmlFor="possuiPrograma"
-                    >O município possui um programa semelhante ao Criança Feliz
-                    </label>
-                  </div>
-                  <div id="containerInputLabelRadioButton">
-                    <input
-                      required={
-                        !aQuestionOne?.a_recursoFinanceiroInsuficiente && 
-                        !aQuestionOne.b_naoHaInteresseMunicipio &&
-                        !aQuestionOne.c_possuiPrograma &&
-                        !aQuestionOne.d_criouPrograma
-                      }
-                      id="criouPrograma"
-                      name="d_criouPrograma"
-                      type="checkbox"
-                      checked={aQuestionOne.d_criouPrograma}
-                      onChange={(event) => setAQuestionOne({
-                        ...aQuestionOne,
-                        d_criouPrograma: !!event.currentTarget?.checked
-                      })}
-                    />
-                    <label
-                      className="containerTextLabel"
-                      htmlFor="criouPrograma"
+                      htmlFor="c_criouPrograma"
                     >O município criou um programa semelhante ao Criança Feliz
                     </label>
                   </div>
+
                 </div>
               </div>
             </div>
-            {aQuestionOne.c_possuiPrograma && (
-              <>
-                <div className="containerBgLabel">
-                  <label
-                    className="containerTextLabel" htmlFor="handleReasonGivingUpNameChange"
-                  >Qual o nome desse programa que o município <u>possui</u>? 
-                    <input
-                      required
-                      autoComplete="no"
-                      id="handleReasonGivingUpNameChange"
-                      name="handleReasonGivingUpNameChange"
-                      type="text"
-                      value={bQuestionSeven_C}
-                      onChange={handleReasonGivingUpNameChange}
-                      placeholder="Sua resposta"
-                    />
-                  </label>
-                </div>
-                <div className="containerBgLabel">
-                  <label
-                    className="containerTextLabel" htmlFor="handleReasonGivingUpBeneficiaryChange"
-                  >Quantos beneficiários são atendidos por este programa que o município <u>possui</u>?
-                    <input
-                      required
-                      autoComplete="no"
-                      id="handleReasonGivingUpBeneficiaryChange"
-                      name="handleReasonGivingUpBeneficiaryChange"
-                      type="number"
-                      value={cQuestionEight_C}
-                      onChange={handleReasonGivingUpBeneficiaryChange}
-                      placeholder="Sua resposta"
-                    />
-                  </label>
-                </div>
-                <div className="containerBgLabel">
-                  <label
-                    className="containerTextLabel" htmlFor="handleReasonGivingUpValueChange"
-                  >Qual o valor mensal gasto com esse programa que o município <u>possui</u>?
-                    <input
-                      required
-                      autoComplete="no"
-                      id="handleReasonGivingUpValueChange"
-                      name="handleReasonGivingUpValueChange"
-                      type="text"
-                      value={dQuestionNine_C}
-                      onChange={handleReasonGivingUpValueChange}
-                      placeholder="Sua resposta"
-                    />
-                  </label>
-                </div>
-              </>
-            )}
-             {aQuestionOne.d_criouPrograma && (
+            {aQuestionFive.c_criouPrograma && (
               <>
                 <div className="containerBgLabel">
                   <label
@@ -409,11 +339,11 @@ export const FormStepB2 = () => {
                   >Qual o nome desse programa que o município <u>criou</u>? 
                     <input
                       required
-                      autoComplete="no"
+                      autoComplete="off"
                       id="handleReasonGivingUpNameCreatedChange"
                       name="handleReasonGivingUpNameCreatedChange"
                       type="text"
-                      value={eQuestionTen_D}
+                      value={bQuestionSix}
                       onChange={handleReasonGivingUpNameCreatedChange}
                       placeholder="Sua resposta"
                     />
@@ -426,13 +356,15 @@ export const FormStepB2 = () => {
                   >Quantos beneficiários são atendidos por este programa que o município <u>criou</u>?
                     <input
                       required
-                      autoComplete="no"
+                      autoComplete="off"
+                      min={0}
+                      max={9999999}
                       id="handleReasonGivingUpBeneficiaryCreatedChange"
                       name="handleReasonGivingUpBeneficiaryCreatedChange"
                       type="number"
-                      value={fQuestionEleven_D}
+                      value={cQuestionSeven}
                       onChange={handleReasonGivingUpBeneficiaryCreatedChange}
-                      placeholder="Sua resposta"
+                      placeholder="Quantidade"
                     />
                   </label>
                 </div>
@@ -444,13 +376,15 @@ export const FormStepB2 = () => {
                     Qual o valor mensal gasto com esse programa que o município <u>criou</u>?
                     <input
                       required
-                      autoComplete="no"
+                      autoComplete="off"
+                      min={0}
+                      max={9999999}
                       id="handleReasonGivingUpValueCreatedChange"
                       name="handleReasonGivingUpValueCreatedChange"
                       type="number"
-                      value={gQuestionTwelve_D}
+                      value={dQuestionEight}
                       onChange={handleReasonGivingUpValueCreatedChange}
-                      placeholder="Sua resposta"
+                      placeholder="Valor"
                     />
                   </label>
                 </div>
@@ -509,14 +443,14 @@ export const FormStepB2 = () => {
                 <div className="containerBgLabel">
                   <label
                     className="containerTextLabel" htmlFor="reasonForDroppingOutWhich"
-                  >Se sim, qual?
+                  >Qual?
                     <input
                       required
-                      autoComplete="no"
+                      autoComplete="off"
                       id="reasonForDroppingOutWhich"
                       name="reasonForDroppingOutWhich"
                       type="text"
-                      value={bQuestionSix}
+                      value={bQuestionTen}
                       onChange={handleReasonForDroppingOutWhichChange}
                       placeholder="Sua resposta"
                     />

@@ -105,7 +105,7 @@ export const FormStep7 = () => {
       <form onSubmit={handleSendPublicServed}>
         <SC.ButtonTypeTextV2>
           <div className="formQuestion">
-            <p>Indique o número de pessoas atendidas pelo Programa Criança Feliz em seu município no mês de referência mencionado anteriormente:</p>
+            <p>Indique o número de pessoas atendidas pelo Programa Criança Feliz em seu município:</p>
             <div className="containerBgLabel">
               <label
                 className="containerTextLabel"
@@ -113,9 +113,12 @@ export const FormStep7 = () => {
               >Gestantes:
                 <input
                   required
+                  autoComplete="off"
                   id="gravidaInput"
                   name="pregnant"
                   type="number"
+                  min={0}
+                  max={999}
                   value={questionOne}
                   onChange={handlePregnantChange}
                   placeholder="Quantidade"
@@ -129,9 +132,12 @@ export const FormStep7 = () => {
               >Crianças de 0-36 meses:
                 <input
                   required
+                  autoComplete="off"
                   id="crianca_0_36"
                   name="childrenAged_0_36"
                   type="number"
+                  min={0}
+                  max={999}
                   value={questionTwo}
                   onChange={handleChildrenAged_0_36Change}
                   placeholder="Quantidade"
@@ -143,9 +149,12 @@ export const FormStep7 = () => {
                 Crianças de 36-72 meses:
                 <input
                   required
+                  autoComplete="off"
                   id="crianca_0_72"
                   name="childrenAged_0_72"
                   type="number"
+                  min={0}
+                  max={999}
                   value={questionThree}
                   onChange={handleChildrenAged_0_72Change}
                   placeholder="Quantidade"
@@ -157,9 +166,12 @@ export const FormStep7 = () => {
                 Quantos domicílios no seu município possuem mais de uma criança sendo acompanhadas pelo PCF?
                 <input
                   required
+                  autoComplete="off"
                   id="quantidadeDeCriancas"
                   name="numberOfChildren"
                   type="number"
+                  min={0}
+                  max={999}
                   value={questionFour}
                   onChange={handleNumberOfChildrenChange}
                   placeholder="Quantidade"

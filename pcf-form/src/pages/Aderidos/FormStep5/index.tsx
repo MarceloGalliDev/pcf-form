@@ -399,14 +399,13 @@ export const FormStep5 = () => {
                 >Qual a remuneração média em R$ (reais) dos Visitadores?
                   <div className="textInfo">
                     <input
-                      autoComplete="off"
                       required
+                      autoComplete="off"
                       id="avarageRemunerationSupervisors"
                       name="remuneracaoMediaVisitadores"
                       type="number"
                       min={0}
                       max={999999}
-                      step={.001}
                       value={questionTwo}
                       onChange={handleAvarageRemunerationSupervisorsChange}
                       placeholder="Valor em R$"
@@ -722,7 +721,6 @@ export const FormStep5 = () => {
                         type="number"
                         min={0}
                         max={9999}
-                        step={.001}
                         value={questionFive.b_visitadoresMediaRemuneracaoEfetivo}
                         onChange={handleEffectiveRemunerationChange}
                         placeholder="Valor"
@@ -766,7 +764,6 @@ export const FormStep5 = () => {
                         type="number"
                         min={0}
                         max={9999}
-                        step={.001}
                         value={questionSix.b_visitadoresMediaRemuneracaoComissionado}
                         onChange={handleCommissionedRemunerationChange}
                         placeholder="Valor"
@@ -810,7 +807,6 @@ export const FormStep5 = () => {
                         type="number"
                         min={0}
                         max={9999}
-                        step={.001}
                         value={questionSeven.b_visitadoresMediaRemuneracaoTemporario}
                         onChange={handleTemporaryRemunerationChange}
                         placeholder="Valor"
@@ -854,7 +850,6 @@ export const FormStep5 = () => {
                         type="number"
                         min={0}
                         max={9999}
-                        step={.001}
                         value={questionEight.b_visitadoresMediaRemuneracaoBolsista}
                         onChange={handleScholarshipRemunerationChange}
                         placeholder="Valor"
@@ -898,7 +893,6 @@ export const FormStep5 = () => {
                         type="number"
                         min={0}
                         max={9999}
-                        step={.001}
                         value={questionNine.b_visitadoresMediaRemuneracaoEstagiarioNivelSuperior}
                         onChange={handleTopLevelInternChange}
                         placeholder="Valor"
@@ -942,7 +936,6 @@ export const FormStep5 = () => {
                         type="number"
                         min={0}
                         max={9999}
-                        step={.001}
                         value={questionTen.b_visitadoresMediaRemuneracaoAutonomos}
                         onChange={handleAutonomousRemunerationChange}
                         placeholder="Valor"
@@ -986,7 +979,6 @@ export const FormStep5 = () => {
                         type="number"
                         min={0}
                         max={9999}
-                        step={.001}
                         value={questionEleven.b_visitadoresMediaRemuneracaoOutrosCargos}
                         onChange={handleOthersRemunerationChange}
                         placeholder="Valor"

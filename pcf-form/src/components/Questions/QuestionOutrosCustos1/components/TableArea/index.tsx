@@ -18,7 +18,7 @@ export const TableAreaOutrosCustos1 = ({ list1, remover1 }:Props) => {
     <SC.TableHead>
       <thead>
         <tr>
-          <SC.TableHeadColumn width={150}>Tipo de organização</SC.TableHeadColumn>
+          <SC.TableHeadColumn width={150}>Outros custos</SC.TableHeadColumn>
           <SC.TableHeadColumn width={100}>Valor</SC.TableHeadColumn>
           <SC.TableHeadColumn width={30}>Excluir</SC.TableHeadColumn>
         </tr>

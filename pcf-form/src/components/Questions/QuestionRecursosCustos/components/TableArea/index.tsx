@@ -18,10 +18,10 @@ export const TableArea = ({ list, remover }:Props) => {
     <SC.TableHead>
       <thead>
         <tr>
-          <SC.TableHeadColumn width={150}>Tipo de organização</SC.TableHeadColumn>
-          <SC.TableHeadColumn width={15}>Aporte</SC.TableHeadColumn>
-          <SC.TableHeadColumn width={30}>Valor</SC.TableHeadColumn>
-          <SC.TableHeadColumn width={30}>Excluir</SC.TableHeadColumn>
+          <SC.TableHeadColumn width={100}>Despesa / Custo</SC.TableHeadColumn>
+          <SC.TableHeadColumn width={50}>Tipo de Recurso</SC.TableHeadColumn>
+          <SC.TableHeadColumn width={50}>Valor</SC.TableHeadColumn>
+          <SC.TableHeadColumn width={10}>Excluir</SC.TableHeadColumn>
         </tr>
       </thead>
 
@@ -45,7 +45,6 @@ export const TableArea = ({ list, remover }:Props) => {
                   {item.b_inputOne}
                   ({item.e_inputFour} {item.f_inputFive}
                   {item.g_inputSix})
-                  
                 </p>
               </SC.ValueArea>
             </SC.TableColumn>

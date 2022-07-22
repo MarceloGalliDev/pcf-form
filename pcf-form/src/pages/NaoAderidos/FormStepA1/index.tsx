@@ -196,7 +196,7 @@ export const FormStepA1 = () => {
           <div className="formQuestion">
             <label
               htmlFor="functionPCF"
-            >Função no PCF:
+            >Função no Município:
               <input
                 required
                 autoComplete="no"

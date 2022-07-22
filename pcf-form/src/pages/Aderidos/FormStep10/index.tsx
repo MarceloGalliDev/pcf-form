@@ -659,7 +659,7 @@ export const FormStep10 = () => {
           </SC.ButtonTypeCheckbox>
 
           <div className="formQuestionV1">
-            <p>Há algum outro custo direto pago com recurso do PCF?</p>
+            <p>Se houver outro custo direto relevante para o programa pago com recursos do PCF e que não foi relacionado na questão anterior, responda abaixo:</p>
             <SC.Body>
               <InputAreaOutrosCustos1 onAdd1={handleAddItemOthersCosts1} />
 

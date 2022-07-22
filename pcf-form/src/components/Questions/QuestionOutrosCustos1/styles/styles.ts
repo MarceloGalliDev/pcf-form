@@ -104,14 +104,14 @@ export const InputLabel = styled.label`
     display: none;
     position: absolute;
     top: 35px;
-    left: calc(100% + -180px);
+    left: calc(100% + -190px);
+    width: 300px;
     padding: 5px;
     border-radius: 3px;
     content: attr(data-tooltip);
     background-color: #cbe9fc;
     color: #073f98;
     border: 1px solid #2E7EB0;
-    white-space: nowrap;
   }
 
   [data-tooltip]:hover:after {

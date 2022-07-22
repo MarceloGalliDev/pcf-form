@@ -91,6 +91,7 @@ export const InputLabel = styled.label`
     border: 1px solid #2E7EB0;
     border-radius: 5px;
     align-items: center;
+    justify-content: space-between;
   }
 
   [data-tooltip] {
@@ -141,7 +142,7 @@ export const InputArea2 = styled.input`
 `;
 
 export const InputArea3 = styled.input`
-  width: 100%;
+  width: 120px;
   height: 30px;
   padding: 0 5px;
   border: none;

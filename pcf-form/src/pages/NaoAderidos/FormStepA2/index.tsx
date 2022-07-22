@@ -17,8 +17,7 @@ type RoomParams = {
 interface ReasonForGivingUpChange {
   a_recursoFinanceiroInsuficiente: boolean;
   b_naoHaInteresseMunicipio: boolean;
-  c_possuiPrograma: boolean;
-  d_naoConhecePrograma: boolean;
+  c_naoConhecePrograma: boolean;
 };
 
 
@@ -28,22 +27,21 @@ export const FormStepA2 = () => {
   const navigate = useNavigate();
   const { state, dispatch } = useFormPage();
 
-  const [aQuestionTwo, setAQuestionTwo] = useState('');
-  const [bQuestionThree, setBQuestionThree] = useState('');
-  const [cQuestionFour, setCQuestionFour] = useState('');
+  const [aQuestionOne, setAQuestionOne] = useState('');
+  const [bQuestionTwo, setBQuestionTwo] = useState('');
+  const [cQuestionThree, setCQuestionThree] = useState('');
+  const [dQuestionFour, setDQuestionFour] = useState('');
   const [aQuestionFive, setAQuestionFive] = useState<ReasonForGivingUpChange>({
     a_recursoFinanceiroInsuficiente: false,
     b_naoHaInteresseMunicipio: false,
-    c_possuiPrograma: false,
-    d_naoConhecePrograma: false,
+    c_naoConhecePrograma: false,
   });
   const [aQuestionSix, setAQuestionSix] = useState('');
   const [bQuestionSeven, setBQuestionSeven] = useState('');
-  const [bQuestionEight, setBQuestionEight] = useState('');
-  const [cQuestionNine, setCQuestionNine] = useState('');
-  const [dQuestionTen, setDQuestionTen] = useState('');
+
   const [isCheckA2Q08, setIsCheckA2Q08] = useState('');
   const [isCheckA2Q13, setIsCheckA2Q13] = useState('');
+  
   const [isAlert, setIsAlert] = useState(false);
 
   const [question] = useRoomA();
@@ -55,17 +53,12 @@ export const FormStepA2 = () => {
       B_Elegiveis_ao_PCF: {
         questao07:
         {
-          aQuestionTwo,
-          bQuestionThree,
-          cQuestionFour,
+          aQuestionOne,
+          bQuestionTwo,
+          cQuestionThree,
+          dQuestionFour,
         },
-        questao08:
-        {
-          aQuestionFive,
-          bQuestionEight,
-          cQuestionNine,
-          dQuestionTen,
-        },
+        questao08: aQuestionFive,
         questao09:
         {
           aQuestionSix,
@@ -93,15 +86,19 @@ export const FormStepA2 = () => {
   };
 
   const handleTargetAudiencePCFChange =(event:ChangeEvent<HTMLInputElement>) => {
-    setAQuestionTwo(event.target.value);
+    setAQuestionOne(event.target.value);
+  };
+
+  const handleTargetAudiencePCFTextNameCheckedChange =(event:ChangeEvent<HTMLInputElement>) => {
+    setBQuestionTwo(event.target.value);
   };
 
   const handleTargetAudiencePCFTextBeneficiaryChange =(event:ChangeEvent<HTMLInputElement>) => {
-    setBQuestionThree(event.target.value);
+    setCQuestionThree(event.target.value);
   };
 
   const handleTargetAudiencePCFTextValueChange =(event:ChangeEvent<HTMLInputElement>) => {
-    setCQuestionFour(event.target.value);
+    setDQuestionFour(event.target.value);
   };
 
   const handleExplainTheReasonChange =(event:ChangeEvent<HTMLInputElement>) => {
@@ -110,18 +107,6 @@ export const FormStepA2 = () => {
 
   const handleExplainTheReasonTextChange =(event:ChangeEvent<HTMLInputElement>) => {
     setBQuestionSeven(event.target.value);
-  };
-
-  const handleTargetAudiencePCFTextNameCheckedChange =(event:ChangeEvent<HTMLInputElement>) => {
-    setBQuestionEight(event.target.value);
-  };
-
-  const handleTargetAudiencePCFTextBeneficiaryCheckedChange =(event:ChangeEvent<HTMLInputElement>) => {
-    setCQuestionNine(event.target.value);
-  };
-
-  const handleTargetAudiencePCFTextValueCheckedChange =(event:ChangeEvent<HTMLInputElement>) => {
-    setDQuestionTen(event.target.value);
   };
 
   useEffect(() => {
@@ -190,154 +175,14 @@ export const FormStepA2 = () => {
               <>
                 <div className="containerBgLabel">
                   <label className="containerTextLabel" htmlFor="targetAudiencePCFTextBeneficiary">
-                    Quantos beneficiários são atendidos por este programa?
-                    <input
-                      required
-                      id="targetAudiencePCFTextBeneficiary"
-                      name="targetAudiencePCFTextBeneficiary"
-                      type="number"
-                      value={bQuestionThree}
-                      onChange={handleTargetAudiencePCFTextBeneficiaryChange}
-                      placeholder="Sua resposta"
-                    />
-                  </label>
-                </div>
-
-                <div className="containerBgLabel">
-                  <label className="containerTextLabel" htmlFor="targetAudiencePCFTextValue">
-                    Qual o valor mensal gasto com esse Programa? 
-                    <input
-                      required
-                      id="targetAudiencePCFTextValue"
-                      name="targetAudiencePCFTextValue"
-                      type=" number"
-                      value={cQuestionFour}
-                      onChange={handleTargetAudiencePCFTextValueChange}
-                      placeholder="Sua resposta"
-                    />
-                  </label>
-                </div>
-              </>
-            )}
-
-          </div>
-        </SC.ButtonTypeRadioText>
-
-        <SC.ButtonTypeCheckboxV1>
-          <div className="formQuestion">
-            <div className="formQuestion">
-              <p className="textFormRadioButton">
-              Qual o motivo do seu município não ter aderido ao Programa Criança Feliz?
-              </p>
-              <div id="containerOption">
-                <div>
-                  <div id="containerInputLabelRadioButton">
-                    <input
-                      required={
-                        !aQuestionFive?.a_recursoFinanceiroInsuficiente && 
-                        !aQuestionFive.b_naoHaInteresseMunicipio &&
-                        !aQuestionFive.c_possuiPrograma &&
-                        !aQuestionFive.d_naoConhecePrograma
-                      }
-                      id="recursoFinanceiroInsuficiente"
-                      name="a_recursoFinanceiroInsuficiente"
-                      type="checkbox"
-                      checked={aQuestionFive.a_recursoFinanceiroInsuficiente}
-                      onChange={(event) => setAQuestionFive({
-                        ...aQuestionFive,
-                        a_recursoFinanceiroInsuficiente: !!event.currentTarget?.checked
-                      })}
-                    />
-                    <label
-                      className="containerTextLabel"
-                      htmlFor="recursoFinanceiroInsuficiente"
-                    >A transferência de recurso financeiro é insuficiente para o município manter o programa
-                    </label>
-                  </div>
-                  <div id="containerInputLabelRadioButton">
-                    <input
-                      required={
-                        !aQuestionFive?.a_recursoFinanceiroInsuficiente && 
-                        !aQuestionFive.b_naoHaInteresseMunicipio &&
-                        !aQuestionFive.c_possuiPrograma &&
-                        !aQuestionFive.d_naoConhecePrograma
-                      }
-                      id="naoHaInteresseMunicipio"
-                      name="b_naoHaInteresseMunicipio"
-                      type="checkbox"
-                      checked={aQuestionFive.b_naoHaInteresseMunicipio}
-                      onChange={(event) => setAQuestionFive({
-                        ...aQuestionFive,
-                        b_naoHaInteresseMunicipio: !!event.currentTarget?.checked
-                      })}
-                    />
-                    <label
-                      className="containerTextLabel"
-                      htmlFor="naoHaInteresseMunicipio"
-                    >Não houve interesse do município em manter o programa
-                    </label>
-                  </div>
-                  <div id="containerInputLabelRadioButton">
-                    <input
-                      required={
-                        !aQuestionFive?.a_recursoFinanceiroInsuficiente && 
-                        !aQuestionFive.b_naoHaInteresseMunicipio &&
-                        !aQuestionFive.c_possuiPrograma &&
-                        !aQuestionFive.d_naoConhecePrograma
-                      }
-                      id="possuiPrograma"
-                      name="c_possuiPrograma"
-                      type="checkbox"
-                      checked={aQuestionFive.c_possuiPrograma}
-                      onChange={(event) => setAQuestionFive({
-                        ...aQuestionFive,
-                        c_possuiPrograma: !!event.currentTarget?.checked
-                      })}
-                    />
-                    <label
-                      className="containerTextLabel"
-                      htmlFor="possuiPrograma"
-                    >O município possui um programa semelhante ao Criança Feliz
-                    </label>
-                  </div>
-                  <div id="containerInputLabelRadioButton">
-                    <input
-                      required={
-                        !aQuestionFive?.a_recursoFinanceiroInsuficiente && 
-                        !aQuestionFive.b_naoHaInteresseMunicipio &&
-                        !aQuestionFive.c_possuiPrograma &&
-                        !aQuestionFive.d_naoConhecePrograma
-                      }
-                      id="naoConhecePrograma"
-                      name="d_naoConhecePrograma"
-                      type="checkbox"
-                      checked={aQuestionFive.d_naoConhecePrograma}
-                      onChange={(event) => setAQuestionFive({
-                        ...aQuestionFive,
-                        d_naoConhecePrograma: !!event.currentTarget?.checked
-                      })}
-                    />
-                    <label
-                      className="containerTextLabel"
-                      htmlFor="naoConhecePrograma"
-                    >O município não conhece o Programa Criança Feliz
-                    </label>
-                  </div>
-                </div>
-              </div>
-            </div>
-            {aQuestionFive.c_possuiPrograma === true && (
-              <>
-                <div className="containerBgLabel">
-                  <label className="containerTextLabel" htmlFor="targetAudiencePCFTextBeneficiary">
                     Qual o nome desse programa?
                     <input
                       required
-                      autoComplete="no"
+                      autoComplete="off"
                       id="targetAudiencePCFTextBeneficiary"
                       name="targetAudiencePCFTextBeneficiary"
                       type="text"
-                      value={bQuestionEight}
+                      value={bQuestionTwo}
                       onChange={handleTargetAudiencePCFTextNameCheckedChange}
                       placeholder="Sua resposta"
                     />
@@ -349,34 +194,118 @@ export const FormStepA2 = () => {
                     Quantos beneficiários são atendidos por este programa?
                     <input
                       required
-                      autoComplete="no"
+                      autoComplete="off"
+                      min={0}
+                      max={9999999}
                       id="targetAudiencePCFTextBeneficiary"
                       name="targetAudiencePCFTextBeneficiary"
                       type="number"
-                      value={cQuestionNine}
-                      onChange={handleTargetAudiencePCFTextBeneficiaryCheckedChange}
-                      placeholder="Sua resposta"
+                      value={cQuestionThree}
+                      onChange={handleTargetAudiencePCFTextBeneficiaryChange}
+                      placeholder="Quantidade"
                     />
                   </label>
                 </div>
 
                 <div className="containerBgLabel">
                   <label className="containerTextLabel" htmlFor="targetAudiencePCFTextValue">
-                    Qual o valor mensal gasto com esse Programa?
+                    Qual o valor mensal gasto com esse Programa? 
                     <input
                       required
-                      autoComplete="no"
+                      autoComplete="off"
+                      min={0}
+                      max={9999999}
                       id="targetAudiencePCFTextValue"
                       name="targetAudiencePCFTextValue"
-                      type="number"
-                      value={dQuestionTen}
-                      onChange={handleTargetAudiencePCFTextValueCheckedChange}
-                      placeholder="Sua resposta"
+                      type=" number"
+                      value={dQuestionFour}
+                      onChange={handleTargetAudiencePCFTextValueChange}
+                      placeholder="Valor"
                     />
                   </label>
                 </div>
               </>
             )}
+          </div>
+        </SC.ButtonTypeRadioText>
+
+        <SC.ButtonTypeCheckboxV1>
+          <div className="formQuestion">
+            <p className="textFormRadioButton">
+            Qual o motivo do seu município não ter aderido ao Programa Criança Feliz?
+            </p>
+            <div id="containerOption">
+              <div>
+                <div id="containerInputLabelRadioButton">
+                  <input
+                    required={
+                      !aQuestionFive?.a_recursoFinanceiroInsuficiente && 
+                      !aQuestionFive.b_naoHaInteresseMunicipio &&
+                      !aQuestionFive.c_naoConhecePrograma
+                    }
+                    id="a_recursoFinanceiroInsuficiente"
+                    name="a_recursoFinanceiroInsuficiente"
+                    type="checkbox"
+                    checked={aQuestionFive.a_recursoFinanceiroInsuficiente}
+                    onChange={(event) => setAQuestionFive({
+                      ...aQuestionFive,
+                      a_recursoFinanceiroInsuficiente: !!event.currentTarget?.checked
+                    })}
+                  />
+                  <label
+                    className="containerTextLabel"
+                    htmlFor="a_recursoFinanceiroInsuficiente"
+                  >A transferência de recurso financeiro é insuficiente para o município manter o programa
+                  </label>
+                </div>
+
+                <div id="containerInputLabelRadioButton">
+                  <input
+                    required={
+                      !aQuestionFive?.a_recursoFinanceiroInsuficiente && 
+                      !aQuestionFive.b_naoHaInteresseMunicipio &&
+                      !aQuestionFive.c_naoConhecePrograma
+                    }
+                    id="b_naoHaInteresseMunicipio"
+                    name="b_naoHaInteresseMunicipio"
+                    type="checkbox"
+                    checked={aQuestionFive.b_naoHaInteresseMunicipio}
+                    onChange={(event) => setAQuestionFive({
+                      ...aQuestionFive,
+                      b_naoHaInteresseMunicipio: !!event.currentTarget?.checked
+                    })}
+                  />
+                  <label
+                    className="containerTextLabel"
+                    htmlFor="b_naoHaInteresseMunicipio"
+                  >Não houve interesse do município em manter o programa
+                  </label>
+                </div>
+
+                <div id="containerInputLabelRadioButton">
+                  <input
+                    required={
+                      !aQuestionFive?.a_recursoFinanceiroInsuficiente && 
+                      !aQuestionFive.b_naoHaInteresseMunicipio &&
+                      !aQuestionFive.c_naoConhecePrograma
+                    }
+                    id="c_naoConhecePrograma"
+                    name="c_naoConhecePrograma"
+                    type="checkbox"
+                    checked={aQuestionFive.c_naoConhecePrograma}
+                    onChange={(event) => setAQuestionFive({
+                      ...aQuestionFive,
+                      c_naoConhecePrograma: !!event.currentTarget?.checked
+                    })}
+                  />
+                  <label
+                    className="containerTextLabel"
+                    htmlFor="c_naoConhecePrograma"
+                  >O município não conhece o Programa Criança Feliz
+                  </label>
+                </div>
+              </div>
+            </div>
           </div>
         </SC.ButtonTypeCheckboxV1>
 
@@ -426,7 +355,6 @@ export const FormStepA2 = () => {
                 </div>
               </div>
             </div>
-            
             {isCheckA2Q13 === "sim_Q13" && (
               <>
                 <div className="containerBgLabel">

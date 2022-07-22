@@ -81,7 +81,7 @@ export const InputArea = ({ onAdd }: Props) => {
       <SC.ContainerInputAreaV1>
 
         <SC.InputLabel>
-          <SC.InputTitle>Tipo de despesa</SC.InputTitle>
+          <SC.InputTitle>Despesa/Custo</SC.InputTitle>
           <SC.SelectArea value={inputOneField} onChange={event => setInputOneField(event.target.value)}>
             <>
               <option></option>
@@ -93,7 +93,7 @@ export const InputArea = ({ onAdd }: Props) => {
         </SC.InputLabel>
 
         <SC.InputLabel>
-          <SC.InputTitle>Tipo do recurso</SC.InputTitle>
+          <SC.InputTitle>Tipo de recurso</SC.InputTitle>
           <SC.SelectArea value={inputTwoField} onChange={event => setInputTwoField(event.target.value)}>
             <>
               <option></option>
@@ -116,7 +116,7 @@ export const InputArea = ({ onAdd }: Props) => {
               placeholder="R$"
             />
             <span
-              data-tooltip="Inserir com casas decimais (Exemplo: 106,38)"
+              data-tooltip="Inserir valores aproximados, sem casas decimais. Ex.: 2485 (que representa 2.485,20)"
             >
               <Info
                 size={20}

@@ -548,7 +548,7 @@ export const ButtonTypeTextV2 = styled.div`
       input {
         display: block;
         margin-top: 17px;
-        width: 10% + 10vw;
+        width: 100%;
         border: none;
         border-bottom: 1px solid #2E7EB0;
         color: #591C21;
