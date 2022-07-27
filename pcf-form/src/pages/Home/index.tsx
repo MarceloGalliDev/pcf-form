@@ -77,7 +77,7 @@ export const Home = () => {
       return;
     };
 
-    const roomRef = await get(ref(database, `rooms/${roomCodeB2}/desistentes`))
+    const roomRef = await get(ref(database, `rooms/${roomCodeB2}/nao_aderidos`))
 
     if (!roomRef.exists()) {
       alert('Questionário não existe!')
@@ -99,7 +99,7 @@ export const Home = () => {
       return;
     };
 
-    const roomRef = await get(ref(database, `rooms/${roomCodeB3}`))
+    const roomRef = await get(ref(database, `rooms/${roomCodeB3}/desistentes`))
 
     if (!roomRef.exists()) {
       alert('Questionário não existe!')
