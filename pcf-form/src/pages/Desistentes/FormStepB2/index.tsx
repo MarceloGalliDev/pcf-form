@@ -88,7 +88,7 @@ export const FormStepB2 = () => {
       await update(ref(database, `rooms/${roomId}/desistentes/`), { endedAt: new Date() })
       setIsAlert(true);
       setTimeout(() => {
-        alert(`Seu questionário foi finalizado e enviado para análise.\n Agradecemos sua participação!`)
+        alert(`Seu questionário foi finalizado e enviado.\n Agradecemos sua participação!`)
         navigate('/')
       }, 2000)
     };
