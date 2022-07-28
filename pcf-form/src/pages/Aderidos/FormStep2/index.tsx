@@ -6,6 +6,7 @@ import { ChangeEvent, FormEvent, useCallback, useEffect, useState } from "react"
 import { push, ref, set, update } from "firebase/database";
 import { database } from "../../../services/firebase";
 import { useRoom } from "../../../hooks/useRoom";
+import { Info } from 'phosphor-react';
 
 type RoomParams = {
   id: string;
@@ -118,14 +119,24 @@ export const FormStep2 = () => {
             <label
               htmlFor="dateAcquisition"
             >Data de adesão do município ao PCF:
-              <input
-                required
-                autoComplete="no"
-                name="dateAcquisition"
-                type="date"
-                value={questionOne}
-                onChange={handleDateAcquisitionChange}
-              />
+              <div className="informationIcon">
+                <input
+                  autoComplete="no"
+                  name="dateAcquisition"
+                  type="date"
+                  value={questionOne}
+                  onChange={handleDateAcquisitionChange}
+                />
+                <span
+                  data-tooltip="*Não obrigatório"
+                >
+                  <Info
+                    size={20}
+                    color="#2d56d2"
+                    weight="light"
+                  />
+                </span>
+              </div>
             </label>
           </div>
         </SC.ButtonTypeDate>
@@ -135,14 +146,24 @@ export const FormStep2 = () => {
             <label
               htmlFor="dateVisition"
             >Data do início das visitas:
-              <input
-                required
-                autoComplete="no"
-                name="dateVisition"
-                type="date"
-                value={questionTwo}
-                onChange={handleDateVisitionChange}
-              />
+              <div className="informationIcon">
+                <input
+                  autoComplete="no"
+                  name="dateVisition"
+                  type="date"
+                  value={questionTwo}
+                  onChange={handleDateVisitionChange}
+                />
+                <span
+                  data-tooltip="*Não obrigatório"
+                >
+                  <Info
+                    size={20}
+                    color="#2d56d2"
+                    weight="light"
+                  />
+                </span>
+              </div>
             </label>
           </div>
         </SC.ButtonTypeDate>

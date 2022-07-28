@@ -186,6 +186,35 @@ export const ButtonTypeDate = styled.div`
     padding: 10px 10px;
     margin-bottom: 10px;
 
+    .informationIcon {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    }
+
+    [data-tooltip] {
+      position: relative;
+      font-weight: bold;
+    }
+
+    [data-tooltip]:after {
+      display: none;
+      position: absolute;
+      top: -5px;
+      left: calc(100% + 5px);
+      width: 130px;
+      padding: 5px;
+      border-radius: 3px;
+      content: attr(data-tooltip);
+      background-color: #cbe9fc;
+      color: #073f98;
+      border: 1px solid #2E7EB0;
+    }
+
+    [data-tooltip]:hover:after {
+      display: block;
+    }
+
     label {
       font-size: 15px;
       font-weight: bold;
