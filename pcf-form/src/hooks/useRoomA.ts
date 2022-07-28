@@ -18,19 +18,17 @@ type FirebaseQuestions = Record<string, {
     questao06: string,
   },
   B_Elegiveis_ao_PCF: {
-    questao07a: { aQuestionOne: string },
-    questao07b: { bQuestionTwo: string },
-    questao07c: { cQuestionThree: number },
-    questao07d: { dQuestionFour: number },
-    questao08: {
-      aQuestionFive: {
-        a_recursoFinanceiroInsuficiente: boolean,
-        b_naoHaInteresseMunicipio: boolean,
-        c_naoConhecePrograma: boolean,
-      },
+    questao07a: string,
+    questao07b: string,
+    questao07c: number,
+    questao07d: number,
+    questao08a: {
+      a_recursoFinanceiroInsuficiente: boolean,
+      b_naoHaInteresseMunicipio: boolean,
+      c_naoConhecePrograma: boolean,
     },
-    questao09a: { aQuestionSix: boolean },
-    questao09b: { bQuestionSeven: string },
+    questao09a: boolean,
+    questao09b: string,
   },
 }>;
 
@@ -58,28 +56,17 @@ export function useRoomA() {
               questao06: value?.A_Informacoes_Gerais_Nao_Aderidos?.questao06,
             },
             B_Elegiveis_ao_PCF: {
-              questao07: {
-                aQuestionOne: value?.B_Elegiveis_ao_PCF?.questao07a || null,
-
-                bQuestionTwo: value?.B_Elegiveis_ao_PCF?.questao07b || null,
-
-                cQuestionThree: value?.B_Elegiveis_ao_PCF?.questao07c || null,
-
-                dQuestionFour: value?.B_Elegiveis_ao_PCF?.questao07d || null,
+              questao07a: value?.B_Elegiveis_ao_PCF?.questao07a || null,
+              questao07b: value?.B_Elegiveis_ao_PCF?.questao07b || null,
+              questao07c: value?.B_Elegiveis_ao_PCF?.questao07c || null,
+              questao07d: value?.B_Elegiveis_ao_PCF?.questao07d || null,
+              questao08a: {
+                a_recursoFinanceiroInsuficiente: value?.B_Elegiveis_ao_PCF?.questao08a?.a_recursoFinanceiroInsuficiente || null,
+                b_naoHaInteresseMunicipio: value?.B_Elegiveis_ao_PCF?.questao08a?.b_naoHaInteresseMunicipio || null,
+                c_naoConhecePrograma: value?.B_Elegiveis_ao_PCF?.questao08a?.c_naoConhecePrograma || null,
               },
-              questao08: {
-                aQuestionFive: {
-                  a_recursoFinanceiroInsuficiente: value?.B_Elegiveis_ao_PCF?.questao08 || null,
-
-                  b_naoHaInteresseMunicipio: value?.B_Elegiveis_ao_PCF?.questao08 || null,
-
-                  c_naoConhecePrograma: value?.B_Elegiveis_ao_PCF?.questao08 || null,
-                },
-              },
-              questao09: {
-                aQuestionSix: value?.B_Elegiveis_ao_PCF?.questao09a || null,
-                bQuestionSeven: value?.B_Elegiveis_ao_PCF?.questao09b || null,
-              },
+              questao09a: value?.B_Elegiveis_ao_PCF?.questao09a || null,
+              questao09b: value?.B_Elegiveis_ao_PCF?.questao09b || null,
             },
           };
         });

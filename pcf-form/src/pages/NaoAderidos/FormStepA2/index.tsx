@@ -51,20 +51,14 @@ export const FormStepA2 = () => {
 
     const questionReq = {
       B_Elegiveis_ao_PCF: {
-        questao07:
-        {
-          questao07a: aQuestionOne,
-          questao07b: bQuestionTwo,
-          questao07c: cQuestionThree,
-          questao07d: dQuestionFour,
-        },
-        questao08: aQuestionFive,
-        questao09:
-        {
-          questao09a: aQuestionSix,
-          questao09b: bQuestionSeven,
-        },
-      }
+        questao07a: aQuestionOne,
+        questao07b: bQuestionTwo,
+        questao07c: cQuestionThree,
+        questao07d: dQuestionFour,
+        questao08a: aQuestionFive,
+        questao09a: aQuestionSix,
+        questao09b: bQuestionSeven,
+      },
     };
 
     if (question.length === 0) {
@@ -123,7 +117,7 @@ export const FormStepA2 = () => {
       setBQuestionTwo(question[0].B_Elegiveis_ao_PCF.questao07b)
       setCQuestionThree(question[0].B_Elegiveis_ao_PCF.questao07c)
       setDQuestionFour(question[0].B_Elegiveis_ao_PCF.questao07d)
-      setAQuestionFive(question[0].B_Elegiveis_ao_PCF.questao08)
+      setAQuestionFive(question[0].B_Elegiveis_ao_PCF.questao08a)
       setAQuestionSix(question[0].B_Elegiveis_ao_PCF.questao09a)
       setBQuestionSeven(question[0].B_Elegiveis_ao_PCF.questao09b)
     }
@@ -341,6 +335,7 @@ export const FormStepA2 = () => {
                       name="explainTheReason"
                       type="radio"
                       value={"sim_Q13"}
+                      checked={aQuestionSix === "sim_Q13"}
                       onClick={() => setIsCheckA2Q13("sim_Q13")}
                       onChange={handleExplainTheReasonChange}
                     />
@@ -357,6 +352,7 @@ export const FormStepA2 = () => {
                       name="explainTheReason"
                       type="radio"
                       value={"nao_Q13"}
+                      checked={aQuestionSix === "nao_Q13"}
                       onClick={() => setIsCheckA2Q13("nao_Q13")}
                       onChange={handleExplainTheReasonChange}
                     />

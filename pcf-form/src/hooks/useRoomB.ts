@@ -18,22 +18,20 @@ type FirebaseQuestions = Record<string, {
     questao06: string,
   },
   B_Desistentes: {
-    questao07a: { aQuestionOne: string },
-    questao07b: { bQuestionTwo: string },
-    questao07c: { cQuestionThree: number },
-    questao07d: { dQuestionFour: number },
+    questao07a: string ,
+    questao07b: string,
+    questao07c: number,
+    questao07d: number,
     questao08a: {
-      aQuestionFive: {
-        a_recursoFinanceiroInsuficiente: boolean,
-        b_naoHaInteresseMunicipio: boolean,
-        c_criouPrograma: boolean,
-      },
-    }
-    questao08b: { bQuestionSix: string },
-    questao08c: { cQuestionSeven: number },
-    questao08d: { dQuestionEight: number },
-    questao09a: { questionNine: boolean },
-    questao09b: { questionTen: string },
+      a_recursoFinanceiroInsuficiente: boolean,
+      b_naoHaInteresseMunicipio: boolean,
+      c_criouPrograma: boolean,
+    },
+    questao08b: string,
+    questao08c: number,
+    questao08d: number,
+    questao09a: boolean,
+    questao09b: string,
   },
 }>;
 
@@ -61,28 +59,20 @@ export function useRoomB() {
               questao06: value?.A_Informacoes_Gerais_Desistentes?.questao06,
             },
             B_Desistentes: {
-              questao07: {
-                aQuestionOne: value?.B_Desistentes?.questao07a || null,
-                bQuestionTwo: value?.B_Desistentes?.questao07b || null,
-                cQuestionThree: value?.B_Desistentes?.questao07c || null,
-                dQuestionFour: value?.B_Desistentes?.questao07d || null,
-              },
+              questao07a: value?.B_Desistentes?.questao07a || null,
+              questao07b: value?.B_Desistentes?.questao07b || null,
+              questao07c: value?.B_Desistentes?.questao07c || null,
+              questao07d: value?.B_Desistentes?.questao07d || null,
               questao08a: {
-                aQuestionFive: {
-                  a_recursoFinanceiroInsuficiente: value?.B_Desistentes?.questao08a || null,
-
-                  b_naoHaInteresseMunicipio: value?.B_Desistentes?.questao08a || null,
-
-                  c_criouPrograma: value?.B_Desistentes?.questao08a || null,
-                },
-                bQuestionSix: value?.B_Desistentes?.questao08b || null,
-                cQuestionSeven: value?.B_Desistentes?.questao08c || null,
-                duestionEight: value?.B_Desistentes?.questao08d || null,
+                a_recursoFinanceiroInsuficiente: value?.B_Desistentes?.questao08a?.a_recursoFinanceiroInsuficiente || null,
+                b_naoHaInteresseMunicipio: value?.B_Desistentes?.questao08a?.b_naoHaInteresseMunicipio || null,
+                c_criouPrograma: value?.B_Desistentes?.questao08a?.c_criouPrograma || null,
               },
-              questao09: {
-                aQuestionNine: value?.B_Desistentes?.questao09a || null,
-                bQuestionTen: value?.B_Desistentes?.questao09b || null,
-              },
+              questao08b: value?.B_Desistentes?.questao08b || null,
+              questao08c: value?.B_Desistentes?.questao08c || null,
+              questao08d: value?.B_Desistentes?.questao08d || null,
+              questao09a: value?.B_Desistentes?.questao09a || null,
+              questao09b: value?.B_Desistentes?.questao09b || null,
             },
           };
         });

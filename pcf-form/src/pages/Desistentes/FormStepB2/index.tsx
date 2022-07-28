@@ -53,27 +53,18 @@ export const FormStepB2 = () => {
 
     const questionReq = {
       B_Desistentes: {
-        questao07:
-        {
-          questao07a: aQuestionOne,
-          questao07b: bQuestionTwo,
-          questao07c: cQuestionThree,
-          questao07d: dQuestionFour,
-        },
-        questao08:
-        {
-          questao08a: aQuestionFive,
-          questao08b: bQuestionSix,
-          questao08c: cQuestionSeven,
-          questao08d: dQuestionEight,
-        }, 
-        questao09:
-        { 
-          questao09a: aQuestionNine,
-          questao09b: bQuestionTen,
-        },
-      }
-    };
+        questao07a: aQuestionOne,
+        questao07b: bQuestionTwo,
+        questao07c: cQuestionThree,
+        questao07d: dQuestionFour,
+        questao08a: aQuestionFive,
+        questao08b: bQuestionSix,
+        questao08c: cQuestionSeven,
+        questao08d: dQuestionEight,
+        questao09a: aQuestionNine,
+        questao09b: bQuestionTen,
+      },
+    }
 
     if (question.length === 0) {
       const firebaseRoomsQuestion = ref(database, `rooms/${roomId}/desistentes/`);
@@ -177,6 +168,7 @@ export const FormStepB2 = () => {
                       name="haveTargetAudiencePCF"
                       type="radio"
                       value="sim_Q02"
+                      checked={aQuestionOne === "sim_Q02"}
                       onClick={() => setIsCheckQ02("sim_Q02")}
                       onChange={handleHaveTargetAudiencePCFChange}
                     />
@@ -193,6 +185,7 @@ export const FormStepB2 = () => {
                       name="haveTargetAudiencePCF"
                       type="radio"
                       value="nao_Q02"
+                      checked={aQuestionOne === "nao_Q02"}
                       onClick={() => setIsCheckQ02("nao_Q02")}
                       onChange={handleHaveTargetAudiencePCFChange}
                     />
@@ -425,6 +418,7 @@ export const FormStepB2 = () => {
                       name="reasonForDroppingOut"
                       type="radio"
                       value={"sim_Q05"}
+                      checked={aQuestionNine === "sim_Q05"}
                       onClick={() => setIsCheckQ05("sim_Q05")}
                       onChange={handleReasonForDroppingOutChange}
                     />
@@ -441,6 +435,7 @@ export const FormStepB2 = () => {
                       name="reasonForDroppingOut"
                       type="radio"
                       value={"nao_Q05"}
+                      checked={aQuestionNine === "nao_Q05"}
                       onClick={() => setIsCheckQ05("nao_Q05")}
                       onChange={handleReasonForDroppingOutChange}
                     />
