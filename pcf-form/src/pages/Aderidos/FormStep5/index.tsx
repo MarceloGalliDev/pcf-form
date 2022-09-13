@@ -405,7 +405,7 @@ export const FormStep5 = () => {
                       name="remuneracaoMediaVisitadores"
                       type="number"
                       min={0}
-                      max={999999}
+                      max={9999999}
                       value={questionTwo}
                       onChange={handleAvarageRemunerationSupervisorsChange}
                       placeholder="Valor em R$"

@@ -118,7 +118,7 @@ export const FormStep7 = () => {
                   name="pregnant"
                   type="number"
                   min={0}
-                  max={999}
+                  max={9999}
                   value={questionOne}
                   onChange={handlePregnantChange}
                   placeholder="Quantidade"
@@ -137,7 +137,7 @@ export const FormStep7 = () => {
                   name="childrenAged_0_36"
                   type="number"
                   min={0}
-                  max={999}
+                  max={9999}
                   value={questionTwo}
                   onChange={handleChildrenAged_0_36Change}
                   placeholder="Quantidade"
@@ -154,7 +154,7 @@ export const FormStep7 = () => {
                   name="childrenAged_0_72"
                   type="number"
                   min={0}
-                  max={999}
+                  max={9999}
                   value={questionThree}
                   onChange={handleChildrenAged_0_72Change}
                   placeholder="Quantidade"
@@ -171,7 +171,7 @@ export const FormStep7 = () => {
                   name="numberOfChildren"
                   type="number"
                   min={0}
-                  max={999}
+                  max={9999}
                   value={questionFour}
                   onChange={handleNumberOfChildrenChange}
                   placeholder="Quantidade"
